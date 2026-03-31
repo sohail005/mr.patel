@@ -1,101 +1,114 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useSpring } from "framer-motion";
+
+type CursorSection = "default" | "hero" | "about" | "skills" | "projects" | "experience" | "contact";
+
+const SECTION_COLORS: Record<CursorSection, string> = {
+    default: "108,99,255",
+    hero: "108,99,255",
+    about: "0,212,255",
+    skills: "108,99,255",
+    projects: "255,111,216",
+    experience: "0,212,255",
+    contact: "108,99,255",
+};
+
+function getSection(): CursorSection {
+    const ids: CursorSection[] = ["hero", "about", "skills", "projects", "experience", "contact"];
+    for (const id of [...ids].reverse()) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= window.innerHeight / 2) return id;
+    }
+    return "default";
+}
 
 export default function CursorEffect() {
-    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [pos, setPos] = useState({ x: -100, y: -100 });
     const [isPointer, setIsPointer] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
+    const [visible, setVisible] = useState(false);
+    const [section, setSection] = useState<CursorSection>("default");
+
+    const dotX = useSpring(-100, { stiffness: 600, damping: 30 });
+    const dotY = useSpring(-100, { stiffness: 600, damping: 30 });
+    const ringX = useSpring(-100, { stiffness: 160, damping: 22 });
+    const ringY = useSpring(-100, { stiffness: 160, damping: 22 });
 
     useEffect(() => {
-        // Only enable on non-touch devices
         if (typeof window === "undefined") return;
-        const isTouchDevice =
-            "ontouchstart" in window || navigator.maxTouchPoints > 0;
-        if (isTouchDevice) return;
+        if ("ontouchstart" in window || navigator.maxTouchPoints > 0) return;
+        setVisible(true);
 
-        setIsVisible(true);
+        const onMove = (e: MouseEvent) => {
+            dotX.set(e.clientX - 5);
+            dotY.set(e.clientY - 5);
+            ringX.set(e.clientX - 18);
+            ringY.set(e.clientY - 18);
+            setPos({ x: e.clientX, y: e.clientY });
 
-        const handleMouseMove = (e: MouseEvent) => {
-            setMousePos({ x: e.clientX, y: e.clientY });
-            const target = e.target as HTMLElement;
+            const t = e.target as HTMLElement;
             setIsPointer(
-                window.getComputedStyle(target).cursor === "pointer" ||
-                target.tagName === "A" ||
-                target.tagName === "BUTTON" ||
-                target.closest("a") !== null ||
-                target.closest("button") !== null
+                window.getComputedStyle(t).cursor === "pointer" ||
+                ["A", "BUTTON"].includes(t.tagName) ||
+                t.closest("a") !== null ||
+                t.closest("button") !== null
             );
         };
+        const onScroll = () => setSection(getSection());
+        const onLeave = () => setVisible(false);
+        const onEnter = () => setVisible(true);
 
-        const handleMouseLeave = () => setIsVisible(false);
-        const handleMouseEnter = () => setIsVisible(true);
-
-        window.addEventListener("mousemove", handleMouseMove);
-        document.addEventListener("mouseleave", handleMouseLeave);
-        document.addEventListener("mouseenter", handleMouseEnter);
-
+        window.addEventListener("mousemove", onMove);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        document.addEventListener("mouseleave", onLeave);
+        document.addEventListener("mouseenter", onEnter);
         return () => {
-            window.removeEventListener("mousemove", handleMouseMove);
-            document.removeEventListener("mouseleave", handleMouseLeave);
-            document.removeEventListener("mouseenter", handleMouseEnter);
+            window.removeEventListener("mousemove", onMove);
+            window.removeEventListener("scroll", onScroll);
+            document.removeEventListener("mouseleave", onLeave);
+            document.removeEventListener("mouseenter", onEnter);
         };
     }, []);
 
-    if (!isVisible) return null;
+    if (!visible) return null;
+    const rgb = SECTION_COLORS[section];
 
     return (
         <>
-            {/* Main cursor dot */}
+            {/* Inner dot */}
             <motion.div
-                className="fixed top-0 left-0 w-3 h-3 rounded-full bg-white mix-blend-difference pointer-events-none z-[9998]"
-                animate={{
-                    x: mousePos.x - 6,
-                    y: mousePos.y - 6,
-                    scale: isPointer ? 0.5 : 1,
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 500,
-                    damping: 28,
-                    mass: 0.5,
-                }}
+                className="fixed top-0 left-0 rounded-full pointer-events-none z-[9998] mix-blend-difference bg-white"
+                style={{ x: dotX, y: dotY, width: 10, height: 10 }}
+                animate={{ scale: isPointer ? 0.4 : 1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
             />
 
             {/* Outer ring */}
             <motion.div
-                className="fixed top-0 left-0 w-10 h-10 rounded-full border border-[var(--color-primary)] pointer-events-none z-[9997]"
-                animate={{
-                    x: mousePos.x - 20,
-                    y: mousePos.y - 20,
-                    scale: isPointer ? 1.8 : 1,
-                    opacity: isPointer ? 0.5 : 0.3,
+                className="fixed top-0 left-0 rounded-full pointer-events-none z-[9997]"
+                style={{
+                    x: ringX,
+                    y: ringY,
+                    width: 36,
+                    height: 36,
+                    border: `1.5px solid rgba(${rgb},0.55)`,
                 }}
-                transition={{
-                    type: "spring",
-                    stiffness: 150,
-                    damping: 15,
-                    mass: 0.1,
-                }}
+                animate={{ scale: isPointer ? 1.6 : 1 }}
+                transition={{ type: "spring", stiffness: 200, damping: 18 }}
             />
 
-            {/* Glow trail */}
+            {/* Soft glow follow */}
             <motion.div
-                className="fixed top-0 left-0 w-40 h-40 rounded-full pointer-events-none z-[9996]"
-                animate={{
-                    x: mousePos.x - 80,
-                    y: mousePos.y - 80,
-                }}
-                transition={{
-                    type: "spring",
-                    stiffness: 50,
-                    damping: 20,
-                    mass: 0.8,
-                }}
+                className="fixed rounded-full pointer-events-none z-[9996]"
                 style={{
-                    background:
-                        "radial-gradient(circle, rgba(108,99,255,0.06) 0%, transparent 70%)",
+                    x: pos.x - 60,
+                    y: pos.y - 60,
+                    width: 120,
+                    height: 120,
+                    background: `radial-gradient(circle, rgba(${rgb},0.07) 0%, transparent 70%)`,
+                    transition: "left 0.15s, top 0.15s",
                 }}
             />
         </>

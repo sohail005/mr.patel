@@ -2,9 +2,8 @@
 
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Preload } from "@react-three/drei";
+import { Preload, AdaptiveDpr } from "@react-three/drei";
 import ParticleField from "./ParticleField";
-import FloatingShapes from "./FloatingShapes";
 
 export default function HeroScene() {
     return (
@@ -20,14 +19,10 @@ export default function HeroScene() {
             >
                 <Suspense fallback={null}>
                     <ambientLight intensity={0.3} />
-                    <pointLight position={[10, 10, 10]} intensity={0.8} color="#6c63ff" />
-                    <pointLight
-                        position={[-10, -10, -10]}
-                        intensity={0.5}
-                        color="#00d4ff"
-                    />
-                    <ParticleField count={1500} radius={8} />
-                    <FloatingShapes />
+                    <pointLight position={[8, 8, 8]} intensity={1.0} color="#6c63ff" />
+                    <pointLight position={[-8, -8, -8]} intensity={0.6} color="#00d4ff" />
+                    <ParticleField count={1800} radius={9} size={0.014} />
+                    <AdaptiveDpr pixelated />
                     <Preload all />
                 </Suspense>
             </Canvas>

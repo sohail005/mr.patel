@@ -1,7 +1,9 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, FormEvent } from "react";
+import WordReveal from "@/components/effects/WordReveal";
+import ScrollReveal from "@/components/effects/ScrollReveal";
 
 const socialLinks = [
     {
@@ -53,8 +55,15 @@ const socialLinks = [
 ];
 
 export default function Contact() {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const ref = useRef<HTMLDivElement>(null!);
+    const { scrollYProgress } = useScroll({
+        target: ref,
+        offset: ["start end", "end start"],
+    });
+
+    const blob1Y = useTransform(scrollYProgress, [0, 1], [-80, 80]);
+    const blob2Y = useTransform(scrollYProgress, [0, 1], [80, -80]);
+
     const [formState, setFormState] = useState({
         name: "",
         email: "",
@@ -76,38 +85,36 @@ export default function Contact() {
 
     return (
         <section id="contact" className="relative py-32 overflow-hidden" ref={ref}>
-            <div className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-[var(--color-primary)] opacity-[0.03] blur-[120px]" />
-            <div className="absolute top-1/4 right-1/4 w-72 h-72 rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-[100px]" />
+            <motion.div 
+                style={{ y: blob1Y }}
+                className="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-[var(--color-primary)] opacity-[0.03] blur-[120px] pointer-events-none" 
+            />
+            <motion.div 
+                style={{ y: blob2Y }}
+                className="absolute top-1/4 right-1/4 w-72 h-72 rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-[100px] pointer-events-none" 
+            />
 
-            <div className="max-w-5xl mx-auto px-6">
+            <div className="max-w-5xl mx-auto px-6 relative z-10">
                 {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-20"
-                >
+                <div className="text-center mb-20">
                     <p className="text-[var(--color-primary)] font-mono text-sm tracking-widest uppercase mb-4">
                         Get In Touch
                     </p>
-                    <h2 className="section-heading">
-                        Let&apos;s <span className="gradient-text">connect</span>
+                    <h2 className="section-heading text-4xl md:text-5xl font-bold">
+                        <WordReveal text="Let's" /> <span className="gradient-text"><WordReveal text="connect" /></span>
                     </h2>
-                    <p className="text-[var(--color-text-muted)] mt-6 max-w-lg mx-auto">
-                        Have a project in mind or want to collaborate? Feel free to reach
-                        out. I&apos;m always open to new opportunities and interesting
-                        conversations.
-                    </p>
-                </motion.div>
+                    <ScrollReveal offset={["start 90%", "start 60%"]}>
+                        <p className="text-[var(--color-text-muted)] mt-6 max-w-lg mx-auto">
+                            Have a project in mind or want to collaborate? Feel free to reach
+                            out. I&apos;m always open to new opportunities and interesting
+                            conversations.
+                        </p>
+                    </ScrollReveal>
+                </div>
 
                 <div className="grid lg:grid-cols-5 gap-12">
                     {/* Left - Contact Info */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -40 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="lg:col-span-2 space-y-8"
-                    >
+                    <div className="lg:col-span-2 space-y-8">
                         {/* Info Cards */}
                         <div className="glass-card p-6">
                             <div className="flex items-center gap-4 mb-4">
@@ -167,40 +174,34 @@ export default function Contact() {
                             </div>
                         </div>
 
-                        {/* Social Links */}
-                        <div className="glass-card p-6">
-                            <p className="text-sm text-[var(--color-text-muted)] mb-4">
-                                Find me online
-                            </p>
-                            <div className="flex gap-3">
-                                {socialLinks.map((link, i) => (
-                                    <motion.a
-                                        key={link.name}
-                                        href={link.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={isInView ? { opacity: 1, y: 0 } : {}}
-                                        transition={{ delay: 0.5 + i * 0.1 }}
-                                        whileHover={{ scale: 1.1, y: -3 }}
-                                        className="w-12 h-12 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-white hover:border-[var(--color-primary)] hover:bg-[rgba(108,99,255,0.1)] transition-all duration-300"
-                                        title={link.name}
-                                    >
-                                        {link.icon}
-                                    </motion.a>
-                                ))}
+                        <ScrollReveal direction="left" offset={["start 90%", "start 60%"]}>
+                            <div className="glass-card p-6">
+                                <p className="text-sm text-[var(--color-text-muted)] mb-4">
+                                    Find me online
+                                </p>
+                                <div className="flex gap-3">
+                                    {socialLinks.map((link, i) => (
+                                        <motion.a
+                                            key={link.name}
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            whileHover={{ scale: 1.1, y: -3 }}
+                                            className="w-12 h-12 rounded-xl bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] flex items-center justify-center text-[var(--color-text-muted)] hover:text-white hover:border-[var(--color-primary)] hover:bg-[rgba(108,99,255,0.1)] transition-all duration-300"
+                                            title={link.name}
+                                        >
+                                            {link.icon}
+                                        </motion.a>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    </motion.div>
+                        </ScrollReveal>
+                    </div>
 
                     {/* Right - Contact Form */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 40 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 0.8, delay: 0.4 }}
-                        className="lg:col-span-3"
-                    >
-                        <form onSubmit={handleSubmit} className="glass-card p-8 space-y-6">
+                    <div className="lg:col-span-3">
+                        <ScrollReveal direction="right" offset={["start 90%", "start 50%"]}>
+                            <form onSubmit={handleSubmit} className="glass-card p-8 space-y-6">
                             <div className="grid sm:grid-cols-2 gap-6">
                                 <div>
                                     <label className="block text-sm text-[var(--color-text-muted)] mb-2">
@@ -316,8 +317,9 @@ export default function Contact() {
                                     </span>
                                 )}
                             </motion.button>
-                        </form>
-                    </motion.div>
+                            </form>
+                        </ScrollReveal>
+                    </div>
                 </div>
             </div>
         </section>
