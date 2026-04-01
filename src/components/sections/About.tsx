@@ -103,7 +103,7 @@ export default function About() {
                     </p>
                     <h2 className="section-heading text-4xl md:text-5xl font-bold">
                         <WordReveal text="Turning ideas into" />{" "}
-                        <span className="gradient-text">
+                        <span className="text-[var(--color-primary)]">
                             <WordReveal text="digital reality" />
                         </span>
                     </h2>

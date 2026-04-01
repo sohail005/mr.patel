@@ -101,7 +101,7 @@ export default function Contact() {
                         Get In Touch
                     </p>
                     <h2 className="section-heading text-4xl md:text-5xl font-bold">
-                        <WordReveal text="Let's" /> <span className="gradient-text"><WordReveal text="connect" /></span>
+                        <WordReveal text="Let's" /> <span className="text-[var(--color-primary)]"><WordReveal text="connect" /></span>
                     </h2>
                     <ScrollReveal offset={["start 90%", "start 60%"]}>
                         <p className="text-[var(--color-text-muted)] mt-6 max-w-lg mx-auto">

@@ -56,7 +56,7 @@ export default function Experience() {
                 <div className="text-center mb-16">
                     <p className="text-[var(--color-primary)] font-mono text-sm tracking-widest uppercase mb-3">Career Path</p>
                     <h2 className="section-heading text-4xl md:text-5xl font-bold">
-                        <WordReveal text="Work" /> <span className="gradient-text"><WordReveal text="experience" /></span>
+                        <WordReveal text="Work" /> <span className="text-[var(--color-primary)]"><WordReveal text="experience" /></span>
                     </h2>
                 </div>
 

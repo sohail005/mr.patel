@@ -11,11 +11,11 @@ const skillCategories = [
         color: "#6c63ff",
         icon: "⚡",
         skills: [
-            { name: "React / React Native", level: 95 },
-            { name: "Next.js", level: 90 },
-            { name: "TypeScript", level: 90 },
-            { name: "Tailwind CSS", level: 92 },
-            { name: "Redux / Context API", level: 85 },
+            { name: "React / React Native", level: 85 },
+            { name: "Next.js", level: 80 },
+            { name: "TypeScript", level: 80 },
+            { name: "Tailwind CSS", level: 85 },
+            { name: "Redux / Context API", level: 75 },
         ],
     },
     {
@@ -23,11 +23,10 @@ const skillCategories = [
         color: "#00d4ff",
         icon: "🎬",
         skills: [
-            { name: "Reanimated", level: 90 },
-            { name: "Gesture Handler", level: 88 },
-            { name: "Framer Motion", level: 85 },
-            { name: "GSAP", level: 80 },
-            { name: "Performance Tuning", level: 85 },
+            { name: "Reanimated", level: 80 },
+            { name: "Gesture Handler", level: 75 },
+            { name: "Framer Motion", level: 75 },
+            { name: "Performance Tuning", level: 70 },
         ],
     },
     {
@@ -35,11 +34,10 @@ const skillCategories = [
         color: "#ff6fd8",
         icon: "🚀",
         skills: [
-            { name: "Git / GitHub Actions", level: 95 },
-            { name: "Fastlane", level: 92 },
-            { name: "CI/CD Pipelines", level: 88 },
-            { name: "App Store", level: 90 },
-            { name: "Play Store", level: 90 },
+            { name: "Git / GitHub Actions", level: 85 },
+            { name: "CI/CD Pipelines", level: 75 },
+            { name: "App Store", level: 80 },
+            { name: "Play Store", level: 80 },
         ],
     },
 ];
@@ -47,10 +45,10 @@ const skillCategories = [
 // All skills as a flat list for the tag cloud
 const allTags = [
     "React", "Next.js", "React Native", "TypeScript", "Tailwind CSS",
-    "Redux", "Context API", "Reanimated", "Framer Motion", "GSAP",
-    "Git", "Fastlane", "CI/CD", "App Store", "Play Store",
-    "REST APIs", "AWS", "Figma", "Three.js", "Node.js",
-    "Performance", "GitHub Actions", "Zustand",
+    "Redux", "Context API", "Reanimated", "Framer Motion",
+    "Git", "CI/CD", "App Store", "Play Store",
+    "REST APIs", "Figma", "Three.js",
+    "Performance", "GitHub Actions",
 ];
 
 const tagColors = ["#6c63ff", "#00d4ff", "#ff6fd8"];
@@ -112,7 +110,7 @@ export default function Skills() {
                         Skills & Expertise
                     </p>
                     <h2 className="section-heading text-4xl md:text-5xl font-bold">
-                        <WordReveal text="My" /> <span className="gradient-text"><WordReveal text="tech stack" /></span>
+                        <WordReveal text="My" /> <span className="text-[var(--color-secondary)]"><WordReveal text="tech stack" /></span>
                     </h2>
                 </div>
 

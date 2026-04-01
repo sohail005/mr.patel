@@ -222,7 +222,7 @@ export default function Projects() {
                         Featured Work
                     </p>
                     <h2 className="section-heading text-4xl md:text-5xl font-bold">
-                        <WordReveal text="Things I've" /> <span className="gradient-text"><WordReveal text="built" /></span>
+                        <WordReveal text="Things I've" /> <span className="text-[var(--color-primary)]"><WordReveal text="built" /></span>
                     </h2>
                 </div>
 
