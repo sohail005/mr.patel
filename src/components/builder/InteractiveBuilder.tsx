@@ -220,7 +220,7 @@ function PickerView({ selected, addFlower, removeFlower, onNext }: any) {
             <button 
                 onClick={onNext}
                 disabled={total < 4 || total > 10}
-                className="px-16 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] border border-white/10 text-white uppercase tracking-widest font-bold disabled:opacity-20 disabled:cursor-not-allowed hover:scale-105 transition-all rounded-full"
+                className="px-16 py-3 bg-white text-black border border-white font-mono text-xs font-bold uppercase tracking-widest disabled:opacity-20 disabled:cursor-not-allowed hover:bg-gray-200 transition-all transition-colors"
             >
                 Next
             </button>
@@ -422,10 +422,10 @@ function ArrangerView({ selected, seed, greenery, onShuffle, onChangeGreenery, o
             <p className="uppercase tracking-widest font-mono text-sm mb-6 font-bold">Customize your bouquet</p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <button onClick={onShuffle} className="px-6 py-2.5 bg-white/10 text-white border border-white/20 rounded-full text-xs uppercase tracking-wider font-medium hover:bg-white/20 transition-colors">
+                <button onClick={onShuffle} className="px-6 py-2.5 bg-transparent text-white border border-white font-mono text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors">
                     Try new arrangement
                 </button>
-                <button onClick={onChangeGreenery} className="px-6 py-2.5 border border-[var(--color-primary)] text-[var(--color-primary)] rounded-full text-xs uppercase tracking-wider font-medium hover:bg-[var(--color-primary)] hover:text-white transition-colors">
+                <button onClick={onChangeGreenery} className="px-6 py-2.5 bg-transparent text-white border border-white font-mono text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors">
                     Change Greenery
                 </button>
             </div>
@@ -454,8 +454,8 @@ function ArrangerView({ selected, seed, greenery, onShuffle, onChangeGreenery, o
             </div>
 
             <div className="flex gap-4 mt-8">
-                <button onClick={onBack} className="px-8 py-3 border border-white/20 text-white rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors">Back</button>
-                <button onClick={onNext} className="px-12 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all z-10 relative">Next</button>
+                <button onClick={onBack} className="px-8 py-3 bg-transparent text-white border border-white font-mono text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors">Back</button>
+                <button onClick={onNext} className="px-12 py-3 bg-white text-black font-mono text-xs font-bold uppercase tracking-widest hover:bg-gray-200 transition-all">Next</button>
             </div>
         </motion.div>
     );
@@ -512,8 +512,8 @@ function MessageView({ message, setMessage, onBack, onNext }: any) {
             </div>
 
             <div className="flex gap-4">
-                <button onClick={onBack} className="px-8 py-3 bg-[#fdfaf6] border-[3px] border-black text-black text-xs font-bold uppercase tracking-widest hover:bg-gray-100 transition-colors shadow-[4px_4px_0_0_rgba(255,255,255,0.1)]">Back</button>
-                <button onClick={onNext} className="px-10 py-3 bg-black border-[3px] border-black text-[#e8dbb0] text-xs font-bold uppercase tracking-widest hover:bg-gray-900 transition-colors shadow-[4px_4px_0_0_rgba(255,255,255,0.1)]">Next</button>
+                <button onClick={onBack} className="px-8 py-3 bg-transparent text-white border border-white font-mono text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors">Back</button>
+                <button onClick={onNext} className="px-12 py-3 bg-white text-black font-mono text-xs font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">Next</button>
             </div>
         </motion.div>
     );
@@ -547,11 +547,20 @@ function FinalView({ selected, seed, greenery, message, isShared, onReset }: any
     return (
         <motion.div 
             initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-            className="flex flex-col items-center justify-center w-full pb-16 pt-4 px-4"
+            className="flex flex-col items-center w-full min-h-[100dvh] pt-12 pb-24 px-4 relative z-50 overflow-x-hidden"
         >
             {isShared && <FallingRoses />}
-            <div className="flex flex-col md:flex-row items-center justify-center lg:gap-8 w-full mb-12">
-                <div className="relative w-full max-w-[500px] min-h-[400px] lg:min-h-[600px] flex flex-col items-center justify-center drop-shadow-xl z-20">
+
+            {/* Top Heading */}
+            <h2 className="font-mono text-lg md:text-xl font-bold mb-16 tracking-wide text-center uppercase text-white shadow-black drop-shadow-md">
+                {isShared ? "Hi, I made this bouquet for you!" : "Your bouquet is ready"}
+            </h2>
+
+            {/* Central Stage */}
+            <div className="relative flex flex-col items-center justify-center w-full max-w-[600px] mb-24 z-10">
+                
+                {/* Bouquet */}
+                <div className="relative w-full min-h-[400px] lg:min-h-[500px] flex flex-col items-center justify-center z-10">
                     <AnimatePresence mode="popLayout">
                     {generateBouquetItems(selected, seed, greenery).map((item: any, i: number) => {
                         const C = item.Component;
@@ -565,48 +574,49 @@ function FinalView({ selected, seed, greenery, message, isShared, onReset }: any
                                 className="absolute w-28 h-28 origin-center flex items-center justify-center"
                                 style={{ zIndex: item.zIndex }}
                             >
-                                <C className={`w-full h-full drop-shadow-md ${item.isLeaf ? 'opacity-90' : ''}`} />
+                                <C className={`w-full h-full drop-shadow-lg ${item.isLeaf ? 'opacity-90' : ''}`} />
                             </motion.div>
                         );
                     })}
                     </AnimatePresence>
                 </div>
 
-                {/* The Note Card */}
+                {/* Tilted Note Card Overlay */}
                 <motion.div 
-                    initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
-                    className="w-full max-w-sm bg-[#fffefa] rounded-xl border border-white/10 p-8 shadow-[0_0_40px_rgba(255,255,255,0.05)] relative overflow-hidden"
-                    style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '100% 32px', lineHeight: '32px', paddingTop: '42px', paddingBottom: '32px' }}
+                    initial={{ opacity: 0, y: 30, rotate: 0 }}
+                    animate={{ opacity: 1, y: 0, rotate: -4 }}
+                    transition={{ delay: 0.8, type: "spring", bounce: 0.4 }}
+                    className="absolute -bottom-12 md:-bottom-16 z-30 w-[280px] md:w-[380px] bg-white border border-black px-6 py-8 shadow-2xl flex flex-col transform-gpu"
                 >
-                    {/* Red vertical margin line */}
-                    <div className="absolute top-0 bottom-0 left-8 w-px bg-red-400/30" />
-                    <div className="absolute top-0 bottom-0 left-[36px] w-px bg-red-400/30" />
-
-                    <div className="font-serif text-xl text-gray-800 pl-8 relative z-10 break-words">
-                        <p className="mb-6 font-bold">Dear {message.to || "Friend"},</p>
-                        <p className="mb-10 min-h-[128px] whitespace-pre-wrap leading-[32px]">{message.body || "A digital bouquet curated just for you."}</p>
-                        <p className="font-bold">Fondly,</p>
-                        <p className="font-bold">{message.from || "Me"}</p>
+                    <p className="font-mono text-sm md:text-base text-black font-bold text-left w-full mb-4">Dear {message.to || "Friend"},</p>
+                    
+                    {message.body && (
+                        <p className="font-mono text-sm text-gray-800 my-4 text-center whitespace-pre-wrap leading-relaxed">{message.body}</p>
+                    )}
+                    
+                    <div className="w-full flex flex-col items-end mt-6">
+                        <p className="font-mono text-sm md:text-base text-black font-bold mb-1">Sincerely,</p>
+                        <p className="font-mono text-sm md:text-base text-black font-bold">{message.from || "Me"}</p>
                     </div>
                 </motion.div>
             </div>
 
-            {/* Restart button and Share button chronologically below */}
+            {/* Actions */}
             <motion.div 
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }}
-                className="flex flex-col sm:flex-row gap-4 w-full justify-center px-4"
+                className="flex gap-4 w-full justify-center relative z-40"
             >
                 <button 
-                    onClick={onReset} 
-                    className="px-8 py-3.5 border border-white/20 rounded-full text-white text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-colors"
+                    onClick={handleShare}
+                    className="px-8 py-3 bg-white text-black text-xs font-mono font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors"
                 >
-                    Build Another Bouquet
+                    {copied ? "COPIED!" : "COPY LINK"}
                 </button>
                 <button 
-                    onClick={handleShare} 
-                    className="px-8 py-3.5 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full text-white text-xs font-bold uppercase tracking-widest hover:scale-105 border border-white/10 transition-all min-w-[200px] shadow-[0_0_20px_rgba(108,99,255,0.4)]"
+                    onClick={onReset} 
+                    className="px-8 py-3 bg-transparent text-white border border-white text-xs font-mono font-bold uppercase tracking-widest hover:bg-white/10 transition-colors"
                 >
-                    {copied ? "Link Copied!" : "Copy Share Link"}
+                    CREATE
                 </button>
             </motion.div>
         </motion.div>
