@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FlowerData } from "./Flowers";
+import FallingRoses from "@/components/effects/FallingRoses";
 
 type Step = "landing" | "picker" | "arranger" | "message" | "final";
 
@@ -17,6 +18,7 @@ export default function InteractiveBuilder() {
     const [seed, setSeed] = useState(0);
     const [greenery, setGreenery] = useState(0);
     const [message, setMessage] = useState({ to: "", from: "", body: "" });
+    const [isShared, setIsShared] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined' && window.location.hash.startsWith('#bouquet=')) {
@@ -30,6 +32,7 @@ export default function InteractiveBuilder() {
                 if (data.greenery !== undefined) setGreenery(data.greenery);
                 if (data.message) setMessage(data.message);
                 
+                setIsShared(true);
                 setStep("final");
             } catch (error) {
                 console.error("Failed to parse bouquet from URL", error);
@@ -102,9 +105,11 @@ export default function InteractiveBuilder() {
                                 seed={seed}
                                 greenery={greenery}
                                 message={message}
+                                isShared={isShared}
                                 onReset={() => {
                                     setSelected([]);
                                     setMessage({ to: "", from: "", body: "" });
+                                    setIsShared(false);
                                     setStep("landing");
                                     window.history.replaceState(null, '', window.location.pathname);
                                     window.dispatchEvent(new Event('hashchange'));
@@ -496,7 +501,7 @@ function MessageView({ message, setMessage, onBack, onNext }: any) {
     );
 }
 
-function FinalView({ selected, seed, greenery, message, onReset }: any) {
+function FinalView({ selected, seed, greenery, message, isShared, onReset }: any) {
     const [copied, setCopied] = useState(false);
 
     const handleShare = () => {
@@ -514,6 +519,7 @@ function FinalView({ selected, seed, greenery, message, onReset }: any) {
             initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
             className="flex flex-col items-center justify-center w-full pb-16 pt-4 px-4"
         >
+            {isShared && <FallingRoses />}
             <div className="flex flex-col md:flex-row items-center justify-center lg:gap-8 w-full mb-12">
                 {/* The Bouquet */}
                 <div className="relative w-full max-w-[500px] min-h-[400px] lg:min-h-[600px] flex flex-col items-center justify-center drop-shadow-xl z-20">
