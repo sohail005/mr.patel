@@ -4,8 +4,16 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FlowerData } from "./Flowers";
 import FallingRoses from "@/components/effects/FallingRoses";
+import dynamic from "next/dynamic";
 
-type Step = "landing" | "picker" | "arranger" | "message" | "final";
+const HeroScene = dynamic(
+    () => import("@/components/three/HeroScene"),
+    { ssr: false }
+);
+
+const F_MAP = ["orchid", "tulip", "dahlia", "anemone", "carnation", "zinnia", "sunflower", "daisy", "rose"];
+
+type Step = "picker" | "arranger" | "message" | "final";
 
 interface SelectedFlower {
     id: string;
@@ -13,7 +21,7 @@ interface SelectedFlower {
 }
 
 export default function InteractiveBuilder() {
-    const [step, setStep] = useState<Step>("landing");
+    const [step, setStep] = useState<Step>("picker");
     const [selected, setSelected] = useState<SelectedFlower[]>([]);
     const [seed, setSeed] = useState(0);
     const [greenery, setGreenery] = useState(0);
@@ -24,13 +32,42 @@ export default function InteractiveBuilder() {
         if (typeof window !== 'undefined' && window.location.hash.startsWith('#bouquet=')) {
             try {
                 const hashParams = window.location.hash.slice(9);
-                const decoded = decodeURIComponent(atob(decodeURIComponent(hashParams)));
-                const data = JSON.parse(decoded);
+                const base64Str = decodeURIComponent(hashParams);
                 
-                if (data.selected) setSelected(data.selected);
-                if (data.seed !== undefined) setSeed(data.seed);
-                if (data.greenery !== undefined) setGreenery(data.greenery);
-                if (data.message) setMessage(data.message);
+                let data;
+                try {
+                    data = JSON.parse(decodeURIComponent(escape(atob(base64Str))));
+                } catch (e) {
+                    data = JSON.parse(decodeURIComponent(atob(base64Str)));
+                }
+                
+                if (Array.isArray(data)) {
+                    if (typeof data[0] === 'string') {
+                        const [typesStr, sStr, g, msgTo, msgFrom, msgBody] = data;
+                        if (typesStr) {
+                            const types = typesStr.split('').map((c: string) => F_MAP[parseInt(c, 36)]).filter(Boolean);
+                            setSelected(types.map((t: string, i: number) => ({ id: `${t}-${Date.now()}-${i}`, typeId: t })));
+                        }
+                        if (sStr) setSeed(parseInt(sStr, 36) / 100000);
+                        if (g !== undefined) setGreenery(g);
+                        setMessage({ to: msgTo || "", from: msgFrom || "", body: msgBody || "" });
+                    } else {
+                        const [types, s, g, msg] = data;
+                        if (types) {
+                            setSelected(types.map((t: string, i: number) => ({ id: `${t}-${Date.now()}-${i}`, typeId: t })));
+                        }
+                        if (s !== undefined) setSeed(s);
+                        if (g !== undefined) setGreenery(g);
+                        if (msg) {
+                            setMessage({ to: msg[0] || "", from: msg[1] || "", body: msg[2] || "" });
+                        }
+                    }
+                } else {
+                    if (data.selected) setSelected(data.selected);
+                    if (data.seed !== undefined) setSeed(data.seed);
+                    if (data.greenery !== undefined) setGreenery(data.greenery);
+                    if (data.message) setMessage(data.message);
+                }
                 
                 setIsShared(true);
                 setStep("final");
@@ -57,17 +94,23 @@ export default function InteractiveBuilder() {
 
     return (
         <section className="relative w-full min-h-screen text-white overflow-hidden font-sans py-8 z-20">
+            {/* Particle background */}
+            <div className="absolute inset-0 pointer-events-none z-0">
+                <HeroScene />
+            </div>
+
+            {/* Radial gradient glow */}
+            <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
+                <div className="w-[700px] h-[500px] rounded-full bg-[var(--color-primary)] opacity-[0.07] blur-[120px]" />
+            </div>
             
             <div className="max-w-6xl mx-auto px-6 h-full flex flex-col items-center relative z-10">
-                <motion.div layoutId="header" className="text-center mb-4" onClick={() => {if(step!=='landing') setStep('landing')}}>
+                <motion.div layoutId="header" className="text-center mb-4" onClick={() => {if(step!=='picker') setStep('picker')}}>
                     <h2 className="text-4xl md:text-5xl font-serif tracking-tight gradient-text cursor-pointer inline-block">Digibouquet</h2>
                 </motion.div>
 
                 <div className="w-full flex-1 relative flex flex-col items-center justify-center min-h-[60vh]">
                     <AnimatePresence mode="wait">
-                        {step === "landing" && (
-                            <LandingView key="landing" onNext={() => setStep("picker")} />
-                        )}
                         {step === "picker" && (
                             <PickerView 
                                 key="picker" 
@@ -110,7 +153,7 @@ export default function InteractiveBuilder() {
                                     setSelected([]);
                                     setMessage({ to: "", from: "", body: "" });
                                     setIsShared(false);
-                                    setStep("landing");
+                                    setStep("picker");
                                     window.history.replaceState(null, '', window.location.pathname);
                                     window.dispatchEvent(new Event('hashchange'));
                                 }}
@@ -127,22 +170,7 @@ export default function InteractiveBuilder() {
 // CHILD VIEWS
 // -------------------------------------------------------------
 
-function LandingView({ onNext }: { onNext: () => void }) {
-    return (
-        <motion.div 
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-            className="flex flex-col items-center gap-10 mt-8"
-        >
-            <p className="text-sm md:text-lg uppercase tracking-widest text-center font-medium max-w-md text-gray-300">Craft a digital arrangement to share as a unique virtual gift.</p>
-            <button 
-                onClick={onNext}
-                className="px-10 py-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white text-sm md:text-base uppercase tracking-widest font-bold hover:scale-105 transition-all duration-300 rounded-full"
-            >
-                Build a Bouquet
-            </button>
-        </motion.div>
-    );
-}
+
 
 function PickerView({ selected, addFlower, removeFlower, onNext }: any) {
     const total = selected.length;
@@ -152,7 +180,7 @@ function PickerView({ selected, addFlower, removeFlower, onNext }: any) {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
             className="w-full flex flex-col items-center pb-20 mt-4"
         >
-            <p className="uppercase tracking-widest font-mono text-sm mb-2 font-bold text-white">Pick 6 to 10 blooms</p>
+            <p className="uppercase tracking-widest font-mono text-sm mb-2 font-bold text-white">Pick 4 to 10 blooms</p>
             <p className="text-sm text-gray-400 mb-12">Click to select, click badge to remove.</p>
             
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-12 gap-x-8 mb-16">
@@ -191,7 +219,7 @@ function PickerView({ selected, addFlower, removeFlower, onNext }: any) {
 
             <button 
                 onClick={onNext}
-                disabled={total < 6 || total > 10}
+                disabled={total < 4 || total > 10}
                 className="px-16 py-3 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] border border-white/10 text-white uppercase tracking-widest font-bold disabled:opacity-20 disabled:cursor-not-allowed hover:scale-105 transition-all rounded-full"
             >
                 Next
@@ -240,29 +268,12 @@ function WatercolorSplotch({ color }: { color: string }) {
 // -------------------------------------------------------------
 
 function generateBouquetItems(selected: any[], seed: number, greeneryType: number) {
-    const items = [];
+    const items: any[] = [];
     
-    // Categorize flowers by role for structural diamond logic
-    // Anchor: Big bottom focal point. Mass: Backdrop volume. Filler: Fills gaps.
+    // Categorize flowers by role
     const anchorIds = ["anemone", "dahlia", "tulip"]; 
     const massIds = ["sunflower", "carnation", "rose"]; 
     const fillerIds = ["daisy", "zinnia", "orchid"];
-
-    // Watercolor Background Glows (acts as color canvas behind flowers)
-    for (let i=0; i<3; i++) {
-        const rSeed = seed + i * 11;
-        const colors = ["#ffcc80", "#f48fb1", "#81d4fa", "#ce93d8"];
-        items.push({
-            id: `bg-color-${i}`,
-            isLeaf: true,
-            Component: (props: any) => <WatercolorSplotch color={colors[Math.floor(pseudoRandom(rSeed)*colors.length)]} />,
-            x: (pseudoRandom(rSeed) - 0.5) * 60,
-            y: (pseudoRandom(rSeed+1) - 0.5) * 60 - 20,
-            rotate: 0,
-            scale: 1.9 + pseudoRandom(rSeed+2),
-            zIndex: 0
-        });
-    }
 
     // Realistic Greenery Backbone
     const gType = greeneryType % 3;
@@ -271,128 +282,133 @@ function generateBouquetItems(selected: any[], seed: number, greeneryType: numbe
     const showWispy = gType === 1 || gType === 2;
 
     if (showEuc) {
-        items.push({
-            id: "euc-1", isLeaf: true, Component: Eucalyptus,
-            x: -80 + pseudoRandom(seed)*25, y: -80 + pseudoRandom(seed+1)*25, rotate: -40 + pseudoRandom(seed+2)*15, scale: 1.5, zIndex: 10
-        });
-        items.push({
-            id: "euc-2", isLeaf: true, Component: Eucalyptus,
-            x: 80 + pseudoRandom(seed+3)*25, y: -80 + pseudoRandom(seed+4)*25, rotate: 40 + pseudoRandom(seed+5)*15, scale: 1.5, zIndex: 11
-        });
-        items.push({
-            id: "euc-3", isLeaf: true, Component: Eucalyptus,
-            x: -100 + pseudoRandom(seed+6)*25, y: 10 + pseudoRandom(seed+7)*25, rotate: -70 + pseudoRandom(seed+8)*15, scale: 1.4, zIndex: 12
-        });
-        items.push({
-            id: "euc-4", isLeaf: true, Component: Eucalyptus,
-            x: 100 + pseudoRandom(seed+9)*25, y: 10 + pseudoRandom(seed+10)*25, rotate: 70 + pseudoRandom(seed+11)*15, scale: 1.4, zIndex: 13
+        // Long sweeping branches reaching high and wide
+        const eucPositions = [
+            { rx: -90, ry: -80, rot: -45, scale: 1.6 },
+            { rx: 90, ry: -60, rot: 40, scale: 1.5 },
+            { rx: -110, ry: 10, rot: -75, scale: 1.4 },
+            { rx: 110, ry: 30, rot: 75, scale: 1.4 }
+        ];
+        eucPositions.forEach((pos, i) => {
+            items.push({
+                id: `euc-${i}`, isLeaf: true, Component: Eucalyptus,
+                x: pos.rx + (pseudoRandom(seed + i) - 0.5) * 20,
+                y: pos.ry + (pseudoRandom(seed + 10 + i) - 0.5) * 20,
+                rotate: pos.rot + (pseudoRandom(seed + 20 + i) - 0.5) * 20, 
+                scale: pos.scale + pseudoRandom(seed + 30 + i) * 0.2,
+                zIndex: 10 + i
+            });
         });
     }
 
     if (showFern) {
-        const fernAngles = [135, 160, 20, 45]; 
-        fernAngles.forEach((baseAngle, i) => {
-            const angle = baseAngle + (pseudoRandom(seed+6+i)-0.5)*20;
-            const rad = angle * Math.PI / 180;
+        // Dense skirt bundled at the bottom
+        const fernPositions = [
+            { rx: -50, ry: 60, rot: -130, scale: 1.5 },
+            { rx: -25, ry: 80, rot: -160, scale: 1.3 },
+            { rx: 25, ry: 80, rot: 160, scale: 1.3 },
+            { rx: 50, ry: 60, rot: 130, scale: 1.5 },
+            { rx: 0, ry: 90, rot: 180, scale: 1.2 }
+        ];
+        fernPositions.forEach((pos, i) => {
             items.push({
                 id: `fern-${i}`, isLeaf: true, Component: DarkFern,
-                x: Math.cos(rad) * 90,
-                y: 30 + Math.sin(rad) * 80,
-                rotate: angle - 90, 
-                scale: 1.3 + pseudoRandom(seed+7+i)*0.4,
+                x: pos.rx + (pseudoRandom(seed + 40 + i) - 0.5) * 15,
+                y: pos.ry + (pseudoRandom(seed + 50 + i) - 0.5) * 15,
+                rotate: pos.rot + (pseudoRandom(seed + 60 + i) - 0.5) * 20, 
+                scale: pos.scale + pseudoRandom(seed + 70 + i) * 0.2,
                 zIndex: 15 + i
             });
         });
     }
 
     if (showWispy) {
-        for (let i=0; i<6; i++) {
-            const angle = 210 + (120 * (i/5)) + (pseudoRandom(seed+10+i)-0.5)*20; 
-            const rad = angle * Math.PI / 180;
+        // Feathery accents radiating from the sides and top
+        const wispyPositions = [
+            { rx: -70, ry: -30, rot: -60, scale: 1.6 },
+            { rx: 70, ry: -20, rot: 60, scale: 1.6 },
+            { rx: -80, ry: 40, rot: -110, scale: 1.5 },
+            { rx: 80, ry: 50, rot: 110, scale: 1.5 },
+            { rx: 0, ry: -90, rot: 0, scale: 1.5 }
+        ];
+        wispyPositions.forEach((pos, i) => {
             items.push({
                 id: `wispy-${i}`, isLeaf: true, Component: WispyGrass,
-                x: Math.cos(rad) * 80,
-                y: -20 + Math.sin(rad) * 80,
-                rotate: angle + 90,
-                scale: 1.4 + pseudoRandom(seed+11+i)*0.5,
-                zIndex: 25 + i 
-            });
-        }
-    }
-
-    // Flowers Processing
-    const anchors: any[] = [];
-    const masses: any[] = [];
-    const fillers: any[] = [];
-
-    // Assign roles dynamically so they look balanced
-    let shuffled = [...selected].sort((a,b) => pseudoRandom(seed + a.typeId.length) - 0.5); 
-    shuffled.forEach(s => {
-        if(anchorIds.includes(s.typeId)) anchors.push(s);
-        else if(massIds.includes(s.typeId)) masses.push(s);
-        else fillers.push(s);
-    });
-    
-    // Ensure at least 1 anchor
-    if(anchors.length === 0 && masses.length > 0) anchors.push(masses.pop());
-    if(anchors.length === 0 && fillers.length > 0) anchors.push(fillers.pop());
-
-    const seedShuffle = (arr: any[], offset: number) => {
-        let res = [...arr];
-        for (let i = res.length - 1; i > 0; i--) {
-            const j = Math.floor(pseudoRandom(seed + offset + i) * (i + 1));
-            [res[i], res[j]] = [res[j], res[i]];
-        }
-        return res;
-    };
-
-    const sAnchors = seedShuffle(anchors, 100);
-    const sMasses = seedShuffle(masses, 200);
-    const sFillers = seedShuffle(fillers, 300);
-
-    const placeFlowers = (flowersArr: any[], yCenter: number, radiusX: number, radiusY: number, startAngle: number, endAngle: number, scaleBase: number, zOffset: number) => {
-        const count = flowersArr.length;
-        if (count === 0) return;
-        flowersArr.forEach((flower, i) => {
-            const flowerDef = FlowerData.find(f => f.id === flower.typeId);
-            
-            // Distribute angles evenly, add jitter
-            let angleDeg = startAngle;
-            if (count > 1) {
-                const span = endAngle - startAngle;
-                angleDeg = startAngle + (span * (i / (count - 1)));
-            } else {
-                angleDeg = (startAngle + endAngle) / 2;
-            }
-            
-            angleDeg += (pseudoRandom(seed + 1000 + i) - 0.5) * 30; // wider angle jitter
-            const rad = angleDeg * Math.PI / 180;
-
-            // Use a variable radius factor to fill the inner core space
-            // Ranges from 40% to 100% of the maximum boundary
-            const rFactor = 0.4 + pseudoRandom(seed + 1005 + i) * 0.6;
-            
-            const x = Math.cos(rad) * (radiusX * rFactor);
-            const y = yCenter + Math.sin(rad) * (radiusY * rFactor);
-            
-            items.push({
-                ...flower, isLeaf: false, Component: flowerDef?.Component,
-                x, y,
-                rotate: (pseudoRandom(seed + 1003 + i) - 0.5) * 25, 
-                scale: scaleBase + (pseudoRandom(seed + 1004 + i) - 0.5) * 0.2,
-                zIndex: zOffset + Math.floor(y) 
+                x: pos.rx + (pseudoRandom(seed + 80 + i) - 0.5) * 20,
+                y: pos.ry + (pseudoRandom(seed + 90 + i) - 0.5) * 20,
+                rotate: pos.rot + (pseudoRandom(seed + 100 + i) - 0.5) * 20,
+                scale: pos.scale + pseudoRandom(seed + 110 + i) * 0.2,
+                zIndex: 20 + i 
             });
         });
     }
 
-    // 1. Fillers (Back/Top Ring)
-    placeFlowers(sFillers, -20, 85, 65, 190, 350, 1.2, 200);
+    // Flowers Processing
+    const bouquetFlowers = [...selected].map((s) => {
+        let role = "mass";
+        if (anchorIds.includes(s.typeId)) role = "anchor";
+        if (fillerIds.includes(s.typeId)) role = "filler";
+        return { ...s, role };
+    });
 
-    // 2. Masses (Middle Ring)
-    placeFlowers(sMasses, 10, 65, 50, 160, 380, 1.4, 400);
+    const roleScore: Record<string, number> = { filler: 0, mass: 1, anchor: 2 };
+    
+    const N = bouquetFlowers.length;
+    const slots: {x: number, y: number}[] = [];
+    
+    // Create exactly matched tall vertical zig-zag column structure
+    for (let j = 0; j < N; j++) {
+        const fraction = N > 1 ? j / (N - 1) : 0.5; // 0 (top/back) to 1 (bottom/front)
+        
+        // Tall Y distribution: top flowers are high (-75), bottom flowers are low (65)
+        const yBase = -75 + fraction * 140; 
+        
+        // Alternating sides
+        const isLeft = j % 2 === 0;
+        
+        // Triangle/Funnel width: significantly wider spread at top, tighter at bottom
+        const width = 85 - fraction * 40; 
+        const xSign = isLeft ? -1 : 1;
+        const xBase = xSign * (width / 2);
+        
+        // Organic scatter
+        const jitterX = (pseudoRandom(seed + 100 + j) - 0.5) * 25;
+        const jitterY = (pseudoRandom(seed + 200 + j) - 0.5) * 25;
+        
+        slots.push({ x: xBase + jitterX, y: yBase + jitterY });
+    }
 
-    // 3. Anchors (Front/Bottom Center)
-    placeFlowers(sAnchors, 40, 35, 25, 60, 120, 1.65, 600);
+    // Sort slots by Y ascending (lowest Y is visually top). 
+    slots.sort((a, b) => a.y - b.y);
+
+    // Sort flowers so fillers are first (top slots) and anchors are last (bottom slots)
+    bouquetFlowers.sort((a, b) => {
+        const scoreA = roleScore[a.role] + pseudoRandom(seed + a.typeId.length) * 0.5;
+        const scoreB = roleScore[b.role] + pseudoRandom(seed + b.typeId.length) * 0.5;
+        return scoreA - scoreB;
+    });
+
+    bouquetFlowers.forEach((flower, i) => {
+        const flowerDef = FlowerData.find(f => f.id === flower.typeId);
+        const slot = slots[i];
+        
+        // Larger presence to match the impressive reference image scale
+        let scaleBase = flower.role === "anchor" ? 1.7 : (flower.role === "mass" ? 1.55 : 1.4);
+        
+        // Dynamically tilt outwards based on their placement
+        const tilt = (slot.x / 60) * 25 + (pseudoRandom(seed + 300 + i) - 0.5) * 20;
+        
+        items.push({
+            ...flower, 
+            isLeaf: false, 
+            Component: flowerDef?.Component,
+            x: slot.x, 
+            y: slot.y,
+            rotate: tilt, 
+            scale: scaleBase + (pseudoRandom(seed + 400 + i) - 0.5) * 0.15,
+            zIndex: 100 + i 
+        });
+    });
 
     return items.sort((a, b) => a.zIndex - b.zIndex);
 }
@@ -417,15 +433,16 @@ function ArrangerView({ selected, seed, greenery, onShuffle, onChangeGreenery, o
             {/* Canvas */}
             <div className="relative w-full max-w-[500px] min-h-[500px] mb-12 flex items-center justify-center mt-10">
 
+                <AnimatePresence mode="popLayout">
                 {generateBouquetItems(selected, seed, greenery).map((item: any, i: number) => {
                     const C = item.Component;
 
                     return (
                         <motion.div 
-                            key={item.id}
-                            initial={{ scale: 0, opacity: 0 }}
-                            animate={{ x: item.x, y: item.y, rotate: item.rotate, scale: item.scale, opacity: 1 }}
-                            transition={{ type: "spring", stiffness: 80, damping: 14, delay: i * 0.04 }}
+                            key={`${item.id}-${seed}-${greenery}`}
+                            initial={{ y: -800 + (pseudoRandom(seed + i*11) * 200), x: item.x + (pseudoRandom(seed + i*7) - 0.5) * 400, opacity: 0, rotate: (pseudoRandom(seed + i*13) - 0.5) * 180, scale: item.scale * 0.5 }}
+                            animate={{ y: item.y, x: item.x, opacity: 1, rotate: item.rotate, scale: item.scale }}
+                            transition={{ type: "spring", bounce: 0.35, duration: 1.2, delay: i * 0.08 }}
                             className="absolute w-28 h-28 origin-center flex items-center justify-center"
                             style={{ zIndex: item.zIndex }}
                         >
@@ -433,6 +450,7 @@ function ArrangerView({ selected, seed, greenery, onShuffle, onChangeGreenery, o
                         </motion.div>
                     );
                 })}
+                </AnimatePresence>
             </div>
 
             <div className="flex gap-4 mt-8">
@@ -505,8 +523,20 @@ function FinalView({ selected, seed, greenery, message, isShared, onReset }: any
     const [copied, setCopied] = useState(false);
 
     const handleShare = () => {
-        const data = { selected, seed, greenery, message };
-        const encoded = encodeURIComponent(btoa(encodeURIComponent(JSON.stringify(data))));
+        const typesStr = selected.map((s: any) => F_MAP.indexOf(s.typeId).toString(36)).join('');
+        const sStr = Math.round(seed * 100000).toString(36);
+        const dataArr = [
+            typesStr,
+            sStr,
+            greenery,
+            message.to,
+            message.from,
+            message.body
+        ];
+        
+        const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(dataArr))));
+        const encoded = encodeURIComponent(base64);
+        
         const url = `${window.location.origin}${window.location.pathname}#bouquet=${encoded}`;
         navigator.clipboard.writeText(url).then(() => {
             setCopied(true);
@@ -521,17 +551,17 @@ function FinalView({ selected, seed, greenery, message, isShared, onReset }: any
         >
             {isShared && <FallingRoses />}
             <div className="flex flex-col md:flex-row items-center justify-center lg:gap-8 w-full mb-12">
-                {/* The Bouquet */}
                 <div className="relative w-full max-w-[500px] min-h-[400px] lg:min-h-[600px] flex flex-col items-center justify-center drop-shadow-xl z-20">
+                    <AnimatePresence mode="popLayout">
                     {generateBouquetItems(selected, seed, greenery).map((item: any, i: number) => {
                         const C = item.Component;
 
                         return (
                             <motion.div 
-                                key={item.id}
-                                initial={{ x: item.x, y: item.y + 20, opacity: 0, rotate: item.rotate }}
-                                animate={{ x: item.x, y: item.y, rotate: item.rotate, scale: item.scale, opacity: 1 }}
-                                transition={{ type: "spring", stiffness: 100, damping: 15, delay: i * 0.05 }}
+                                key={`${item.id}-${seed}-${greenery}`}
+                                initial={{ y: -800 + (pseudoRandom(seed + i*11) * 200), x: item.x + (pseudoRandom(seed + i*7) - 0.5) * 400, opacity: 0, rotate: (pseudoRandom(seed + i*13) - 0.5) * 180, scale: item.scale * 0.5 }}
+                                animate={{ y: item.y, x: item.x, opacity: 1, rotate: item.rotate, scale: item.scale }}
+                                transition={{ type: "spring", bounce: 0.35, duration: 1.2, delay: i * 0.08 }}
                                 className="absolute w-28 h-28 origin-center flex items-center justify-center"
                                 style={{ zIndex: item.zIndex }}
                             >
@@ -539,6 +569,7 @@ function FinalView({ selected, seed, greenery, message, isShared, onReset }: any
                             </motion.div>
                         );
                     })}
+                    </AnimatePresence>
                 </div>
 
                 {/* The Note Card */}
@@ -555,7 +586,7 @@ function FinalView({ selected, seed, greenery, message, isShared, onReset }: any
                         <p className="mb-6 font-bold">Dear {message.to || "Friend"},</p>
                         <p className="mb-10 min-h-[128px] whitespace-pre-wrap leading-[32px]">{message.body || "A digital bouquet curated just for you."}</p>
                         <p className="font-bold">Fondly,</p>
-                        <p className="font-bold">{message.from || "Sohail"}</p>
+                        <p className="font-bold">{message.from || "Me"}</p>
                     </div>
                 </motion.div>
             </div>
