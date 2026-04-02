@@ -19,10 +19,7 @@ export const FlowerData = [
 const baseClasses = "object-contain pointer-events-none drop-shadow-none cursor-pointer hover:scale-105 transition-transform duration-300";
 const imageStyle = {
     // Crushes dark grey AI artifacts to pure black, boosts vividness
-    filter: "brightness(0.85) contrast(1.4) saturate(1.2)", 
-    // Smoothly fades out the edges of the box so no corners are ever visible
-    WebkitMaskImage: "radial-gradient(circle, black 65%, transparent 75%)",
-    maskImage: "radial-gradient(circle, black 65%, transparent 75%)"
+    filter: "brightness(0.85) contrast(1.4) saturate(1.2)"
 };
 
 function Orchid({ className, ...props }: FlowerProps) {

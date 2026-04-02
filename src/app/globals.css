@@ -37,6 +37,7 @@ body {
 @media (pointer: fine) {
   body { cursor: none; }
   a, button { cursor: none; }
+  input, textarea { cursor: text; }
 }
 
 ::selection {

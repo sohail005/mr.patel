@@ -53,10 +53,10 @@ export default function InteractiveBuilder() {
     };
 
     return (
-        <section className="relative w-full min-h-screen text-white overflow-hidden font-sans py-24 z-20">
+        <section className="relative w-full min-h-screen text-white overflow-hidden font-sans py-8 z-20">
             
             <div className="max-w-6xl mx-auto px-6 h-full flex flex-col items-center relative z-10">
-                <motion.div layoutId="header" className="text-center mb-12" onClick={() => {if(step!=='landing') setStep('landing')}}>
+                <motion.div layoutId="header" className="text-center mb-4" onClick={() => {if(step!=='landing') setStep('landing')}}>
                     <h2 className="text-4xl md:text-5xl font-serif tracking-tight gradient-text cursor-pointer inline-block">Digibouquet</h2>
                 </motion.div>
 
@@ -208,11 +208,8 @@ function pseudoRandom(seed: number) {
 
 const baseLeafClasses = "object-contain pointer-events-none drop-shadow-none";
 
-// Elliptical mask keeps the long stems intact while fading the corners
 const leafStyle = {
-    filter: "brightness(0.8) contrast(1.5) saturate(1.2)", 
-    WebkitMaskImage: "radial-gradient(ellipse at center, black 65%, transparent 85%)",
-    maskImage: "radial-gradient(ellipse at center, black 65%, transparent 85%)"
+    filter: "brightness(0.8) contrast(1.5) saturate(1.2)"
 };
 
 function Eucalyptus({ className }: any) {
@@ -257,111 +254,140 @@ function generateBouquetItems(selected: any[], seed: number, greeneryType: numbe
             x: (pseudoRandom(rSeed) - 0.5) * 60,
             y: (pseudoRandom(rSeed+1) - 0.5) * 60 - 20,
             rotate: 0,
-            scale: 1.5 + pseudoRandom(rSeed+2),
+            scale: 1.9 + pseudoRandom(rSeed+2),
             zIndex: 0
         });
     }
 
-    // Tall Background Vines (Eucalyptus stretch top-left and top-right)
-    items.push({
-        id: "euc-1", isLeaf: true, Component: Eucalyptus,
-        x: -55 - pseudoRandom(seed)*20, y: -70, rotate: -45 + (pseudoRandom(seed)-0.5)*15, scale: 1.3, zIndex: 10
-    });
-    items.push({
-        id: "euc-2", isLeaf: true, Component: Eucalyptus,
-        x: 55 + pseudoRandom(seed+1)*20, y: -70, rotate: 45 + (pseudoRandom(seed+1)-0.5)*15, scale: 1.3, zIndex: 11
-    });
+    // Realistic Greenery Backbone
+    const gType = greeneryType % 3;
+    const showEuc = gType === 0 || gType === 1;
+    const showFern = gType === 0 || gType === 2;
+    const showWispy = gType === 1 || gType === 2;
 
-    // Thick Dark Fern Base (Shooting downwards and outwards)
-    for (let i=0; i<4; i++) {
+    if (showEuc) {
         items.push({
-            id: `fern-${i}`, isLeaf: true, Component: DarkFern,
-            x: (i%2===0?-1:1) * (30 + pseudoRandom(seed+3+i)*25),
-            y: 50 + pseudoRandom(seed+4+i)*20,
-            rotate: (i%2===0?-1:1) * (110 + pseudoRandom(seed+5+i)*30), 
-            scale: 1.1 + pseudoRandom(seed+6+i)*0.4,
-            zIndex: 15 + i
+            id: "euc-1", isLeaf: true, Component: Eucalyptus,
+            x: -80 + pseudoRandom(seed)*25, y: -80 + pseudoRandom(seed+1)*25, rotate: -40 + pseudoRandom(seed+2)*15, scale: 1.5, zIndex: 10
+        });
+        items.push({
+            id: "euc-2", isLeaf: true, Component: Eucalyptus,
+            x: 80 + pseudoRandom(seed+3)*25, y: -80 + pseudoRandom(seed+4)*25, rotate: 40 + pseudoRandom(seed+5)*15, scale: 1.5, zIndex: 11
+        });
+        items.push({
+            id: "euc-3", isLeaf: true, Component: Eucalyptus,
+            x: -100 + pseudoRandom(seed+6)*25, y: 10 + pseudoRandom(seed+7)*25, rotate: -70 + pseudoRandom(seed+8)*15, scale: 1.4, zIndex: 12
+        });
+        items.push({
+            id: "euc-4", isLeaf: true, Component: Eucalyptus,
+            x: 100 + pseudoRandom(seed+9)*25, y: 10 + pseudoRandom(seed+10)*25, rotate: 70 + pseudoRandom(seed+11)*15, scale: 1.4, zIndex: 13
         });
     }
 
-    // Wispy Seed Pod Strands (Radiating unpredictably)
-    const wispyColors = ["#ce93d8", "#b2dfdb", "#ffcc80"];
-    const wColor = wispyColors[greeneryType % 3];
-    for (let i=0; i<7; i++) {
-        const angle = pseudoRandom(seed+10+i) * Math.PI * 2;
-        items.push({
-            id: `wispy-${i}`, isLeaf: true, Component: (props: any) => <WispyGrass {...props} color={wColor} />,
-            x: Math.cos(angle) * 55,
-            y: Math.sin(angle) * 65,
-            rotate: (angle*180)/Math.PI + 90,
-            scale: 1.2 + pseudoRandom(seed+12+i)*0.5,
-            zIndex: Math.random() > 0.5 ? 25 : 300 
+    if (showFern) {
+        const fernAngles = [135, 160, 20, 45]; 
+        fernAngles.forEach((baseAngle, i) => {
+            const angle = baseAngle + (pseudoRandom(seed+6+i)-0.5)*20;
+            const rad = angle * Math.PI / 180;
+            items.push({
+                id: `fern-${i}`, isLeaf: true, Component: DarkFern,
+                x: Math.cos(rad) * 90,
+                y: 30 + Math.sin(rad) * 80,
+                rotate: angle - 90, 
+                scale: 1.3 + pseudoRandom(seed+7+i)*0.4,
+                zIndex: 15 + i
+            });
         });
     }
 
-    // Organize selected flowers into roles
+    if (showWispy) {
+        for (let i=0; i<6; i++) {
+            const angle = 210 + (120 * (i/5)) + (pseudoRandom(seed+10+i)-0.5)*20; 
+            const rad = angle * Math.PI / 180;
+            items.push({
+                id: `wispy-${i}`, isLeaf: true, Component: WispyGrass,
+                x: Math.cos(rad) * 80,
+                y: -20 + Math.sin(rad) * 80,
+                rotate: angle + 90,
+                scale: 1.4 + pseudoRandom(seed+11+i)*0.5,
+                zIndex: 25 + i 
+            });
+        }
+    }
+
+    // Flowers Processing
     const anchors: any[] = [];
     const masses: any[] = [];
     const fillers: any[] = [];
 
-    // Make a shallow copy and randomly assign roles based on hardcoded lists
-    [...selected].forEach(s => {
-        if (anchorIds.includes(s.typeId)) anchors.push(s);
-        else if (massIds.includes(s.typeId)) masses.push(s);
+    // Assign roles dynamically so they look balanced
+    let shuffled = [...selected].sort((a,b) => pseudoRandom(seed + a.typeId.length) - 0.5); 
+    shuffled.forEach(s => {
+        if(anchorIds.includes(s.typeId)) anchors.push(s);
+        else if(massIds.includes(s.typeId)) masses.push(s);
         else fillers.push(s);
     });
-
-    // Ensure we have at least 1 anchor by stealing from mass/filler if needed
-    if (anchors.length === 0 && masses.length > 0) anchors.push(masses.pop());
-    if (anchors.length === 0 && fillers.length > 0) anchors.push(fillers.pop());
     
-    // ANCHORS: The focal point at the bottom center
-    anchors.forEach((a, i) => {
-        const flowerDef = FlowerData.find(f => f.id === a.typeId);
-        items.push({
-            ...a, isLeaf: false, Component: flowerDef?.Component,
-            x: (i%2===0?1:-1) * i * 15,
-            y: 55 + i*15, // Anchored low
-            rotate: (pseudoRandom(seed+20+i) - 0.5) * 20,
-            scale: 1.4 + pseudoRandom(seed+21+i)*0.3, // Giant hero scale
-            zIndex: 400 + i // Front and center
-        });
-    });
+    // Ensure at least 1 anchor
+    if(anchors.length === 0 && masses.length > 0) anchors.push(masses.pop());
+    if(anchors.length === 0 && fillers.length > 0) anchors.push(fillers.pop());
 
-    // MASS BACKBONE: Upper fan structure
-    masses.forEach((m, i) => {
-        const flowerDef = FlowerData.find(f => f.id === m.typeId);
-        const slots = [
-            {x: -35, y: -45}, {x: 35, y: -45}, {x: 0, y: -30}, 
-            {x: -50, y: -10}, {x: 50, y: -10}
-        ];
-        const slot = slots[i % slots.length];
-        items.push({
-            ...m, isLeaf: false, Component: flowerDef?.Component,
-            x: slot.x + (pseudoRandom(seed+30+i)-0.5)*15,
-            y: slot.y + (pseudoRandom(seed+31+i)-0.5)*15,
-            rotate: (pseudoRandom(seed+32+i) - 0.5) * 35,
-            scale: 1.2 + pseudoRandom(seed+33+i)*0.2,
-            zIndex: 100 + Math.floor(slot.y)
-        });
-    });
+    const seedShuffle = (arr: any[], offset: number) => {
+        let res = [...arr];
+        for (let i = res.length - 1; i > 0; i--) {
+            const j = Math.floor(pseudoRandom(seed + offset + i) * (i + 1));
+            [res[i], res[j]] = [res[j], res[i]];
+        }
+        return res;
+    };
 
-    // FILLERS: Central gap filling
-    fillers.forEach((f, i) => {
-        const flowerDef = FlowerData.find(flower => flower.id === f.typeId);
-        const angle = pseudoRandom(seed+40+i) * Math.PI * 2;
-        const radius = pseudoRandom(seed+41+i) * 35;
-        const x = Math.cos(angle) * (radius * 1.5);
-        const y = Math.sin(angle) * (radius) + 15;
-        
-        items.push({
-            ...f, isLeaf: false, Component: flowerDef?.Component,
-            x, y,
-            rotate: (pseudoRandom(seed+42+i) - 0.5) * 50,
-            scale: 0.9 + pseudoRandom(seed+43+i)*0.3,
-            zIndex: 200 + Math.floor(y) 
+    const sAnchors = seedShuffle(anchors, 100);
+    const sMasses = seedShuffle(masses, 200);
+    const sFillers = seedShuffle(fillers, 300);
+
+    const placeFlowers = (flowersArr: any[], yCenter: number, radiusX: number, radiusY: number, startAngle: number, endAngle: number, scaleBase: number, zOffset: number) => {
+        const count = flowersArr.length;
+        if (count === 0) return;
+        flowersArr.forEach((flower, i) => {
+            const flowerDef = FlowerData.find(f => f.id === flower.typeId);
+            
+            // Distribute angles evenly, add jitter
+            let angleDeg = startAngle;
+            if (count > 1) {
+                const span = endAngle - startAngle;
+                angleDeg = startAngle + (span * (i / (count - 1)));
+            } else {
+                angleDeg = (startAngle + endAngle) / 2;
+            }
+            
+            angleDeg += (pseudoRandom(seed + 1000 + i) - 0.5) * 30; // wider angle jitter
+            const rad = angleDeg * Math.PI / 180;
+
+            // Use a variable radius factor to fill the inner core space
+            // Ranges from 40% to 100% of the maximum boundary
+            const rFactor = 0.4 + pseudoRandom(seed + 1005 + i) * 0.6;
+            
+            const x = Math.cos(rad) * (radiusX * rFactor);
+            const y = yCenter + Math.sin(rad) * (radiusY * rFactor);
+            
+            items.push({
+                ...flower, isLeaf: false, Component: flowerDef?.Component,
+                x, y,
+                rotate: (pseudoRandom(seed + 1003 + i) - 0.5) * 25, 
+                scale: scaleBase + (pseudoRandom(seed + 1004 + i) - 0.5) * 0.2,
+                zIndex: zOffset + Math.floor(y) 
+            });
         });
-    });
+    }
+
+    // 1. Fillers (Back/Top Ring)
+    placeFlowers(sFillers, -20, 85, 65, 190, 350, 1.2, 200);
+
+    // 2. Masses (Middle Ring)
+    placeFlowers(sMasses, 10, 65, 50, 160, 380, 1.4, 400);
+
+    // 3. Anchors (Front/Bottom Center)
+    placeFlowers(sAnchors, 40, 35, 25, 60, 120, 1.65, 600);
 
     return items.sort((a, b) => a.zIndex - b.zIndex);
 }
@@ -384,7 +410,7 @@ function ArrangerView({ selected, seed, greenery, onShuffle, onChangeGreenery, o
             </div>
 
             {/* Canvas */}
-            <div className="relative w-80 lg:w-96 min-h-[400px] mb-12 flex items-center justify-center mt-10">
+            <div className="relative w-full max-w-[500px] min-h-[500px] mb-12 flex items-center justify-center mt-10">
 
                 {generateBouquetItems(selected, seed, greenery).map((item: any, i: number) => {
                     const C = item.Component;
@@ -395,7 +421,7 @@ function ArrangerView({ selected, seed, greenery, onShuffle, onChangeGreenery, o
                             initial={{ scale: 0, opacity: 0 }}
                             animate={{ x: item.x, y: item.y, rotate: item.rotate, scale: item.scale, opacity: 1 }}
                             transition={{ type: "spring", stiffness: 80, damping: 14, delay: i * 0.04 }}
-                            className="absolute w-28 h-28 origin-center flex items-center justify-center mix-blend-lighten"
+                            className="absolute w-28 h-28 origin-center flex items-center justify-center"
                             style={{ zIndex: item.zIndex }}
                         >
                             <C className={`w-full h-full object-contain pointer-events-none ${item.isLeaf ? 'opacity-90' : ''}`} />
@@ -486,50 +512,52 @@ function FinalView({ selected, seed, greenery, message, onReset }: any) {
     return (
         <motion.div 
             initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-16 lg:gap-32 w-full pb-32 pt-10"
+            className="flex flex-col items-center justify-center w-full pb-16 pt-4 px-4"
         >
-            {/* The Bouquet */}
-            <div className="relative w-80 h-96 flex flex-col items-center justify-center -mt-10 md:mt-0 drop-shadow-xl z-20">
-                {generateBouquetItems(selected, seed, greenery).map((item: any, i: number) => {
-                    const C = item.Component;
+            <div className="flex flex-col md:flex-row items-center justify-center lg:gap-8 w-full mb-12">
+                {/* The Bouquet */}
+                <div className="relative w-full max-w-[500px] min-h-[400px] lg:min-h-[600px] flex flex-col items-center justify-center drop-shadow-xl z-20">
+                    {generateBouquetItems(selected, seed, greenery).map((item: any, i: number) => {
+                        const C = item.Component;
 
-                    return (
-                        <motion.div 
-                            key={item.id}
-                            initial={{ x: item.x, y: item.y + 20, opacity: 0, rotate: item.rotate }}
-                            animate={{ x: item.x, y: item.y, rotate: item.rotate, scale: item.scale, opacity: 1 }}
-                            transition={{ type: "spring", stiffness: 100, damping: 15, delay: i * 0.05 }}
-                            className="absolute w-28 h-28 origin-center flex items-center justify-center"
-                            style={{ zIndex: item.zIndex }}
-                        >
-                            <C className={`w-full h-full drop-shadow-md ${item.isLeaf ? 'opacity-90' : ''}`} />
-                        </motion.div>
-                    );
-                })}
+                        return (
+                            <motion.div 
+                                key={item.id}
+                                initial={{ x: item.x, y: item.y + 20, opacity: 0, rotate: item.rotate }}
+                                animate={{ x: item.x, y: item.y, rotate: item.rotate, scale: item.scale, opacity: 1 }}
+                                transition={{ type: "spring", stiffness: 100, damping: 15, delay: i * 0.05 }}
+                                className="absolute w-28 h-28 origin-center flex items-center justify-center"
+                                style={{ zIndex: item.zIndex }}
+                            >
+                                <C className={`w-full h-full drop-shadow-md ${item.isLeaf ? 'opacity-90' : ''}`} />
+                            </motion.div>
+                        );
+                    })}
+                </div>
+
+                {/* The Note Card */}
+                <motion.div 
+                    initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
+                    className="w-full max-w-sm bg-[#fffefa] rounded-xl border border-white/10 p-8 shadow-[0_0_40px_rgba(255,255,255,0.05)] relative overflow-hidden"
+                    style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '100% 32px', lineHeight: '32px', paddingTop: '42px', paddingBottom: '32px' }}
+                >
+                    {/* Red vertical margin line */}
+                    <div className="absolute top-0 bottom-0 left-8 w-px bg-red-400/30" />
+                    <div className="absolute top-0 bottom-0 left-[36px] w-px bg-red-400/30" />
+
+                    <div className="font-serif text-xl text-gray-800 pl-8 relative z-10 break-words">
+                        <p className="mb-6 font-bold">Dear {message.to || "Friend"},</p>
+                        <p className="mb-10 min-h-[128px] whitespace-pre-wrap leading-[32px]">{message.body || "A digital bouquet curated just for you."}</p>
+                        <p className="font-bold">Fondly,</p>
+                        <p className="font-bold">{message.from || "Sohail"}</p>
+                    </div>
+                </motion.div>
             </div>
 
-            {/* The Note Card */}
-            <motion.div 
-                initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
-                className="w-full max-w-sm bg-[#fffefa] rounded-xl border border-white/10 p-8 shadow-[0_0_40px_rgba(255,255,255,0.05)] relative overflow-hidden"
-                style={{ backgroundImage: 'linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px)', backgroundSize: '100% 32px', lineHeight: '32px', paddingTop: '42px', paddingBottom: '32px' }}
-            >
-                {/* Red vertical margin line */}
-                <div className="absolute top-0 bottom-0 left-8 w-px bg-red-400/30" />
-                <div className="absolute top-0 bottom-0 left-[36px] w-px bg-red-400/30" />
-
-                <div className="font-serif text-xl text-gray-800 pl-8 relative z-10 break-words">
-                    <p className="mb-6 font-bold">Dear {message.to || "Friend"},</p>
-                    <p className="mb-10 min-h-[128px] whitespace-pre-wrap leading-[32px]">{message.body || "A digital bouquet curated just for you."}</p>
-                    <p className="font-bold">Fondly,</p>
-                    <p className="font-bold">{message.from || "Sohail"}</p>
-                </div>
-            </motion.div>
-
-            {/* Restart button and Share button absolutely positioned at the bottom */}
+            {/* Restart button and Share button chronologically below */}
             <motion.div 
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }}
-                className="absolute bottom-10 flex flex-col sm:flex-row gap-4 w-full justify-center px-4"
+                className="flex flex-col sm:flex-row gap-4 w-full justify-center px-4"
             >
                 <button 
                     onClick={onReset} 
