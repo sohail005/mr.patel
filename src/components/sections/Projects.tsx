@@ -7,30 +7,120 @@ import { useRef, useState } from "react";
 
 const projects = [
     {
-        title: "Figma-to-Code Pipeline",
-        description: "A workflow automation system for streamlining infrastructure and design handovers, converting design assets into production-ready code.",
-        tags: ["Workflow Automation", "Code Generation", "Infrastructure", "React"],
+        title: "Opus Virtual Offices",
+        description: "A premium all-in-one virtual office platform offering professional business addresses, live call answering, and mail handling services across 650+ US locations.",
+        tags: ["Virtual Office", "SaaS", "Web Platform", "Business Services"],
+        color: "#3b82f6",
+        image: "https://www.opusvirtualoffices.com/opus-logo-icon.svg",
+        github: "#",
+        live: "https://www.opusvirtualoffices.com/",
+    },
+    {
+        title: "Finecart",
+        description: "A local marketplace application that connects users with neighborhood stores for convenient doorstep delivery of varied products.",
+        tags: ["React Native", "Firebase", "Marketplace"],
         color: "#6c63ff",
-        image: "⚡",
+        image: "https://play-lh.googleusercontent.com/dRmXZ9KOrIV3ysgByLlUDf32JTG8-fC5sEr9D7XeXjSLpP1OjYMlsgYekqx0xQzteuY=s512-rw",
         github: "https://github.com/sohail005",
-        live: "#",
+        live: "https://play.google.com/store/apps/details?id=com.retail.center.io",
     },
     {
-        title: "Revalsys Technologies Collaboration",
-        description: "Collaborative development work focused on specialized software solutions, scalable architectures, and component modularity.",
-        tags: ["Collaboration", "Software Solutions", "React Native"],
+        title: "HOPP",
+        description: "An on-demand driver service app that allows users to hire verified and trained professional drivers on an hourly basis.",
+        tags: ["React Native", "Google Maps", "On-Demand"],
         color: "#00d4ff",
-        image: "🤝",
+        image: "https://play-lh.googleusercontent.com/65rwHxXRvvzoJG6iETMINnUgeQqYq0JUUVUCP8AHMARnUVGYOXVNqSL4FRyWCOUxnDY=s512-rw",
         github: "https://github.com/sohail005",
-        live: "#",
+        live: "https://play.google.com/store/apps/details?id=com.Revalsys.warantech.HoppCustomer",
     },
     {
-        title: "Modern Website Builder",
-        description: "A project focused on creating intuitive tools for simplified web development and deployment, leveraging modern front-end frameworks.",
-        tags: ["UI/UX", "Web Builders", "Next.js", "App Deployment"],
+        title: "HOPP-Partner",
+        description: "The companion application for HOPP drivers to manage their bookings, trips, and real-time navigation.",
+        tags: ["Real-time Tracking", "React Native", "Logistics"],
         color: "#ff6fd8",
-        image: "🏗️",
+        image: "https://play-lh.googleusercontent.com/GOMusFUPLSJCgpplOT8-i2qRqR_EGjNLelEO2MDsnzI6C0Y8gRPy-iqLhImfM0JoEQ=s512-rw",
         github: "https://github.com/sohail005",
+        live: "https://play.google.com/store/apps/details?id=com.Revalsys.warantech.HOPPDriver",
+    },
+    {
+        title: "Reval Retail",
+        description: "A comprehensive retail shopping platform designed for local neighborhood stores to reach customers online.",
+        tags: ["E-commerce", "React Native", "Retail"],
+        color: "#a78bfa",
+        image: "https://play-lh.googleusercontent.com/DE372GJhBmpnz9xdn3wRcdpFqV5z2NzkZQ2Ro6EDPxkbnD-vzC8t9q6ezeqGoAkLUT0=s512-rw",
+        github: "https://github.com/sohail005",
+        live: "https://play.google.com/store/apps/details?id=com.revalretail",
+    },
+    {
+        title: "RevalOmni Dashboard",
+        description: "A business management dashboard for retail owners to monitor sales, inventory, and business analytics in real-time.",
+        tags: ["Data Viz", "React Native", "Analytics"],
+        color: "#fbbf24",
+        image: "https://play-lh.googleusercontent.com/ACPopRcdWwcEgdhg8yvN1Tp6FF2xfzskkqWP6OmGhgvjWOZOaBCCD7T5t4FnaFdDiYL3=s512-rw",
+        github: "https://github.com/sohail005",
+        live: "https://play.google.com/store/apps/details?id=com.masterwsi",
+    },
+    {
+        title: "Reval ESS",
+        description: "Employee Self Service (ESS) application for internal company management, profile updates, and leave requests.",
+        tags: ["HRMS", "Internal Tool", "React Native"],
+        color: "#94a3b8",
+        image: "https://play-lh.googleusercontent.com/PZsZzBt_BforgPaps1wry9HbuIwThsfNghCCMvLOVG1iA8qV-5Gh0pnUGzRSt5QbVOo5=s512-rw",
+        github: "https://github.com/sohail005",
+        live: "https://play.google.com/store/apps/details?id=com.revaless",
+    },
+    {
+        title: "Hopp(ios)",
+        description: "iOS version of the on-demand driver service, offering seamless booking and professional driver management.",
+        tags: ["iOS", "App Store", "React Native"],
+        color: "#00d4ff",
+        image: "https://is1-ssl.mzstatic.com/image/thumb/Purple112/v4/3f/b4/d6/3fb4d6f4-7130-0849-b8e9-9e84838de4a2/AppIcon-0-0-1x_U007epad-0-10-0-85-220.png/1024x1024bb.jpg",
+        github: "https://github.com/sohail005",
+        live: "https://apps.apple.com/in/app/hopp-company/id1527763771",
+    },
+    {
+        title: "Hopp Partner (ios)",
+        description: "iOS companion app for HOPP partners to track earnings, manage schedules, and accept trip requests.",
+        tags: ["iOS", "Logistics", "React Native"],
+        color: "#ff6fd8",
+        image: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f4/dc/f8/f4dcf8d4-2b24-3aa1-1ae3-611a7365700a/AppIcon-0-0-1x_U007epad-0-9-0-85-220.png/1024x1024bb.jpg",
+        github: "https://github.com/sohail005",
+        live: "https://apps.apple.com/in/app/hopp-partner/id1527779025",
+    },
+    {
+        title: "Revalsys Authenticator",
+        description: "A secure authentication app providing 2FA and secure notifications for internal company systems using JWT and Biometrics.",
+        tags: ["Security", "Biometrics", "2FA"],
+        color: "#10b981",
+        image: "https://play-lh.googleusercontent.com/KEQmiTIYsjlwCK0IU0jPqqQMqc90LGQHAPlA1Cir6u8F2jgZS3GbQ0DAY8W1vbhBcZY=s512-rw",
+        github: "https://github.com/sohail005",
+        live: "https://play.google.com/store/apps/details?id=com.revalnotification",
+    },
+    {
+        title: "Pro V Networking",
+        description: "A professional networking and business event platform for connecting attendees and managing event interactions.",
+        tags: ["Networking", "Social", "React Native"],
+        color: "#ec4899",
+        image: "https://play-lh.googleusercontent.com/P1Mzwk2GwKYy99eLRSP_JZTSS9xJpdi3Ad0jraytb39owFr3-zfogY4cL4RED-wzWX9GGQnFTxsumoKOj-UT-_4=s512-rw",
+        github: "https://github.com/sohail005",
+        live: "https://play.google.com/store/apps/details?id=com.pro_v_networking",
+    },
+    {
+        title: "Pro V Networking(ios)",
+        description: "iOS version of the professional networking platform, listed as Pro 5 Networking on the App Store.",
+        tags: ["iOS", "Networking", "Professional"],
+        color: "#ec4899",
+        image: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e6/bb/93/e6bb9361-96f2-563f-9dcf-7ee8452671c5/AppIcon-1x_U007emarketing-0-6-0-85-220-0.png/1024x1024bb.jpg",
+        github: "https://github.com/sohail005",
+        live: "https://apps.apple.com/in/app/pro-5-networking/id6745877588",
+    },
+    {
+        title: "Motorspace",
+        description: "A JavaScript-focused exploration project involving visualization and interactive simulations for motor systems.",
+        tags: ["JavaScript", "HTML/CSS", "Simulation"],
+        color: "#ef4444",
+        image: "⚙️",
+        github: "https://github.com/sohail005/Motorspace",
         live: "#",
     },
 ];
@@ -123,12 +213,23 @@ function MagneticCard({ project }: { project: (typeof projects)[0] }) {
                     <motion.div
                         animate={{
                             rotate: isHovered ? 360 : 0,
-                            scale: isHovered ? 1.15 : 1,
+                            scale: isHovered ? 1.1 : 1,
                         }}
-                        transition={{ duration: 0.6, ease: "easeInOut" }}
-                        className="text-5xl"
+                        transition={{ duration: 0.8, ease: "circOut" }}
+                        className="w-16 h-16 rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-white/5 flex items-center justify-center relative group-hover:border-white/20 transition-colors"
                     >
-                        {project.image}
+                        {project.image.startsWith('http') ? (
+                            <img 
+                                src={project.image} 
+                                alt={project.title} 
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                loading="lazy"
+                            />
+                        ) : (
+                            <span className="text-4xl">{project.image}</span>
+                        )}
+                        {/* Reflective shine overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </motion.div>
 
                     <div className="flex gap-3">
@@ -143,7 +244,7 @@ function MagneticCard({ project }: { project: (typeof projects)[0] }) {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                 </svg>
                             )},
-                        ].map((btn) => (
+                        ].filter(btn => btn.href !== "#").map((btn) => (
                             <motion.a
                                 key={btn.label}
                                 href={btn.href}

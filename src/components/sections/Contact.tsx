@@ -71,16 +71,40 @@ export default function Contact() {
     });
     const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setSending(true);
-        // Simulate sending
-        await new Promise((r) => setTimeout(r, 1500));
-        setSending(false);
-        setSent(true);
-        setFormState({ name: "", email: "", message: "" });
-        setTimeout(() => setSent(false), 3000);
+        setError("");
+
+        try {
+            const response = await fetch("/api/send", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: formState.name,
+                    email: formState.email,
+                    message: formState.message,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                setSent(true);
+                setFormState({ name: "", email: "", message: "" });
+                setTimeout(() => setSent(false), 5000);
+            } else {
+                setError(result.error || "Something went wrong. Please try again.");
+            }
+        } catch (err) {
+            setError("Failed to connect to the server. Please try again later.");
+        } finally {
+            setSending(false);
+        }
     };
 
     return (
@@ -247,9 +271,19 @@ export default function Contact() {
                                     required
                                     rows={5}
                                     className="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.1)] text-white placeholder-[var(--color-text-muted)] focus:border-[var(--color-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)] transition-colors resize-none"
-                                    placeholder="Tell me about your project..."
+                                placeholder="Tell me about your project..."
                                 />
                             </div>
+
+                            {error && (
+                                <motion.p 
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="text-red-400 text-sm font-mono mt-[-1rem] text-center"
+                                >
+                                    {error}
+                                </motion.p>
+                            )}
 
                             <motion.button
                                 type="submit"
