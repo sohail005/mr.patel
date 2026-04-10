@@ -31,10 +31,10 @@ export default function CursorEffect() {
     const [visible, setVisible] = useState(false);
     const [section, setSection] = useState<CursorSection>("default");
 
-    const dotX = useSpring(-100, { stiffness: 600, damping: 30 });
-    const dotY = useSpring(-100, { stiffness: 600, damping: 30 });
-    const ringX = useSpring(-100, { stiffness: 160, damping: 22 });
-    const ringY = useSpring(-100, { stiffness: 160, damping: 22 });
+    const dotX = useSpring(-100, { stiffness: 1500, damping: 40 });
+    const dotY = useSpring(-100, { stiffness: 1500, damping: 40 });
+    const ringX = useSpring(-100, { stiffness: 500, damping: 30 });
+    const ringY = useSpring(-100, { stiffness: 500, damping: 30 });
 
     useEffect(() => {
         if (typeof window === "undefined") return;
@@ -42,6 +42,7 @@ export default function CursorEffect() {
         setVisible(true);
 
         const onMove = (e: MouseEvent) => {
+            if (!visible) setVisible(true);
             dotX.set(e.clientX - 5);
             dotY.set(e.clientY - 5);
             ringX.set(e.clientX - 18);
@@ -108,7 +109,7 @@ export default function CursorEffect() {
                     width: 120,
                     height: 120,
                     background: `radial-gradient(circle, rgba(${rgb},0.07) 0%, transparent 70%)`,
-                    transition: "left 0.15s, top 0.15s",
+                    transition: "left 0.1s, top 0.1s",
                 }}
             />
         </>

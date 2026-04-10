@@ -1,16 +1,19 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 
 const navLinks = [
-    { name: "Home", href: "/#hero", section: "hero" },
-    { name: "About", href: "/#about", section: "about" },
-    { name: "Skills", href: "/#skills", section: "skills" },
-    { name: "Projects", href: "/#projects", section: "projects" },
-    { name: "Experience", href: "/#experience", section: "experience" },
-    { name: "Digibouquet", href: "/digibouquet", section: "" },
-    { name: "Contact", href: "/#contact", section: "contact" },
+    { name: "Home",        href: "/#hero",        section: "hero",       highlight: false },
+    { name: "About",       href: "/#about",       section: "about",      highlight: false },
+    { name: "Skills",      href: "/#skills",      section: "skills",     highlight: false },
+    { name: "Projects",    href: "/#projects",    section: "projects",   highlight: false },
+    { name: "Experience",  href: "/#experience",  section: "experience", highlight: false },
+    { name: "Digibouquet", href: "/digibouquet",  section: "/digibouquet", highlight: false },
+    { name: "Learn",       href: "/learn",        section: "/learn",     highlight: false },
+    { name: "Free Tools",  href: "/free-tools",   section: "/free-tools",highlight: true  },
+    { name: "Contact",     href: "/#contact",     section: "contact",    highlight: false },
 ];
 
 function MagneticLink({
@@ -19,12 +22,14 @@ function MagneticLink({
     isActive,
     id,
     onClick,
+    highlight,
 }: {
     href: string;
     children: React.ReactNode;
     isActive: boolean;
     id: string;
     onClick?: () => void;
+    highlight?: boolean;
 }) {
     const ref = useRef<HTMLAnchorElement>(null!);
     const x = useMotionValue(0);
@@ -41,6 +46,31 @@ function MagneticLink({
     };
     const handleMouseLeave = () => { x.set(0); y.set(0); };
 
+    if (highlight) {
+        return (
+            <motion.a
+                ref={ref}
+                href={href}
+                id={id}
+                onClick={onClick}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+                style={{ x: sx, y: sy }}
+                whileHover={{ scale: 1.06 }}
+                className="relative px-3.5 py-1.5 text-sm font-semibold text-white rounded-full overflow-hidden whitespace-nowrap flex items-center justify-center"
+            >
+                {/* Animated gradient border */}
+                <span className="absolute inset-0 rounded-full"
+                    style={{ background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent))", padding: "1px" }}>
+                    <span className="absolute inset-[1px] rounded-full bg-[var(--color-background)]" />
+                </span>
+                <span className="relative z-10 gradient-text">{children}</span>
+                {/* Pulse dot */}
+                <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[var(--color-secondary)] animate-pulse" />
+            </motion.a>
+        );
+    }
+
     return (
         <motion.a
             ref={ref}
@@ -50,7 +80,7 @@ function MagneticLink({
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{ x: sx, y: sy }}
-            className="relative px-4 py-2 text-sm text-[var(--color-text-muted)] hover:text-white transition-colors duration-300"
+            className="relative px-3 py-2 text-sm text-[var(--color-text-muted)] hover:text-white transition-colors duration-300 whitespace-nowrap"
         >
             {children}
             {isActive && (
@@ -72,16 +102,23 @@ function MagneticLink({
 }
 
 export default function Navbar() {
+    const pathname = usePathname();
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("hero");
 
     useEffect(() => {
+        // Only run scroll spy on the homepage
+        if (pathname !== "/" && pathname !== "/#hero") {
+            setActiveSection(pathname);
+            return;
+        }
+
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
 
-            // Detect active section
-            const sections = navLinks.map((l) => l.section).filter(Boolean);
+            // Detect active section on the homepage only
+            const sections = navLinks.map((l) => l.section).filter(s => !s.startsWith("/"));
             for (const id of sections.reverse()) {
                 const el = document.getElementById(id);
                 if (!el) continue;
@@ -93,17 +130,18 @@ export default function Navbar() {
             }
         };
         window.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll(); // init on mount
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [pathname]);
 
     return (
         <motion.nav
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
                 scrolled
-                    ? "bg-[rgba(5,8,22,0.80)] backdrop-blur-2xl border-b border-[rgba(108,99,255,0.18)]"
+                    ? "bg-[rgba(5,8,22,0.3)] backdrop-blur-[24px] backdrop-saturate-[1.8] border-b border-white/[0.05] shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]"
                     : "bg-transparent"
             }`}
         >
@@ -127,11 +165,11 @@ export default function Navbar() {
                     whileHover={{ scale: 1.08 }}
                     whileTap={{ scale: 0.95 }}
                 >
-                    {"<SP />"}
+                    {"<Sohail Patel />"}
                 </motion.a>
 
                 {/* Desktop Links */}
-                <div className="hidden md:flex items-center gap-1">
+                <div className="hidden md:flex items-center gap-0.5">
                     {navLinks.map((link, i) => (
                         <motion.div
                             key={link.name}
@@ -142,7 +180,8 @@ export default function Navbar() {
                             <MagneticLink
                                 href={link.href}
                                 isActive={link.section === activeSection}
-                                id={`nav-link-${link.name.toLowerCase()}`}
+                                id={`nav-link-${link.name.toLowerCase().replace(" ", "-")}`}
+                                highlight={link.highlight}
                             >
                                 {link.name}
                             </MagneticLink>
@@ -154,7 +193,7 @@ export default function Navbar() {
                 <motion.a
                     href="/#contact"
                     id="nav-cta-button"
-                    className="hidden md:block px-5 py-2.5 rounded-full text-sm font-medium bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white relative overflow-hidden group"
+                    className="hidden md:block px-4 py-2.5 rounded-full text-sm font-medium bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white relative overflow-hidden group"
                     whileHover={{ scale: 1.06, boxShadow: "0 0 20px rgba(108,99,255,0.5)" }}
                     whileTap={{ scale: 0.95 }}
                 >

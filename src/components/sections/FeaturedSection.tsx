@@ -20,7 +20,7 @@ const FEATURES = [
         num: "02",
         subtitle: "Modern Web Experiences",
         title: "Next.js",
-        titleAccent: "Engineer",
+        titleAccent: "",
         description:
             "Shipping full-stack Next.js applications with server components, dynamic routing, SEO optimization, and pixel-perfect UI implementations.",
         tags: ["Next.js", "TypeScript", "Tailwind CSS", "REST APIs"],
@@ -30,21 +30,21 @@ const FEATURES = [
     },
     {
         num: "03",
-        subtitle: "Zero-Touch Releases",
-        title: "CI/CD",
-        titleAccent: "Automation",
+        subtitle: "App Store & Google Play",
+        title: "Android and IOS",
+        titleAccent: "Deployment",
         description:
-            "Fastlane + GitHub Actions pipelines that ship to App Store and Play Store without a single manual step. Reliable, repeatable, fast.",
-        tags: ["Fastlane", "GitHub Actions", "App Store", "Play Store"],
+            "Shipping React Native apps to millions of hands. Handling code signing, provisioning profiles, and navigating complex app store review guidelines without breaking a sweat.",
+        tags: ["EAS Build", "Code Signing", "App Store", "Play Store"],
         color: "#ff6fd8",
         stat: "100%",
-        statLabel: "Automated Releases",
+        statLabel: "Production Releases",
     },
     {
         num: "04",
         subtitle: "Type-Safe Architecture",
         title: "TypeScript",
-        titleAccent: "Advocate",
+        titleAccent: "JavaScript",
         description:
             "Strong typing across the entire stack. Clean, self-documenting code that teams can scale and maintain without friction or runtime surprises.",
         tags: ["TypeScript", "Redux Toolkit", "Clean Architecture", "Patterns"],
@@ -276,7 +276,7 @@ function FeaturePanel({
     return (
         <motion.div
             style={{ opacity, y, willChange: "transform, opacity" }}
-            className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-20 px-6 lg:px-20 pointer-events-none pt-12 lg:pt-0"
+            className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-20 px-6 lg:px-20 pointer-events-none pt-36 lg:pt-0"
         >
             {/* Left — Text */}
             <div className="flex-1 max-w-lg space-y-3 lg:space-y-6 text-center lg:text-left z-10">
@@ -410,7 +410,7 @@ export default function FeaturedSection() {
                 />
 
                 {/* Section label */}
-                <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10">
+                <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 w-full text-center">
                     <p className="text-[var(--color-primary)] font-mono text-xs tracking-widest uppercase">
                         What I Do
                     </p>

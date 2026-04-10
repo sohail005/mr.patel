@@ -14,7 +14,7 @@ export default function Footer() {
                         className="text-xl font-bold gradient-text tracking-tight"
                         whileHover={{ scale: 1.05 }}
                     >
-                        {"<SP />"}
+                        {"<Sohail Patel />"}
                     </motion.a>
 
                     <p className="text-sm text-[var(--color-text-muted)]">

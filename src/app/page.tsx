@@ -21,9 +21,15 @@ const ScrollProgress = dynamic(
   { ssr: false }
 );
 
+const LenisProvider = dynamic(
+  () => import("@/components/effects/LenisProvider"),
+  { ssr: false }
+);
+
 export default function Home() {
   return (
     <main className="relative">
+      <LenisProvider />
       <ScrollProgress />
       <CursorEffect />
       <Navbar />
