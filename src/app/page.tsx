@@ -11,11 +11,6 @@ import Experience from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 
-const CursorEffect = dynamic(
-  () => import("@/components/effects/CursorEffect"),
-  { ssr: false }
-);
-
 const ScrollProgress = dynamic(
   () => import("@/components/effects/ScrollProgress"),
   { ssr: false }
@@ -31,7 +26,6 @@ export default function Home() {
     <main className="relative">
       <LenisProvider />
       <ScrollProgress />
-      <CursorEffect />
       <Navbar />
       <Hero />
       <FeaturedSection />

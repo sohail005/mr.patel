@@ -1,456 +1,352 @@
 "use client";
 
+import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
-const FEATURES = [
-    {
-        num: "01",
-        subtitle: "Mobile-First Engineer",
-        title: "React Native",
-        titleAccent: "Developer",
-        description:
-            "Building production-grade mobile apps from scratch to the App Store. Buttery 60fps animations, gesture-driven interfaces, and platform-native performance.",
-        tags: ["React Native", "Expo", "Reanimated", "Gesture Handler"],
-        color: "#6c63ff",
-        stat: "3+",
-        statLabel: "Years Mobile Dev",
-    },
-    {
-        num: "02",
-        subtitle: "Modern Web Experiences",
-        title: "Next.js",
-        titleAccent: "",
-        description:
-            "Shipping full-stack Next.js applications with server components, dynamic routing, SEO optimization, and pixel-perfect UI implementations.",
-        tags: ["Next.js", "TypeScript", "Tailwind CSS", "REST APIs"],
-        color: "#00d4ff",
-        stat: "25+",
-        statLabel: "Projects Shipped",
-    },
-    {
-        num: "03",
-        subtitle: "App Store & Google Play",
-        title: "Android and IOS",
-        titleAccent: "Deployment",
-        description:
-            "Shipping React Native apps to millions of hands. Handling code signing, provisioning profiles, and navigating complex app store review guidelines without breaking a sweat.",
-        tags: ["EAS Build", "Code Signing", "App Store", "Play Store"],
-        color: "#ff6fd8",
-        stat: "100%",
-        statLabel: "Production Releases",
-    },
-    {
-        num: "04",
-        subtitle: "Type-Safe Architecture",
-        title: "TypeScript",
-        titleAccent: "JavaScript",
-        description:
-            "Strong typing across the entire stack. Clean, self-documenting code that teams can scale and maintain without friction or runtime surprises.",
-        tags: ["TypeScript", "Redux Toolkit", "Clean Architecture", "Patterns"],
-        color: "#a78bfa",
-        stat: "15+",
-        statLabel: "Technologies",
-    },
+const stages = [
+  {
+    id: "01",
+    label: "Foundation",
+    titleTop: "SHIP",
+    titleBottom: "PRODUCTS",
+    highlight: "THAT HOLD",
+    subtitle: "Production-first delivery",
+    body:
+      "From release cycles to bug pressure, the work starts with shipping real software that survives outside a polished demo.",
+    note: "React Native, app stores, release ownership, production debugging.",
+    accent: "#8fc7ff",
+    cards: [
+      { title: "Release pipeline", value: "build / sign / ship", tone: "soft" },
+      { title: "Bug triage", value: "critical > major > polish", tone: "strong" },
+      { title: "Versioning", value: "ios 4.2.1 / android 4.2.1", tone: "soft" },
+    ],
+  },
+  {
+    id: "02",
+    label: "Interfaces",
+    titleTop: "BUILD",
+    titleBottom: "EXPERIENCES",
+    highlight: "THAT READ FAST",
+    subtitle: "Clear interaction layers",
+    body:
+      "Web and mobile interfaces need rhythm, hierarchy, and immediate readability before they need decoration.",
+    note: "Next.js, TypeScript, dashboards, platform UI, systemized layouts.",
+    accent: "#7fe0c3",
+    cards: [
+      { title: "Route map", value: "/dashboard /analytics /projects /contact", tone: "strong" },
+      { title: "Components", value: "cards / nav / motion / form states", tone: "soft" },
+      { title: "UX rule", value: "clarity before flourish", tone: "soft" },
+    ],
+  },
+  {
+    id: "03",
+    label: "Systems",
+    titleTop: "SCALE",
+    titleBottom: "THE STACK",
+    highlight: "WITHOUT FRICTION",
+    subtitle: "Architecture under motion",
+    body:
+      "The better the transitions feel, the more the underlying code has to stay disciplined: boundaries, state, performance, and maintainable patterns.",
+    note: "Server components, APIs, performance, reusable structure, sane state flow.",
+    accent: "#f7b267",
+    cards: [
+      { title: "Modules", value: "app / components / effects / sections", tone: "soft" },
+      { title: "State", value: "scoped, predictable, minimal", tone: "strong" },
+      { title: "Performance", value: "motion with restraint", tone: "soft" },
+    ],
+  },
+  {
+    id: "04",
+    label: "Polish",
+    titleTop: "DIRECT",
+    titleBottom: "THE MOTION",
+    highlight: "LIKE A FILM CUT",
+    subtitle: "Scrollytelling without excess",
+    body:
+      "The goal is a portfolio that feels intentional at every scroll point: pinned visuals, bold transitions, and enough restraint to keep the work in focus.",
+    note: "Framer Motion, layered timing, sticky scenes, editorial pacing.",
+    accent: "#ff8a65",
+    cards: [
+      { title: "Scene", value: "pinned visual stage", tone: "strong" },
+      { title: "Text", value: "hard cuts + soft fades", tone: "soft" },
+      { title: "Rule", value: "free tooling only", tone: "soft" },
+    ],
+  },
 ];
 
-// ─── Visuals ──────────────────────────────────────────────────────────────────
-
-function PhoneVisual({ color }: { color: string }) {
-    return (
-        <div className="relative w-40 h-72 mx-auto">
-            <div
-                className="absolute inset-0 rounded-[2.5rem] border-2 opacity-50"
-                style={{ borderColor: color }}
-            />
-            <div
-                className="absolute top-3 left-1/2 -translate-x-1/2 w-10 h-1 rounded-full opacity-40"
-                style={{ backgroundColor: color }}
-            />
-            <div
-                className="absolute bottom-4 left-1/2 -translate-x-1/2 w-16 h-1 rounded-full opacity-30"
-                style={{ backgroundColor: color }}
-            />
-            <div
-                className="absolute inset-4 rounded-[2rem] overflow-hidden"
-                style={{ background: `${color}08` }}
-            >
-                <div className="mt-5 space-y-2.5 px-3">
-                    {[75, 90, 60, 82].map((w, i) => (
-                        <motion.div
-                            key={i}
-                            className="h-7 rounded-xl"
-                            style={{
-                                width: `${w}%`,
-                                background: `${color}1a`,
-                                border: `1px solid ${color}25`,
-                            }}
-                            animate={{ opacity: [0.35, 0.85, 0.35] }}
-                            transition={{
-                                duration: 2.2,
-                                delay: i * 0.38,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                            }}
-                        />
-                    ))}
-                </div>
-            </div>
-            <div
-                className="absolute inset-0 rounded-[2.5rem] blur-2xl opacity-10"
-                style={{ background: color }}
-            />
-        </div>
-    );
-}
-
-function BrowserVisual({ color }: { color: string }) {
-    const lines = [85, 65, 90, 72, 55, 78, 62];
-    return (
-        <div className="w-full max-w-xs mx-auto">
-            <div
-                className="rounded-2xl overflow-hidden border"
-                style={{ borderColor: `${color}30`, background: `${color}06` }}
-            >
-                <div
-                    className="px-4 py-3 flex items-center gap-2 border-b"
-                    style={{ borderColor: `${color}20` }}
-                >
-                    {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
-                        <div
-                            key={c}
-                            className="w-2.5 h-2.5 rounded-full opacity-60"
-                            style={{ backgroundColor: c }}
-                        />
-                    ))}
-                    <div
-                        className="flex-1 h-4 rounded-md mx-2 opacity-20"
-                        style={{ background: color }}
-                    />
-                </div>
-                <div className="p-4 space-y-2">
-                    {lines.map((w, i) => (
-                        <motion.div
-                            key={i}
-                            className="h-2.5 rounded-sm"
-                            style={{ width: `${w}%`, background: `${color}28` }}
-                            animate={{ opacity: [0.25, 0.7, 0.25] }}
-                            transition={{
-                                duration: 1.8,
-                                delay: i * 0.2,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                            }}
-                        />
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function PipelineVisual({ color }: { color: string }) {
-    const stages = ["Push", "Test", "Build", "Deploy"];
-    return (
-        <div className="flex flex-col items-center gap-6">
-            <div className="flex items-center gap-2">
-                {stages.map((s, i) => (
-                    <div key={s} className="flex items-center gap-2">
-                        <motion.div
-                            className="flex flex-col items-center gap-1.5"
-                            animate={{ scale: [1, 1.06, 1] }}
-                            transition={{
-                                duration: 1.6,
-                                delay: i * 0.5,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                            }}
-                        >
-                            <div
-                                className="w-14 h-14 rounded-2xl flex items-center justify-center text-lg font-bold"
-                                style={{
-                                    background: `${color}12`,
-                                    border: `1px solid ${color}35`,
-                                    color: color,
-                                }}
-                            >
-                                {["↑", "✓", "◈", "→"][i]}
-                            </div>
-                            <span className="text-xs font-mono" style={{ color: `${color}88` }}>
-                                {s}
-                            </span>
-                        </motion.div>
-                        {i < stages.length - 1 && (
-                            <motion.div
-                                className="w-8 h-px mb-6 rounded-full"
-                                style={{ background: `${color}40` }}
-                                animate={{ scaleX: [0.5, 1, 0.5], opacity: [0.3, 0.8, 0.3] }}
-                                transition={{
-                                    duration: 1.6,
-                                    delay: i * 0.5 + 0.3,
-                                    repeat: Infinity,
-                                }}
-                            />
-                        )}
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-}
-
-function TypeVisual({ color }: { color: string }) {
-    const types = [
-        "const build = <T extends App>(config: T): Deploy<T>",
-        "type Stack = React | Next | Native | TypeScript",
-        "interface Dev { mobile: true; web: true; ci: true }",
-    ];
-    return (
-        <div className="space-y-3 font-mono text-xs max-w-xs mx-auto">
-            {types.map((line, i) => (
-                <motion.div
-                    key={i}
-                    className="px-4 py-3 rounded-xl truncate"
-                    style={{
-                        background: `${color}0c`,
-                        border: `1px solid ${color}28`,
-                        color: `${color}cc`,
-                    }}
-                    animate={{ opacity: [0.4, 0.85, 0.4] }}
-                    transition={{ duration: 2.5, delay: i * 0.6, repeat: Infinity, ease: "easeInOut" }}
-                >
-                    {line}
-                </motion.div>
-            ))}
-        </div>
-    );
-}
-
-const VISUALS = [PhoneVisual, BrowserVisual, PipelineVisual, TypeVisual];
-
-// ─── FeaturePanel — must be outside parent (calls hooks) ─────────────────────
-function FeaturePanel({
-    feature,
-    index,
-    total,
-    progress,
+function StageText({
+  stage,
+  index,
+  progress,
 }: {
-    feature: (typeof FEATURES)[0];
-    index: number;
-    total: number;
-    progress: MotionValue<number>;
+  stage: (typeof stages)[number];
+  index: number;
+  progress: MotionValue<number>;
 }) {
-    const seg = 1 / total;
-    const start = index * seg;
-    const end = (index + 1) * seg;
-    const t = 0.06; // transition band
+  const segment = 1 / stages.length;
+  const start = index * segment;
+  const mid = start + segment / 2;
+  const end = (index + 1) * segment;
 
-    const opIn = index === 0 ? 0 : start - t;
-    const opOut = index === total - 1 ? 1 : end - t;
+  const opacity = useTransform(progress, [start, start + 0.08, end - 0.08, end], [0, 1, 1, 0]);
+  const y = useTransform(progress, [start, mid, end], [36, 0, -28]);
 
-    // Clamp to [0,1]
-    const inputRange = [
-        Math.max(0, opIn),
-        Math.min(1, start + t),
-        Math.max(0, opOut),
-        Math.min(1, end + t),
-    ];
-    const opacityOut = [
-        index === 0 ? 1 : 0,
-        1,
-        1,
-        index === total - 1 ? 1 : 0,
-    ];
+  return (
+    <motion.div
+      style={{ opacity, y }}
+      className="absolute inset-y-0 right-0 hidden w-full items-center justify-end px-6 pb-16 pt-24 lg:flex lg:px-12"
+    >
+      <div className="max-w-[34rem] text-left">
+        <p
+          className="font-mono text-[11px] uppercase tracking-[0.34em]"
+          style={{ color: stage.accent }}
+        >
+          {stage.label}
+        </p>
+        <div className="mt-5 font-[family:var(--font-display)] text-[clamp(3rem,6vw,6rem)] leading-[0.88] text-white">
+          <div>{stage.titleTop}</div>
+          <div>{stage.titleBottom}</div>
+          <div className="mt-2 inline-block px-3 py-1 text-black" style={{ background: stage.accent }}>
+            {stage.highlight}
+          </div>
+        </div>
+        <p className="mt-6 text-2xl leading-tight text-white">{stage.subtitle}</p>
+        <div className="mt-8 h-px w-56 bg-white/60" />
+        <p className="mt-8 text-lg leading-9 text-[var(--color-text-muted)]">{stage.body}</p>
+        <p className="mt-6 text-sm leading-7 text-white/70">{stage.note}</p>
+      </div>
+    </motion.div>
+  );
+}
 
-    const opacity = useTransform(progress, inputRange, opacityOut);
-    const yValues = [
-        index === 0 ? 0 : 28,
-        0,
-        0,
-        index === total - 1 ? 0 : -28,
-    ];
-    const y = useTransform(progress, inputRange, yValues);
+function StageVisual({
+  stage,
+  index,
+  progress,
+}: {
+  stage: (typeof stages)[number];
+  index: number;
+  progress: MotionValue<number>;
+}) {
+  const segment = 1 / stages.length;
+  const start = index * segment;
+  const mid = start + segment / 2;
+  const end = (index + 1) * segment;
 
-    const Visual = VISUALS[index];
+  const opacity = useTransform(progress, [start, start + 0.08, end - 0.08, end], [0, 1, 1, 0]);
+  const scale = useTransform(progress, [start, mid, end], [0.92, 1, 1.04]);
+  const rotate = useTransform(progress, [start, mid, end], [-8, 0, 6]);
+  const x = useTransform(progress, [start, mid, end], [-60, 0, 40]);
 
-    return (
+  return (
+    <motion.div
+      style={{ opacity, scale, rotateZ: rotate, x }}
+      className="absolute left-0 top-1/2 z-10 hidden h-[34rem] w-[46rem] -translate-y-1/2 lg:block"
+    >
+      <div className="relative h-full w-full">
+        <div
+          className="absolute left-12 top-6 h-80 w-80 rounded-full blur-[110px]"
+          style={{ background: `${stage.accent}22` }}
+        />
+
         <motion.div
-            style={{ opacity, y, willChange: "transform, opacity" }}
-            className="absolute inset-0 flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-20 px-6 lg:px-20 pointer-events-none pt-36 lg:pt-0"
+          className="absolute left-0 top-20 w-[30rem] rounded-[2rem] border border-white/10 bg-[rgba(10,18,28,0.9)] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
+          style={{ rotate: -8 }}
         >
-            {/* Left — Text */}
-            <div className="flex-1 max-w-lg space-y-3 lg:space-y-6 text-center lg:text-left z-10">
-                <div className="flex items-center gap-3 justify-center lg:justify-start">
-                    <span
-                        className="text-[10px] lg:text-xs font-mono tracking-[0.25em] uppercase"
-                        style={{ color: feature.color }}
-                    >
-                        {feature.num}
-                    </span>
-                    <div className="h-px w-8 lg:w-12 opacity-40" style={{ background: feature.color }} />
-                    <span className="text-[10px] lg:text-xs text-[var(--color-text-muted)]">{feature.subtitle}</span>
-                </div>
-
-                <h3 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white drop-shadow-lg">
-                    {feature.title}{" "}
-                    <span style={{ color: feature.color }}>{feature.titleAccent}</span>
-                </h3>
-
-                <p className="text-xs lg:text-lg text-[var(--color-text-muted)] leading-relaxed max-w-sm mx-auto lg:max-w-md lg:mx-0 drop-shadow">
-                    {feature.description}
-                </p>
-
-                <div className="flex flex-wrap gap-1.5 lg:gap-2 justify-center lg:justify-start">
-                    {feature.tags.map((tag) => (
-                        <span
-                            key={tag}
-                            className="px-2 lg:px-3 py-0.5 lg:py-1 text-[10px] lg:text-xs rounded-full border backdrop-blur-sm"
-                            style={{
-                                borderColor: `${feature.color}35`,
-                                color: feature.color,
-                                background: `${feature.color}0d`,
-                            }}
-                        >
-                            {tag}
-                        </span>
-                    ))}
-                </div>
-
-                {/* Stat */}
-                <div className="pt-1.5 lg:pt-2">
-                    <p className="text-4xl lg:text-6xl font-black" style={{ color: feature.color }}>
-                        {feature.stat}
-                    </p>
-                    <p className="text-[10px] lg:text-sm text-[var(--color-text-muted)] mt-0.5 lg:mt-1">{feature.statLabel}</p>
-                </div>
+          <div className="mb-5 flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+            <span className="h-2.5 w-2.5 rounded-full bg-yellow-300/80" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
+          </div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.28em]" style={{ color: stage.accent }}>
+            stage {stage.id} / source
+          </p>
+          <div className="mt-5 space-y-3 font-mono text-sm text-white/80">
+            <div className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
+              const stage = "{stage.label.toLowerCase()}";
             </div>
-
-            {/* Right — Visual */}
-            <div className="flex-shrink-0 w-full lg:w-72 flex items-center justify-center scale-[0.65] md:scale-90 lg:scale-100 origin-top lg:origin-center mt-[-1rem] lg:mt-0">
-                <Visual color={feature.color} />
+            <div className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
+              transition: pinned visual + editorial copy
             </div>
+            <div className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
+              constraint: free tooling / no paid plugins
+            </div>
+          </div>
         </motion.div>
-    );
-}
 
-// ─── Progress dots ────────────────────────────────────────────────────────────
-function ProgressDots({
-    total,
-    progress,
-}: {
-    total: number;
-    progress: MotionValue<number>;
-}) {
-    return (
-        <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-10">
-            {Array.from({ length: total }).map((_, i) => {
-                const start = i / total;
-                const end = (i + 1) / total;
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                const scale = useTransform(progress, [start, (start + end) / 2, end], [1, 1.6, 1]);
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                const opacity = useTransform(progress, [start, (start + end) / 2, end], [0.3, 1, 0.3]);
-                return (
-                    <motion.div
-                        key={i}
-                        style={{ scale, opacity }}
-                        className="w-1.5 h-1.5 rounded-full bg-white"
-                    />
-                );
-            })}
-        </div>
-    );
-}
-
-// ─── Main Export ──────────────────────────────────────────────────────────────
-export default function FeaturedSection() {
-    const containerRef = useRef<HTMLDivElement>(null!);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"],
-    });
-
-    return (
-        <section
-            ref={containerRef}
-            style={{ height: `${FEATURES.length * 100}vh` }}
-            className="relative"
+        <motion.div
+          className="absolute left-56 top-52 w-[22rem] rounded-[1.8rem] border border-white/10 bg-[rgba(14,24,36,0.94)] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.32)]"
+          style={{ rotate: 7 }}
         >
-            {/* Sticky inner */}
-            <div className="sticky top-0 h-screen overflow-hidden">
-                {/* Background gradient that shifts with scroll */}
-                {FEATURES.map((f, i) => {
-                    const seg = 1 / FEATURES.length;
-                    // eslint-disable-next-line react-hooks/rules-of-hooks
-                    const opacity = useTransform(
-                        scrollYProgress,
-                        [i * seg, i * seg + 0.08, (i + 1) * seg - 0.08, (i + 1) * seg],
-                        [0, 0.06, 0.06, 0]
-                    );
-                    return (
-                        <motion.div
-                            key={f.color}
-                            style={{
-                                opacity,
-                                background: `radial-gradient(ellipse at 70% 50%, ${f.color} 0%, transparent 60%)`,
-                            }}
-                            className="absolute inset-0 pointer-events-none"
-                        />
-                    );
-                })}
+          <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-white/55">
+            showcase cards
+          </p>
+          <div className="mt-4 space-y-3">
+            {stage.cards.map((card) => (
+              <div
+                key={card.title}
+                className={`rounded-[1.2rem] border px-4 py-4 ${
+                  card.tone === "strong"
+                    ? "border-white/14 bg-white/[0.06]"
+                    : "border-white/8 bg-white/[0.03]"
+                }`}
+              >
+                <p className="font-mono text-[10px] uppercase tracking-[0.24em]" style={{ color: stage.accent }}>
+                  {card.title}
+                </p>
+                <p className="mt-3 text-lg text-white">{card.value}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
-                {/* Subtle grid */}
-                <div
-                    className="absolute inset-0 opacity-[0.02] pointer-events-none"
-                    style={{
-                        backgroundImage:
-                            "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-                        backgroundSize: "80px 80px",
-                    }}
+        <motion.div
+          className="absolute left-24 top-[22rem] w-[18rem] rounded-[1.7rem] border border-white/10 bg-[rgba(9,17,26,0.92)] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.28)]"
+          style={{ rotate: -3 }}
+        >
+          <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-white/55">
+            software map
+          </p>
+          <div className="mt-4 space-y-2">
+            {["mobile", "web", "api", "motion", "release"].map((item, itemIndex) => (
+              <div key={item} className="flex items-center gap-3">
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ background: itemIndex === 2 ? "white" : stage.accent }}
                 />
+                <span className="font-mono text-sm uppercase tracking-[0.18em] text-white/80">
+                  {item}
+                </span>
+                <span className="h-px flex-1 bg-white/10" />
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
 
-                {/* Section label */}
-                <div className="absolute top-20 left-1/2 -translate-x-1/2 z-10 w-full text-center">
-                    <p className="text-[var(--color-primary)] font-mono text-xs tracking-widest uppercase">
-                        What I Do
-                    </p>
-                </div>
-
-                {/* Feature panels */}
-                <div className="relative h-full">
-                    {FEATURES.map((feature, i) => (
-                        <FeaturePanel
-                            key={feature.num}
-                            feature={feature}
-                            index={i}
-                            total={FEATURES.length}
-                            progress={scrollYProgress}
-                        />
-                    ))}
-                </div>
-
-                {/* Progress dots */}
-                <ProgressDots total={FEATURES.length} progress={scrollYProgress} />
-
-                {/* Scroll hint at start */}
-                <motion.div
-                    style={{
-                        opacity: useTransform(scrollYProgress, [0, 0.08], [1, 0]),
-                    }}
-                    className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-                >
-                    <span className="text-[9px] font-mono tracking-[0.25em] text-[var(--color-text-muted)] uppercase">
-                        Keep scrolling
-                    </span>
-                    <motion.div
-                        animate={{ y: [0, 8, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                        className="w-4 h-7 rounded-full border border-[rgba(255,255,255,0.15)] flex items-start justify-center pt-1"
-                    >
-                        <div className="w-0.5 h-1.5 rounded-full bg-[var(--color-primary)]" />
-                    </motion.div>
-                </motion.div>
+function MobileStageList() {
+  return (
+    <div className="space-y-6 lg:hidden">
+      {stages.map((stage) => (
+        <div key={stage.id} className="story-card rounded-[1.8rem] p-6">
+          <p className="font-mono text-[10px] uppercase tracking-[0.3em]" style={{ color: stage.accent }}>
+            {stage.label}
+          </p>
+          <div className="mt-4 font-[family:var(--font-display)] text-4xl leading-[0.9] text-white">
+            <div>{stage.titleTop}</div>
+            <div>{stage.titleBottom}</div>
+            <div className="mt-2 inline-block px-3 py-1 text-black" style={{ background: stage.accent }}>
+              {stage.highlight}
             </div>
-        </section>
-    );
+          </div>
+          <p className="mt-5 text-lg leading-8 text-[var(--color-text-muted)]">{stage.body}</p>
+          <div className="mt-6 space-y-3">
+            {stage.cards.map((card) => (
+              <div key={card.title} className="rounded-[1.15rem] border border-white/8 bg-white/[0.03] px-4 py-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.24em]" style={{ color: stage.accent }}>
+                  {card.title}
+                </p>
+                <p className="mt-2 text-white">{card.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default function FeaturedSection() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+
+  return (
+    <>
+      <section className="relative bg-[#090909] px-6 py-20 lg:hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_40%,rgba(255,255,255,0.10),transparent_24%),linear-gradient(180deg,#040404_0%,#161616_55%,#0b0b0b_100%)]" />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-white/60">
+            Showcase
+          </p>
+          <p className="mt-3 font-[family:var(--font-display)] text-[clamp(3rem,15vw,4.8rem)] leading-[0.9] text-white">
+            Code and software,
+            <br />
+            directed like scenes.
+          </p>
+          <p className="mt-6 max-w-md text-base leading-8 text-[var(--color-text-muted)]">
+            Bold software storytelling for small screens, without the pinned desktop layers.
+          </p>
+          <div className="mt-10">
+            <MobileStageList />
+          </div>
+        </div>
+      </section>
+
+      <section ref={ref} className="relative hidden lg:block" style={{ height: `${stages.length * 100}vh` }}>
+        <div className="sticky top-0 h-screen overflow-hidden bg-[#090909]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_40%,rgba(255,255,255,0.10),transparent_24%),linear-gradient(90deg,#040404_0%,#171717_52%,#0b0b0b_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent_20%,transparent_80%,rgba(255,255,255,0.02))]" />
+
+          <div className="absolute left-8 top-8 z-30 hidden lg:block">
+            <p className="font-[family:var(--font-display)] text-5xl font-semibold tracking-tight text-white">
+              Showcase
+            </p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--color-text-muted)]">
+              Code / software / motion
+            </p>
+          </div>
+
+          <div className="absolute bottom-8 left-8 z-30 hidden lg:block max-w-xs">
+            <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-white/60">
+              Interactive project scrollytelling
+            </p>
+            <p className="mt-3 text-sm leading-7 text-white/60">
+              Pinned visual composition, hard-cut headline changes, softer body fades.
+            </p>
+          </div>
+
+          <div className="relative mx-auto h-full max-w-7xl">
+            {stages.map((stage, index) => (
+              <StageVisual key={`visual-${stage.id}`} stage={stage} index={index} progress={scrollYProgress} />
+            ))}
+
+            {stages.map((stage, index) => (
+              <StageText key={`text-${stage.id}`} stage={stage} index={index} progress={scrollYProgress} />
+            ))}
+
+            <div className="absolute right-8 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-4 lg:flex">
+              {stages.map((stage, index) => {
+                const segment = 1 / stages.length;
+                const scale = useTransform(
+                  scrollYProgress,
+                  [index * segment, index * segment + segment / 2, (index + 1) * segment],
+                  [1, 1.45, 1]
+                );
+                const opacity = useTransform(
+                  scrollYProgress,
+                  [index * segment, index * segment + segment / 2, (index + 1) * segment],
+                  [0.28, 1, 0.28]
+                );
+
+                return (
+                  <motion.div key={stage.id} style={{ scale, opacity }} className="flex items-center gap-3">
+                    <div className="h-2.5 w-2.5 rounded-full bg-white" />
+                    <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/55">
+                      {stage.label}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }

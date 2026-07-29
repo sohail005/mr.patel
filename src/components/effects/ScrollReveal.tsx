@@ -46,7 +46,7 @@ export default function ScrollReveal({
     if (mode === "inView") {
         return (
             <motion.div
-                className={className}
+                className={`relative ${className}`.trim()}
                 custom={{ dir: direction, sc: scale }}
                 variants={inViewVariants}
                 initial="hidden"
@@ -72,7 +72,7 @@ export default function ScrollReveal({
         <motion.div
             ref={ref}
             style={{ opacity, y, x, scale: scaleVal, willChange: "transform, opacity" }}
-            className={className}
+            className={`relative ${className}`.trim()}
         >
             {children}
         </motion.div>

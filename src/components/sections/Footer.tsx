@@ -1,35 +1,19 @@
 "use client";
 
-import { motion } from "framer-motion";
-
 export default function Footer() {
-    const currentYear = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
-    return (
-        <footer className="relative py-12 border-t border-[rgba(108,99,255,0.1)]">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                    <motion.a
-                        href="#hero"
-                        className="text-xl font-bold gradient-text tracking-tight"
-                        whileHover={{ scale: 1.05 }}
-                    >
-                        {"<Sohail Patel />"}
-                    </motion.a>
-
-                    <p className="text-sm text-[var(--color-text-muted)]">
-                        © {currentYear} Sohail Patel. Crafted with{" "}
-                        <span className="text-[var(--color-accent)]">♥</span> and lots of ☕
-                    </p>
-
-                    <div className="flex items-center gap-1 text-xs text-[var(--color-text-muted)]">
-                        <span>Built with</span>
-                        <span className="text-[var(--color-primary)]">Next.js</span>
-                        <span>×</span>
-                        <span className="text-[var(--color-secondary)]">Three.js</span>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    );
+  return (
+    <footer className="border-t border-white/8 py-10">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 text-sm text-[var(--color-text-muted)] md:flex-row md:items-center md:justify-between">
+        <a href="/#hero" className="font-[family:var(--font-display)] text-3xl text-white">
+          Sohail Patel
+        </a>
+        <p>Copyright {currentYear}. Built with Next.js, Framer Motion, and free tooling only.</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--color-primary)]">
+          Directed interface work
+        </p>
+      </div>
+    </footer>
+  );
 }
