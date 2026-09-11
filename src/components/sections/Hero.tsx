@@ -58,8 +58,7 @@ export default function Hero() {
       >
         <div>
           <h1 className="section-heading max-w-5xl text-white">
-            Cinematic product work for web and mobile, built with motion that
-            earns its place.
+            work for web and mobile, built with motion that earns its place.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-muted)] md:text-xl">
             I design and ship React Native and Next.js experiences that feel

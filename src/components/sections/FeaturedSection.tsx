@@ -320,7 +320,7 @@ export default function FeaturedSection() {
               <StageText key={`text-${stage.id}`} stage={stage} index={index} progress={scrollYProgress} />
             ))}
 
-            <div className="absolute right-8 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-4 lg:flex">
+            <div className="absolute right-8 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-4 lg:flex ">
               {stages.map((stage, index) => {
                 const segment = 1 / stages.length;
                 const scale = useTransform(

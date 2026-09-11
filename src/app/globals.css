@@ -14,9 +14,17 @@
   --color-text-muted: #94a5b6;
   --color-border: rgba(143, 199, 255, 0.18);
 
-  --font-sans: var(--font-manrope), system-ui, sans-serif;
-  --font-display: var(--font-cormorant), Georgia, serif;
-  --font-mono: var(--font-space-mono), monospace;
+  --font-sans: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
+  --font-display: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
+  --font-mono: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
+  --font-serif: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
+}
+
+:root {
+  --font-sans: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
+  --font-display: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
+  --font-mono: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
+  --font-serif: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
 }
 
 html {
@@ -29,8 +37,31 @@ body {
     radial-gradient(circle at 80% 20%, rgba(127, 224, 195, 0.1), transparent 24%),
     linear-gradient(180deg, #07121b 0%, #081724 28%, #06131f 64%, #040d15 100%);
   color: var(--color-text);
-  font-family: var(--font-sans);
+  font-family: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
   overflow-x: hidden;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
+}
+
+.font-sans,
+.font-serif,
+.font-mono {
+  font-family: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace !important;
 }
 
 a,

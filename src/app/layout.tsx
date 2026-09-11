@@ -1,22 +1,11 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Manrope, Space_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const manrope = Manrope({
+const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-manrope",
-});
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  variable: "--font-cormorant",
+  variable: "--font-jetbrains-mono",
   weight: ["400", "500", "600", "700"],
-});
-
-const spaceMono = Space_Mono({
-  subsets: ["latin"],
-  variable: "--font-space-mono",
-  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -46,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${manrope.variable} ${cormorant.variable} ${spaceMono.variable} antialiased`}
+        className={`${jetBrainsMono.className} ${jetBrainsMono.variable} antialiased`}
       >
         <div className="noise-overlay" />
         {children}
