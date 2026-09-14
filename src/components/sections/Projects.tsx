@@ -691,7 +691,7 @@ export default function Projects() {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -8 }}
-                className="story-card group block h-full rounded-[1.8rem] p-4 sm:p-5"
+                className="story-card group block rounded-[1.8rem] p-4 sm:p-5"
               >
                 <ProjectThumbnail project={project} />
 
