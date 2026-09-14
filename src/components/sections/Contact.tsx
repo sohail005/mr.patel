@@ -238,11 +238,24 @@ export default function Contact() {
               <motion.button
                 type="submit"
                 disabled={sending}
+                aria-busy={sending}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.99 }}
-                className="mt-6 w-full rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--primary-action-text)] disabled:opacity-60"
+                className="mt-6 flex w-full items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--primary-action-text)] disabled:cursor-wait disabled:opacity-60"
               >
-                {sent ? "Message sent" : sending ? "Sending" : "Send message"}
+                {sending ? (
+                  <>
+                    <span
+                      aria-hidden="true"
+                      className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent"
+                    />
+                    <span>Sending...</span>
+                  </>
+                ) : sent ? (
+                  "Message sent"
+                ) : (
+                  "Send message"
+                )}
               </motion.button>
             </form>
           </ScrollReveal>
