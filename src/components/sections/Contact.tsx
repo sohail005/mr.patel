@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 
@@ -24,6 +24,13 @@ const socials: { label: string; href: string; icon: SocialIconName }[] = [
   { label: "Threads", href: "https://www.threads.com/@sohail.code", icon: "threads" },
   { label: "Instagram", href: "https://www.instagram.com/sohail.code/", icon: "instagram" },
   { label: "Email", href: "mailto:sohail345patel@gmail.com", icon: "email" },
+];
+
+const serviceOptions = [
+  "App Deployment Services",
+  "Complete App Development",
+  "Website Development",
+  "Development Training",
 ];
 
 function SocialIcon({ name }: { name: SocialIconName }) {
@@ -110,14 +117,39 @@ export default function Contact() {
   const [formState, setFormState] = useState({
     name: "",
     email: "",
+    service: "",
     message: "",
   });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
+  const [serviceOpen, setServiceOpen] = useState(false);
+  const serviceMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!serviceMenuRef.current?.contains(event.target as Node)) {
+        setServiceOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setServiceOpen(false);
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    if (!formState.service) {
+      setError("Please select a service before sending your message.");
+      return;
+    }
     setSending(true);
     setError("");
 
@@ -134,7 +166,7 @@ export default function Contact() {
       }
 
       setSent(true);
-      setFormState({ name: "", email: "", message: "" });
+      setFormState({ name: "", email: "", service: "", message: "" });
       setTimeout(() => setSent(false), 4000);
     } catch (caughtError) {
       setError(
@@ -212,6 +244,62 @@ export default function Contact() {
                     className="mt-3 w-full rounded-[1.25rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3 text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]"
                   />
                 </label>
+              </div>
+
+              <div ref={serviceMenuRef} className="relative mt-5">
+                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                  Service
+                </span>
+                <button
+                  type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded={serviceOpen}
+                  onClick={() => setServiceOpen((open) => !open)}
+                  className={`mt-3 flex min-h-14 w-full items-center justify-between gap-4 rounded-[1.25rem] border px-4 py-3 text-left text-sm outline-none transition-[border-color,background-color,box-shadow] duration-300 ${
+                    serviceOpen
+                      ? "border-[var(--color-primary)] bg-[var(--control-bg-hover)] shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-primary)_12%,transparent)]"
+                      : "border-[var(--surface-border)] bg-[var(--control-bg)] hover:border-[var(--surface-border-strong)]"
+                  }`}
+                >
+                  <span className={formState.service ? "text-[var(--color-text)]" : "text-[var(--color-text-muted)]"}>
+                    {formState.service || "Select a service"}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className={`text-[var(--color-primary)] transition-transform duration-300 ${serviceOpen ? "rotate-180" : ""}`}
+                  >
+                    ↓
+                  </span>
+                </button>
+
+                {serviceOpen ? (
+                  <div
+                    role="listbox"
+                    aria-label="Available services"
+                    className="absolute inset-x-0 top-full z-30 mt-2 overflow-hidden rounded-[1.25rem] border border-[var(--surface-border-strong)] bg-[var(--color-panel-strong)] p-1.5 shadow-[0_22px_55px_rgba(0,0,0,0.42)] backdrop-blur-2xl"
+                  >
+                    {serviceOptions.map((service) => (
+                      <button
+                        key={service}
+                        type="button"
+                        role="option"
+                        aria-selected={formState.service === service}
+                        onClick={() => {
+                          setFormState((state) => ({ ...state, service }));
+                          setServiceOpen(false);
+                        }}
+                        className={`flex w-full items-center justify-between rounded-[0.9rem] px-4 py-3 text-left text-sm transition-colors duration-200 ${
+                          formState.service === service
+                            ? "bg-[var(--primary-action-bg)] text-[var(--color-text)]"
+                            : "text-[var(--color-text-muted)] hover:bg-[var(--control-bg-hover)] hover:text-[var(--color-text)]"
+                        }`}
+                      >
+                        <span>{service}</span>
+                        {formState.service === service ? <span aria-hidden="true">✓</span> : null}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
               </div>
 
               <label className="mt-5 block">

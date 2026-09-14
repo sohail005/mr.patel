@@ -662,10 +662,12 @@ function ProjectThumbnail({ project }: { project: Project }) {
   );
 }
 
-export default function Projects() {
+export default function Projects({ limit }: { limit?: number }) {
+  const visibleProjects = limit ? orderedProjects.slice(0, limit) : orderedProjects;
+
   return (
     <section id="projects" className="relative overflow-hidden py-28">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_5%,color-mix(in_srgb,var(--color-accent)_14%,transparent),transparent_26%),radial-gradient(circle_at_86%_28%,color-mix(in_srgb,var(--color-secondary)_10%,transparent),transparent_22%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_5%,color-mix(in_srgb,var(--color-accent)_14%,transparent),transparent_26%),radial-gradient(circle_at_86%_28%,color-mix(in_srgb,var(--color-secondary)_10%,transparent),transparent_22%)]" />
       <div className="mx-auto max-w-7xl px-6">
         <ScrollReveal mode="inView" className="max-w-3xl">
           <p className="section-kicker">Projects</p>
@@ -679,7 +681,7 @@ export default function Projects() {
         </ScrollReveal>
 
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
-          {orderedProjects.map((project, index) => (
+          {visibleProjects.map((project, index) => (
             <ScrollReveal
               key={project.link}
               mode="inView"
@@ -740,6 +742,18 @@ export default function Projects() {
             </ScrollReveal>
           ))}
         </div>
+
+        {limit ? (
+          <div className="mt-10 flex justify-center">
+            <a
+              href="/projects"
+              className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-3 font-mono text-[11px] uppercase tracking-[0.24em] text-[var(--primary-action-text)] transition-[transform,background-color,border-color,gap] duration-300 hover:-translate-y-0.5 hover:gap-4 hover:border-[var(--color-primary)] hover:bg-[var(--control-bg-hover)]"
+            >
+              View all projects
+              <span aria-hidden="true">-&gt;</span>
+            </a>
+          </div>
+        ) : null}
       </div>
     </section>
   );

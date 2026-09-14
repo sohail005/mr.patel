@@ -17,13 +17,14 @@ export async function POST(req: Request) {
     const body = await req.json();
     const name = typeof body.name === 'string' ? body.name.trim() : '';
     const email = typeof body.email === 'string' ? body.email.trim() : '';
+    const service = typeof body.service === 'string' ? body.service.trim() : '';
     const message = typeof body.message === 'string' ? body.message.trim() : '';
     const gmailUser = process.env.GMAIL_USER?.trim();
     const gmailAppPassword = process.env.GMAIL_APP_PASSWORD?.trim();
 
-    if (!name || !email || !message) {
+    if (!name || !email || !service || !message) {
       return NextResponse.json(
-        { success: false, error: 'Name, email, and message are required.' },
+        { success: false, error: 'Name, email, service, and message are required.' },
         { status: 400 }
       );
     }
@@ -53,20 +54,22 @@ export async function POST(req: Request) {
 
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
+    const safeService = escapeHtml(service);
     const safeMessage = escapeHtml(message);
 
     await transporter.sendMail({
       from: gmailUser,
       to: gmailUser,
       replyTo: email,
-      subject: `New Portfolio Message from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      subject: `${service} Inquiry from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`,
       html: `
         <div style="font-family: sans-serif; padding: 40px; background-color: #030014; color: #ffffff; border-radius: 20px;">
           <h1 style="color: #6c63ff; margin-bottom: 24px;">New Portfolio Inquiry</h1>
           <div style="background-color: rgba(255,255,255,0.05); padding: 24px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
             <p style="margin-bottom: 8px;"><strong style="color: #6c63ff;">Name:</strong> ${safeName}</p>
             <p style="margin-bottom: 24px;"><strong style="color: #6c63ff;">Email:</strong> ${safeEmail}</p>
+            <p style="margin-bottom: 24px;"><strong style="color: #6c63ff;">Service:</strong> ${safeService}</p>
             <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);">
               <p style="line-height: 1.6; white-space: pre-wrap;">${safeMessage}</p>
             </div>
