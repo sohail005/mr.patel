@@ -203,7 +203,7 @@ export default function LearnWithMe() {
                         Learn With <span className="gradient-text">Me</span>
                     </h1>
                     <p className="text-lg md:text-xl text-[var(--color-text-muted)] max-w-2xl mx-auto leading-relaxed">
-                        Explore the technologies I've worked on, learn my favorite patterns, and discover how I structure production-grade applications.
+                        Explore the technologies I&apos;ve worked on, learn my favorite patterns, and discover how I structure production-grade applications.
                     </p>
                 </FadeUp>
 
@@ -374,7 +374,7 @@ export default function LearnWithMe() {
                         Want to learn more or <span className="text-[var(--color-secondary)]">work together?</span>
                     </h2>
                     <p className="text-[var(--color-text-muted)] max-w-xl mx-auto">
-                        Whether you need a full-stack developer for your next project or looking for mentorship in React Native, I'm always open to chat.
+                        Whether you need a full-stack developer for your next project or looking for mentorship in React Native, I&apos;m always open to chat.
                     </p>
                 </div>
                 <Contact />

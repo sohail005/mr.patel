@@ -3,6 +3,8 @@
 import { useRef, RefObject } from "react";
 import { useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
 
+type ScrollOffset = NonNullable<Parameters<typeof useScroll>[0]>["offset"];
+
 interface ScrollAnimationOptions {
   /** Input scroll progress range, default [0, 1] */
   inputRange?: [number, number];
@@ -11,7 +13,7 @@ interface ScrollAnimationOptions {
   /** Apply spring smoothing */
   spring?: boolean;
   /** Framer Motion offset tuple */
-  offset?: [string, string];
+  offset?: ScrollOffset;
 }
 
 /**
@@ -30,7 +32,7 @@ export function useScrollAnimation(
     offset = ["start end", "end start"],
   } = options;
 
-  const { scrollYProgress } = useScroll({ target: ref, offset: offset as any });
+  const { scrollYProgress } = useScroll({ target: ref, offset });
   const value = useTransform(scrollYProgress, inputRange, outputRange);
 
   const springValue = useSpring(value, { stiffness: 80, damping: 20 });
@@ -43,11 +45,11 @@ export function useScrollAnimation(
  */
 export function useScrollOpacity(
   ref: RefObject<HTMLElement>,
-  offset?: [string, string]
+  offset?: ScrollOffset
 ): MotionValue<number> {
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: (offset as any) ?? ["start end", "start 40%"],
+    offset: offset ?? ["start end", "start 40%"],
   });
   return useTransform(scrollYProgress, [0, 0.6], [0, 1]);
 }

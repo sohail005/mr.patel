@@ -30,9 +30,9 @@ export default function Skills() {
     <section id="skills" ref={ref} className="relative py-28">
       <div className="mx-auto max-w-7xl px-6">
         <ScrollReveal mode="inView" className="max-w-3xl">
-          <p className="section-kicker">Tools of the route</p>
-          <h2 className="section-heading mt-4 text-white">
-            A stack shaped around speed, clarity, and controlled motion.
+          <p className="section-kicker">Stack</p>
+          <h2 className="section-heading mt-4 text-[var(--color-text)]">
+            The tools I reach for when the product has to move quickly.
           </h2>
         </ScrollReveal>
 
@@ -46,7 +46,7 @@ export default function Skills() {
                 >
                   Track {index + 1}
                 </p>
-                <h3 className="mt-4 text-2xl text-white">{group.title}</h3>
+                <h3 className="mt-4 text-2xl text-[var(--color-text)]">{group.title}</h3>
                 <div className="mt-8 space-y-4">
                   {group.items.map((item, itemIndex) => (
                     <div key={item} className="space-y-2">
@@ -58,7 +58,7 @@ export default function Skills() {
                           Ready
                         </span>
                       </div>
-                      <div className="h-1.5 rounded-full bg-white/6">
+                      <div className="h-1.5 rounded-full bg-[var(--control-bg)]">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={inView ? { width: `${70 + itemIndex * 6}%` } : { width: 0 }}

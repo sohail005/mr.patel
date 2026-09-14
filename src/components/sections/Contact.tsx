@@ -57,9 +57,8 @@ export default function Contact() {
       <div className="mx-auto max-w-6xl px-6">
         <ScrollReveal mode="inView" className="max-w-3xl">
           <p className="section-kicker">Contact</p>
-          <h2 className="section-heading mt-4 text-white">
-            If the build needs care, direction, and motion discipline, let&apos;s
-            talk.
+          <h2 className="section-heading mt-4 text-[var(--color-text)]">
+            Tell me what you are building. I will tell you where I can help.
           </h2>
         </ScrollReveal>
 
@@ -70,8 +69,8 @@ export default function Contact() {
                 Reach out
               </p>
               <p className="mt-6 text-lg leading-8 text-[var(--color-text-muted)]">
-                I&apos;m open to product work, interface-heavy builds, and
-                animation-driven frontends that still need engineering rigor.
+                I&apos;m open to mobile apps, web products, dashboards, and
+                interfaces where the details matter after launch.
               </p>
 
               <div className="mt-10 space-y-3">
@@ -81,7 +80,7 @@ export default function Contact() {
                     href={social.href}
                     target={social.href.startsWith("mailto:") ? undefined : "_blank"}
                     rel={social.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                    className="flex items-center justify-between rounded-[1.25rem] border border-white/10 bg-white/5 px-4 py-4 text-sm text-[var(--color-text-muted)] hover:text-white"
+                    className="flex items-center justify-between rounded-[1.25rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-4 text-sm text-[var(--color-text-muted)] hover:bg-[var(--control-bg-hover)] hover:text-[var(--color-text)]"
                   >
                     <span>{social.label}</span>
                     <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-primary)]">
@@ -108,7 +107,7 @@ export default function Contact() {
                     onChange={(event) =>
                       setFormState((state) => ({ ...state, name: event.target.value }))
                     }
-                    className="mt-3 w-full rounded-[1.25rem] border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-[var(--color-primary)]"
+                    className="mt-3 w-full rounded-[1.25rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3 text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]"
                   />
                 </label>
 
@@ -124,7 +123,7 @@ export default function Contact() {
                     onChange={(event) =>
                       setFormState((state) => ({ ...state, email: event.target.value }))
                     }
-                    className="mt-3 w-full rounded-[1.25rem] border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-[var(--color-primary)]"
+                    className="mt-3 w-full rounded-[1.25rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3 text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]"
                   />
                 </label>
               </div>
@@ -141,7 +140,7 @@ export default function Contact() {
                   onChange={(event) =>
                     setFormState((state) => ({ ...state, message: event.target.value }))
                   }
-                  className="mt-3 w-full rounded-[1.5rem] border border-white/10 bg-white/5 px-4 py-3 text-white outline-none focus:border-[var(--color-primary)]"
+                  className="mt-3 w-full rounded-[1.5rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3 text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]"
                 />
               </label>
 
@@ -154,7 +153,7 @@ export default function Contact() {
                 disabled={sending}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.99 }}
-                className="mt-6 w-full rounded-full border border-[rgba(143,199,255,0.22)] bg-[rgba(143,199,255,0.12)] px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-white disabled:opacity-60"
+                className="mt-6 w-full rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--primary-action-text)] disabled:opacity-60"
               >
                 {sent ? "Message sent" : sending ? "Sending" : "Send message"}
               </motion.button>

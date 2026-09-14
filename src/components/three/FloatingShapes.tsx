@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, MeshWobbleMaterial } from "@react-three/drei";
+import { Float, MeshDistortMaterial } from "@react-three/drei";
 import * as THREE from "three";
 
 function FloatingShape({
@@ -26,25 +26,20 @@ function FloatingShape({
         meshRef.current.rotation.z = state.clock.elapsedTime * speed * 0.2;
     });
 
-    const GeometryComponent = () => {
-        switch (geometry) {
-            case "octahedron":
-                return <octahedronGeometry args={[1, 0]} />;
-            case "torus":
-                return <torusGeometry args={[1, 0.38, 16, 48]} />;
-            case "icosahedron":
-                return <icosahedronGeometry args={[1, 1]} />;
-            case "torusKnot":
-                return <torusKnotGeometry args={[0.7, 0.25, 80, 12]} />;
-            default:
-                return <sphereGeometry args={[1, 32, 32]} />;
-        }
-    };
-
     return (
         <Float speed={speed} rotationIntensity={0.6} floatIntensity={2.5}>
             <mesh ref={meshRef} position={position} scale={scale}>
-                <GeometryComponent />
+                {geometry === "octahedron" ? (
+                    <octahedronGeometry args={[1, 0]} />
+                ) : geometry === "torus" ? (
+                    <torusGeometry args={[1, 0.38, 16, 48]} />
+                ) : geometry === "icosahedron" ? (
+                    <icosahedronGeometry args={[1, 1]} />
+                ) : geometry === "torusKnot" ? (
+                    <torusKnotGeometry args={[0.7, 0.25, 80, 12]} />
+                ) : (
+                    <sphereGeometry args={[1, 32, 32]} />
+                )}
                 <MeshDistortMaterial
                     color={color}
                     transparent

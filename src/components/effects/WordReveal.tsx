@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
+type ScrollOffset = NonNullable<Parameters<typeof useScroll>[0]>["offset"];
+
 // ─── RevealWord must be defined OUTSIDE the parent to avoid hooks-in-loop ───
 function RevealWord({
     word,
@@ -39,7 +41,7 @@ function RevealWord({
 interface WordRevealProps {
     text: string;
     className?: string;
-    offset?: any; // Bypassing Framer Motion's strict tuple type
+    offset?: ScrollOffset;
 }
 
 export default function WordReveal({

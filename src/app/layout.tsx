@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
+import ClickSpark from "@/components/effects/ClickSpark";
+import ThemeSwitcher from "@/components/effects/ThemeSwitcher";
 import "./globals.css";
 
 const jetBrainsMono = JetBrains_Mono({
@@ -33,12 +35,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{var t=localStorage.getItem("portfolio-theme")||"midnight";document.documentElement.dataset.theme=t;}catch(e){}',
+          }}
+        />
+      </head>
       <body
-        className={`${jetBrainsMono.className} ${jetBrainsMono.variable} antialiased`}
+        className={`${jetBrainsMono.variable} antialiased`}
       >
-        <div className="noise-overlay" />
-        {children}
+        <ClickSpark
+          sparkColor="#cce6ff"
+          sparkSize={12}
+          sparkRadius={20}
+          sparkCount={10}
+          duration={460}
+          extraScale={1.15}
+        >
+          <div className="noise-overlay" />
+          {children}
+          <ThemeSwitcher />
+        </ClickSpark>
       </body>
     </html>
   );

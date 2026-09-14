@@ -37,15 +37,14 @@ export default function About() {
 
       <div className="mx-auto max-w-7xl px-6">
         <ScrollReveal mode="inView" className="max-w-3xl">
-          <p className="section-kicker">About the climb</p>
-          <h2 className="section-heading mt-4 text-white">
-            Built from production pressure, not from portfolio theater.
+          <p className="section-kicker">About</p>
+          <h2 className="section-heading mt-4 text-[var(--color-text)]">
+            I like the part where design has to survive production.
           </h2>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-muted)]">
-            I work across interface design, implementation, performance, and
-            release process. That mix matters because the best animated
-            experiences still need to survive handoff, edge cases, and real
-            users.
+            My work sits between interface detail and release responsibility:
+            the layout, the state, the handoff, the strange edge case, and the
+            tiny interaction that makes a product feel finished.
           </p>
         </ScrollReveal>
 
@@ -82,7 +81,7 @@ export default function About() {
                   <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-secondary)]">
                     Principle {index + 1}
                   </p>
-                  <h3 className="mt-3 text-xl text-white">{item.title}</h3>
+                  <h3 className="mt-3 text-xl text-[var(--color-text)]">{item.title}</h3>
                   <p className="mt-3 leading-7 text-[var(--color-text-muted)]">
                     {item.text}
                   </p>

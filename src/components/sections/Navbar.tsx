@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -11,7 +12,6 @@ const navLinks = [
   { name: "Projects", href: "/#projects", section: "projects" },
   { name: "Experience", href: "/#experience", section: "experience" },
   { name: "Contact", href: "/#contact", section: "contact" },
-  { name: "Free Tools", href: "/free-tools", section: "/free-tools" },
 ];
 
 export default function Navbar() {
@@ -22,7 +22,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (pathname !== "/") {
-      setActiveSection(pathname);
+      window.queueMicrotask(() => setActiveSection(pathname));
       return;
     }
 
@@ -58,8 +58,8 @@ export default function Navbar() {
       <div
         className={`relative flex w-full items-center justify-between overflow-hidden border-b px-5 py-4 sm:px-8 lg:px-12 ${
           scrolled
-            ? "border-white/10 bg-[rgba(5,14,24,0.84)] shadow-[0_18px_55px_rgba(0,0,0,0.26)] backdrop-blur-2xl"
-            : "border-white/6 bg-[rgba(5,14,24,0.52)] backdrop-blur-xl"
+            ? "border-[var(--surface-border)] bg-[var(--nav-bg-scrolled)] shadow-[0_18px_55px_rgba(0,0,0,0.26)] backdrop-blur-2xl"
+            : "border-[var(--surface-border)] bg-[var(--nav-bg-rest)] backdrop-blur-xl"
         }`}
       >
         <motion.div
@@ -73,23 +73,23 @@ export default function Navbar() {
           className="pointer-events-none absolute bottom-0 left-0 h-px w-full bg-[linear-gradient(90deg,transparent,rgba(143,199,255,0.85),rgba(127,224,195,0.65),transparent)]"
         />
 
-        <a href="/#hero" className="relative z-10 flex items-center gap-3">
+        <Link href="/#hero" className="relative z-10 flex min-w-0 items-center gap-3">
           <motion.span
             animate={{ opacity: [0.45, 1, 0.45], scale: [1, 1.35, 1] }}
             transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
             className="h-2.5 w-2.5 rounded-full bg-[var(--color-secondary)]"
           />
           <div>
-            <p className="font-[family:var(--font-display)] text-2xl leading-none text-white">
+            <p className="whitespace-nowrap font-[family:var(--font-display)] text-2xl font-semibold leading-none text-[var(--color-text)]">
               Sohail Patel
             </p>
             <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.32em] text-[var(--color-text-muted)]">
               Software developer
             </p>
           </div>
-        </a>
+        </Link>
 
-        <div className="relative z-10 hidden items-center gap-7 md:flex">
+        <div className="relative z-10 hidden items-center gap-7 lg:flex">
           {navLinks.map((link, index) => {
             const active = link.section === activeSection;
             return (
@@ -101,7 +101,7 @@ export default function Navbar() {
                 transition={{ delay: 0.05 * index, duration: 0.45 }}
                 whileHover={{ y: -2 }}
                 className={`group relative font-mono text-[11px] uppercase tracking-[0.28em] ${
-                  active ? "text-white" : "text-[var(--color-text-muted)] hover:text-white"
+                  active ? "text-[var(--color-text)]" : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
                 }`}
               >
                 {link.name}
@@ -122,12 +122,12 @@ export default function Navbar() {
           href="/#contact"
           whileHover={{ scale: 1.03, y: -1 }}
           whileTap={{ scale: 0.99 }}
-          className="relative z-10 hidden overflow-hidden rounded-full border border-[rgba(143,199,255,0.24)] bg-[rgba(143,199,255,0.08)] px-5 py-3 font-mono text-[11px] uppercase tracking-[0.24em] text-white md:block"
+          className="primary-action-button relative z-10 hidden overflow-hidden rounded-full border px-5 py-3 font-mono text-[11px] uppercase tracking-[0.24em] lg:block"
         >
           <motion.span
             animate={{ x: ["-140%", "160%"] }}
             transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 1.6 }}
-            className="absolute inset-y-0 left-0 w-14 skew-x-[-20deg] bg-white/12"
+            className="absolute inset-y-0 left-0 w-14 skew-x-[-20deg] bg-[var(--control-bg-hover)]"
           />
           <span className="relative z-10">Start a project</span>
         </motion.a>
@@ -135,24 +135,24 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setMobileOpen((value) => !value)}
-          className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 md:hidden"
+          className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] lg:hidden"
           aria-label="Toggle navigation"
         >
           <div className="space-y-1.5">
             <motion.span
               animate={mobileOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 24 }}
-              className="block h-px w-5 bg-white"
+              className="block h-px w-5 bg-[var(--color-text)]"
             />
             <motion.span
               animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
               transition={{ duration: 0.15 }}
-              className="block h-px w-5 bg-white"
+              className="block h-px w-5 bg-[var(--color-text)]"
             />
             <motion.span
               animate={mobileOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 24 }}
-              className="block h-px w-5 bg-white"
+              className="block h-px w-5 bg-[var(--color-text)]"
             />
           </div>
         </button>
@@ -165,7 +165,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.24 }}
-            className="border-b border-white/10 bg-[rgba(5,14,24,0.96)] px-5 py-6 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-2xl md:hidden"
+            className="border-b border-[var(--surface-border)] bg-[var(--nav-bg-scrolled)] px-5 py-6 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-2xl lg:hidden"
           >
             <div className="flex flex-col gap-5">
               {navLinks.map((link, index) => (
@@ -176,7 +176,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.04 * index, duration: 0.2 }}
-                  className="font-mono text-xs uppercase tracking-[0.28em] text-[var(--color-text-muted)] hover:text-white"
+                  className="font-mono text-xs uppercase tracking-[0.28em] text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
                 >
                   {link.name}
                 </motion.a>

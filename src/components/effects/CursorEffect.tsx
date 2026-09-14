@@ -39,10 +39,8 @@ export default function CursorEffect() {
     useEffect(() => {
         if (typeof window === "undefined") return;
         if ("ontouchstart" in window || navigator.maxTouchPoints > 0) return;
-        setVisible(true);
-
         const onMove = (e: MouseEvent) => {
-            if (!visible) setVisible(true);
+            setVisible(true);
             dotX.set(e.clientX - 5);
             dotY.set(e.clientY - 5);
             ringX.set(e.clientX - 18);
@@ -71,7 +69,7 @@ export default function CursorEffect() {
             document.removeEventListener("mouseleave", onLeave);
             document.removeEventListener("mouseenter", onEnter);
         };
-    }, []);
+    }, [dotX, dotY, ringX, ringY]);
 
     if (!visible) return null;
     const rgb = SECTION_COLORS[section];

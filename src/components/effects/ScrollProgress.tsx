@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring, useTransform, useMotionValue } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
 export default function ScrollProgress() {
     const { scrollYProgress } = useScroll();
@@ -13,11 +12,6 @@ export default function ScrollProgress() {
 
     // Pre-compute the left position as a motion value (no hooks inside JSX)
     const dotLeft = useTransform(scaleX, (v: number) => `calc(${v * 100}% - 6px)`);
-
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => setMounted(true), []);
-
-    if (!mounted) return null;
 
     return (
         <>

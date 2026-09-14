@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FlowerData } from "./Flowers";
@@ -41,6 +42,7 @@ export default function InteractiveBuilder() {
                     data = JSON.parse(decodeURIComponent(atob(base64Str)));
                 }
                 
+                window.queueMicrotask(() => {
                 if (Array.isArray(data)) {
                     if (typeof data[0] === 'string') {
                         const [typesStr, sStr, g, msgTo, msgFrom, msgBody] = data;
@@ -71,6 +73,7 @@ export default function InteractiveBuilder() {
                 
                 setIsShared(true);
                 setStep("final");
+                });
             } catch (error) {
                 console.error("Failed to parse bouquet from URL", error);
             }
@@ -231,7 +234,7 @@ function PickerView({ selected, addFlower, removeFlower, onNext }: any) {
 }
 
 function pseudoRandom(seed: number) {
-    let x = Math.sin(seed++) * 10000;
+    const x = Math.sin(seed++) * 10000;
     return x - Math.floor(x);
 }
 
@@ -253,7 +256,7 @@ function DarkFern({ className }: any) {
     return <img src="/flowers/fern.png" className={`${baseLeafClasses} ${className}`} style={leafStyle} alt="Fern" />;
 }
 
-function WispyGrass({ className, color }: any) {
+function WispyGrass({ className }: any) {
     return <img src="/flowers/wispy.png" className={`${baseLeafClasses} ${className}`} style={leafStyle} alt="Wispy Grass" />;
 }
 
@@ -393,7 +396,7 @@ function generateBouquetItems(selected: any[], seed: number, greeneryType: numbe
         const slot = slots[i];
         
         // Larger presence to match the impressive reference image scale
-        let scaleBase = flower.role === "anchor" ? 1.7 : (flower.role === "mass" ? 1.55 : 1.4);
+        const scaleBase = flower.role === "anchor" ? 1.7 : (flower.role === "mass" ? 1.55 : 1.4);
         
         // Dynamically tilt outwards based on their placement
         const tilt = (slot.x / 60) * 25 + (pseudoRandom(seed + 300 + i) - 0.5) * 20;
@@ -507,7 +510,7 @@ function MessageView({ message, setMessage, onBack, onNext }: any) {
                 </div>
                 
                 <div className="absolute bottom-32 right-10 text-gray-400 font-sans text-xs opacity-50 pointer-events-none select-none">
-                    //
+                    {"//"}
                 </div>
             </div>
 

@@ -1,9 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import StartExperience from "@/components/effects/StartExperience";
 import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
-import FeaturedSection from "@/components/sections/FeaturedSection";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
@@ -26,9 +26,9 @@ export default function Home() {
     <main className="relative">
       <LenisProvider />
       <ScrollProgress />
+      <StartExperience />
       <Navbar />
       <Hero />
-      <FeaturedSection />
       <About />
       <Skills />
       <Projects />

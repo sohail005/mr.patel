@@ -5,8 +5,19 @@ import { motion } from "framer-motion";
 
 const ROSE_COUNT = 30;
 
+interface Rose {
+    id: number;
+    x: number;
+    delay: number;
+    duration: number;
+    size: number;
+    rotate: number;
+    rotateEnd: number;
+    pathOffset: number;
+}
+
 export default function FallingRoses() {
-    const [roses, setRoses] = useState<any[]>([]);
+    const [roses, setRoses] = useState<Rose[]>([]);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -20,7 +31,7 @@ export default function FallingRoses() {
                 rotateEnd: Math.random() * 360 + 360,
                 pathOffset: (Math.random() - 0.5) * 100, // drift left/right
             }));
-            setRoses(newRoses);
+            window.queueMicrotask(() => setRoses(newRoses));
         }
     }, []);
 

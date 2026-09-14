@@ -11,6 +11,11 @@ interface ParticleFieldProps {
     size?: number;
 }
 
+function seededRandom(index: number) {
+    const value = Math.sin(index * 12.9898) * 43758.5453;
+    return value - Math.floor(value);
+}
+
 export default function ParticleField({
     count = 2000,
     radius = 10,
@@ -27,15 +32,15 @@ export default function ParticleField({
         const accentColor = new THREE.Color("#ff6fd8");
 
         for (let i = 0; i < count; i++) {
-            const theta = Math.random() * Math.PI * 2;
-            const phi = Math.acos(2 * Math.random() - 1);
-            const r = radius * Math.cbrt(Math.random());
+            const theta = seededRandom(i * 4 + 1) * Math.PI * 2;
+            const phi = Math.acos(2 * seededRandom(i * 4 + 2) - 1);
+            const r = radius * Math.cbrt(seededRandom(i * 4 + 3));
 
             positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
             positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
             positions[i * 3 + 2] = r * Math.cos(phi);
 
-            const colorChoice = Math.random();
+            const colorChoice = seededRandom(i * 4 + 4);
             const chosenColor =
                 colorChoice < 0.5
                     ? baseColor

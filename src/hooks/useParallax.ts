@@ -3,6 +3,8 @@
 import { useRef, RefObject } from "react";
 import { useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
 
+type ScrollOffset = NonNullable<Parameters<typeof useScroll>[0]>["offset"];
+
 /**
  * Reusable parallax hook.
  * Returns a `y` MotionValue that shifts by `distance` pixels
@@ -14,9 +16,9 @@ import { useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
 export function useParallax(
   ref: RefObject<HTMLElement>,
   distance: number,
-  offset: [string, string] = ["start end", "end start"]
+  offset: ScrollOffset = ["start end", "end start"]
 ): MotionValue<number> {
-  const { scrollYProgress } = useScroll({ target: ref, offset: offset as any });
+  const { scrollYProgress } = useScroll({ target: ref, offset });
   return useTransform(scrollYProgress, [0, 1], [-distance, distance]);
 }
 
@@ -29,7 +31,7 @@ export function useParallaxSpring(
 ): MotionValue<number> {
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"] as any,
+    offset: ["start end", "end start"],
   });
   const raw = useTransform(scrollYProgress, [0, 1], [-distance, distance]);
   return useSpring(raw, { stiffness: 60, damping: 18 });

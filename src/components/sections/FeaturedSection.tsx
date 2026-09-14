@@ -8,13 +8,13 @@ const stages = [
     id: "01",
     label: "Foundation",
     titleTop: "SHIP",
-    titleBottom: "PRODUCTS",
-    highlight: "THAT HOLD",
+    titleBottom: "REAL WORK",
+    highlight: "IN PRODUCTION",
     subtitle: "Production-first delivery",
     body:
-      "From release cycles to bug pressure, the work starts with shipping real software that survives outside a polished demo.",
+      "The work starts with releases, fixes, handoff, and the everyday details that decide whether a product feels reliable.",
     note: "React Native, app stores, release ownership, production debugging.",
-    accent: "#8fc7ff",
+    accent: "var(--color-primary)",
     cards: [
       { title: "Release pipeline", value: "build / sign / ship", tone: "soft" },
       { title: "Bug triage", value: "critical > major > polish", tone: "strong" },
@@ -24,14 +24,14 @@ const stages = [
   {
     id: "02",
     label: "Interfaces",
-    titleTop: "BUILD",
-    titleBottom: "EXPERIENCES",
-    highlight: "THAT READ FAST",
+    titleTop: "MAKE UI",
+    titleBottom: "EASY TO USE",
+    highlight: "ON EVERY SCREEN",
     subtitle: "Clear interaction layers",
     body:
-      "Web and mobile interfaces need rhythm, hierarchy, and immediate readability before they need decoration.",
+      "Web and mobile interfaces need clear hierarchy, predictable states, and room for users to move without thinking too hard.",
     note: "Next.js, TypeScript, dashboards, platform UI, systemized layouts.",
-    accent: "#7fe0c3",
+    accent: "var(--color-secondary)",
     cards: [
       { title: "Route map", value: "/dashboard /analytics /projects /contact", tone: "strong" },
       { title: "Components", value: "cards / nav / motion / form states", tone: "soft" },
@@ -41,14 +41,14 @@ const stages = [
   {
     id: "03",
     label: "Systems",
-    titleTop: "SCALE",
-    titleBottom: "THE STACK",
-    highlight: "WITHOUT FRICTION",
+    titleTop: "KEEP CODE",
+    titleBottom: "MAINTAINABLE",
+    highlight: "AFTER LAUNCH",
     subtitle: "Architecture under motion",
     body:
-      "The better the transitions feel, the more the underlying code has to stay disciplined: boundaries, state, performance, and maintainable patterns.",
+      "Good interfaces are easier to keep improving when the code has clear boundaries, simple state, and predictable patterns.",
     note: "Server components, APIs, performance, reusable structure, sane state flow.",
-    accent: "#f7b267",
+    accent: "var(--color-accent)",
     cards: [
       { title: "Modules", value: "app / components / effects / sections", tone: "soft" },
       { title: "State", value: "scoped, predictable, minimal", tone: "strong" },
@@ -58,18 +58,18 @@ const stages = [
   {
     id: "04",
     label: "Polish",
-    titleTop: "DIRECT",
-    titleBottom: "THE MOTION",
-    highlight: "LIKE A FILM CUT",
-    subtitle: "Scrollytelling without excess",
+    titleTop: "ADD MOTION",
+    titleBottom: "WHERE IT HELPS",
+    highlight: "NOT EVERYWHERE",
+    subtitle: "Animation with a job to do",
     body:
-      "The goal is a portfolio that feels intentional at every scroll point: pinned visuals, bold transitions, and enough restraint to keep the work in focus.",
+      "Animation should explain what changed, guide attention, or make a transition feel calmer. Otherwise it gets simplified.",
     note: "Framer Motion, layered timing, sticky scenes, editorial pacing.",
-    accent: "#ff8a65",
+    accent: "var(--color-primary-strong)",
     cards: [
       { title: "Scene", value: "pinned visual stage", tone: "strong" },
       { title: "Text", value: "hard cuts + soft fades", tone: "soft" },
-      { title: "Rule", value: "free tooling only", tone: "soft" },
+      { title: "Rule", value: "focused product craft", tone: "soft" },
     ],
   },
 ];
@@ -103,17 +103,17 @@ function StageText({
         >
           {stage.label}
         </p>
-        <div className="mt-5 font-[family:var(--font-display)] text-[clamp(3rem,6vw,6rem)] leading-[0.88] text-white">
+        <div className="mt-5 font-[family:var(--font-display)] text-[clamp(3rem,6vw,6rem)] leading-[0.88] text-[var(--color-text)]">
           <div>{stage.titleTop}</div>
           <div>{stage.titleBottom}</div>
-          <div className="mt-2 inline-block px-3 py-1 text-black" style={{ background: stage.accent }}>
+          <div className="mt-2 inline-block px-3 py-1 text-[var(--highlight-text)]" style={{ background: stage.accent }}>
             {stage.highlight}
           </div>
         </div>
-        <p className="mt-6 text-2xl leading-tight text-white">{stage.subtitle}</p>
-        <div className="mt-8 h-px w-56 bg-white/60" />
+        <p className="mt-6 text-2xl leading-tight text-[var(--color-text)]">{stage.subtitle}</p>
+        <div className="mt-8 h-px w-56 bg-[var(--featured-line)]" />
         <p className="mt-8 text-lg leading-9 text-[var(--color-text-muted)]">{stage.body}</p>
-        <p className="mt-6 text-sm leading-7 text-white/70">{stage.note}</p>
+        <p className="mt-6 text-sm leading-7 text-[var(--featured-soft-text)]">{stage.note}</p>
       </div>
     </motion.div>
   );
@@ -150,7 +150,7 @@ function StageVisual({
         />
 
         <motion.div
-          className="absolute left-0 top-20 w-[30rem] rounded-[2rem] border border-white/10 bg-[rgba(10,18,28,0.9)] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.35)]"
+          className="absolute left-0 top-20 w-[30rem] rounded-[2rem] border border-[var(--featured-border)] bg-[var(--featured-card)] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.25)]"
           style={{ rotate: -8 }}
         >
           <div className="mb-5 flex items-center gap-2">
@@ -161,24 +161,24 @@ function StageVisual({
           <p className="font-mono text-[10px] uppercase tracking-[0.28em]" style={{ color: stage.accent }}>
             stage {stage.id} / source
           </p>
-          <div className="mt-5 space-y-3 font-mono text-sm text-white/80">
-            <div className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
-              const stage = "{stage.label.toLowerCase()}";
+          <div className="mt-5 space-y-3 font-mono text-sm text-[var(--featured-card-text)]">
+            <div className="rounded-xl border border-[var(--featured-border)] bg-[var(--featured-card-soft)] px-4 py-3">
+              const stage = &quot;{stage.label.toLowerCase()}&quot;;
             </div>
-            <div className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
+            <div className="rounded-xl border border-[var(--featured-border)] bg-[var(--featured-card-soft)] px-4 py-3">
               transition: pinned visual + editorial copy
             </div>
-            <div className="rounded-xl border border-white/8 bg-white/[0.03] px-4 py-3">
-              constraint: free tooling / no paid plugins
+            <div className="rounded-xl border border-[var(--featured-border)] bg-[var(--featured-card-soft)] px-4 py-3">
+              constraint: focused product craft
             </div>
           </div>
         </motion.div>
 
         <motion.div
-          className="absolute left-56 top-52 w-[22rem] rounded-[1.8rem] border border-white/10 bg-[rgba(14,24,36,0.94)] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.32)]"
+          className="absolute left-56 top-52 w-[22rem] rounded-[1.8rem] border border-[var(--featured-border)] bg-[var(--featured-card)] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.24)]"
           style={{ rotate: 7 }}
         >
-          <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-white/55">
+          <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--featured-soft-text)]">
             showcase cards
           </p>
           <div className="mt-4 space-y-3">
@@ -187,24 +187,24 @@ function StageVisual({
                 key={card.title}
                 className={`rounded-[1.2rem] border px-4 py-4 ${
                   card.tone === "strong"
-                    ? "border-white/14 bg-white/[0.06]"
-                    : "border-white/8 bg-white/[0.03]"
+                    ? "border-[var(--featured-border-strong)] bg-[var(--featured-card-strong)]"
+                    : "border-[var(--featured-border)] bg-[var(--featured-card-soft)]"
                 }`}
               >
                 <p className="font-mono text-[10px] uppercase tracking-[0.24em]" style={{ color: stage.accent }}>
                   {card.title}
                 </p>
-                <p className="mt-3 text-lg text-white">{card.value}</p>
+                <p className="mt-3 text-lg text-[var(--color-text)]">{card.value}</p>
               </div>
             ))}
           </div>
         </motion.div>
 
         <motion.div
-          className="absolute left-24 top-[22rem] w-[18rem] rounded-[1.7rem] border border-white/10 bg-[rgba(9,17,26,0.92)] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.28)]"
+          className="absolute left-24 top-[22rem] w-[18rem] rounded-[1.7rem] border border-[var(--featured-border)] bg-[var(--featured-card)] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)]"
           style={{ rotate: -3 }}
         >
-          <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-white/55">
+          <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--featured-soft-text)]">
             software map
           </p>
           <div className="mt-4 space-y-2">
@@ -212,12 +212,12 @@ function StageVisual({
               <div key={item} className="flex items-center gap-3">
                 <span
                   className="h-2 w-2 rounded-full"
-                  style={{ background: itemIndex === 2 ? "white" : stage.accent }}
+                  style={{ background: itemIndex === 2 ? "var(--color-text)" : stage.accent }}
                 />
-                <span className="font-mono text-sm uppercase tracking-[0.18em] text-white/80">
+                <span className="font-mono text-sm uppercase tracking-[0.18em] text-[var(--featured-card-text)]">
                   {item}
                 </span>
-                <span className="h-px flex-1 bg-white/10" />
+                <span className="h-px flex-1 bg-[var(--featured-border)]" />
               </div>
             ))}
           </div>
@@ -235,27 +235,58 @@ function MobileStageList() {
           <p className="font-mono text-[10px] uppercase tracking-[0.3em]" style={{ color: stage.accent }}>
             {stage.label}
           </p>
-          <div className="mt-4 font-[family:var(--font-display)] text-4xl leading-[0.9] text-white">
+          <div className="mt-4 font-[family:var(--font-display)] text-4xl leading-[0.9] text-[var(--color-text)]">
             <div>{stage.titleTop}</div>
             <div>{stage.titleBottom}</div>
-            <div className="mt-2 inline-block px-3 py-1 text-black" style={{ background: stage.accent }}>
+            <div className="mt-2 inline-block px-3 py-1 text-[var(--highlight-text)]" style={{ background: stage.accent }}>
               {stage.highlight}
             </div>
           </div>
           <p className="mt-5 text-lg leading-8 text-[var(--color-text-muted)]">{stage.body}</p>
           <div className="mt-6 space-y-3">
             {stage.cards.map((card) => (
-              <div key={card.title} className="rounded-[1.15rem] border border-white/8 bg-white/[0.03] px-4 py-4">
+              <div key={card.title} className="rounded-[1.15rem] border border-[var(--featured-border)] bg-[var(--featured-card-soft)] px-4 py-4">
                 <p className="font-mono text-[10px] uppercase tracking-[0.24em]" style={{ color: stage.accent }}>
                   {card.title}
                 </p>
-                <p className="mt-2 text-white">{card.value}</p>
+                <p className="mt-2 text-[var(--color-text)]">{card.value}</p>
               </div>
             ))}
           </div>
         </div>
       ))}
     </div>
+  );
+}
+
+function StageMarker({
+  stage,
+  index,
+  progress,
+}: {
+  stage: (typeof stages)[number];
+  index: number;
+  progress: MotionValue<number>;
+}) {
+  const segment = 1 / stages.length;
+  const scale = useTransform(
+    progress,
+    [index * segment, index * segment + segment / 2, (index + 1) * segment],
+    [1, 1.45, 1]
+  );
+  const opacity = useTransform(
+    progress,
+    [index * segment, index * segment + segment / 2, (index + 1) * segment],
+    [0.28, 1, 0.28]
+  );
+
+  return (
+    <motion.div style={{ scale, opacity }} className="flex items-center gap-3">
+      <div className="h-2.5 w-2.5 rounded-full bg-[var(--color-text)]" />
+      <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--featured-soft-text)]">
+        {stage.label}
+      </span>
+    </motion.div>
   );
 }
 
@@ -268,19 +299,19 @@ export default function FeaturedSection() {
 
   return (
     <>
-      <section className="relative bg-[#090909] px-6 py-20 lg:hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_40%,rgba(255,255,255,0.10),transparent_24%),linear-gradient(180deg,#040404_0%,#161616_55%,#0b0b0b_100%)]" />
+      <section className="relative bg-[var(--featured-bg)] px-6 py-20 lg:hidden">
+        <div className="absolute inset-0 bg-[var(--featured-bg-layer-mobile)]" />
         <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-white/60">
+          <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-[var(--featured-soft-text)]">
             Showcase
           </p>
-          <p className="mt-3 font-[family:var(--font-display)] text-[clamp(3rem,15vw,4.8rem)] leading-[0.9] text-white">
-            Code and software,
+          <p className="mt-3 font-[family:var(--font-display)] text-[clamp(3rem,15vw,4.8rem)] leading-[0.9] text-[var(--color-text)]">
+            Software work,
             <br />
-            directed like scenes.
+            shown clearly.
           </p>
           <p className="mt-6 max-w-md text-base leading-8 text-[var(--color-text-muted)]">
-            Bold software storytelling for small screens, without the pinned desktop layers.
+            A quick look at how I think about shipping interfaces that stay useful after the demo.
           </p>
           <div className="mt-10">
             <MobileStageList />
@@ -289,12 +320,12 @@ export default function FeaturedSection() {
       </section>
 
       <section ref={ref} className="relative hidden lg:block" style={{ height: `${stages.length * 100}vh` }}>
-        <div className="sticky top-0 h-screen overflow-hidden bg-[#090909]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_40%,rgba(255,255,255,0.10),transparent_24%),linear-gradient(90deg,#040404_0%,#171717_52%,#0b0b0b_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent_20%,transparent_80%,rgba(255,255,255,0.02))]" />
+        <div className="sticky top-0 h-screen overflow-hidden bg-[var(--featured-bg)]">
+          <div className="absolute inset-0 bg-[var(--featured-bg-layer)]" />
+          <div className="absolute inset-0 bg-[var(--featured-vignette)]" />
 
           <div className="absolute left-8 top-8 z-30 hidden lg:block">
-            <p className="font-[family:var(--font-display)] text-5xl font-semibold tracking-tight text-white">
+            <p className="font-[family:var(--font-display)] text-5xl font-semibold tracking-tight text-[var(--color-text)]">
               Showcase
             </p>
             <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--color-text-muted)]">
@@ -303,11 +334,11 @@ export default function FeaturedSection() {
           </div>
 
           <div className="absolute bottom-8 left-8 z-30 hidden lg:block max-w-xs">
-            <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-white/60">
-              Interactive project scrollytelling
+            <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-[var(--featured-soft-text)]">
+              Practical product thinking
             </p>
-            <p className="mt-3 text-sm leading-7 text-white/60">
-              Pinned visual composition, hard-cut headline changes, softer body fades.
+            <p className="mt-3 text-sm leading-7 text-[var(--featured-soft-text)]">
+              Release habits, interface clarity, maintainable code, and motion used with restraint.
             </p>
           </div>
 
@@ -321,28 +352,9 @@ export default function FeaturedSection() {
             ))}
 
             <div className="absolute right-8 top-1/2 z-30 hidden -translate-y-1/2 flex-col gap-4 lg:flex ">
-              {stages.map((stage, index) => {
-                const segment = 1 / stages.length;
-                const scale = useTransform(
-                  scrollYProgress,
-                  [index * segment, index * segment + segment / 2, (index + 1) * segment],
-                  [1, 1.45, 1]
-                );
-                const opacity = useTransform(
-                  scrollYProgress,
-                  [index * segment, index * segment + segment / 2, (index + 1) * segment],
-                  [0.28, 1, 0.28]
-                );
-
-                return (
-                  <motion.div key={stage.id} style={{ scale, opacity }} className="flex items-center gap-3">
-                    <div className="h-2.5 w-2.5 rounded-full bg-white" />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/55">
-                      {stage.label}
-                    </span>
-                  </motion.div>
-                );
-              })}
+              {stages.map((stage, index) => (
+                <StageMarker key={stage.id} stage={stage} index={index} progress={scrollYProgress} />
+              ))}
             </div>
           </div>
         </div>

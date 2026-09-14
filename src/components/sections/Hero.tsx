@@ -3,21 +3,17 @@
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import ProfileCard from "@/components/effects/ProfileCard";
+import profilePhoto from "@/Assets/profile-photo.jpg";
 
 const HeroScene = dynamic(() => import("@/components/three/HeroScene"), {
   ssr: false,
 });
 
 const metrics = [
-  { label: "Years shipping products", value: "3+" },
-  { label: "Mobile and web releases", value: "25+" },
-  { label: "Core stack coverage", value: "React / Next / Native" },
-];
-
-const ledger = [
-  ["Current focus", "Product-grade React Native and Next.js systems"],
-  ["Preferred terrain", "Animation-heavy UI, release engineering, polished interfaces"],
-  ["Approach", "Fast delivery, sober architecture, detail in motion"],
+  { label: "Years shipping products", value: "5+" },
+  { label: "Mobile and web releases", value: "20+" },
+  { label: "Core stack coverage", value: "React Native / React / Next " },
 ];
 
 export default function Hero() {
@@ -36,9 +32,9 @@ export default function Hero() {
     <section
       id="hero"
       ref={ref}
-      className="relative flex min-h-screen items-center overflow-hidden"
+      className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
-      <motion.div style={{ y: sceneY }} className="absolute inset-0 opacity-70">
+      <motion.div style={{ y: sceneY }} className="absolute inset-0 opacity-50 md:opacity-60 lg:opacity-70">
         <HeroScene />
       </motion.div>
 
@@ -47,105 +43,72 @@ export default function Hero() {
 
       <motion.div
         style={{ scale: hazeScale }}
-        className="pointer-events-none absolute left-1/2 top-[12%] h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-[rgba(204,230,255,0.12)] blur-[120px]"
+        className="pointer-events-none absolute left-1/2 top-[10%] h-[18rem] w-[18rem] -translate-x-1/2 rounded-full bg-[rgba(204,230,255,0.12)] blur-[90px] sm:h-[28rem] sm:w-[28rem] lg:h-[34rem] lg:w-[34rem] lg:blur-[120px]"
       />
 
-      <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#040d15] to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-56 bg-[var(--hero-bottom-fade)]" />
 
       <motion.div
         style={{ y: copyY, opacity: copyOpacity }}
-        className="relative z-10 grid w-full gap-12 px-6 pb-20 pt-36 lg:grid-cols-[minmax(0,1.45fr)_minmax(24rem,0.55fr)] lg:items-end lg:px-12 2xl:px-20"
+        className="relative z-10 grid w-full gap-9 px-5 pb-24 pt-28 sm:px-8 sm:pt-32 md:grid-cols-[minmax(0,1.08fr)_minmax(17rem,0.92fr)] md:items-center md:gap-8 md:pb-28 lg:grid-cols-[minmax(0,1.45fr)_minmax(24rem,0.55fr)] lg:items-end lg:gap-12 lg:px-12 lg:pt-36 2xl:px-20"
       >
-        <div>
-          <h1 className="section-heading max-w-5xl text-white">
-            work for web and mobile, built with motion that earns its place.
+        <div className="max-w-3xl md:max-w-none">
+          <h1 className="section-heading max-w-5xl text-balance text-[var(--color-text)]">
+            Web and mobile products, built for real users.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-muted)] md:text-xl">
-            I design and ship React Native and Next.js experiences that feel
-            precise under the cursor, stable in production, and intentional in
-            every state change.
+          <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg md:mt-6 md:text-xl md:leading-8">
+            I build React Native and Next.js interfaces that are fast, readable,
+            and steady after launch.
           </p>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 min-[420px]:flex-row md:mt-10">
             <a
               href="#projects"
-              className="rounded-full border border-[rgba(143,199,255,0.26)] bg-[rgba(143,199,255,0.12)] px-6 py-3 font-mono text-[11px] uppercase tracking-[0.28em] text-white"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-3 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--primary-action-text)] sm:tracking-[0.28em]"
             >
               Explore work
             </a>
             <a
               href="#contact"
-              className="rounded-full border border-white/12 px-6 py-3 font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--color-text-muted)] hover:text-white"
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--surface-border)] px-6 py-3 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-text-muted)] hover:text-[var(--color-text)] sm:tracking-[0.28em]"
             >
               Discuss a build
             </a>
           </div>
-
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
-            {metrics.map((item) => (
-              <div key={item.label} className="story-card rounded-[1.6rem] p-5">
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
-                  {item.label}
-                </p>
-                <p className="mt-4 text-2xl font-semibold text-white">
-                  {item.value}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
 
-        <div className="story-card rounded-[2rem] p-6 sm:p-8 lg:max-w-[30rem] lg:justify-self-end">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-primary)]">
-                Field ledger
+        <div className="flex justify-center md:justify-end">
+          <ProfileCard
+            avatarUrl={profilePhoto.src}
+            miniAvatarUrl={profilePhoto.src}
+            name="Sohail Patel"
+            title="Software Developer"
+            handle="sohailpatel"
+            status="Available"
+            contactText="Contact"
+            behindGlowEnabled
+            behindGlowColor="rgba(143,199,255,0.62)"
+            behindGlowSize="54%"
+            innerGradient="linear-gradient(145deg,rgba(6,16,27,0.96) 0%,rgba(13,30,45,0.88) 62%,rgba(18,44,52,0.78) 100%)"
+            className="hero-profile-card lg:mr-2"
+          />
+        </div>
+
+        <div className="grid gap-3 min-[520px]:grid-cols-3 md:col-span-2 md:gap-4 lg:mt-2">
+          {metrics.map((item) => (
+            <div key={item.label} className="story-card rounded-[1.25rem] p-4 sm:rounded-[1.6rem] sm:p-5">
+              <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[var(--color-text-muted)] sm:text-[10px] sm:tracking-[0.24em]">
+                {item.label}
               </p>
-              <p className="mt-2 font-[family:var(--font-display)] text-4xl leading-none text-white">
-                Sohail Patel
+              <p className="mt-3 text-lg font-semibold text-[var(--color-text)] sm:mt-4 sm:text-2xl">
+                {item.value}
               </p>
             </div>
-            <div className="rounded-full border border-[rgba(127,224,195,0.24)] bg-[rgba(127,224,195,0.09)] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-secondary)]">
-              Available
-            </div>
-          </div>
-
-          <div className="ridge-divider my-6" />
-
-          <div className="space-y-4 text-sm text-[var(--color-text-muted)]">
-            {ledger.map(([label, value]) => (
-              <div key={label} className="ledger-line">
-                <span className="font-mono uppercase tracking-[0.2em] text-[10px] text-[var(--color-primary)]">
-                  {label}
-                </span>
-                <span className="max-w-[14rem] text-right leading-6 text-[var(--color-text)]">
-                  {value}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 rounded-[1.5rem] border border-white/8 bg-[rgba(255,255,255,0.03)] p-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--color-text-muted)]">
-              Signature stack
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {["Next.js", "React Native", "TypeScript", "Framer Motion", "Three.js"].map(
-                (item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-white/10 px-3 py-1 text-xs text-[var(--color-text-muted)]"
-                  >
-                    {item}
-                  </span>
-                )
-              )}
-            </div>
-          </div>
+          ))}
         </div>
       </motion.div>
 
-      <div className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2">
+      <div className="absolute bottom-5 left-1/2 z-20 hidden -translate-x-1/2 sm:block lg:bottom-8">
         <motion.div
           animate={{ y: [0, 9, 0] }}
           transition={{ duration: 1.8, repeat: Infinity }}
@@ -154,7 +117,7 @@ export default function Hero() {
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--color-text-muted)]">
             Scroll the climb
           </span>
-          <div className="flex h-10 w-6 justify-center rounded-full border border-white/15 pt-2">
+          <div className="flex h-10 w-6 justify-center rounded-full border border-[var(--surface-border)] pt-2">
             <span className="h-2 w-1 rounded-full bg-[var(--color-primary)]" />
           </div>
         </motion.div>
