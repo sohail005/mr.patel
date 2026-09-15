@@ -98,21 +98,21 @@ function StageText({
     >
       <div className="max-w-[34rem] text-left">
         <p
-          className="font-mono text-[11px] uppercase tracking-[0.34em]"
+          className="text-sm font-mono uppercase tracking-[0.34em]"
           style={{ color: stage.accent }}
         >
           {stage.label}
         </p>
-        <div className="mt-5 font-[family:var(--font-display)] text-[clamp(3rem,6vw,6rem)] leading-[0.88] text-[var(--color-text)]">
+        <div className="text-hero mt-5 text-[var(--color-text)]">
           <div>{stage.titleTop}</div>
           <div>{stage.titleBottom}</div>
           <div className="mt-2 inline-block px-3 py-1 text-[var(--highlight-text)]" style={{ background: stage.accent }}>
             {stage.highlight}
           </div>
         </div>
-        <p className="mt-6 text-2xl leading-tight text-[var(--color-text)]">{stage.subtitle}</p>
+        <p className="text-card-title mt-6 text-[var(--color-text)]">{stage.subtitle}</p>
         <div className="mt-8 h-px w-56 bg-[var(--featured-line)]" />
-        <p className="mt-8 text-lg leading-9 text-[var(--color-text-muted)]">{stage.body}</p>
+        <p className="text-body-lg mt-8 text-[var(--color-text-muted)]">{stage.body}</p>
         <p className="mt-6 text-sm leading-7 text-[var(--featured-soft-text)]">{stage.note}</p>
       </div>
     </motion.div>
@@ -158,7 +158,7 @@ function StageVisual({
             <span className="h-2.5 w-2.5 rounded-full bg-yellow-300/80" />
             <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
           </div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.28em]" style={{ color: stage.accent }}>
+          <p className="text-sm font-mono uppercase tracking-[0.28em]" style={{ color: stage.accent }}>
             stage {stage.id} / source
           </p>
           <div className="mt-5 space-y-3 font-mono text-sm text-[var(--featured-card-text)]">
@@ -178,7 +178,7 @@ function StageVisual({
           className="absolute left-56 top-52 w-[22rem] rounded-[1.8rem] border border-[var(--featured-border)] bg-[var(--featured-card)] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.24)]"
           style={{ rotate: 7 }}
         >
-          <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--featured-soft-text)]">
+          <p className="text-caption font-mono uppercase tracking-[0.26em] text-[var(--featured-soft-text)]">
             showcase cards
           </p>
           <div className="mt-4 space-y-3">
@@ -191,7 +191,7 @@ function StageVisual({
                     : "border-[var(--featured-border)] bg-[var(--featured-card-soft)]"
                 }`}
               >
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em]" style={{ color: stage.accent }}>
+                <p className="text-caption font-mono uppercase tracking-[0.24em]" style={{ color: stage.accent }}>
                   {card.title}
                 </p>
                 <p className="mt-3 text-lg text-[var(--color-text)]">{card.value}</p>
@@ -204,7 +204,7 @@ function StageVisual({
           className="absolute left-24 top-[22rem] w-[18rem] rounded-[1.7rem] border border-[var(--featured-border)] bg-[var(--featured-card)] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)]"
           style={{ rotate: -3 }}
         >
-          <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--featured-soft-text)]">
+          <p className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--featured-soft-text)]">
             software map
           </p>
           <div className="mt-4 space-y-2">
@@ -232,7 +232,7 @@ function MobileStageList() {
     <div className="space-y-6 lg:hidden">
       {stages.map((stage) => (
         <div key={stage.id} className="story-card rounded-[1.8rem] p-6">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em]" style={{ color: stage.accent }}>
+          <p className="text-sm font-mono uppercase tracking-[0.3em]" style={{ color: stage.accent }}>
             {stage.label}
           </p>
           <div className="mt-4 font-[family:var(--font-display)] text-4xl leading-[0.9] text-[var(--color-text)]">
@@ -246,7 +246,7 @@ function MobileStageList() {
           <div className="mt-6 space-y-3">
             {stage.cards.map((card) => (
               <div key={card.title} className="rounded-[1.15rem] border border-[var(--featured-border)] bg-[var(--featured-card-soft)] px-4 py-4">
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em]" style={{ color: stage.accent }}>
+                <p className="text-sm font-mono uppercase tracking-[0.24em]" style={{ color: stage.accent }}>
                   {card.title}
                 </p>
                 <p className="mt-2 text-[var(--color-text)]">{card.value}</p>
@@ -283,7 +283,7 @@ function StageMarker({
   return (
     <motion.div style={{ scale, opacity }} className="flex items-center gap-3">
       <div className="h-2.5 w-2.5 rounded-full bg-[var(--color-text)]" />
-      <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--featured-soft-text)]">
+      <span className="text-caption font-mono uppercase tracking-[0.28em] text-[var(--featured-soft-text)]">
         {stage.label}
       </span>
     </motion.div>
@@ -302,15 +302,15 @@ export default function FeaturedSection() {
       <section className="relative bg-[var(--featured-bg)] px-6 py-20 lg:hidden">
         <div className="absolute inset-0 bg-[var(--featured-bg-layer-mobile)]" />
         <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-[var(--featured-soft-text)]">
+          <p className="text-caption font-mono uppercase tracking-[0.32em] text-[var(--featured-soft-text)]">
             Showcase
           </p>
-          <p className="mt-3 font-[family:var(--font-display)] text-[clamp(3rem,15vw,4.8rem)] leading-[0.9] text-[var(--color-text)]">
+          <p className="text-hero mt-3 text-[var(--color-text)]">
             Software work,
             <br />
             shown clearly.
           </p>
-          <p className="mt-6 max-w-md text-base leading-8 text-[var(--color-text-muted)]">
+          <p className="text-body-lg mt-6 max-w-md text-[var(--color-text-muted)]">
             A quick look at how I think about shipping interfaces that stay useful after the demo.
           </p>
           <div className="mt-10">
@@ -328,13 +328,13 @@ export default function FeaturedSection() {
             <p className="font-[family:var(--font-display)] text-5xl font-semibold tracking-tight text-[var(--color-text)]">
               Showcase
             </p>
-            <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--color-text-muted)]">
+            <p className="text-sm font-mono uppercase tracking-[0.3em] text-[var(--color-text-muted)]">
               Code / software / motion
             </p>
           </div>
 
           <div className="absolute bottom-8 left-8 z-30 hidden lg:block max-w-xs">
-            <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-[var(--featured-soft-text)]">
+            <p className="text-sm font-mono uppercase tracking-[0.26em] text-[var(--featured-soft-text)]">
               Practical product thinking
             </p>
             <p className="mt-3 text-sm leading-7 text-[var(--featured-soft-text)]">

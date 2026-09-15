@@ -49,7 +49,7 @@ export default function Experience() {
               Teams, products, releases, and the lessons that came with them.
             </h2>
             <div className="rounded-[1.35rem] border border-[var(--surface-border)] bg-[var(--control-bg)] p-4 mt-5">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-primary)]">
+              <p className="text-caption font-mono uppercase tracking-[0.22em] text-[var(--color-primary)]">
                 Career track
               </p>
               <p className="mt-3 text-sm leading-6 text-[var(--color-text-muted)]">
@@ -74,11 +74,11 @@ export default function Experience() {
                   <span className="absolute -left-7 top-7 hidden h-4 w-4 rounded-full border border-[var(--color-primary)] bg-[var(--color-background)] shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-primary)_13%,transparent),0_0_24px_color-mix(in_srgb,var(--color-primary)_46%,transparent)] sm:block" />
                   <div className="relative">
                     <div className="flex flex-wrap items-center gap-2 sm:block">
-                      <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-primary)]">
+                      <p className="text-caption font-mono uppercase tracking-[0.22em] text-[var(--color-primary)]">
                         {item.period}
                       </p>
                       <span
-                        className={`rounded-full border px-3 py-1 font-mono text-[9px] uppercase tracking-[0.16em] sm:mt-4 sm:inline-flex ${
+                        className={`rounded-full border px-3 py-1 text-caption font-mono uppercase tracking-[0.16em] sm:mt-4 sm:inline-flex ${
                           item.duration === "Current"
                             ? "border-[color-mix(in_srgb,var(--color-primary)_46%,transparent)] bg-[var(--color-primary)] text-[var(--highlight-text)] shadow-[0_0_24px_color-mix(in_srgb,var(--color-primary)_28%,transparent)]"
                             : "border-[var(--surface-border)] bg-[var(--control-bg)] text-[var(--color-text-muted)]"
@@ -94,10 +94,10 @@ export default function Experience() {
 
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-start justify-between gap-3">
-                      <h3 className="text-xl font-semibold leading-tight text-[var(--color-text)] sm:text-2xl">
+                      <h3 className="text-card-title text-[var(--color-text)]">
                         {item.role}
                       </h3>
-                      <span className="rounded-full bg-[color-mix(in_srgb,var(--color-secondary)_13%,transparent)] px-3 py-1 font-mono text-[9px] uppercase tracking-[0.16em] text-[var(--color-secondary)]">
+                      <span className="text-caption rounded-full bg-[color-mix(in_srgb,var(--color-secondary)_13%,transparent)] px-3 py-1 font-mono uppercase tracking-[0.16em] text-[var(--color-secondary)]">
                         {item.type}
                       </span>
                     </div>

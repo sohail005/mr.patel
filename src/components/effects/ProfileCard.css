@@ -39,7 +39,7 @@
     var(--behind-glow-color) 0%,
     transparent var(--behind-glow-size)
   );
-  filter: blur(54px) saturate(0.95);
+  filter: blur(65px) saturate(0.95);
   inset: 0;
   opacity: calc(0.42 * var(--card-opacity));
   pointer-events: none;
@@ -64,7 +64,7 @@
   backface-visibility: hidden;
   border-radius: var(--card-radius);
   box-shadow:
-    rgba(0, 0, 0, 0.8) calc((var(--pointer-from-left) * 10px) - 3px)
+    rgba(0, 0, 0, 0.6) calc((var(--pointer-from-left) * 10px) - 3px)
       calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px,
     0 34px 100px rgba(0, 0, 0, 0.34);
   display: grid;
@@ -246,22 +246,23 @@
 .pc-details h3 {
   background-clip: text;
   background-image: none;
-  color: rgba(255, 255, 255, 0.94);
+  color: #ffffff;
   font-size: min(4.2svh, 2.65em);
   font-weight: 700;
   line-height: 1;
   margin: 0;
   -webkit-background-clip: text;
   letter-spacing: 0;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 2px 24px rgba(247, 247, 247, 0.45);
   -webkit-text-fill-color: currentColor;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .pc-details p {
   background-clip: text;
   background-image: none;
-  color: rgba(204, 255, 239, 0.9);
-  font-size: 14px;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 16px;
   font-weight: 700;
   margin: 0 auto;
   position: relative;
@@ -271,6 +272,7 @@
   -webkit-background-clip: text;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.42);
   -webkit-text-fill-color: currentColor;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .pc-user-info {
@@ -322,14 +324,14 @@
 
 .pc-handle {
   color: rgba(255, 255, 255, 0.92);
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1;
 }
 
 .pc-status {
   color: rgba(255, 255, 255, 0.72);
-  font-size: 11px;
+  font-size: 16px;
   line-height: 1;
 }
 
@@ -340,7 +342,7 @@
   border-radius: 999px;
   color: rgba(255, 255, 255, 0.94);
   cursor: pointer;
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 800;
   padding: 10px 13px;
   pointer-events: auto;
@@ -390,7 +392,7 @@
   }
 
   .pc-details p {
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .pc-user-info {
@@ -408,15 +410,15 @@
   }
 
   .pc-handle {
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .pc-status {
-    font-size: 10px;
+    font-size: 14px;
   }
 
   .pc-contact-btn {
-    font-size: 10px;
+    font-size: 14px;
     padding: 9px 11px;
   }
 }

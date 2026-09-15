@@ -39,10 +39,10 @@ export default function Hero() {
         className="relative z-10 grid w-full gap-9 px-5 pb-24 pt-28 sm:px-8 sm:pt-32 md:grid-cols-[minmax(0,1.08fr)_minmax(17rem,0.92fr)] md:items-center md:gap-8 md:pb-28 lg:grid-cols-[minmax(0,1.45fr)_minmax(24rem,0.55fr)] lg:items-end lg:gap-12 lg:px-12 lg:pt-36 2xl:px-20"
       >
         <div className="max-w-4xl md:max-w-none">
-          <h1 className="section-heading max-w-7xl text-balance text-[var(--color-text)]">
+          <h1 className="text-hero max-w-7xl text-balance text-[var(--color-text)]">
             I build thoughtful web and mobile experiences that solve real-world problems.
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg md:mt-6 md:text-xl md:leading-8">
+          <p className="text-body-lg mt-5 max-w-2xl text-[var(--color-text-muted)] md:mt-6">
             I build React Native and Next.js interfaces that are fast, readable,
             and steady after launch.
           </p>
@@ -50,13 +50,13 @@ export default function Hero() {
           <div className="mt-8 flex flex-col gap-3 min-[420px]:flex-row md:mt-10">
             <a
               href="#projects"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-3 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--primary-action-text)] sm:tracking-[0.28em]"
+              className="text-button inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-3 text-center font-mono uppercase tracking-[0.2em] text-[var(--primary-action-text)] sm:tracking-[0.28em]"
             >
               Explore work
             </a>
             <a
               href="#contact"
-              className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--surface-border)] px-6 py-3 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-text-muted)] hover:text-[var(--color-text)] sm:tracking-[0.28em]"
+              className="text-button inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--surface-border)] px-6 py-3 text-center font-mono uppercase tracking-[0.2em] text-[var(--color-text-muted)] hover:text-[var(--color-text)] sm:tracking-[0.28em]"
             >
               Discuss a build
             </a>
@@ -83,7 +83,7 @@ export default function Hero() {
         <div className="grid gap-3 min-[520px]:grid-cols-2 md:col-span-2 md:gap-4 lg:mt-2 lg:grid-cols-4">
           {metrics.map((item) => (
             <div key={item.label} className="story-card rounded-[1.25rem] p-4 sm:rounded-[1.6rem] sm:p-5">
-              <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[var(--color-text-muted)] sm:text-[10px] sm:tracking-[0.24em]">
+              <p className="text-caption font-mono uppercase tracking-[0.18em] text-white sm:tracking-[0.24em]">
                 {item.label}
               </p>
               <p className="mt-3 text-lg font-semibold text-[var(--color-text)] sm:mt-4 sm:text-2xl">
@@ -100,7 +100,7 @@ export default function Hero() {
           transition={{ duration: 1.8, repeat: Infinity }}
           className="flex flex-col items-center gap-3"
         >
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-[var(--color-text-muted)]">
+          <span className="text-sm font-mono uppercase tracking-[0.3em] text-[var(--color-text-muted)]">
             Scroll the climb
           </span>
           <div className="flex h-10 w-6 justify-center rounded-full border border-[var(--surface-border)] pt-2">

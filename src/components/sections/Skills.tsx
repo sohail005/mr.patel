@@ -62,7 +62,7 @@ export default function Skills() {
             <h2 className="section-heading max-w-4xl text-[var(--color-text)]">
               The tools I reach for when the product has to move quickly.
             </h2>
-            <p className="text-sm leading-7 text-[var(--color-text-muted)] sm:text-base mt-5">
+            <p className="text-body-lg prose-measure mt-5 text-[var(--color-text-muted)]">
               A practical stack for shipping responsive web apps, mobile products,
               and polished interfaces without turning the codebase heavy.
             </p>
@@ -76,17 +76,17 @@ export default function Skills() {
                 <div className="relative z-10 flex items-start justify-between gap-4">
                   <div>
                     <p
-                      className="font-mono text-[10px] uppercase tracking-[0.24em]"
+                      className="text-caption font-mono uppercase tracking-[0.24em]"
                       style={{ color: group.color }}
                     >
                       {group.eyebrow}
                     </p>
-                    <h3 className="mt-4 text-2xl font-semibold leading-tight text-[var(--color-text)]">
+                    <h3 className="text-card-title mt-4 text-[var(--color-text)]">
                       {group.title}
                     </h3>
                   </div>
                   <span
-                    className="rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em]"
+                    className="text-caption rounded-full border px-3 py-1 font-mono uppercase tracking-[0.18em]"
                     style={{
                       borderColor: `color-mix(in srgb, ${group.color} 38%, transparent)`,
                       color: group.color,
@@ -96,7 +96,7 @@ export default function Skills() {
                   </span>
                 </div>
 
-                <p className="relative z-10 mt-4 min-h-14 text-sm leading-7 text-[var(--color-text-muted)]">
+                <p className="relative z-10 mt-4 min-h-14 text-sm leading-6 text-[var(--color-text-muted)]">
                   {group.summary}
                 </p>
 
@@ -107,7 +107,7 @@ export default function Skills() {
                         <span className="text-sm font-medium text-[var(--color-text-muted)]">
                           {item.name}
                         </span>
-                        <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
+                        <span className="text-caption font-mono uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
                           Ready
                         </span>
                       </div>

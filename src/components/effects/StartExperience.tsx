@@ -76,7 +76,7 @@ export default function StartExperience() {
           <div className="relative z-10 flex min-h-screen flex-col justify-between px-6 py-7 sm:px-10 lg:px-14">
             <div className="grid items-start gap-6 md:grid-cols-[auto_minmax(14rem,24rem)] md:justify-between">
               <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-white/52">
+                <p className="text-caption font-mono uppercase tracking-[0.32em] text-white/52">
                   Presenting {paddedProgress} / 100
                 </p>
                 <div className="mt-4 h-px w-48 overflow-hidden bg-white/12">
@@ -92,7 +92,7 @@ export default function StartExperience() {
                 <div className="h-20 w-[min(82vw,24rem)] overflow-hidden opacity-90 mix-blend-screen md:-mt-4">
                  
                 </div>
-                <p className="-mt-2 hidden text-right font-mono text-[11px] uppercase tracking-[0.28em] text-white/44 sm:block">
+                <p className="text-sm -mt-2 hidden text-right font-mono uppercase tracking-[0.28em] text-white/44 sm:block">
                   Compiling experience v 2026
                 </p>
               </div>
@@ -134,7 +134,7 @@ export default function StartExperience() {
                       ease: "easeInOut",
                       delay: index * 0.16,
                     }}
-                    className="rounded-full border border-white/14 bg-white/6 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.26em] text-white/70"
+                    className="text-caption rounded-full border border-white/14 bg-white/6 px-4 py-2 font-mono uppercase tracking-[0.26em] text-white/70"
                   >
                     {role}
                   </motion.span>
@@ -149,7 +149,7 @@ export default function StartExperience() {
                 ["Mode", "Motion-led product craft"],
               ].map(([label, value]) => (
                 <div key={label} className="flex items-center justify-between gap-5">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-white/36">
+                  <span className="text-caption font-mono uppercase tracking-[0.28em] text-white/36">
                     {label}
                   </span>
                   <span className="text-right text-sm text-white/70">{value}</span>

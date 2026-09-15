@@ -41,7 +41,7 @@ export default function About() {
           <h2 className="section-heading mt-4 text-[var(--color-text)]">
             I like the part where design has to survive production.
           </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-muted)]">
+          <p className="text-body-lg prose-measure mt-6 text-[var(--color-text-muted)]">
             My work sits between interface detail and release responsibility:
             the layout, the state, the handoff, the strange edge case, and the
             tiny interaction that makes a product feel finished.
@@ -51,7 +51,7 @@ export default function About() {
         <div className="mt-9 grid gap-5 sm:mt-10 lg:grid-cols-[1.15fr_0.85fr]">
           <ScrollReveal>
             <div className="story-card rounded-[1.4rem] p-6 sm:rounded-[2rem] sm:p-8 lg:p-10">
-              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-primary)]">
+              <p className="text-caption font-mono uppercase tracking-[0.28em] text-[var(--color-primary)]">
                 Field notes
               </p>
               <div className="mt-6 space-y-4 text-[var(--color-text-muted)] sm:mt-8 sm:space-y-5">
@@ -78,10 +78,10 @@ export default function About() {
                 delay={index * 0.08}
               >
                 <div className="panel-shell rounded-[1.6rem] p-6">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+                  <p className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-secondary)]">
                     Principle {index + 1}
                   </p>
-                  <h3 className="mt-3 text-xl text-[var(--color-text)]">{item.title}</h3>
+                  <h3 className="text-card-title mt-3 text-[var(--color-text)]">{item.title}</h3>
                   <p className="mt-3 leading-7 text-[var(--color-text-muted)]">
                     {item.text}
                   </p>

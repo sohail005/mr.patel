@@ -242,10 +242,10 @@ export default function Contact() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.12, duration: 0.32, ease: "easeOut" }}
               >
-                <p className="text-4xl font-bold text-text sm:text-6xl">
+                <p className="text-4xl font-bold text-text sm:text-5xl">
                   Thank you!
                 </p>
-                <p className="mt-3 max-w-2xl text-base leading-7 text-text-muted sm:text-lg">
+                <p className="text-body-lg mt-3 max-w-2xl text-text-muted">
                   Your message has been sent successfully. I will get back to you soon.
                 </p>
               </motion.div>
@@ -278,10 +278,10 @@ export default function Contact() {
         <div className="mt-9 grid gap-5 sm:mt-10 sm:gap-6 lg:grid-cols-[0.42fr_0.58fr]">
           <ScrollReveal mode="inView" direction="up">
             <div className="story-card rounded-[1.4rem] p-6 sm:rounded-4xl sm:p-8">
-              <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--color-primary)]">
+              <p className="text-caption font-mono uppercase tracking-[0.26em] text-[var(--color-primary)]">
                 Reach out
               </p>
-              <p className="mt-6 text-lg leading-8">
+              <p className="text-body-lg mt-6">
                 I&apos;m open to mobile apps, web products, dashboards, and
                 interfaces where the details matter after launch.
               </p>
@@ -298,7 +298,7 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="story-card rounded-[1.4rem] p-6 sm:rounded-[2rem] sm:p-8">
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                  <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
                     Name
                   </span>
                   <input
@@ -315,7 +315,7 @@ export default function Contact() {
                 </label>
 
                 <label className="block">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                  <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
                     Email
                   </span>
                   <input
@@ -333,7 +333,7 @@ export default function Contact() {
               </div>
 
               <div ref={serviceMenuRef} className="relative mt-5">
-                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
                   Service
                 </span>
                 <button
@@ -389,7 +389,7 @@ export default function Contact() {
               </div>
 
               <label className="mt-5 block">
-                <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
                   Message
                 </span>
                 <textarea
@@ -415,7 +415,7 @@ export default function Contact() {
                 aria-busy={sending}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.99 }}
-                className="mt-6 flex w-full items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-4 font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--primary-action-text)] disabled:cursor-wait disabled:opacity-60"
+                className="text-button mt-6 flex w-full items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-4 font-mono uppercase tracking-[0.28em] text-[var(--primary-action-text)] disabled:cursor-wait disabled:opacity-60"
               >
                 {sending ? (
                   <>

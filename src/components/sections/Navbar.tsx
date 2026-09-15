@@ -81,10 +81,10 @@ export default function Navbar() {
             className="h-2.5 w-2.5 rounded-full bg-[var(--color-secondary)]"
           />
           <div>
-            <p className="whitespace-nowrap font-[family:var(--font-display)] text-2xl font-semibold leading-none text-[var(--color-text)]">
+            <p className="whitespace-nowrap font-[family:var(--font-display)] text-xl font-semibold leading-none text-[var(--color-text)] sm:text-2xl">
               Sohail Patel
             </p>
-            <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.32em] text-[var(--color-text-muted)]">
+            <p className="text-caption mt-1 font-mono uppercase tracking-[0.32em] text-[var(--color-text-muted)]">
               Software developer
             </p>
           </div>
@@ -101,7 +101,7 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 * index, duration: 0.45 }}
                 whileHover={{ y: -2 }}
-                className={`group relative font-mono text-[11px] uppercase tracking-[0.28em] ${
+                className={`text-nav-link group relative font-mono uppercase tracking-[0.28em] ${
                   active ? "text-[var(--color-text)]" : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
                 }`}
               >
@@ -123,7 +123,7 @@ export default function Navbar() {
           href="/#contact"
           whileHover={{ scale: 1.03, y: -1 }}
           whileTap={{ scale: 0.99 }}
-          className="primary-action-button relative z-10 hidden overflow-hidden rounded-full border px-5 py-3 font-mono text-[11px] uppercase tracking-[0.24em] lg:block"
+          className="text-button primary-action-button relative z-10 hidden overflow-hidden rounded-full border px-5 py-3 font-mono uppercase tracking-[0.24em] lg:block"
         >
           <motion.span
             animate={{ x: ["-140%", "160%"] }}
@@ -177,7 +177,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.04 * index, duration: 0.2 }}
-                  className="font-mono text-xs uppercase tracking-[0.28em] text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                  className="text-nav-link font-mono uppercase tracking-[0.28em] text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
                 >
                   {link.name}
                 </motion.a>

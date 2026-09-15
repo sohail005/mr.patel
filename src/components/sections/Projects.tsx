@@ -527,7 +527,7 @@ function StorePreview({ project }: { project: Project }) {
 
   return (
     <div className="flex aspect-[4/3] min-h-[20rem] max-w-full flex-col overflow-hidden bg-[#f8fafd] text-[#202124] sm:aspect-square sm:min-h-[27.625rem]">
-      <div className="flex h-9 shrink-0 items-center gap-3 border-b border-[#dde2ea] bg-white px-3 text-[10px] text-[#5f6368] sm:gap-4 sm:px-4 sm:text-xs">
+      <div className="flex h-9 shrink-0 items-center gap-3 border-b border-[#dde2ea] bg-white px-3 text-[12px] text-[#5f6368] sm:gap-4 sm:px-4 sm:text-xs">
         <div className="flex items-center gap-1.5 font-semibold text-[#3c4043]">
           <span
             className="h-3 w-3 rounded-sm"
@@ -556,14 +556,14 @@ function StorePreview({ project }: { project: Project }) {
               <p className="text-xs font-semibold sm:text-sm">
                 {project.thumbnail.rating ?? "4.0"} star
               </p>
-              <p className="text-[10px] text-[#5f6368]">Rating</p>
+              <p className="text-[12px] text-[#5f6368]">Rating</p>
             </div>
             <div className="h-8 w-px bg-[#dde2ea]" />
             <div>
               <p className="truncate text-xs font-semibold sm:text-sm">
                 {project.thumbnail.downloads ?? project.metric.replace(" downloads", "")}
               </p>
-              <p className="text-[10px] text-[#5f6368]">Downloads</p>
+              <p className="text-[12px] text-[#5f6368]">Downloads</p>
             </div>
           </div>
 
@@ -628,7 +628,7 @@ function ProjectThumbnail({ project }: { project: Project }) {
             className="h-2 w-2 shrink-0 rounded-full"
             style={{ backgroundColor: project.thumbnail.accent }}
           />
-          <span className="truncate font-mono text-[10px] text-white/72">
+          <span className="text-caption truncate font-mono text-white/72">
             {project.thumbnail.previewUrl}
           </span>
         </div>
@@ -649,10 +649,10 @@ function ProjectThumbnail({ project }: { project: Project }) {
             }`}
           />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex items-center justify-between bg-gradient-to-t from-black/72 to-transparent px-4 pb-3 pt-10">
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/78">
+            <span className="text-caption font-mono uppercase tracking-[0.22em] text-white/78">
               {project.thumbnail.source}
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/78">
+            <span className="text-caption font-mono uppercase tracking-[0.22em] text-white/78">
               {project.type}
             </span>
           </div>
@@ -674,7 +674,7 @@ export default function Projects({ limit }: { limit?: number }) {
           <h2 className="section-heading mt-4 text-[var(--color-text)]">
             Shipped products with real interfaces, not placeholder shots.
           </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-muted)]">
+          <p className="text-body-lg prose-measure mt-6 text-[var(--color-text-muted)]">
             A company-wise collection of shipped web, Android, and iOS products,
             shown with real storefront and product interface previews.
           </p>
@@ -700,10 +700,10 @@ export default function Projects({ limit }: { limit?: number }) {
 
                 <div className="relative z-10 min-w-0 p-2 pt-5 sm:p-4 sm:pt-6">
                   <div className="flex min-w-0 flex-wrap items-center justify-between gap-3">
-                    <p className="min-w-0 max-w-full break-words font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-primary)] sm:tracking-[0.24em]">
+                    <p className="text-caption min-w-0 max-w-full break-words font-mono uppercase tracking-[0.18em] text-[var(--color-primary)] sm:tracking-[0.24em]">
                       {project.region}
                     </p>
-                    <span className="max-w-full rounded-full border border-[var(--surface-border)] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--color-text-muted)] sm:px-3 sm:tracking-[0.2em]">
+                    <span className="text-caption max-w-full rounded-full border border-[var(--surface-border)] px-2.5 py-1 font-mono uppercase tracking-[0.12em] text-[var(--color-text-muted)] sm:px-3 sm:tracking-[0.2em]">
                       {project.platform} /{" "}
                       {project.metric}
                     </span>
@@ -712,7 +712,7 @@ export default function Projects({ limit }: { limit?: number }) {
                   <h3 className="mt-4 break-words text-xl font-semibold leading-tight text-[var(--color-text)] sm:text-3xl">
                     {project.title}
                   </h3>
-                  <p className="mt-3 break-words font-mono text-[10px] tracking-[0.12em] text-amber-50 sm:tracking-[0.22em]">
+                  <p className="text-caption mt-3 break-words font-mono tracking-[0.12em] text-amber-50 sm:tracking-[0.22em]">
                     Built at <strong className="text-[var(--color-primary)]">{project.company}</strong>
                   </p>
                   <p className="mt-4 text-sm leading-7 text-[var(--color-text-muted)] sm:text-base sm:leading-8">
@@ -731,10 +731,10 @@ export default function Projects({ limit }: { limit?: number }) {
                   </div>
 
                   <div className="mt-8 flex items-center justify-between gap-4 border-t border-[var(--surface-border)] pt-5">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-text-muted)] sm:tracking-[0.24em]">
+                    <span className="text-caption font-mono uppercase tracking-[0.16em] text-[var(--color-text-muted)] sm:tracking-[0.24em]">
                       Live project
                     </span>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-text)] transition-transform group-hover:translate-x-1 sm:tracking-[0.24em]">
+                    <span className="text-caption font-mono uppercase tracking-[0.16em] text-[var(--color-text)] transition-transform group-hover:translate-x-1 sm:tracking-[0.24em]">
                       View
                     </span>
                   </div>
@@ -748,7 +748,7 @@ export default function Projects({ limit }: { limit?: number }) {
           <div className="mt-10 flex justify-center">
             <a
               href="/projects"
-              className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-3 font-mono text-[11px] uppercase tracking-[0.24em] text-[var(--primary-action-text)] transition-[transform,background-color,border-color,gap] duration-300 hover:-translate-y-0.5 hover:gap-4 hover:border-[var(--color-primary)] hover:bg-[var(--control-bg-hover)]"
+              className="text-button inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-3 font-mono uppercase tracking-[0.24em] text-[var(--primary-action-text)] transition-[transform,background-color,border-color,gap] duration-300 hover:-translate-y-0.5 hover:gap-4 hover:border-[var(--color-primary)] hover:bg-[var(--control-bg-hover)]"
             >
               View all projects
               <span aria-hidden="true">-&gt;</span>

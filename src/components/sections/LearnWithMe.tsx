@@ -195,14 +195,14 @@ export default function LearnWithMe() {
                         transition={{ type: "spring", stiffness: 200, damping: 20 }}
                         className="inline-block mb-6 px-4 py-1.5 rounded-full border border-[rgba(108,99,255,0.3)] bg-[rgba(108,99,255,0.1)] backdrop-blur-md"
                     >
-                        <span className="text-[var(--color-primary)] font-mono text-xs tracking-widest uppercase">
+                        <span className="text-caption text-[var(--color-primary)] font-mono tracking-widest uppercase">
                             Knowledge Base
                         </span>
                     </motion.div>
-                    <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight leading-tight mb-6">
+                    <h1 className="text-hero text-white mb-6">
                         Learn With <span className="gradient-text">Me</span>
                     </h1>
-                    <p className="text-lg md:text-xl text-[var(--color-text-muted)] max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-body-lg prose-measure mx-auto text-[var(--color-text-muted)]">
                         Explore the technologies I&apos;ve worked on, learn my favorite patterns, and discover how I structure production-grade applications.
                     </p>
                 </FadeUp>
@@ -250,8 +250,8 @@ export default function LearnWithMe() {
                                         {tech.icon}
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-bold text-white">{tech.name}</h3>
-                                        <span className="text-xs font-mono" style={{ color: tech.color }}>{tech.level}</span>
+                                        <h3 className="text-card-title text-white">{tech.name}</h3>
+                                        <span className="text-caption font-mono" style={{ color: tech.color }}>{tech.level}</span>
                                     </div>
                                 </div>
                                 <p className="text-sm text-[var(--color-text-muted)] leading-relaxed relative z-10 flex-grow">
@@ -297,9 +297,9 @@ export default function LearnWithMe() {
                                                 {selectedTech.icon}
                                             </div>
                                             <div>
-                                                <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">{selectedTech.name}</h2>
+                                                <h2 className="section-heading text-white">{selectedTech.name}</h2>
                                                 <div className="flex items-center gap-3 mt-2">
-                                                    <span className="px-3 py-1 rounded-full text-xs font-mono border border-white/10 text-[var(--color-text-muted)]">
+                                                    <span className="text-caption px-3 py-1 rounded-full font-mono border border-white/10 text-[var(--color-text-muted)]">
                                                         {selectedTech.category}
                                                     </span>
                                                     <span className="text-sm font-semibold" style={{ color: selectedTech.color }}>{selectedTech.level}</span>
@@ -310,7 +310,7 @@ export default function LearnWithMe() {
                                         <div className="grid lg:grid-cols-3 gap-10">
                                             <div className="lg:col-span-2 space-y-10">
                                                 <section>
-                                                    <h4 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                                                    <h4 className="text-card-title text-white mb-3 flex items-center gap-2">
                                                         <span className="text-[var(--color-primary)]">#</span> Overview
                                                     </h4>
                                                     <p className="text-[var(--color-text-muted)] leading-relaxed">
@@ -319,7 +319,7 @@ export default function LearnWithMe() {
                                                 </section>
 
                                                 <section>
-                                                    <h4 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                                                    <h4 className="text-card-title text-white mb-3 flex items-center gap-2">
                                                         <span className="text-green-400">#</span> Real-world Usage
                                                     </h4>
                                                     <p className="text-[var(--color-text-muted)] leading-relaxed">
@@ -328,7 +328,7 @@ export default function LearnWithMe() {
                                                 </section>
 
                                                 <section>
-                                                    <h4 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                                    <h4 className="text-card-title text-white mb-4 flex items-center gap-2">
                                                         <span className="text-yellow-400">#</span> Pro Tips & Best Practices
                                                     </h4>
                                                     <ul className="space-y-3">
@@ -344,12 +344,12 @@ export default function LearnWithMe() {
 
                                             <div className="space-y-8">
                                                 <div className="p-6 rounded-2xl bg-white/[0.03] border border-white/[0.05]">
-                                                    <h4 className="text-sm font-bold text-white mb-4 uppercase tracking-widest text-[var(--color-text-muted)]">
+                                                    <h4 className="text-caption font-semibold text-white mb-4 uppercase tracking-widest">
                                                         Key Concepts
                                                     </h4>
                                                     <div className="flex flex-wrap gap-2">
                                                         {selectedTech.concepts.map(c => (
-                                                            <span key={c} className="px-3 py-1.5 text-xs rounded-lg bg-black/40 text-white/80 border border-white/5">
+                                                            <span key={c} className="text-caption px-3 py-1.5 rounded-lg bg-black/40 text-white/80 border border-white/5">
                                                                 {c}
                                                             </span>
                                                         ))}
@@ -370,10 +370,10 @@ export default function LearnWithMe() {
             <div className="mt-32 pt-20 border-t border-[rgba(255,255,255,0.05)] relative">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-[var(--color-primary)] to-transparent opacity-30" />
                 <div className="text-center mb-10 px-6">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    <h2 className="section-heading text-white mb-4">
                         Want to learn more or <span className="text-[var(--color-secondary)]">work together?</span>
                     </h2>
-                    <p className="text-[var(--color-text-muted)] max-w-xl mx-auto">
+                    <p className="text-body-lg prose-measure mx-auto text-[var(--color-text-muted)]">
                         Whether you need a full-stack developer for your next project or looking for mentorship in React Native, I&apos;m always open to chat.
                     </p>
                 </div>

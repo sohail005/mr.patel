@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import ClickSpark from "@/components/effects/ClickSpark";
 import ThemeSwitcher from "@/components/effects/ThemeSwitcher";
+import PortfolioChat from "@/components/portfolio-chat/PortfolioChat";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
 
 const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -47,7 +55,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${jetBrainsMono.variable} antialiased`}
+        className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}
       >
         <ClickSpark
           sparkColor="#cce6ff"
@@ -59,6 +67,7 @@ export default function RootLayout({
         >
           <div className="noise-overlay" />
           {children}
+          <PortfolioChat />
           <ThemeSwitcher />
         </ClickSpark>
         <Script

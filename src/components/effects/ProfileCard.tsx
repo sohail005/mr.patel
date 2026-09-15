@@ -237,7 +237,7 @@ function ProfileCardComponent({
             </div>
             <div className="pc-content">
               <div className="pc-details">
-                <h3>{name}</h3>
+                <h3 className="text-[#224248]">{name}</h3>
                 <p>{title}</p>
               </div>
             </div>

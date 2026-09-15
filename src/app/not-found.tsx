@@ -11,10 +11,10 @@ export default function NotFound() {
       <section className="relative z-10 mx-auto grid w-full max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
           <p className="section-kicker">Error 404</p>
-          <h1 className="section-heading mt-5 max-w-3xl text-white">
+          <h1 className="text-hero mt-5 max-w-3xl text-white">
             this route wandered off the map.
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-8 text-[var(--color-text-muted)]">
+          <p className="text-body-lg prose-measure mt-6 text-[var(--color-text-muted)]">
             The page you are looking for does not exist, moved, or never made it
             into production. Let&apos;s get you back to the working build.
           </p>
@@ -22,13 +22,13 @@ export default function NotFound() {
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Link
               href="/"
-              className="rounded-full border border-[rgba(143,199,255,0.26)] bg-[rgba(143,199,255,0.12)] px-6 py-3 text-center font-mono text-[11px] uppercase tracking-[0.28em] text-white"
+              className="text-button rounded-full border border-[rgba(143,199,255,0.26)] bg-[rgba(143,199,255,0.12)] px-6 py-3 text-center font-mono uppercase tracking-[0.28em] text-white"
             >
               Back home
             </Link>
             <Link
               href="/#projects"
-              className="rounded-full border border-white/12 px-6 py-3 text-center font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--color-text-muted)] hover:text-white"
+              className="text-button rounded-full border border-white/12 px-6 py-3 text-center font-mono uppercase tracking-[0.28em] text-[var(--color-text-muted)] hover:text-white"
             >
               View projects
             </Link>

@@ -34,8 +34,10 @@ export default function ThemeSwitcher() {
         ? currentTheme
         : "midnight";
 
-    setActiveTheme(nextTheme);
-    setHydrated(true);
+    window.queueMicrotask(() => {
+      setActiveTheme(nextTheme);
+      setHydrated(true);
+    });
   }, []);
 
   useEffect(() => {

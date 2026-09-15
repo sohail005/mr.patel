@@ -132,7 +132,7 @@ export default function Services() {
           <h2 className="section-heading mt-4 text-[var(--color-text)]">
             From first commit to the release that reaches real people.
           </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-text-muted)]">
+          <p className="text-body-lg prose-measure mt-6 text-[var(--color-text-muted)]">
             Focused product work across mobile, web, release engineering, and
             the practical skills that keep teams moving.
           </p>
@@ -154,13 +154,13 @@ export default function Services() {
                   >
                     <ServiceIcon name={service.icon} />
                   </div>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                  <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
                     {service.number}
                   </span>
                 </div>
 
                 <div className="relative z-10 mt-6 flex flex-1 flex-col sm:mt-7">
-                  <h3 className="max-w-md text-2xl text-[var(--color-text)] sm:text-[1.7rem]">
+                  <h3 className="text-card-title max-w-md text-[var(--color-text)]">
                     {service.title}
                   </h3>
                   <p className="mt-3 max-w-lg leading-7 text-[var(--color-text-muted)]">
@@ -179,7 +179,7 @@ export default function Services() {
                   <a
                     href="#contact"
                     aria-label={`Talk about ${service.title}`}
-                    className="mt-8 inline-flex min-h-11 w-fit items-center gap-2 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-5 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--primary-action-text)] transition-[transform,background-color,border-color,gap] duration-300 hover:-translate-y-0.5 hover:gap-3 hover:border-[var(--color-primary)] hover:bg-[var(--control-bg-hover)]"
+                    className="text-button mt-8 inline-flex min-h-11 w-fit items-center gap-2 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-5 py-3 font-mono uppercase tracking-[0.2em] text-[var(--primary-action-text)] transition-[transform,background-color,border-color,gap] duration-300 hover:-translate-y-0.5 hover:gap-3 hover:border-[var(--color-primary)] hover:bg-[var(--control-bg-hover)]"
                   >
                     Let&apos;s talk about this
                     <span aria-hidden="true">-&gt;</span>
