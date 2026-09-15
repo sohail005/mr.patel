@@ -1,7 +1,9 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { Lottie } from "lottie-react";
+import handshakeAnimation from "@/Assets/Business_Handshake.json";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 
 type SocialIconName = "github" | "linkedin" | "threads" | "instagram" | "youtube" | "email";
@@ -133,6 +135,7 @@ export default function Contact() {
   });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
   const [error, setError] = useState("");
   const [serviceOpen, setServiceOpen] = useState(false);
   const serviceMenuRef = useRef<HTMLDivElement>(null);
@@ -154,6 +157,28 @@ export default function Contact() {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  useEffect(() => {
+    if (!sent) return;
+
+    const timeout = window.setTimeout(() => setSent(false), 4000);
+    return () => window.clearTimeout(timeout);
+  }, [sent]);
+
+  useEffect(() => {
+    if (!showSuccessAnimation) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setShowSuccessAnimation(false);
+    };
+    const timeout = window.setTimeout(() => setShowSuccessAnimation(false), 3200);
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.clearTimeout(timeout);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showSuccessAnimation]);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -177,8 +202,8 @@ export default function Contact() {
       }
 
       setSent(true);
+      setShowSuccessAnimation(true);
       setFormState({ name: "", email: "", service: "", message: "" });
-      setTimeout(() => setSent(false), 4000);
     } catch (caughtError) {
       setError(
         caughtError instanceof Error
@@ -192,21 +217,71 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative py-16 sm:py-20 lg:py-24">
+      <AnimatePresence>
+        {showSuccessAnimation ? (
+          <motion.div
+            aria-modal="true"
+            className="fixed inset-0 z-10000 flex items-center justify-center bg-transparent"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            role="dialog"
+            onClick={() => setShowSuccessAnimation(false)}
+          >
+            <motion.div
+              className="flex h-screen w-screen flex-col items-center justify-center overflow-hidden text-center"
+              initial={{ scale: 0.94, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.98, opacity: 0 }}
+              transition={{ duration: 0.28, ease: "easeOut" }}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <motion.div
+                className="relative z-10 mt-60 bg-background p-10 text-center rounded-2xl shadow-[0_22px_55px_rgba(0,0,0,0.42)] backdrop-blur-2xl "
+                initial={{ y: -14, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.12, duration: 0.32, ease: "easeOut" }}
+              >
+                <p className="text-4xl font-bold text-text sm:text-6xl">
+                  Thank you!
+                </p>
+                <p className="mt-3 max-w-2xl text-base leading-7 text-text-muted sm:text-lg">
+                  Your message has been sent successfully. I will get back to you soon.
+                </p>
+              </motion.div>
+              <Lottie
+                src={handshakeAnimation}
+                autoplay
+                loop={false}
+                className="h-auto w-[140vw] min-w-[140vw] max-w-none shrink-0"
+              />
+            </motion.div>
+            <button
+              type="button"
+              aria-label="Close success animation"
+              className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-2xl leading-none text-white hover:bg-white/16 focus:outline-none focus:ring-2 focus:ring-white/50"
+              onClick={() => setShowSuccessAnimation(false)}
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
       <div className="mx-auto max-w-6xl px-6">
         <ScrollReveal mode="inView" className="max-w-3xl">
           <p className="section-kicker">Contact</p>
-          <h2 className="section-heading mt-4 text-[var(--color-text)]">
+          <h2 className="section-heading mt-4">
             Tell me what you are building. I will tell you where I can help.
           </h2>
         </ScrollReveal>
 
         <div className="mt-9 grid gap-5 sm:mt-10 sm:gap-6 lg:grid-cols-[0.42fr_0.58fr]">
           <ScrollReveal mode="inView" direction="up">
-            <div className="story-card rounded-[1.4rem] p-6 sm:rounded-[2rem] sm:p-8">
+            <div className="story-card rounded-[1.4rem] p-6 sm:rounded-4xl sm:p-8">
               <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--color-primary)]">
                 Reach out
               </p>
-              <p className="mt-6 text-lg leading-8 text-[var(--color-text-muted)]">
+              <p className="mt-6 text-lg leading-8">
                 I&apos;m open to mobile apps, web products, dashboards, and
                 interfaces where the details matter after launch.
               </p>
