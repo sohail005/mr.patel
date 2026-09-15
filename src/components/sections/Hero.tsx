@@ -38,9 +38,9 @@ export default function Hero() {
       <div
         className="relative z-10 grid w-full gap-9 px-5 pb-24 pt-28 sm:px-8 sm:pt-32 md:grid-cols-[minmax(0,1.08fr)_minmax(17rem,0.92fr)] md:items-center md:gap-8 md:pb-28 lg:grid-cols-[minmax(0,1.45fr)_minmax(24rem,0.55fr)] lg:items-end lg:gap-12 lg:px-12 lg:pt-36 2xl:px-20"
       >
-        <div className="max-w-3xl md:max-w-none">
-          <h1 className="section-heading max-w-5xl text-balance text-[var(--color-text)]">
-            Web and mobile products, built for real users.
+        <div className="max-w-4xl md:max-w-none">
+          <h1 className="section-heading max-w-7xl text-balance text-[var(--color-text)]">
+            I build thoughtful web and mobile experiences that solve real-world problems.
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--color-text-muted)] sm:text-lg md:mt-6 md:text-xl md:leading-8">
             I build React Native and Next.js interfaces that are fast, readable,

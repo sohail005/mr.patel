@@ -58,11 +58,11 @@ export default function Skills() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <ScrollReveal mode="inView" className="max-w-5xl">
           <p className="section-kicker">Capabilities grid</p>
-          <div className="mt-4 grid gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(18rem,0.36fr)] lg:items-end">
+          <div className="mt-4 gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(18rem,0.36fr)] lg:items-end">
             <h2 className="section-heading max-w-4xl text-[var(--color-text)]">
               The tools I reach for when the product has to move quickly.
             </h2>
-            <p className="max-w-sm text-sm leading-7 text-[var(--color-text-muted)] sm:text-base">
+            <p className="text-sm leading-7 text-[var(--color-text-muted)] sm:text-base mt-5">
               A practical stack for shipping responsive web apps, mobile products,
               and polished interfaces without turning the codebase heavy.
             </p>

@@ -424,7 +424,7 @@ textarea {
 
 .section-heading {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4.8vw, 5.2rem);
+  font-size: clamp(1rem, 4vw, 3rem);
   font-weight: 750;
   line-height: 0.98;
   letter-spacing: 0;
@@ -693,7 +693,7 @@ textarea {
   }
 
   .section-heading {
-    font-size: clamp(2rem, 10vw, 2.65rem);
+    font-size: clamp(1.5rem, 10vw, 2.65rem);
     line-height: 1.02;
   }
 

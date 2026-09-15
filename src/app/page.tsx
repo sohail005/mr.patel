@@ -1,9 +1,8 @@
-"use client";
-
-import dynamic from "next/dynamic";
+import HomeRuntime from "@/components/effects/HomeRuntime";
 import StartExperience from "@/components/effects/StartExperience";
 import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
+import MobileAppShowcase from "@/components/sections/MobileAppShowcase";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
 import Services from "@/components/sections/Services";
@@ -12,24 +11,14 @@ import Experience from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/sections/Footer";
 
-const ScrollProgress = dynamic(
-  () => import("@/components/effects/ScrollProgress"),
-  { ssr: false }
-);
-
-const LenisProvider = dynamic(
-  () => import("@/components/effects/LenisProvider"),
-  { ssr: false }
-);
-
 export default function Home() {
   return (
     <main className="relative">
-      <LenisProvider />
-      <ScrollProgress />
+      <HomeRuntime />
       <StartExperience />
       <Navbar />
       <Hero />
+      <MobileAppShowcase />
       <About />
       <Skills />
       <Services />
