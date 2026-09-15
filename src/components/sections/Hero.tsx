@@ -13,6 +13,7 @@ const metrics = [
   { label: "Years shipping products", value: "5+" },
   { label: "Mobile and web releases", value: "20+" },
   { label: "Core stack coverage", value: "React Native / React / Next " },
+  { label: "Delivery ownership", value: "Build / Test / Launch" },
 ];
 
 export default function Hero() {
@@ -79,7 +80,7 @@ export default function Hero() {
           />
         </div>
 
-        <div className="grid gap-3 min-[520px]:grid-cols-3 md:col-span-2 md:gap-4 lg:mt-2">
+        <div className="grid gap-3 min-[520px]:grid-cols-2 md:col-span-2 md:gap-4 lg:mt-2 lg:grid-cols-4">
           {metrics.map((item) => (
             <div key={item.label} className="story-card rounded-[1.25rem] p-4 sm:rounded-[1.6rem] sm:p-5">
               <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[var(--color-text-muted)] sm:text-[10px] sm:tracking-[0.24em]">
