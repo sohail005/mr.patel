@@ -1,8 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import ProfileCard from "@/components/effects/ProfileCard";
 import profilePhoto from "@/Assets/profile-photo.jpg";
 
@@ -17,39 +16,25 @@ const metrics = [
 ];
 
 export default function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const copyOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
-  const sceneY = useTransform(scrollYProgress, [0, 1], [0, 70]);
-  const hazeScale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
-
   return (
     <section
       id="hero"
-      ref={ref}
       className="relative flex min-h-[100svh] items-center overflow-hidden"
     >
-      <motion.div style={{ y: sceneY }} className="absolute inset-0 opacity-50 md:opacity-60 lg:opacity-70">
+      <div className="absolute inset-0 opacity-50 md:opacity-60 lg:opacity-70">
         <HeroScene />
-      </motion.div>
+      </div>
 
       <div className="atmosphere" />
       <div className="terrain-grid absolute inset-0 opacity-[0.06]" />
 
-      <motion.div
-        style={{ scale: hazeScale }}
+      <div
         className="pointer-events-none absolute left-1/2 top-[10%] h-[18rem] w-[18rem] -translate-x-1/2 rounded-full bg-[rgba(204,230,255,0.12)] blur-[90px] sm:h-[28rem] sm:w-[28rem] lg:h-[34rem] lg:w-[34rem] lg:blur-[120px]"
       />
 
       <div className="absolute inset-x-0 bottom-0 h-56 bg-[var(--hero-bottom-fade)]" />
 
-      <motion.div
-        style={{ y: copyY, opacity: copyOpacity }}
+      <div
         className="relative z-10 grid w-full gap-9 px-5 pb-24 pt-28 sm:px-8 sm:pt-32 md:grid-cols-[minmax(0,1.08fr)_minmax(17rem,0.92fr)] md:items-center md:gap-8 md:pb-28 lg:grid-cols-[minmax(0,1.45fr)_minmax(24rem,0.55fr)] lg:items-end lg:gap-12 lg:px-12 lg:pt-36 2xl:px-20"
       >
         <div className="max-w-3xl md:max-w-none">
@@ -106,7 +91,7 @@ export default function Hero() {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       <div className="absolute bottom-5 left-1/2 z-20 hidden -translate-x-1/2 sm:block lg:bottom-8">
         <motion.div

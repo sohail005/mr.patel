@@ -26,13 +26,13 @@ export default function About() {
     offset: ["start end", "end start"],
   });
 
-  const hazeY = useTransform(scrollYProgress, [0, 1], [-40, 60]);
+  const hazeY = useTransform(scrollYProgress, [0, 1], [-20, 28]);
 
   return (
-    <section id="about" ref={ref} className="relative overflow-hidden py-28">
+    <section id="about" ref={ref} className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
       <motion.div
         style={{ y: hazeY }}
-        className="pointer-events-none absolute left-0 top-16 h-80 w-80 rounded-full bg-[rgba(127,224,195,0.08)] blur-[120px]"
+        className="pointer-events-none absolute left-0 top-16 hidden h-80 w-80 rounded-full bg-[rgba(127,224,195,0.08)] blur-[90px] md:block"
       />
 
       <div className="mx-auto max-w-7xl px-6">
@@ -48,13 +48,13 @@ export default function About() {
           </p>
         </ScrollReveal>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="mt-9 grid gap-5 sm:mt-10 lg:grid-cols-[1.15fr_0.85fr]">
           <ScrollReveal>
-            <div className="story-card rounded-[2rem] p-8 sm:p-10">
+            <div className="story-card rounded-[1.4rem] p-6 sm:rounded-[2rem] sm:p-8 lg:p-10">
               <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--color-primary)]">
                 Field notes
               </p>
-              <div className="mt-8 space-y-5 text-[var(--color-text-muted)]">
+              <div className="mt-6 space-y-4 text-[var(--color-text-muted)] sm:mt-8 sm:space-y-5">
                 <p className="text-lg leading-8 text-[var(--color-text)]">
                   My strongest work sits where interaction design and software
                   discipline overlap.

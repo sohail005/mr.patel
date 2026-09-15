@@ -19,8 +19,8 @@ interface ScrollRevealProps {
 const inViewVariants: Variants = {
   hidden: ({ dir, sc }: { dir: string; sc: boolean }) => ({
     opacity: 0,
-    y: dir === "up" ? 40 : dir === "down" ? -40 : 0,
-    x: dir === "left" ? 60 : dir === "right" ? -60 : 0,
+    y: dir === "up" ? 24 : dir === "down" ? -24 : 0,
+    x: dir === "left" ? 24 : dir === "right" ? -24 : 0,
     scale: sc ? 0.9 : 1,
     willChange: "transform, opacity",
   }),
@@ -29,7 +29,7 @@ const inViewVariants: Variants = {
     y: 0,
     x: 0,
     scale: 1,
-    transition: { type: "spring", stiffness: 70, damping: 18 },
+    transition: { type: "spring", stiffness: 120, damping: 22 },
   },
 };
 
@@ -80,8 +80,8 @@ function ScrollRevealProgress({
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset });
   const opacity = useTransform(scrollYProgress, [0, 0.6], [0, 1]);
-  const yInit = direction === "up" ? 55 : direction === "down" ? -55 : 0;
-  const xInit = direction === "left" ? 75 : direction === "right" ? -75 : 0;
+  const yInit = direction === "up" ? 28 : direction === "down" ? -28 : 0;
+  const xInit = direction === "left" ? 28 : direction === "right" ? -28 : 0;
   const y = useTransform(scrollYProgress, [0, 0.6], [yInit, 0]);
   const x = useTransform(scrollYProgress, [0, 0.6], [xInit, 0]);
   const scaleVal = useTransform(scrollYProgress, [0, 0.6], scale ? [0.88, 1] : [1, 1]);

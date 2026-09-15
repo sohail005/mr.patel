@@ -4,13 +4,14 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 
-type SocialIconName = "github" | "linkedin" | "threads" | "instagram" | "email";
+type SocialIconName = "github" | "linkedin" | "threads" | "instagram" | "youtube" | "email";
 
 const socialIconColors: Record<SocialIconName, string> = {
   github: "#f0f6fc",
   linkedin: "#0a66c2",
   threads: "#ffffff",
   instagram: "#e4405f",
+  youtube: "#ff0033",
   email: "#ea4335",
 };
 
@@ -23,6 +24,7 @@ const socials: { label: string; href: string; icon: SocialIconName }[] = [
   },
   { label: "Threads", href: "https://www.threads.com/@sohail.code", icon: "threads" },
   { label: "Instagram", href: "https://www.instagram.com/sohail.code/", icon: "instagram" },
+  { label: "YouTube", href: "https://www.youtube.com/@Sohail.code005", icon: "youtube" },
   { label: "Email", href: "mailto:sohail345patel@gmail.com", icon: "email" },
 ];
 
@@ -76,6 +78,15 @@ function SocialIcon({ name }: { name: SocialIconName }) {
     return (
       <svg {...commonProps}>
         <path d="M17.7 11.4c-.28-3.08-2.2-5.1-5.4-5.1-3.46 0-5.58 2.24-5.58 5.7 0 3.55 2.16 5.7 5.5 5.7 2.63 0 4.42-1.43 4.42-3.53 0-1.85-1.3-3.06-3.37-3.06-2.2 0-3.3 1.05-3.3 2.37 0 1.03.74 1.7 1.9 1.7 1.21 0 2.05-.71 2.05-1.82 0-2.22-1.59-3.96-4.08-3.96" />
+      </svg>
+    );
+  }
+
+  if (name === "youtube") {
+    return (
+      <svg {...commonProps}>
+        <path d="M21 12s0-3.1-.4-4.6a2.5 2.5 0 0 0-1.8-1.8C17.3 5.3 12 5.3 12 5.3s-5.3 0-6.8.4a2.5 2.5 0 0 0-1.8 1.8C3 8.9 3 12 3 12s0 3.1.4 4.6a2.5 2.5 0 0 0 1.8 1.8c1.5.4 6.8.4 6.8.4s5.3 0 6.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.5.4-4.6.4-4.6Z" />
+        <path d="m10 9.5 5 2.5-5 2.5v-5Z" fill="currentColor" stroke="none" />
       </svg>
     );
   }
@@ -180,7 +191,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-28">
+    <section id="contact" className="relative py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-6xl px-6">
         <ScrollReveal mode="inView" className="max-w-3xl">
           <p className="section-kicker">Contact</p>
@@ -189,9 +200,9 @@ export default function Contact() {
           </h2>
         </ScrollReveal>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-[0.42fr_0.58fr]">
-          <ScrollReveal mode="inView" direction="left">
-            <div className="story-card rounded-[2rem] p-8">
+        <div className="mt-9 grid gap-5 sm:mt-10 sm:gap-6 lg:grid-cols-[0.42fr_0.58fr]">
+          <ScrollReveal mode="inView" direction="up">
+            <div className="story-card rounded-[1.4rem] p-6 sm:rounded-[2rem] sm:p-8">
               <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--color-primary)]">
                 Reach out
               </p>
@@ -208,8 +219,8 @@ export default function Contact() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal mode="inView" direction="right">
-            <form onSubmit={handleSubmit} className="story-card rounded-[2rem] p-8">
+          <ScrollReveal mode="inView" direction="up">
+            <form onSubmit={handleSubmit} className="story-card rounded-[1.4rem] p-6 sm:rounded-[2rem] sm:p-8">
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block">
                   <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">

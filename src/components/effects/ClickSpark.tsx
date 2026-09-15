@@ -38,18 +38,17 @@ export default function ClickSpark({
 }: ClickSparkProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const sparksRef = useRef<Spark[]>([]);
+  const animationIdRef = useRef<number | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const parent = canvas.parentElement;
-    if (!parent) return;
-
     let resizeTimeout: ReturnType<typeof setTimeout>;
 
     const resizeCanvas = () => {
-      const { width, height } = parent.getBoundingClientRect();
+      const width = window.innerWidth;
+      const height = window.innerHeight;
       const pixelRatio = window.devicePixelRatio || 1;
 
       const nextWidth = Math.max(1, Math.floor(width * pixelRatio));
@@ -68,12 +67,11 @@ export default function ClickSpark({
       resizeTimeout = setTimeout(resizeCanvas, 100);
     };
 
-    const resizeObserver = new ResizeObserver(handleResize);
-    resizeObserver.observe(parent);
+    window.addEventListener("resize", handleResize);
     resizeCanvas();
 
     return () => {
-      resizeObserver.disconnect();
+      window.removeEventListener("resize", handleResize);
       clearTimeout(resizeTimeout);
     };
   }, []);
@@ -94,16 +92,16 @@ export default function ClickSpark({
     [easing]
   );
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+  const startAnimation = useCallback(
+    () => {
+      const drawFrame = (timestamp: number) => {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext("2d");
+      if (!canvas || !ctx) {
+        animationIdRef.current = null;
+        return;
+      }
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animationId: number;
-
-    const draw = (timestamp: number) => {
       const pixelRatio = window.devicePixelRatio || 1;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -134,21 +132,33 @@ export default function ClickSpark({
         return true;
       });
 
-      animationId = requestAnimationFrame(draw);
+      animationIdRef.current =
+        sparksRef.current.length > 0 ? requestAnimationFrame(drawFrame) : null;
+      };
+
+      animationIdRef.current = requestAnimationFrame(drawFrame);
+    },
+    [duration, easeFunc, extraScale, sparkColor, sparkRadius, sparkSize]
+  );
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    return () => {
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+        animationIdRef.current = null;
+      }
     };
-
-    animationId = requestAnimationFrame(draw);
-
-    return () => cancelAnimationFrame(animationId);
-  }, [duration, easeFunc, extraScale, sparkColor, sparkRadius, sparkSize]);
+  }, [startAnimation]);
 
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    const x = event.clientX;
+    const y = event.clientY;
     const now = performance.now();
 
     const newSparks = Array.from({ length: sparkCount }, (_, index) => ({
@@ -159,6 +169,9 @@ export default function ClickSpark({
     }));
 
     sparksRef.current.push(...newSparks);
+    if (animationIdRef.current === null) {
+      startAnimation();
+    }
   };
 
   return (
@@ -166,7 +179,7 @@ export default function ClickSpark({
       <canvas
         ref={canvasRef}
         aria-hidden="true"
-        className="pointer-events-none absolute left-0 top-0 z-[9997] block select-none"
+        className="pointer-events-none fixed inset-0 z-[9997] block select-none"
       />
       {children}
     </div>

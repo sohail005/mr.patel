@@ -526,8 +526,8 @@ function StorePreview({ project }: { project: Project }) {
   const secondaryLabel = isAppStore ? "Share" : "Share";
 
   return (
-    <div className="flex aspect-4/3 min-h-110.5 flex-col overflow-hidden bg-[#f8fafd] text-[#202124] sm:aspect-16/16 sm:min-h-110.5">
-      <div className="flex h-9 shrink-0 items-center gap-4 border-b border-[#dde2ea] bg-white px-4 text-[10px] text-[#5f6368] sm:text-xs">
+    <div className="flex aspect-[4/3] min-h-[20rem] max-w-full flex-col overflow-hidden bg-[#f8fafd] text-[#202124] sm:aspect-square sm:min-h-[27.625rem]">
+      <div className="flex h-9 shrink-0 items-center gap-3 border-b border-[#dde2ea] bg-white px-3 text-[10px] text-[#5f6368] sm:gap-4 sm:px-4 sm:text-xs">
         <div className="flex items-center gap-1.5 font-semibold text-[#3c4043]">
           <span
             className="h-3 w-3 rounded-sm"
@@ -542,7 +542,7 @@ function StorePreview({ project }: { project: Project }) {
         <span className="hidden sm:inline">Books</span>
       </div>
 
-      <div className="grid shrink-0 grid-cols-[1fr_auto] gap-3 px-4 pt-4 sm:gap-5 sm:px-6 sm:pt-5">
+      <div className="grid min-w-0 shrink-0 grid-cols-[minmax(0,1fr)_auto] gap-3 px-3 pt-4 sm:gap-5 sm:px-6 sm:pt-5">
         <div className="min-w-0">
           <p className="truncate text-lg font-semibold leading-tight text-[#202124] sm:text-3xl">
             {project.title}
@@ -560,7 +560,7 @@ function StorePreview({ project }: { project: Project }) {
             </div>
             <div className="h-8 w-px bg-[#dde2ea]" />
             <div>
-              <p className="text-xs font-semibold sm:text-sm">
+              <p className="truncate text-xs font-semibold sm:text-sm">
                 {project.thumbnail.downloads ?? project.metric.replace(" downloads", "")}
               </p>
               <p className="text-[10px] text-[#5f6368]">Downloads</p>
@@ -586,13 +586,13 @@ function StorePreview({ project }: { project: Project }) {
             alt={`${project.title} app icon`}
             loading="lazy"
             referrerPolicy="no-referrer"
-            className="h-14 w-14 rounded-[1rem] object-cover shadow-[0_12px_24px_rgba(60,64,67,0.2)] sm:h-24 sm:w-24 sm:rounded-[1.6rem]"
+            className="h-12 w-12 rounded-[0.9rem] object-cover shadow-[0_12px_24px_rgba(60,64,67,0.2)] sm:h-24 sm:w-24 sm:rounded-[1.6rem]"
           />
         ) : null}
       </div>
 
-      <div className="min-h-0 flex-1 px-4 pb-5 pt-5 sm:px-6 sm:pb-6 sm:pt-6">
-        <div className="flex h-full items-end gap-2 overflow-hidden sm:gap-3">
+      <div className="min-h-0 flex-1 px-3 pb-4 pt-4 sm:px-6 sm:pb-6 sm:pt-6">
+        <div className="flex h-full min-w-0 items-end gap-2 overflow-hidden sm:gap-3">
         {screenshots.slice(0, 4).map((screenshot) => (
           <img
             key={screenshot}
@@ -600,7 +600,7 @@ function StorePreview({ project }: { project: Project }) {
             alt={`${project.title} ${storeName} screenshot`}
             loading="lazy"
             referrerPolicy="no-referrer"
-            className="h-full max-h-[190px] min-h-[132px] w-[92px] shrink-0 rounded-lg border border-[#dde2ea] bg-white object-cover object-top shadow-sm sm:w-[124px]"
+            className="h-full min-h-[8rem] min-w-0 flex-1 basis-0 rounded-lg border border-[#dde2ea] bg-white object-cover object-top shadow-sm sm:max-h-[190px] sm:w-[124px] sm:flex-none"
           />
         ))}
         </div>
@@ -666,9 +666,9 @@ export default function Projects({ limit }: { limit?: number }) {
   const visibleProjects = limit ? orderedProjects.slice(0, limit) : orderedProjects;
 
   return (
-    <section id="projects" className="relative overflow-hidden py-28">
+    <section id="projects" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_5%,color-mix(in_srgb,var(--color-accent)_14%,transparent),transparent_26%),radial-gradient(circle_at_86%_28%,color-mix(in_srgb,var(--color-secondary)_10%,transparent),transparent_22%)]" />
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <ScrollReveal mode="inView" className="max-w-3xl">
           <p className="section-kicker">Projects</p>
           <h2 className="section-heading mt-4 text-[var(--color-text)]">
@@ -680,41 +680,42 @@ export default function Projects({ limit }: { limit?: number }) {
           </p>
         </ScrollReveal>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-2">
+        <div className="mt-9 grid min-w-0 gap-5 sm:mt-10 sm:gap-6 lg:grid-cols-2">
           {visibleProjects.map((project, index) => (
             <ScrollReveal
               key={project.link}
               mode="inView"
-              direction={index % 2 === 0 ? "left" : "right"}
+              direction="up"
               delay={index * 0.05}
+              className="min-w-0"
             >
               <motion.a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -8 }}
-                className="story-card group block rounded-[1.8rem] p-4 sm:p-5"
+                className="story-card group block w-full min-w-0 rounded-[1.1rem] p-3 sm:rounded-[1.8rem] sm:p-5"
               >
                 <ProjectThumbnail project={project} />
 
-                <div className="relative z-10 p-3 pt-5 sm:p-4 sm:pt-6">
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-primary)]">
+                <div className="relative z-10 min-w-0 p-2 pt-5 sm:p-4 sm:pt-6">
+                  <div className="flex min-w-0 flex-wrap items-center justify-between gap-3">
+                    <p className="min-w-0 max-w-full break-words font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-primary)] sm:tracking-[0.24em]">
                       {project.region}
                     </p>
-                    <span className="rounded-full border border-[var(--surface-border)] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
+                    <span className="max-w-full rounded-full border border-[var(--surface-border)] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[var(--color-text-muted)] sm:px-3 sm:tracking-[0.2em]">
                       {project.platform} /{" "}
                       {project.metric}
                     </span>
                   </div>
 
-                  <h3 className="mt-4 text-2xl font-semibold leading-tight text-[var(--color-text)] sm:text-3xl">
+                  <h3 className="mt-4 break-words text-xl font-semibold leading-tight text-[var(--color-text)] sm:text-3xl">
                     {project.title}
                   </h3>
-                  <p className="mt-3 font-mono text-[10px] tracking-[0.22em] text-amber-50">
+                  <p className="mt-3 break-words font-mono text-[10px] tracking-[0.12em] text-amber-50 sm:tracking-[0.22em]">
                     Built at <strong className="text-[var(--color-primary)]">{project.company}</strong>
                   </p>
-                  <p className="mt-4 leading-8 text-[var(--color-text-muted)]">
+                  <p className="mt-4 text-sm leading-7 text-[var(--color-text-muted)] sm:text-base sm:leading-8">
                     {project.summary}
                   </p>
 
@@ -730,10 +731,10 @@ export default function Projects({ limit }: { limit?: number }) {
                   </div>
 
                   <div className="mt-8 flex items-center justify-between gap-4 border-t border-[var(--surface-border)] pt-5">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-text-muted)] sm:tracking-[0.24em]">
                       Live project
                     </span>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[var(--color-text)] transition-transform group-hover:translate-x-1">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--color-text)] transition-transform group-hover:translate-x-1 sm:tracking-[0.24em]">
                       View
                     </span>
                   </div>

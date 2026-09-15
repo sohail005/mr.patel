@@ -19,9 +19,10 @@ export function useLenis() {
     if ("ontouchstart" in window || navigator.maxTouchPoints > 0) return;
 
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 0.45,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      wheelMultiplier: 1.25,
       touchMultiplier: 0,
     });
 

@@ -57,7 +57,7 @@ export default function Navbar() {
       className="fixed inset-x-0 top-0 z-50"
     >
       <div
-        className={`relative flex w-full items-center justify-between overflow-hidden border-b px-5 py-4 sm:px-8 lg:px-12 ${
+        className={`site-nav-bar relative flex w-full items-center justify-between overflow-hidden border-b px-5 py-4 sm:px-8 lg:px-12 ${
           scrolled
             ? "border-[var(--surface-border)] bg-[var(--nav-bg-scrolled)] shadow-[0_18px_55px_rgba(0,0,0,0.26)] backdrop-blur-2xl"
             : "border-[var(--surface-border)] bg-[var(--nav-bg-rest)] backdrop-blur-xl"
@@ -166,7 +166,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.24 }}
-            className="border-b border-[var(--surface-border)] bg-[var(--nav-bg-scrolled)] px-5 py-6 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-2xl lg:hidden"
+            className="site-nav-menu border-b border-[var(--surface-border)] bg-[var(--nav-bg-scrolled)] px-5 py-6 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-2xl lg:hidden"
           >
             <div className="flex flex-col gap-5">
               {navLinks.map((link, index) => (

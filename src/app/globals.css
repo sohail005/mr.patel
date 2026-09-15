@@ -424,7 +424,7 @@ textarea {
 
 .section-heading {
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 5.2vw, 5.6rem);
+  font-size: clamp(2rem, 4.8vw, 5.2rem);
   font-weight: 750;
   line-height: 0.98;
   letter-spacing: 0;
@@ -666,6 +666,41 @@ textarea {
 }
 
 @media (max-width: 640px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .site-nav-bar,
+  .site-nav-menu,
+  .story-card,
+  .glass-card,
+  .theme-switcher,
+  .theme-dropdown {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .site-nav-bar {
+    background: var(--nav-bg-scrolled);
+  }
+
+  .story-card {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 18px 44px rgba(0, 0, 0, 0.24);
+  }
+
+  .section-heading {
+    font-size: clamp(2rem, 10vw, 2.65rem);
+    line-height: 1.02;
+  }
+
+  .section-kicker {
+    letter-spacing: 0.26em;
+  }
+
   .theme-switcher {
     bottom: 0.85rem !important;
     flex-direction: row !important;

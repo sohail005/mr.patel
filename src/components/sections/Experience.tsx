@@ -28,7 +28,7 @@ const experience = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-28">
+    <section id="experience" className="relative py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-5xl px-6">
         <ScrollReveal mode="inView" className="max-w-3xl">
           <p className="section-kicker">Experience</p>
@@ -37,14 +37,14 @@ export default function Experience() {
           </h2>
         </ScrollReveal>
 
-        <div className="mt-14 space-y-6">
-          {experience.map((item, index) => (
+        <div className="mt-9 space-y-5 sm:mt-10 sm:space-y-6">
+          {experience.map((item) => (
             <ScrollReveal
               key={`${item.company}-${item.period}`}
               mode="inView"
-              direction={index % 2 === 0 ? "left" : "right"}
+              direction="up"
             >
-              <div className="grid gap-5 rounded-[2rem] border border-[var(--surface-border)] bg-[var(--control-bg)] p-7 sm:grid-cols-[0.34fr_0.66fr] sm:p-8">
+              <div className="grid gap-5 rounded-[1.4rem] border border-[var(--surface-border)] bg-[var(--control-bg)] p-6 sm:grid-cols-[0.34fr_0.66fr] sm:rounded-[2rem] sm:p-8">
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[var(--color-primary)]">
                     {item.period}

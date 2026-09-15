@@ -123,8 +123,8 @@ function ServiceIcon({ name }: { name: ServiceIcon }) {
 
 export default function Services() {
   return (
-    <section id="services" className="relative overflow-hidden py-28">
-      <div className="pointer-events-none absolute right-0 top-24 h-72 w-72 rounded-full bg-[rgba(143,199,255,0.07)] blur-[110px]" />
+    <section id="services" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
+      <div className="pointer-events-none absolute right-0 top-24 hidden h-72 w-72 rounded-full bg-[rgba(143,199,255,0.07)] blur-[90px] md:block" />
 
       <div className="mx-auto max-w-7xl px-6">
         <ScrollReveal mode="inView" className="max-w-3xl">
@@ -138,15 +138,15 @@ export default function Services() {
           </p>
         </ScrollReveal>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
+        <div className="mt-9 grid gap-5 sm:mt-10 md:grid-cols-2">
           {services.map((service, index) => (
             <ScrollReveal
               key={service.title}
               mode="inView"
               delay={index * 0.08}
-              direction={index % 2 === 0 ? "left" : "right"}
+              direction="up"
             >
-              <article className="story-card group flex h-full flex-col rounded-[1.9rem] p-7 transition-[transform,border-color,box-shadow] duration-500 hover:-translate-y-1 hover:border-[var(--surface-border-strong)] hover:shadow-[0_30px_90px_rgba(0,0,0,0.34)] sm:p-8">
+              <article className="story-card group flex h-full flex-col rounded-[1.4rem] p-6 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[var(--surface-border-strong)] hover:shadow-[0_22px_56px_rgba(0,0,0,0.28)] sm:rounded-[1.9rem] sm:p-8">
                 <div className="relative z-10 flex items-start justify-between gap-4">
                   <div
                     className="flex h-12 w-12 items-center justify-center rounded-[1rem] border bg-[var(--control-bg)] transition-transform duration-500 group-hover:rotate-6 group-hover:scale-105"
@@ -159,7 +159,7 @@ export default function Services() {
                   </span>
                 </div>
 
-                <div className="relative z-10 mt-7 flex flex-1 flex-col">
+                <div className="relative z-10 mt-6 flex flex-1 flex-col sm:mt-7">
                   <h3 className="max-w-md text-2xl text-[var(--color-text)] sm:text-[1.7rem]">
                     {service.title}
                   </h3>
@@ -167,7 +167,7 @@ export default function Services() {
                     {service.description}
                   </p>
 
-                  <ul className="mt-7 grid gap-3 sm:grid-cols-2" aria-label={`${service.title} capabilities`}>
+                  <ul className="mt-6 grid gap-3 sm:mt-7 sm:grid-cols-2" aria-label={`${service.title} capabilities`}>
                     {service.capabilities.map((capability) => (
                       <li key={capability} className="flex gap-2.5 text-sm leading-6 text-[var(--color-text-muted)]">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: service.accent }} />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { JetBrains_Mono } from "next/font/google";
 import ClickSpark from "@/components/effects/ClickSpark";
 import ThemeSwitcher from "@/components/effects/ThemeSwitcher";
@@ -59,6 +60,12 @@ export default function RootLayout({
           {children}
           <ThemeSwitcher />
         </ClickSpark>
+        <Script
+          async
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7274193441004898"
+          crossOrigin="anonymous"
+        />
       </body>
     </html>
   );
