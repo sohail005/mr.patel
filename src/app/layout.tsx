@@ -38,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <meta name="google-adsense-account" content="ca-pub-7274193441004898" />
         <script
           dangerouslySetInnerHTML={{
             __html:
