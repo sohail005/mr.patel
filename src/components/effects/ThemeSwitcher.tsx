@@ -20,17 +20,28 @@ function isThemeId(value: string | null): value is ThemeId {
 }
 
 export default function ThemeSwitcher() {
-  const [activeTheme, setActiveTheme] = useState<ThemeId>(() => {
-    if (typeof window === "undefined") return "midnight";
-    const savedTheme = localStorage.getItem(storageKey);
-    return isThemeId(savedTheme) ? savedTheme : "midnight";
-  });
+  const [activeTheme, setActiveTheme] = useState<ThemeId>("midnight");
+  const [hydrated, setHydrated] = useState(false);
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const savedTheme = localStorage.getItem(storageKey);
+    const currentTheme = document.documentElement.dataset.theme ?? null;
+    const nextTheme = isThemeId(savedTheme)
+      ? savedTheme
+      : isThemeId(currentTheme)
+        ? currentTheme
+        : "midnight";
+
+    setActiveTheme(nextTheme);
+    setHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
     document.documentElement.dataset.theme = activeTheme;
-  }, [activeTheme]);
+  }, [activeTheme, hydrated]);
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {

@@ -55,8 +55,6 @@ export default function Skills() {
 
   return (
     <section id="skills" ref={ref} className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-[radial-gradient(circle_at_20%_0%,color-mix(in_srgb,var(--color-primary)_18%,transparent),transparent_30%),radial-gradient(circle_at_76%_8%,color-mix(in_srgb,var(--color-secondary)_14%,transparent),transparent_26%)]" />
-
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <ScrollReveal mode="inView" className="max-w-5xl">
           <p className="section-kicker">Capabilities grid</p>

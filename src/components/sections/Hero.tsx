@@ -63,7 +63,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="flex justify-center md:justify-end">
+        <div className="flex justify-center">
           <ProfileCard
             avatarUrl={profilePhoto.src}
             miniAvatarUrl={profilePhoto.src}
