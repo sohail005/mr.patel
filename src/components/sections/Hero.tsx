@@ -39,7 +39,7 @@ export default function Hero() {
         className="relative z-10 grid w-full gap-9 px-5 pb-24 pt-28 sm:px-8 sm:pt-32 md:grid-cols-[minmax(0,1.08fr)_minmax(17rem,0.92fr)] md:items-center md:gap-8 md:pb-28 lg:grid-cols-[minmax(0,1.45fr)_minmax(24rem,0.55fr)] lg:items-end lg:gap-12 lg:px-12 lg:pt-36 2xl:px-20"
       >
         <div className="max-w-4xl md:max-w-none">
-          <h1 className="text-hero max-w-7xl text-balance text-[var(--color-text)]">
+          <h1 className="text-hero hero-title max-w-7xl text-balance text-[var(--color-text)]">
             I build thoughtful web and mobile experiences that solve real-world problems.
           </h1>
           <p className="text-body-lg mt-5 max-w-2xl text-[var(--color-text-muted)] md:mt-6">

@@ -12,6 +12,9 @@ const themes = [
 
 type ThemeId = (typeof themes)[number]["id"];
 type SwatchStyle = CSSProperties & { "--theme-swatch": string };
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (callback: () => void) => void;
+};
 
 const storageKey = "portfolio-theme";
 
@@ -56,10 +59,22 @@ export default function ThemeSwitcher() {
     return () => window.removeEventListener("pointerdown", handlePointerDown);
   }, []);
 
-  const setTheme = (theme: ThemeId) => {
+  const applyTheme = (theme: ThemeId) => {
     setActiveTheme(theme);
     document.documentElement.dataset.theme = theme;
     localStorage.setItem(storageKey, theme);
+  };
+
+  const setTheme = (theme: ThemeId) => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const transitionDocument = document as ViewTransitionDocument;
+
+    if (transitionDocument.startViewTransition && !prefersReducedMotion) {
+      transitionDocument.startViewTransition(() => applyTheme(theme));
+      return;
+    }
+
+    applyTheme(theme);
   };
 
   return (

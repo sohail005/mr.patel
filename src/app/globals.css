@@ -238,6 +238,12 @@ html {
   scroll-behavior: smooth;
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 360ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 body {
   background: var(--body-bg);
   color: var(--color-text);
@@ -380,11 +386,11 @@ button,
 input,
 textarea {
   transition:
-    color 180ms ease,
-    border-color 180ms ease,
-    background-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+    color 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 ::selection {
@@ -522,6 +528,12 @@ textarea {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.04),
     0 24px 80px rgba(0, 0, 0, 0.28);
+  transform: translateZ(0);
+  transition:
+    border-color 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .story-card::before {
@@ -600,7 +612,7 @@ textarea {
   padding: 0.4rem;
   position: fixed;
   right: 1.25rem;
-  z-index: 80;
+  z-index: 110;
 }
 
 .theme-quick,
@@ -658,6 +670,7 @@ textarea {
 }
 
 .theme-dropdown {
+  animation: theme-menu-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
   background: var(--theme-panel);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -671,6 +684,7 @@ textarea {
   padding: 0.45rem;
   position: absolute;
   right: 0;
+  transform-origin: bottom right;
 }
 
 .theme-option {
@@ -730,6 +744,18 @@ textarea {
   transform: scale(1.14);
 }
 
+@keyframes theme-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (max-width: 640px) {
   html,
   body {
@@ -760,6 +786,11 @@ textarea {
   .text-hero {
     font-size: clamp(2.25rem, 1.65rem + 6vw, 2.75rem);
     line-height: 1.08;
+  }
+
+  .hero-title {
+    font-size: clamp(1.85rem, 1.38rem + 5.6vw, 2.35rem);
+    line-height: 1.12;
   }
 
   .section-heading {

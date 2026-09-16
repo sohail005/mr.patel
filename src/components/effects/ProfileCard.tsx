@@ -102,19 +102,23 @@ function ProfileCardComponent({
     wrap.style.setProperty("--rotate-y", `${round(centerY / 4)}deg`);
   }, []);
 
-  function animateToTarget() {
-    const current = currentRef.current;
-    const target = targetRef.current;
-    current.x += (target.x - current.x) * 0.16;
-    current.y += (target.y - current.y) * 0.16;
-    setVarsFromXY(current.x, current.y);
+  const animateToTarget = useCallback(() => {
+    const tick = () => {
+      const current = currentRef.current;
+      const target = targetRef.current;
+      current.x += (target.x - current.x) * 0.16;
+      current.y += (target.y - current.y) * 0.16;
+      setVarsFromXY(current.x, current.y);
 
-    if (Math.hypot(target.x - current.x, target.y - current.y) > 0.2) {
-      rafRef.current = requestAnimationFrame(animateToTarget);
-    } else {
-      rafRef.current = null;
-    }
-  }
+      if (Math.hypot(target.x - current.x, target.y - current.y) > 0.2) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        rafRef.current = null;
+      }
+    };
+
+    tick();
+  }, [setVarsFromXY]);
 
   const setTarget = useCallback(
     (x: number, y: number) => {
