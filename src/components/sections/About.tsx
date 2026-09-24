@@ -32,7 +32,7 @@ export default function About() {
     <section id="about" ref={ref} className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
       <motion.div
         style={{ y: hazeY }}
-        className="pointer-events-none absolute left-0 top-16 hidden h-80 w-80 rounded-full bg-[rgba(127,224,195,0.08)] blur-[90px] md:block"
+        className="pointer-events-none absolute left-0 top-16 hidden h-80 w-80 rounded-full bg-[rgba(42,131,95,0.08)] blur-[90px] md:block"
       />
 
       <div className="mx-auto max-w-7xl px-6">
@@ -78,11 +78,11 @@ export default function About() {
                 delay={index * 0.08}
               >
                 <div className="panel-shell rounded-[1.6rem] p-6">
-                  <p className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+                  <p className="text-caption font-mono uppercase tracking-[0.24em] text-primary">
                     Principle {index + 1}
                   </p>
-                  <h3 className="text-card-title mt-3 text-[var(--color-text)]">{item.title}</h3>
-                  <p className="mt-3 leading-7 text-[var(--color-text-muted)]">
+                  <h3 className="text-card-title mt-3 text-text">{item.title}</h3>
+                  <p className="mt-3 leading-7 text-text-muted">
                     {item.text}
                   </p>
                 </div>

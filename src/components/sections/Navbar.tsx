@@ -59,32 +59,29 @@ export default function Navbar() {
       <div
         className={`site-nav-bar relative flex w-full items-center justify-between overflow-hidden border-b px-5 py-4 sm:px-8 lg:px-12 ${
           scrolled
-            ? "border-[var(--surface-border)] bg-[var(--nav-bg-scrolled)] shadow-[0_18px_55px_rgba(0,0,0,0.26)] backdrop-blur-2xl"
-            : "border-[var(--surface-border)] bg-[var(--nav-bg-rest)] backdrop-blur-xl"
+            ? "border-[var(--surface-border)] bg-[var(--nav-bg-scrolled)] shadow-[inset_0_-1px_0_rgba(255,255,255,0.08),0_18px_55px_rgba(0,0,0,0.26)] backdrop-blur-2xl backdrop-saturate-150"
+            : "border-[var(--surface-border)] bg-[var(--nav-bg-rest)] shadow-[inset_0_-1px_0_rgba(255,255,255,0.06)] backdrop-blur-xl backdrop-saturate-150"
         }`}
       >
         <motion.div
           animate={{ x: ["-10%", "10%", "-10%"] }}
           transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-          className="pointer-events-none absolute inset-y-0 left-[-20%] w-[40%] bg-[linear-gradient(90deg,transparent,rgba(143,199,255,0.12),transparent)] blur-2xl"
+          className="pointer-events-none absolute inset-y-0 left-[-20%] w-[40%] bg-[linear-gradient(90deg,transparent,rgba(139,187,146,0.12),transparent)] blur-2xl"
         />
         <motion.div
           animate={{ opacity: [0.35, 0.8, 0.35], scaleX: [0.8, 1, 0.8] }}
           transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-          className="pointer-events-none absolute bottom-0 left-0 h-px w-full bg-[linear-gradient(90deg,transparent,rgba(143,199,255,0.85),rgba(127,224,195,0.65),transparent)]"
+          className="pointer-events-none absolute bottom-0 left-0 h-px w-full bg-[linear-gradient(90deg,transparent,rgba(139,187,146,0.85),rgba(42,131,95,0.65),transparent)]"
         />
 
         <Link href="/#hero" className="relative z-10 flex min-w-0 items-center gap-3">
           <motion.span
             animate={{ opacity: [0.45, 1, 0.45], scale: [1, 1.35, 1] }}
             transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-            className="h-2.5 w-2.5 rounded-full bg-[var(--color-secondary)]"
+            className="h-2.5 w-2.5 rounded-full bg-secondary"
           />
           <div>
-            <p className="whitespace-nowrap font-[family:var(--font-display)] text-xl font-semibold leading-none text-[var(--color-text)] sm:text-2xl">
-              Sohail Patel
-            </p>
-            <p className="text-caption mt-1 font-mono uppercase tracking-[0.32em] text-[var(--color-text-muted)]">
+            <p className="text-caption mt-1 font-mono uppercase tracking-[0.32em] text-text-muted">
               Software developer
             </p>
           </div>
@@ -136,7 +133,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setMobileOpen((value) => !value)}
-          className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] lg:hidden"
+          className="liquid-glass relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] lg:hidden"
           aria-label="Toggle navigation"
         >
           <div className="space-y-1.5">

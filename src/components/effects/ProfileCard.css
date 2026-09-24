@@ -11,7 +11,7 @@
   --background-y: 50%;
   --grain: none;
   --icon: none;
-  --behind-glow-color: rgba(125, 190, 255, 0.67);
+  --behind-glow-color: rgba(139, 187, 146, 0.67);
   --behind-glow-size: 50%;
   --inner-gradient: linear-gradient(145deg, rgba(7, 16, 28, 0.96), rgba(16, 34, 52, 0.84));
   --sunpillar-1: hsl(2, 100%, 73%);
@@ -30,7 +30,12 @@
 }
 
 .hero-profile-card {
-  max-width: min(20rem, calc(100vw - 2.5rem));
+  width: 19rem;
+  max-width: min(19rem, calc(100vw - 2.5rem));
+}
+
+.hero-profile-card .pc-shine::before {
+  opacity: 0;
 }
 
 .pc-behind {
@@ -60,7 +65,7 @@
 
 .pc-card {
   aspect-ratio: 0.718;
-  background: #07111d;
+  background: #071a17;
   backface-visibility: hidden;
   border-radius: var(--card-radius);
   box-shadow:
@@ -90,7 +95,7 @@
 }
 
 .pc-inside {
-  background-color: #07111d;
+  background-color: #071a17;
   background-image: var(--inner-gradient);
   inset: 0;
   position: absolute;
@@ -102,7 +107,7 @@
     radial-gradient(
       farthest-corner circle at var(--pointer-x) var(--pointer-y),
       rgba(255, 255, 255, 0.22) 0%,
-      rgba(143, 199, 255, 0.08) 24%,
+      rgba(139, 187, 146, 0.08) 24%,
       transparent 58%
     ),
     linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.14) 48%, transparent 62%);
@@ -176,7 +181,7 @@
   background-image: radial-gradient(
     farthest-corner circle at var(--pointer-x) var(--pointer-y),
     rgba(255, 255, 255, 0.18) 0%,
-    rgba(143, 199, 255, 0.06) 24%,
+    rgba(139, 187, 146, 0.06) 24%,
     transparent 58%
   );
   filter: none;
@@ -281,11 +286,15 @@
 .pc-user-info {
   --ui-inset: 18px;
   align-items: center;
-  background: rgba(4, 13, 21, 0.72);
-  backdrop-filter: blur(24px);
+  background: rgba(4, 13, 21, 0.6);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: calc(max(0px, var(--card-radius) - var(--ui-inset) + 6px));
   bottom: var(--ui-inset);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.14),
+    inset 0 -8px 16px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
   left: var(--ui-inset);
@@ -339,8 +348,12 @@
 }
 
 .pc-contact-btn {
-  background: rgba(204, 230, 255, 0.12);
-  border: 1px solid rgba(204, 230, 255, 0.24);
+  position: relative;
+  isolation: isolate;
+  background: rgba(139, 187, 146, 0.16);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(139, 187, 146, 0.3);
   border-radius: 999px;
   color: rgba(255, 255, 255, 0.94);
   cursor: pointer;
@@ -348,6 +361,7 @@
   font-weight: 800;
   padding: 10px 13px;
   pointer-events: auto;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
   transform: translateZ(18px);
   transition:
     background-color 260ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -359,9 +373,11 @@
 }
 
 .pc-contact-btn:hover {
-  background: rgba(204, 230, 255, 0.18);
+  background: rgba(139, 187, 146, 0.24);
   border-color: rgba(255, 255, 255, 0.46);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    0 10px 22px rgba(0, 0, 0, 0.18);
   transform: translateY(-1px) translateZ(18px);
 }
 
@@ -386,6 +402,7 @@
   }
 
   .hero-profile-card.pc-card-wrapper {
+    width: 15.5rem;
     max-width: min(15.5rem, calc(100vw - 2.5rem));
   }
 
@@ -400,38 +417,38 @@
   }
 
   .pc-details h3 {
-    font-size: clamp(1.75rem, 9vw, 2.4rem);
+    font-size: clamp(1.3rem, 6.4vw, 1.65rem);
   }
 
   .pc-details p {
-    font-size: 16px;
+    font-size: 13px;
   }
 
   .pc-user-info {
     --ui-inset: 14px;
-    padding: 9px 10px;
+    padding: 8px 10px;
   }
 
   .pc-user-details {
-    gap: 9px;
+    gap: 8px;
   }
 
   .pc-mini-avatar {
-    height: 30px;
-    width: 30px;
+    height: 28px;
+    width: 28px;
   }
 
   .pc-handle {
-    font-size: 16px;
+    font-size: 13px;
   }
 
   .pc-status {
-    font-size: 14px;
+    font-size: 11px;
   }
 
   .pc-contact-btn {
-    font-size: 14px;
-    padding: 9px 11px;
+    font-size: 12px;
+    padding: 7px 10px;
   }
 }
 
@@ -457,14 +474,32 @@
     max-width: min(17rem, calc(100vw - 2rem));
   }
 
+  .pc-details h3 {
+    font-size: clamp(1.15rem, 7.2vw, 1.4rem);
+  }
+
+  .pc-details p {
+    font-size: 12px;
+  }
+
   .pc-user-info {
     --ui-inset: 12px;
   }
 
   .pc-handle {
     max-width: 6rem;
+    font-size: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .pc-status {
+    font-size: 10px;
+  }
+
+  .pc-contact-btn {
+    font-size: 11px;
+    padding: 6px 9px;
   }
 }

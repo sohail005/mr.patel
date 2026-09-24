@@ -66,7 +66,7 @@ export default function StartExperience() {
             className="absolute left-0 top-0 h-1 w-full origin-left bg-white"
           />
 
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_24%,rgba(143,199,255,0.16),transparent_28%),linear-gradient(180deg,#050505_0%,#0b1118_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_24%,rgba(139,187,146,0.16),transparent_28%),linear-gradient(180deg,#050505_0%,#0a1512_100%)]" />
           <motion.div
             animate={{ x: ["-22%", "18%", "-22%"], opacity: [0.22, 0.54, 0.22] }}
             transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}

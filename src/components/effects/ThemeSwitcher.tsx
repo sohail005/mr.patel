@@ -3,7 +3,7 @@
 import { CSSProperties, useEffect, useRef, useState } from "react";
 
 const themes = [
-  { id: "midnight", name: "Midnight", swatch: "#8fc7ff" },
+  { id: "midnight", name: "Midnight", swatch: "#8bbb92" },
   { id: "emerald", name: "Emerald", swatch: "#7fe0c3" },
   { id: "ember", name: "Ember", swatch: "#ff9f6e" },
   { id: "violet", name: "Violet", swatch: "#c4a7ff" },

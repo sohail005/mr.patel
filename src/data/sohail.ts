@@ -29,7 +29,7 @@ export const sohailProfile = {
 export const sohailSkills: SkillGroup[] = [
   {
     title: "Frontend",
-    items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "State design"],
+    items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "State design", "SEO"],
   },
   {
     title: "Mobile",

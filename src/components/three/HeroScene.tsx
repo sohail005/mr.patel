@@ -34,8 +34,8 @@ export default function HeroScene() {
             >
                 <Suspense fallback={null}>
                     <ambientLight intensity={0.3} />
-                    <pointLight position={[8, 8, 8]} intensity={1.0} color="#6c63ff" />
-                    <pointLight position={[-8, -8, -8]} intensity={0.6} color="#00d4ff" />
+                    <pointLight position={[8, 8, 8]} intensity={1.0} color="#2a835f" />
+                    <pointLight position={[-8, -8, -8]} intensity={0.6} color="#8bbb92" />
                     <ParticleField count={900} radius={9} size={0.014} />
                     <AdaptiveDpr pixelated />
                     <Preload all />

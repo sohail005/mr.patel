@@ -124,7 +124,7 @@ function ServiceIcon({ name }: { name: ServiceIcon }) {
 export default function Services() {
   return (
     <section id="services" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
-      <div className="pointer-events-none absolute right-0 top-24 hidden h-72 w-72 rounded-full bg-[rgba(143,199,255,0.07)] blur-[90px] md:block" />
+      <div className="pointer-events-none absolute right-0 top-24 hidden h-72 w-72 rounded-full bg-[rgba(139,187,146,0.07)] blur-[90px] md:block" />
 
       <div className="mx-auto max-w-7xl px-6">
         <ScrollReveal mode="inView" className="max-w-3xl">
@@ -179,7 +179,7 @@ export default function Services() {
                   <a
                     href="#contact"
                     aria-label={`Talk about ${service.title}`}
-                    className="text-button mt-8 inline-flex min-h-11 w-fit items-center gap-2 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-5 py-3 font-mono uppercase tracking-[0.2em] text-[var(--primary-action-text)] transition-[transform,background-color,border-color,gap] duration-300 hover:-translate-y-0.5 hover:gap-3 hover:border-[var(--color-primary)] hover:bg-[var(--control-bg-hover)]"
+                    className="text-button mt-8 inline-flex min-h-11 w-fit items-center gap-2 rounded-full border border-(--primary-action-border) bg-(--primary-action-bg) px-5 py-3 font-mono uppercase tracking-[0.2em] text-(--primary-action-text) transition-[transform,background-color,border-color,gap] duration-300 hover:-translate-y-0.5 hover:gap-3 hover:border-primary hover:bg-(--control-bg-hover)"
                   >
                     Let&apos;s talk about this
                     <span aria-hidden="true">-&gt;</span>

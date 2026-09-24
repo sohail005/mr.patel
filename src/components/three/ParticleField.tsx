@@ -19,7 +19,7 @@ function seededRandom(index: number) {
 export default function ParticleField({
     count = 2000,
     radius = 10,
-    color = "#6c63ff",
+    color = "#2a835f",
     size = 0.015,
 }: ParticleFieldProps) {
     const meshRef = useRef<THREE.Points>(null!);
@@ -28,8 +28,8 @@ export default function ParticleField({
         const positions = new Float32Array(count * 3);
         const colors = new Float32Array(count * 3);
         const baseColor = new THREE.Color(color);
-        const secondaryColor = new THREE.Color("#00d4ff");
-        const accentColor = new THREE.Color("#ff6fd8");
+        const secondaryColor = new THREE.Color("#8bbb92");
+        const accentColor = new THREE.Color("#12544f");
 
         for (let i = 0; i < count; i++) {
             const theta = seededRandom(i * 4 + 1) * Math.PI * 2;

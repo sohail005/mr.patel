@@ -1,72 +1,86 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { ReactNode } from "react";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 
-const groups = [
+const CodeIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="16 18 22 12 16 6" />
+    <polyline points="8 6 2 12 8 18" />
+  </svg>
+);
+
+const SmartphoneIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+    <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+    <path d="M12 18h.01" />
+  </svg>
+);
+
+const SparklesIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+    <path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z" />
+    <path d="M5 3v4" />
+    <path d="M19 17v4" />
+    <path d="M3 5h4" />
+    <path d="M17 19h4" />
+  </svg>
+);
+
+const groups: {
+  title: string;
+  summary: string;
+  color: string;
+  badge: string;
+  icon: ReactNode;
+  items: string[];
+}[] = [
   {
-    eyebrow: "Track 01",
     title: "Frontend Systems",
     summary: "Product interfaces built with typed components, responsive layouts, and clean release habits.",
     color: "var(--color-primary)",
     badge: "Web",
-    items: [
-      { name: "Next.js", level: 88 },
-      { name: "React", level: 94 },
-      { name: "TypeScript", level: 82 },
-      { name: "Tailwind CSS", level: 90 },
-      { name: "State design", level: 76 },
-    ],
+    icon: <CodeIcon />,
+    items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "State design", "SEO"],
   },
   {
-    eyebrow: "Track 02",
     title: "Mobile Delivery",
     summary: "React Native apps carried from feature work through testing, store assets, and production releases.",
-    color: "var(--color-secondary)",
+    color: "var(--color-primary)",
     badge: "Apps",
-    items: [
-      { name: "React Native", level: 92 },
-      { name: "Release cycles", level: 86 },
-      { name: "Store deployment", level: 88 },
-      { name: "Performance tuning", level: 84 },
-      { name: "Native modules", level: 74 },
-    ],
+    icon: <SmartphoneIcon />,
+    items: ["React Native", "Release cycles", "Store deployment", "Performance tuning", "Native modules"],
   },
   {
-    eyebrow: "Track 03",
     title: "Motion & Polish",
     summary: "Purposeful interaction details that make products feel refined without slowing the experience down.",
-    color: "var(--color-accent)",
+    color: "var(--color-primary)",
     badge: "UX",
-    items: [
-      { name: "Framer Motion", level: 82 },
-      { name: "Lenis scroll", level: 78 },
-      { name: "Three.js", level: 72 },
-      { name: "Interaction pacing", level: 88 },
-      { name: "Layout animations", level: 80 },
-    ],
+    icon: <SparklesIcon />,
+    items: ["Framer Motion", "Lenis scroll", "Three.js", "Interaction pacing", "Layout animations"],
   },
 ];
 
 export default function Skills() {
-  const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-120px" });
-
   return (
-    <section id="skills" ref={ref} className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
+    <section id="skills" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <ScrollReveal mode="inView" className="max-w-5xl">
-          <p className="section-kicker">Capabilities grid</p>
-          <div className="mt-4 gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(18rem,0.36fr)] lg:items-end">
-            <h2 className="section-heading max-w-4xl text-[var(--color-text)]">
-              The tools I reach for when the product has to move quickly.
-            </h2>
-            <p className="text-body-lg prose-measure mt-5 text-[var(--color-text-muted)]">
-              A practical stack for shipping responsive web apps, mobile products,
-              and polished interfaces without turning the codebase heavy.
-            </p>
+        <ScrollReveal mode="inView" className="max-w-3xl">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-primary" />
+            <p className="section-kicker">Capabilities</p>
           </div>
+          <h2 className="section-heading mt-4 max-w-2xl text-text">
+            The tools I reach for{" "}
+            <span className="text-text-muted">when the product has to </span>
+            <span className="bg-[linear-gradient(90deg,var(--color-primary),var(--color-primary-strong))] bg-clip-text text-transparent">
+              move quickly.
+            </span>
+          </h2>
+          <p className="text-body-lg prose-measure mt-5 text-text-muted">
+            A practical stack for shipping responsive web apps, mobile products,
+            and polished interfaces without turning the codebase heavy.
+          </p>
         </ScrollReveal>
 
         <div className="mt-9 grid gap-5 sm:mt-10 lg:grid-cols-3">
@@ -74,17 +88,16 @@ export default function Skills() {
             <ScrollReveal key={group.title} mode="inView" delay={index * 0.08}>
               <article className="story-card group h-full rounded-[1.35rem] p-5 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[var(--surface-border-strong)] sm:rounded-[1.75rem] sm:p-6">
                 <div className="relative z-10 flex items-start justify-between gap-4">
-                  <div>
-                    <p
-                      className="text-caption font-mono uppercase tracking-[0.24em]"
-                      style={{ color: group.color }}
-                    >
-                      {group.eyebrow}
-                    </p>
-                    <h3 className="text-card-title mt-4 text-[var(--color-text)]">
-                      {group.title}
-                    </h3>
-                  </div>
+                  <span
+                    className="flex h-14 w-14 items-center justify-center rounded-2xl border [&>svg]:h-6 [&>svg]:w-6"
+                    style={{
+                      borderColor: `color-mix(in srgb, ${group.color} 32%, transparent)`,
+                      background: `color-mix(in srgb, ${group.color} 14%, transparent)`,
+                      color: group.color,
+                    }}
+                  >
+                    {group.icon}
+                  </span>
                   <span
                     className="text-caption rounded-full border px-3 py-1 font-mono uppercase tracking-[0.18em]"
                     style={{
@@ -96,35 +109,36 @@ export default function Skills() {
                   </span>
                 </div>
 
-                <p className="relative z-10 mt-4 min-h-14 text-sm leading-6 text-[var(--color-text-muted)]">
+                <p
+                  className="text-caption relative z-10 mt-5 font-mono uppercase tracking-[0.24em]"
+                  style={{ color: group.color }}
+                >
+                  {group.title}
+                </p>
+                <h3 className="text-card-title relative z-10 mt-1 text-text">
+                  {group.title}
+                </h3>
+
+                <p className="relative z-10 mt-3 text-sm leading-6 text-text-muted">
                   {group.summary}
                 </p>
 
-                <div className="relative z-10 mt-6 space-y-4">
-                  {group.items.map((item, itemIndex) => (
-                    <div key={item.name} className="space-y-2">
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="text-sm font-medium text-[var(--color-text-muted)]">
-                          {item.name}
-                        </span>
-                        <span className="text-caption font-mono uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
-                          Ready
-                        </span>
-                      </div>
-                      <div className="h-1.5 overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--color-text)_9%,transparent)]">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={inView ? { width: `${item.level}%` } : { width: 0 }}
-                          transition={{ duration: 0.65, delay: 0.08 * itemIndex, ease: "easeOut" }}
-                          className="h-full rounded-full shadow-[0_0_18px_currentColor]"
-                          style={{
-                            background: `linear-gradient(90deg, ${group.color}, rgba(255,255,255,0.8))`,
-                            color: group.color,
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ))}
+                <div className="relative z-10 mt-5 border-t border-(--surface-border) pt-5">
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {group.items.map((item) => (
+                      <span
+                        key={item}
+                        className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm text-text"
+                        style={{
+                          borderColor: `color-mix(in srgb, ${group.color} 20%, transparent)`,
+                          background: `color-mix(in srgb, ${group.color} 8%, transparent)`,
+                        }}
+                      >
+                        <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: group.color }} />
+                        <span className="truncate">{item}</span>
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </article>
             </ScrollReveal>

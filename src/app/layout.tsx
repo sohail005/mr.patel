@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import ClickSpark from "@/components/effects/ClickSpark";
 import ThemeSwitcher from "@/components/effects/ThemeSwitcher";
+import LiquidGlassTracker from "@/components/effects/LiquidGlassTracker";
 import PortfolioChat from "@/components/portfolio-chat/PortfolioChat";
 import "./globals.css";
 
@@ -58,7 +59,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}
       >
         <ClickSpark
-          sparkColor="#cce6ff"
+          sparkColor="#cfe4d1"
           sparkSize={12}
           sparkRadius={20}
           sparkCount={10}
@@ -69,6 +70,7 @@ export default function RootLayout({
           {children}
           <PortfolioChat />
           <ThemeSwitcher />
+          <LiquidGlassTracker />
         </ClickSpark>
         <Script
           async

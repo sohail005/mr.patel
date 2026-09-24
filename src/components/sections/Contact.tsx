@@ -118,7 +118,7 @@ function SocialButton({ label, href, icon }: (typeof socials)[number]) {
         <span className="" aria-hidden="true">
           <SocialIcon name={icon} />
         </span>
-        <span className="text-left transition-colors duration-300 group-hover:text-[var(--color-text)]">
+        <span className="text-left transition-colors duration-300 text-primary group-hover:text-text">
           {label}
         </span>
       </span>

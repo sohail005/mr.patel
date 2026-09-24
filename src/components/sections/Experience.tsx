@@ -49,7 +49,7 @@ export default function Experience() {
               Teams, products, releases, and the lessons that came with them.
             </h2>
             <div className="rounded-[1.35rem] border border-[var(--surface-border)] bg-[var(--control-bg)] p-4 mt-5">
-              <p className="text-caption font-mono uppercase tracking-[0.22em] text-[var(--color-primary)]">
+              <p className="text-caption font-mono uppercase tracking-[0.22em] text-primary">
                 Career track
               </p>
               <p className="mt-3 text-sm leading-6 text-[var(--color-text-muted)]">
@@ -74,7 +74,7 @@ export default function Experience() {
                   <span className="absolute -left-7 top-7 hidden h-4 w-4 rounded-full border border-[var(--color-primary)] bg-[var(--color-background)] shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-primary)_13%,transparent),0_0_24px_color-mix(in_srgb,var(--color-primary)_46%,transparent)] sm:block" />
                   <div className="relative">
                     <div className="flex flex-wrap items-center gap-2 sm:block">
-                      <p className="text-caption font-mono uppercase tracking-[0.22em] text-[var(--color-primary)]">
+                      <p className="text-caption font-mono uppercase tracking-[0.22em] text-accent">
                         {item.period}
                       </p>
                       <span
@@ -87,21 +87,21 @@ export default function Experience() {
                         {item.duration}
                       </span>
                     </div>
-                    <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--color-text-muted)]">
+                    <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-primary-strong">
                       {item.company}
                     </p>
                   </div>
 
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-start justify-between gap-3">
-                      <h3 className="text-card-title text-[var(--color-text)]">
+                      <h3 className="text-card-title text-primary-strong">
                         {item.role}
                       </h3>
-                      <span className="text-caption rounded-full bg-[color-mix(in_srgb,var(--color-secondary)_13%,transparent)] px-3 py-1 font-mono uppercase tracking-[0.16em] text-[var(--color-secondary)]">
+                      <span className="text-caption rounded-full bg-[color-mix(in_srgb,var(--color-secondary)_13%,transparent)] px-3 py-1 font-mono uppercase tracking-[0.16em] text-primary">
                         {item.type}
                       </span>
                     </div>
-                    <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--color-text-muted)] sm:text-base sm:leading-8">
+                    <p className="mt-4 max-w-3xl text-sm leading-7 text-primary sm:text-base sm:leading-8">
                       {item.focus}
                     </p>
 
@@ -111,7 +111,7 @@ export default function Experience() {
                           key={highlight}
                           className="rounded-xl border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3"
                         >
-                          <span className="block text-sm font-medium leading-6 text-[var(--color-text)]">
+                          <span className="block text-sm font-medium leading-6 text-primary">
                             {highlight}
                           </span>
                         </div>
@@ -122,7 +122,7 @@ export default function Experience() {
                       {item.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="rounded-full border border-[var(--surface-border)] px-3 py-1.5 text-xs text-[var(--color-text-muted)]"
+                          className="rounded-full border border-[var(--surface-border)] px-3 py-1.5 text-xs text-primary-strong"
                         >
                           {skill}
                         </span>

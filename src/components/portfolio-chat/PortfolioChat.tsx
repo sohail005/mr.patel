@@ -269,7 +269,7 @@ export default function PortfolioChat() {
         onClick={() => setOpen(true)}
         whileHover={{ y: -3, scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className={`fixed bottom-[4.75rem] right-4 z-[90] flex min-h-12 items-center gap-3 overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(143,199,255,0.18),rgba(127,224,195,0.11),rgba(255,255,255,0.07))] px-4 py-3 text-sm font-semibold text-[var(--color-text)] shadow-[0_18px_55px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl sm:bottom-[4.85rem] sm:right-5 ${open ? "pointer-events-none opacity-0" : "opacity-100"}`}
+        className={`fixed bottom-[4.75rem] right-4 z-[90] flex min-h-12 items-center gap-3 overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-4 py-3 text-sm font-semibold text-[var(--color-text)] shadow-[0_18px_55px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl sm:bottom-[4.85rem] sm:right-5 ${open ? "pointer-events-none opacity-0" : "opacity-100"}`}
       >
         <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
         <span className="relative h-2.5 w-2.5 rounded-full bg-[var(--color-secondary)] shadow-[0_0_18px_var(--color-secondary)]" />

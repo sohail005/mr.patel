@@ -9,7 +9,7 @@ const skills = [
     "React", "Next.js", "TypeScript", "Tailwind CSS", "Redux",
     "Context API", "React Native", "Reanimated", "Framer Motion", "GSAP",
     "Git", "Fastlane", "CI/CD", "App Store", "Play Store",
-    "REST APIs", "AWS", "Figma", "Three.js", "Node.js",
+    "REST APIs", "AWS", "Figma", "Three.js", "Node.js", "SEO",
 ];
 
 function OrbitalRing({ radius }: { radius: number }) {

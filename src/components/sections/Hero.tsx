@@ -1,7 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import ProfileCard from "@/components/effects/ProfileCard";
 import profilePhoto from "@/Assets/profile-photo.jpg";
 
@@ -9,14 +10,99 @@ const HeroScene = dynamic(() => import("@/components/three/HeroScene"), {
   ssr: false,
 });
 
-const metrics = [
-  { label: "Years shipping products", value: "5+" },
-  { label: "Mobile and web releases", value: "20+" },
-  { label: "Core stack coverage", value: "React Native / React / Next " },
-  { label: "Delivery ownership", value: "Build / Test / Launch" },
+// Timed to hand off right as the StartExperience preloader clears the screen.
+const REVEAL_DELAY = 3;
+const REVEAL_SPRING = { type: "spring" as const, stiffness: 120, damping: 22 };
+
+const HEADLINE = "I develop high-performance web & mobile applications.";
+const ACCENT_WORD_COUNT = 2;
+const headlineWords = HEADLINE.split(" ");
+const accentStartIndex = headlineWords.length - ACCENT_WORD_COUNT;
+
+const techStack = ["React Native", "Next.js", "TypeScript", "SEO"];
+
+const wordVariants = {
+  hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+};
+
+const HOVER_PALETTE = [
+  "#2dd4bf",
+  "#38bdf8",
+  "#60a5fa",
+  "#fb923c",
+  "#f87171",
+  "#f472b6",
+  "#a78bfa",
+  "#818cf8",
 ];
 
+const SCRAMBLE_STEPS = 5;
+const SCRAMBLE_INTERVAL = 50;
+const HOLD_DURATION = 650;
+
+function HoverLetter({ char }: { char: string }) {
+  const [color, setColor] = useState<string | null>(null);
+  const [fading, setFading] = useState(false);
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  const clearTimers = () => {
+    timersRef.current.forEach(clearTimeout);
+    timersRef.current = [];
+  };
+
+  useEffect(() => clearTimers, []);
+
+  if (char.trim() === "") {
+    return <span>{char}</span>;
+  }
+
+  const handleEnter = () => {
+    clearTimers();
+    setFading(false);
+    for (let step = 0; step < SCRAMBLE_STEPS; step++) {
+      const timer = setTimeout(() => {
+        setColor(HOVER_PALETTE[Math.floor(Math.random() * HOVER_PALETTE.length)]);
+      }, step * SCRAMBLE_INTERVAL);
+      timersRef.current.push(timer);
+    }
+  };
+
+  const handleLeave = () => {
+    clearTimers();
+    const timer = setTimeout(() => {
+      setFading(true);
+      setColor(null);
+    }, HOLD_DURATION);
+    timersRef.current.push(timer);
+  };
+
+  return (
+    <span
+      className="hero-headline-letter"
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      style={{
+        transitionDuration: fading ? "1100ms" : "140ms",
+        ...(color ? { color, WebkitTextFillColor: color } : undefined),
+      }}
+    >
+      {char}
+    </span>
+  );
+}
+
 export default function Hero() {
+  const shouldReduceMotion = useReducedMotion();
+  const rise = (delay: number, distance = 20) =>
+    shouldReduceMotion
+      ? { initial: false as const }
+      : {
+          initial: { opacity: 0, y: distance },
+          animate: { opacity: 1, y: 0 },
+          transition: { ...REVEAL_SPRING, delay },
+        };
+
   return (
     <section
       id="hero"
@@ -29,75 +115,117 @@ export default function Hero() {
       <div className="atmosphere" />
       <div className="terrain-grid absolute inset-0 opacity-[0.06]" />
 
-      <div
-        className="pointer-events-none absolute left-1/2 top-[10%] h-[18rem] w-[18rem] -translate-x-1/2 rounded-full bg-[rgba(204,230,255,0.12)] blur-[90px] sm:h-[28rem] sm:w-[28rem] lg:h-[34rem] lg:w-[34rem] lg:blur-[120px]"
-      />
+      <div className="pointer-events-none absolute left-1/2 top-[10%] h-[18rem] w-[18rem] -translate-x-1/2 rounded-full bg-[rgba(139,187,146,0.14)] blur-[90px] sm:h-[28rem] sm:w-[28rem] lg:h-[34rem] lg:w-[34rem] lg:blur-[120px]" />
 
       <div className="absolute inset-x-0 bottom-0 h-56 bg-[var(--hero-bottom-fade)]" />
 
-      <div
-        className="relative z-10 grid w-full gap-9 px-5 pb-24 pt-28 sm:px-8 sm:pt-32 md:grid-cols-[minmax(0,1.08fr)_minmax(17rem,0.92fr)] md:items-center md:gap-8 md:pb-28 lg:grid-cols-[minmax(0,1.45fr)_minmax(24rem,0.55fr)] lg:items-end lg:gap-12 lg:px-12 lg:pt-36 2xl:px-20"
-      >
-        <div className="max-w-4xl md:max-w-none">
-          <h1 className="text-hero hero-title max-w-7xl text-balance text-[var(--color-text)]">
-            I build thoughtful web and mobile experiences that solve real-world problems.
-          </h1>
-          <p className="text-body-lg mt-5 max-w-2xl text-[var(--color-text-muted)] md:mt-6">
-            I build React Native and Next.js interfaces that are fast, readable,
-            and steady after launch.
-          </p>
+      <div className="relative z-10 grid w-full gap-12 px-5 pb-24 pt-28 sm:px-8 sm:pt-32 md:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)] md:items-center md:gap-10 md:pb-28 lg:grid-cols-[minmax(0,1.5fr)_minmax(21rem,0.5fr)] lg:gap-16 lg:px-12 lg:pt-32 xl:px-16 2xl:px-24">
+        {/* LEFT: hierarchy */}
+        <div className="flex max-w-2xl flex-col items-start gap-5 sm:gap-6 md:max-w-none">
+          <motion.span
+            {...rise(REVEAL_DELAY, 14)}
+            className="inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.32em] text-primary"
+          >
+            <span className="h-1 w-4 rounded-full bg-primary" />
+            Software developer
+          </motion.span>
 
-          <div className="mt-8 flex flex-col gap-3 min-[420px]:flex-row md:mt-10">
+          <h1 className="hero-title text-text">
+            <span className="sr-only">{HEADLINE}</span>
+            <span aria-hidden="true">
+              {headlineWords.map((word, i) => (
+                <motion.span
+                  key={`${word}-${i}`}
+                  className={`inline-block mr-[0.28em] ${i >= accentStartIndex ? "gradient-text" : ""}`}
+                  variants={shouldReduceMotion ? undefined : wordVariants}
+                  initial={shouldReduceMotion ? false : "hidden"}
+                  animate={shouldReduceMotion ? undefined : "visible"}
+                  transition={{ ...REVEAL_SPRING, delay: REVEAL_DELAY + 0.15 + i * 0.06 }}
+                  style={{ willChange: "transform, opacity, filter" }}
+                >
+                  {Array.from(word).map((char, ci) => (
+                    <HoverLetter key={ci} char={char} />
+                  ))}
+                </motion.span>
+              ))}
+            </span>
+          </h1>
+
+          <motion.p
+            {...rise(REVEAL_DELAY + 0.45)}
+            className="text-body-lg max-w-xxl text-text-muted"
+          >
+            I build with <span className="font-bold">React Native, Next.js & React.js, SEO, backed by Firebase, analytics, and production deployments.</span>
+          </motion.p>
+
+          <motion.div
+            {...rise(REVEAL_DELAY + 0.55)}
+            className="flex flex-wrap items-center gap-3 pt-1 sm:gap-4"
+          >
             <a
               href="#projects"
-              className="text-button inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-3 text-center font-mono uppercase tracking-[0.2em] text-[var(--primary-action-text)] sm:tracking-[0.28em]"
+              className="relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-6 py-2.5 text-center font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text)] shadow-[0_18px_55px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
+              <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
               Explore work
             </a>
             <a
               href="#contact"
-              className="text-button inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--surface-border)] px-6 py-3 text-center font-mono uppercase tracking-[0.2em] text-[var(--color-text-muted)] hover:text-[var(--color-text)] sm:tracking-[0.28em]"
+              className="relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-6 py-2.5 text-center font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text)] shadow-[0_18px_55px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
+              <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
               Discuss a build
             </a>
+          </motion.div>
+
+          <motion.div
+            {...rise(REVEAL_DELAY + 0.65, 12)}
+            className="inline-flex items-center gap-2 pt-1 font-mono text-[11px] uppercase tracking-[0.24em] text-text-muted"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
+            </span>
+            Available for builds
+          </motion.div>
+        </div>
+
+        {/* RIGHT: portrait + supporting visual */}
+        <motion.div
+          {...rise(REVEAL_DELAY + 0.35, 26)}
+          className="flex w-full flex-col items-center gap-5 md:items-end md:pr-1 lg:pr-3 xl:pr-4"
+        >
+          <div className="hero-portrait-frame">
+            <ProfileCard
+              avatarUrl={profilePhoto.src}
+              miniAvatarUrl={profilePhoto.src}
+              name="Sohail Patel"
+              title="Software Developer"
+              handle="sohailpatel"
+              status="Available"
+              contactText="Contact"
+              behindGlowEnabled
+              behindGlowColor="rgba(139,187,146,0.5)"
+              behindGlowSize="48%"
+              innerGradient="linear-gradient(145deg,rgba(6,16,27,0.96) 0%,rgba(13,30,45,0.88) 62%,rgba(18,44,52,0.78) 100%)"
+              className="hero-profile-card"
+            />
           </div>
-        </div>
 
-        <div className="flex justify-center">
-          <ProfileCard
-            avatarUrl={profilePhoto.src}
-            miniAvatarUrl={profilePhoto.src}
-            name="Sohail Patel"
-            title="Software Developer"
-            handle="sohailpatel"
-            status="Available"
-            contactText="Contact"
-            behindGlowEnabled
-            behindGlowColor="rgba(143,199,255,0.62)"
-            behindGlowSize="54%"
-            innerGradient="linear-gradient(145deg,rgba(6,16,27,0.96) 0%,rgba(13,30,45,0.88) 62%,rgba(18,44,52,0.78) 100%)"
-            className="hero-profile-card lg:mr-2"
-          />
-        </div>
-
-        <div className="grid gap-3 min-[520px]:grid-cols-2 md:col-span-2 md:gap-4 lg:mt-2 lg:grid-cols-4">
-          {metrics.map((item) => (
-            <div key={item.label} className="story-card rounded-[1.25rem] p-4 sm:rounded-[1.6rem] sm:p-5">
-              <p className="text-caption font-mono uppercase tracking-[0.18em] text-white sm:tracking-[0.24em]">
-                {item.label}
-              </p>
-              <p className="mt-3 text-lg font-semibold text-[var(--color-text)] sm:mt-4 sm:text-2xl">
-                {item.value}
-              </p>
-            </div>
-          ))}
-        </div>
+          <div className="flex flex-wrap items-center justify-center gap-2 md:justify-end">
+            {techStack.map((tech) => (
+              <span key={tech} className="hero-tech-chip">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </motion.div>
       </div>
 
       <div className="absolute bottom-5 left-1/2 z-20 hidden -translate-x-1/2 sm:block lg:bottom-8">
         <motion.div
-          animate={{ y: [0, 9, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity }}
+          animate={shouldReduceMotion ? { y: 0 } : { y: [0, 9, 0] }}
+          transition={shouldReduceMotion ? undefined : { duration: 1.8, repeat: Infinity }}
           className="flex flex-col items-center gap-3"
         >
           <span className="text-sm font-mono uppercase tracking-[0.3em] text-[var(--color-text-muted)]">
