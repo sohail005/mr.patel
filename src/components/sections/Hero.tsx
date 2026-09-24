@@ -19,6 +19,13 @@ const ACCENT_WORD_COUNT = 2;
 const headlineWords = HEADLINE.split(" ");
 const accentStartIndex = headlineWords.length - ACCENT_WORD_COUNT;
 
+let letterCursor = 0;
+const wordStartIndices = headlineWords.map((word) => {
+  const start = letterCursor;
+  letterCursor += word.length + 1;
+  return start;
+});
+
 const techStack = ["React Native", "Next.js", "TypeScript", "SEO"];
 
 const wordVariants = {
@@ -41,7 +48,42 @@ const SCRAMBLE_STEPS = 5;
 const SCRAMBLE_INTERVAL = 50;
 const HOLD_DURATION = 650;
 
-function HoverLetter({ char }: { char: string }) {
+const hexToRgb = (hex: string): [number, number, number] => {
+  const clean = hex.trim().replace("#", "");
+  const full = clean.length === 3 ? clean.split("").map((c) => c + c).join("") : clean;
+  const n = parseInt(full, 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+};
+
+const rgbToHex = (r: number, g: number, b: number) =>
+  `#${[r, g, b].map((v) => Math.round(v).toString(16).padStart(2, "0")).join("")}`;
+
+const mixHex = (a: string, b: string, t: number) => {
+  const [r1, g1, b1] = hexToRgb(a);
+  const [r2, g2, b2] = hexToRgb(b);
+  return rgbToHex(r1 + (r2 - r1) * t, g1 + (g2 - g1) * t, b1 + (b2 - b1) * t);
+};
+
+const readCssColor = (name: string, fallback: string) => {
+  if (typeof window === "undefined") return fallback;
+  const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return value.startsWith("#") ? value : fallback;
+};
+
+const gradientColorAt = (progress: number) => {
+  const stops = [
+    readCssColor("--color-primary-strong", "#cfe4d1"),
+    readCssColor("--color-secondary", "#2a835f"),
+    readCssColor("--color-accent", "#12544f"),
+  ];
+  const clamped = Math.min(1, Math.max(0, progress));
+  const segment = 1 / (stops.length - 1);
+  const index = Math.min(stops.length - 2, Math.floor(clamped / segment));
+  const localT = (clamped - index * segment) / segment;
+  return mixHex(stops[index], stops[index + 1], localT);
+};
+
+function HoverLetter({ char, progress }: { char: string; progress: number }) {
   const [color, setColor] = useState<string | null>(null);
   const [fading, setFading] = useState(false);
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
@@ -60,9 +102,11 @@ function HoverLetter({ char }: { char: string }) {
   const handleEnter = () => {
     clearTimers();
     setFading(false);
+    const finalColor = gradientColorAt(progress);
     for (let step = 0; step < SCRAMBLE_STEPS; step++) {
       const timer = setTimeout(() => {
-        setColor(HOVER_PALETTE[Math.floor(Math.random() * HOVER_PALETTE.length)]);
+        const isLastStep = step === SCRAMBLE_STEPS - 1;
+        setColor(isLastStep ? finalColor : HOVER_PALETTE[Math.floor(Math.random() * HOVER_PALETTE.length)]);
       }, step * SCRAMBLE_INTERVAL);
       timersRef.current.push(timer);
     }
@@ -144,7 +188,11 @@ export default function Hero() {
                   style={{ willChange: "transform, opacity, filter" }}
                 >
                   {Array.from(word).map((char, ci) => (
-                    <HoverLetter key={ci} char={char} />
+                    <HoverLetter
+                      key={ci}
+                      char={char}
+                      progress={(wordStartIndices[i] + ci) / (HEADLINE.length - 1)}
+                    />
                   ))}
                 </motion.span>
               ))}
@@ -164,14 +212,14 @@ export default function Hero() {
           >
             <a
               href="#projects"
-              className="relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-6 py-2.5 text-center font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text)] shadow-[0_18px_55px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-6 py-2.5 text-center font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text)] shadow-[0_9px_28px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-2xl transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
               Explore work
             </a>
             <a
               href="#contact"
-              className="relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-6 py-2.5 text-center font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text)] shadow-[0_18px_55px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-6 py-2.5 text-center font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text)] shadow-[0_9px_28px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-2xl transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
               Discuss a build

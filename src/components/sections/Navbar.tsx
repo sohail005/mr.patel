@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import ThemeSwitcher from "@/components/effects/ThemeSwitcher";
 
 const navLinks = [
   { name: "Home", href: "/#hero", section: "hero" },
@@ -71,7 +72,7 @@ export default function Navbar() {
         <motion.div
           animate={{ opacity: [0.35, 0.8, 0.35], scaleX: [0.8, 1, 0.8] }}
           transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-          className="pointer-events-none absolute bottom-0 left-0 h-px w-full bg-[linear-gradient(90deg,transparent,rgba(139,187,146,0.85),rgba(42,131,95,0.65),transparent)]"
+          className="pointer-events-none absolute bottom-0 left-0 h-px w-full bg-[linear-gradient(90deg,transparent,rgba(143,199,255,0.85),rgba(127,224,195,0.65),transparent)]"
         />
 
         <Link href="/#hero" className="relative z-10 flex min-w-0 items-center gap-3">
@@ -81,7 +82,7 @@ export default function Navbar() {
             className="h-2.5 w-2.5 rounded-full bg-secondary"
           />
           <div>
-            <p className="text-caption mt-1 font-mono uppercase tracking-[0.32em] text-text-muted">
+            <p className="mt-1 text-sm font-mono font-medium uppercase tracking-[0.32em] text-text-strong">
               Software developer
             </p>
           </div>
@@ -99,7 +100,7 @@ export default function Navbar() {
                 transition={{ delay: 0.05 * index, duration: 0.45 }}
                 whileHover={{ y: -2 }}
                 className={`text-nav-link group relative font-mono uppercase tracking-[0.28em] ${
-                  active ? "text-[var(--color-text)]" : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                  active ? "text-text" : "text-text-muted hover:text-text"
                 }`}
               >
                 {link.name}
@@ -125,35 +126,39 @@ export default function Navbar() {
           <motion.span
             animate={{ x: ["-140%", "160%"] }}
             transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 1.6 }}
-            className="absolute inset-y-0 left-0 w-14 skew-x-[-20deg] bg-[var(--control-bg-hover)]"
+            className="absolute inset-y-0 left-0 w-14 skew-x-[-20deg] bg-(--control-bg-hover)"
           />
           <span className="relative z-10">Start a project</span>
         </motion.a>
 
-        <button
-          type="button"
-          onClick={() => setMobileOpen((value) => !value)}
-          className="liquid-glass relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] lg:hidden"
-          aria-label="Toggle navigation"
-        >
-          <div className="space-y-1.5">
-            <motion.span
-              animate={mobileOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 24 }}
-              className="block h-px w-5 bg-[var(--color-text)]"
-            />
-            <motion.span
-              animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-              transition={{ duration: 0.15 }}
-              className="block h-px w-5 bg-[var(--color-text)]"
-            />
-            <motion.span
-              animate={mobileOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 24 }}
-              className="block h-px w-5 bg-[var(--color-text)]"
-            />
-          </div>
-        </button>
+        <div className="relative z-10 flex items-center gap-2 lg:hidden">
+          <ThemeSwitcher variant="inline" />
+
+          <button
+            type="button"
+            onClick={() => setMobileOpen((value) => !value)}
+            className="liquid-glass flex h-11 w-11 items-center justify-center rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)]"
+            aria-label="Toggle navigation"
+          >
+            <div className="space-y-1.5">
+              <motion.span
+                animate={mobileOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }}
+                transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                className="block h-px w-5 bg-text"
+              />
+              <motion.span
+                animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
+                transition={{ duration: 0.15 }}
+                className="block h-px w-5 bg-text-muted"
+              />
+              <motion.span
+                animate={mobileOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }}
+                transition={{ type: "spring", stiffness: 300, damping: 24 }}
+                className="block h-px w-5 bg-text"
+              />
+            </div>
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -174,7 +179,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.04 * index, duration: 0.2 }}
-                  className="text-nav-link font-mono uppercase tracking-[0.28em] text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                  className="text-nav-link font-mono uppercase tracking-[0.28em] text-text-muted hover:text-text"
                 >
                   {link.name}
                 </motion.a>

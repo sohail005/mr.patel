@@ -69,8 +69,9 @@ export default function Experience() {
                 mode="inView"
                 direction="up"
                 delay={index * 0.08}
+                fade={false}
               >
-                <article className="group relative grid gap-5 rounded-[1.35rem] border border-[var(--surface-border)] bg-[linear-gradient(135deg,var(--color-panel),var(--color-panel-strong))] p-5 shadow-[0_24px_70px_rgba(0,0,0,0.22)] transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[var(--surface-border-strong)] hover:shadow-[0_28px_86px_rgba(0,0,0,0.3)] sm:grid-cols-[12rem_minmax(0,1fr)] sm:rounded-[1.85rem] sm:p-6 lg:grid-cols-[15rem_minmax(0,1fr)] lg:p-7">
+                <article className="story-card group relative grid gap-5 rounded-[1.35rem] p-5 sm:grid-cols-[12rem_minmax(0,1fr)] sm:rounded-[1.85rem] sm:p-6 lg:grid-cols-[15rem_minmax(0,1fr)] lg:p-7">
                   <span className="absolute -left-7 top-7 hidden h-4 w-4 rounded-full border border-[var(--color-primary)] bg-[var(--color-background)] shadow-[0_0_0_6px_color-mix(in_srgb,var(--color-primary)_13%,transparent),0_0_24px_color-mix(in_srgb,var(--color-primary)_46%,transparent)] sm:block" />
                   <div className="relative">
                     <div className="flex flex-wrap items-center gap-2 sm:block">

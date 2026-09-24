@@ -2,7 +2,6 @@ import HomeRuntime from "@/components/effects/HomeRuntime";
 import StartExperience from "@/components/effects/StartExperience";
 import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
-import MobileAppShowcase from "@/components/sections/MobileAppShowcase";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
 import Services from "@/components/sections/Services";
@@ -18,7 +17,6 @@ export default function Home() {
       <StartExperience />
       <Navbar />
       <Hero />
-      <MobileAppShowcase />
       <About />
       <Skills />
       <Services />

@@ -86,7 +86,7 @@ export default function Skills() {
         <div className="mt-9 grid gap-5 sm:mt-10 lg:grid-cols-3">
           {groups.map((group, index) => (
             <ScrollReveal key={group.title} mode="inView" delay={index * 0.08}>
-              <article className="story-card group h-full rounded-[1.35rem] p-5 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[var(--surface-border-strong)] sm:rounded-[1.75rem] sm:p-6">
+              <article className="story-card group h-full rounded-[1.35rem] p-5 sm:rounded-[1.75rem] sm:p-6">
                 <div className="relative z-10 flex items-start justify-between gap-4">
                   <span
                     className="flex h-14 w-14 items-center justify-center rounded-2xl border [&>svg]:h-6 [&>svg]:w-6"

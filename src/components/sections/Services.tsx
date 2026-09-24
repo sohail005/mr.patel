@@ -146,7 +146,7 @@ export default function Services() {
               delay={index * 0.08}
               direction="up"
             >
-              <article className="story-card group flex h-full flex-col rounded-[1.4rem] p-6 transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[var(--surface-border-strong)] hover:shadow-[0_22px_56px_rgba(0,0,0,0.28)] sm:rounded-[1.9rem] sm:p-8">
+              <article className="story-card group flex h-full flex-col rounded-[1.4rem] p-6 sm:rounded-[1.9rem] sm:p-8">
                 <div className="relative z-10 flex items-start justify-between gap-4">
                   <div
                     className="flex h-12 w-12 items-center justify-center rounded-[1rem] border bg-[var(--control-bg)] transition-transform duration-500 group-hover:rotate-6 group-hover:scale-105"
@@ -179,7 +179,7 @@ export default function Services() {
                   <a
                     href="#contact"
                     aria-label={`Talk about ${service.title}`}
-                    className="text-button mt-8 inline-flex min-h-11 w-fit items-center gap-2 rounded-full border border-(--primary-action-border) bg-(--primary-action-bg) px-5 py-3 font-mono uppercase tracking-[0.2em] text-(--primary-action-text) transition-[transform,background-color,border-color,gap] duration-300 hover:-translate-y-0.5 hover:gap-3 hover:border-primary hover:bg-(--control-bg-hover)"
+                    className="text-button mt-8 inline-flex min-h-11 w-fit items-center gap-2 rounded-full border border-(--primary-action-border) bg-(--primary-action-bg) px-5 py-3 font-mono uppercase tracking-[0.2em] text-(--primary-action-text) transition-[transform,background-color,border-color,color,gap] duration-300 hover:-translate-y-0.5 hover:gap-3 hover:border-primary hover:bg-(--control-bg-hover) hover:text-(--color-text)"
                   >
                     Let&apos;s talk about this
                     <span aria-hidden="true">-&gt;</span>

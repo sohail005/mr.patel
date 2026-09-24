@@ -712,7 +712,7 @@ export default function Projects({ limit }: { limit?: number }) {
                   <h3 className="mt-4 break-words text-xl font-semibold leading-tight text-[var(--color-text)] sm:text-3xl">
                     {project.title}
                   </h3>
-                  <p className="text-caption mt-3 break-words font-mono tracking-[0.12em] text-amber-50 sm:tracking-[0.22em]">
+                  <p className="text-caption mt-3 break-words font-mono tracking-[0.12em] text-[var(--color-text-muted)] sm:tracking-[0.22em]">
                     Built at <strong className="text-[var(--color-primary)]">{project.company}</strong>
                   </p>
                   <p className="mt-4 text-sm leading-7 text-[var(--color-text-muted)] sm:text-base sm:leading-8">
@@ -748,7 +748,7 @@ export default function Projects({ limit }: { limit?: number }) {
           <div className="mt-10 flex justify-center">
             <a
               href="/projects"
-              className="text-button inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-3 font-mono uppercase tracking-[0.24em] text-[var(--primary-action-text)] transition-[transform,background-color,border-color,gap] duration-300 hover:-translate-y-0.5 hover:gap-4 hover:border-[var(--color-primary)] hover:bg-[var(--control-bg-hover)]"
+              className="text-button inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-3 font-mono uppercase tracking-[0.24em] text-[var(--primary-action-text)] transition-[transform,background-color,border-color,color,gap] duration-300 hover:-translate-y-0.5 hover:gap-4 hover:border-[var(--color-primary)] hover:bg-[var(--control-bg-hover)] hover:text-[var(--color-primary)]"
             >
               View all projects
               <span aria-hidden="true">-&gt;</span>

@@ -256,6 +256,7 @@
   background-image: none;
   color: #ffffff;
   font-size: min(4.2svh, 2.65em);
+  font-style: italic;
   font-weight: 700;
   line-height: 1;
   margin: 0;
@@ -263,7 +264,7 @@
   letter-spacing: 0;
   text-shadow: 0 2px 24px rgba(247, 247, 247, 0.45);
   -webkit-text-fill-color: currentColor;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: var(--font-playfair), Georgia, 'Times New Roman', Times, serif;
 }
 
 .pc-details p {

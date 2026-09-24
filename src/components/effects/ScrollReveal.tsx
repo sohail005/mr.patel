@@ -14,11 +14,12 @@ interface ScrollRevealProps {
   offset?: ScrollOffset;
   mode?: ScrollRevealMode;
   delay?: number;
+  fade?: boolean;
 }
 
-const inViewVariants: Variants = {
+const inViewVariants = (fade: boolean): Variants => ({
   hidden: ({ dir, sc }: { dir: string; sc: boolean }) => ({
-    opacity: 0,
+    opacity: fade ? 0 : 1,
     y: dir === "up" ? 24 : dir === "down" ? -24 : 0,
     x: dir === "left" ? 24 : dir === "right" ? -24 : 0,
     scale: sc ? 0.9 : 1,
@@ -31,7 +32,7 @@ const inViewVariants: Variants = {
     scale: 1,
     transition: { type: "spring", stiffness: 120, damping: 22 },
   },
-};
+});
 
 export default function ScrollReveal({
   children,
@@ -41,13 +42,14 @@ export default function ScrollReveal({
   offset = ["start 92%", "start 35%"],
   mode = "scroll",
   delay = 0,
+  fade = true,
 }: ScrollRevealProps) {
   if (mode === "inView") {
     return (
       <motion.div
         className={`relative ${className}`.trim()}
         custom={{ dir: direction, sc: scale }}
-        variants={inViewVariants}
+        variants={inViewVariants(fade)}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-60px" }}

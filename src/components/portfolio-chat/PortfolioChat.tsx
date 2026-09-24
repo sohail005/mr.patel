@@ -269,7 +269,7 @@ export default function PortfolioChat() {
         onClick={() => setOpen(true)}
         whileHover={{ y: -3, scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className={`fixed bottom-[4.75rem] right-4 z-[90] flex min-h-12 items-center gap-3 overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-4 py-3 text-sm font-semibold text-[var(--color-text)] shadow-[0_18px_55px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl sm:bottom-[4.85rem] sm:right-5 ${open ? "pointer-events-none opacity-0" : "opacity-100"}`}
+        className={`ask-sohail-scope fixed bottom-[4.75rem] right-4 z-[90] flex min-h-12 items-center gap-3 overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-4 py-3 text-sm font-semibold text-[var(--color-text)] shadow-[0_9px_28px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-2xl sm:bottom-[4.85rem] sm:right-5 ${open ? "pointer-events-none opacity-0" : "opacity-100"}`}
       >
         <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
         <span className="relative h-2.5 w-2.5 rounded-full bg-[var(--color-secondary)] shadow-[0_0_18px_var(--color-secondary)]" />
@@ -290,7 +290,7 @@ export default function PortfolioChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 18, scale: 0.97 }}
             transition={{ duration: 0.22, ease: "easeOut" }}
-            className="fixed inset-x-3 bottom-3 top-3 z-[120] flex overflow-hidden rounded-[1.65rem] border border-white/12 bg-[linear-gradient(145deg,rgba(8,20,32,0.84),rgba(5,13,22,0.94))] text-[var(--color-text)] shadow-[0_28px_95px_rgba(0,0,0,0.46),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl sm:inset-auto sm:bottom-5 sm:right-5 sm:h-[min(680px,calc(100svh-2.5rem))] sm:w-[400px]"
+            className="ask-sohail-scope fixed inset-x-3 bottom-3 top-3 z-[120] flex overflow-hidden rounded-[1.65rem] border border-white/12 bg-[linear-gradient(145deg,rgba(8,20,32,0.84),rgba(5,13,22,0.94))] text-[var(--color-text)] shadow-[0_28px_95px_rgba(0,0,0,0.46),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl sm:inset-auto sm:bottom-5 sm:right-5 sm:h-[min(680px,calc(100svh-2.5rem))] sm:w-[400px]"
           >
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,color-mix(in_srgb,var(--color-primary)_24%,transparent),transparent_34%),radial-gradient(circle_at_90%_20%,color-mix(in_srgb,var(--color-secondary)_15%,transparent),transparent_30%)]" />
             <div className="relative z-10 flex min-h-0 w-full flex-col">

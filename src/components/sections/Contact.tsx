@@ -5,30 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Lottie } from "lottie-react";
 import handshakeAnimation from "@/Assets/Business_Handshake.json";
 import ScrollReveal from "@/components/effects/ScrollReveal";
-
-type SocialIconName = "github" | "linkedin" | "threads" | "instagram" | "youtube" | "email";
-
-const socialIconColors: Record<SocialIconName, string> = {
-  github: "#f0f6fc",
-  linkedin: "#0a66c2",
-  threads: "#ffffff",
-  instagram: "#e4405f",
-  youtube: "#ff0033",
-  email: "#ea4335",
-};
-
-const socials: { label: string; href: string; icon: SocialIconName }[] = [
-  { label: "GitHub", href: "https://github.com/sohail005", icon: "github" },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/md-sohail-a63a321b1/",
-    icon: "linkedin",
-  },
-  { label: "Threads", href: "https://www.threads.com/@sohail.code", icon: "threads" },
-  { label: "Instagram", href: "https://www.instagram.com/sohail.code/", icon: "instagram" },
-  { label: "YouTube", href: "https://www.youtube.com/@Sohail.code005", icon: "youtube" },
-  { label: "Email", href: "mailto:sohail345patel@gmail.com", icon: "email" },
-];
+import SocialLinks from "@/components/sections/SocialLinks";
+import { ShieldCheck } from "lucide-react";
 
 const serviceOptions = [
   "App Deployment Services",
@@ -37,92 +15,132 @@ const serviceOptions = [
   "Development Training",
 ];
 
-function SocialIcon({ name }: { name: SocialIconName }) {
-  const commonProps = {
-    "aria-hidden": true,
-    className: "h-9 w-9 transition-transform duration-300 group-hover:scale-110",
-    fill: "none",
-    stroke: "currentColor",
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    strokeWidth: 1.8,
-    style: { color: socialIconColors[name] },
-    viewBox: "0 0 24 24",
-  };
+const contactChecklist = [
+  "SEO-ready, engineered to rank on Google",
+  "Lightning-fast, animated & mobile-first",
+  "Designed to turn visitors into customers",
+];
 
-  if (name === "github") {
-    return (
-      <svg {...commonProps} fill="currentColor" stroke="none">
-        <path d="M12 2.5a9.5 9.5 0 0 0-3 18.51c.48.09.65-.21.65-.46v-1.67c-2.65.58-3.21-1.12-3.21-1.12-.44-1.1-1.06-1.39-1.06-1.39-.86-.59.07-.58.07-.58.95.07 1.45.98 1.45.98.85 1.45 2.23 1.03 2.77.79.09-.62.33-1.03.6-1.27-2.12-.24-4.35-1.06-4.35-4.72 0-1.04.37-1.89.98-2.56-.1-.24-.42-1.21.09-2.52 0 0 .8-.26 2.62.98a9.1 9.1 0 0 1 4.76 0c1.82-1.24 2.62-.98 2.62-.98.51 1.31.19 2.28.09 2.52.61.67.98 1.52.98 2.56 0 3.67-2.24 4.48-4.37 4.72.34.3.64.88.64 1.77v2.62c0 .25.17.55.66.46A9.5 9.5 0 0 0 12 2.5Z" />
-      </svg>
-    );
-  }
+const pastCompanies = [
+  "Fossil",
+  "Opus Virtual Offices",
+  "Jockey",
+  "Hopp",
+  "Pro 5 Networking",
+  "Finecart",
+  "Reval ERP",
+];
 
-  if (name === "linkedin") {
-    return (
-      <svg {...commonProps}>
-        <path d="M7 9.5v7M7 6.5v.01M11 16.5v-4a3 3 0 0 1 6 0v4M11 9.5v7" />
-      </svg>
-    );
-  }
-
-  if (name === "instagram") {
-    return (
-      <svg {...commonProps}>
-        <rect x="3.5" y="3.5" width="17" height="17" rx="4" />
-        <circle cx="12" cy="12" r="4" />
-        <path d="M17.5 6.5h.01" />
-      </svg>
-    );
-  }
-
-  if (name === "threads") {
-    return (
-      <svg {...commonProps}>
-        <path d="M17.7 11.4c-.28-3.08-2.2-5.1-5.4-5.1-3.46 0-5.58 2.24-5.58 5.7 0 3.55 2.16 5.7 5.5 5.7 2.63 0 4.42-1.43 4.42-3.53 0-1.85-1.3-3.06-3.37-3.06-2.2 0-3.3 1.05-3.3 2.37 0 1.03.74 1.7 1.9 1.7 1.21 0 2.05-.71 2.05-1.82 0-2.22-1.59-3.96-4.08-3.96" />
-      </svg>
-    );
-  }
-
-  if (name === "youtube") {
-    return (
-      <svg {...commonProps}>
-        <path d="M21 12s0-3.1-.4-4.6a2.5 2.5 0 0 0-1.8-1.8C17.3 5.3 12 5.3 12 5.3s-5.3 0-6.8.4a2.5 2.5 0 0 0-1.8 1.8C3 8.9 3 12 3 12s0 3.1.4 4.6a2.5 2.5 0 0 0 1.8 1.8c1.5.4 6.8.4 6.8.4s5.3 0 6.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.5.4-4.6.4-4.6Z" />
-        <path d="m10 9.5 5 2.5-5 2.5v-5Z" fill="currentColor" stroke="none" />
-      </svg>
-    );
-  }
-
+function CheckIcon() {
   return (
-    <svg {...commonProps}>
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="m4 7 8 6 8-6" />
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className="h-3.5 w-3.5"
+      aria-hidden="true"
+    >
+      <path
+        d="M5 12.5 10 17 19 7"
+        stroke="currentColor"
+        strokeWidth={2.4}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
 
-function SocialButton({ label, href, icon }: (typeof socials)[number]) {
-  const isEmail = href.startsWith("mailto:");
-
+function MailIcon() {
   return (
-    <motion.a
-      href={href}
-      target={isEmail ? undefined : "_blank"}
-      rel={isEmail ? undefined : "noopener noreferrer"}
-      whileHover={{ y: -4, scale: 1.015 }}
-      whileTap={{ scale: 0.98 }}
-      className="social-orbit-button group relative flex min-h-14 items-center justify-between overflow-hidden rounded-[1.25rem] border border-[var(--surface-border)] px-4 py-4 text-sm text-[var(--color-text-muted)]"
-    >
-      <span className="" aria-hidden="true" />
-      <span className="relative z-10 flex flex-1 items-center justify-start gap-3 text-left">
-        <span className="" aria-hidden="true">
-          <SocialIcon name={icon} />
+    <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
+      <rect
+        x="3"
+        y="5"
+        width="18"
+        height="14"
+        rx="2"
+        stroke="currentColor"
+        strokeWidth={1.8}
+      />
+      <path
+        d="m4 7 8 6 8-6"
+        stroke="currentColor"
+        strokeWidth={1.8}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ContactPitchCard() {
+  return (
+    <div className="story-card flex h-full flex-col justify-between gap-8 rounded-[1.4rem] p-6 sm:rounded-4xl sm:p-8">
+      <div>
+        <span className="inline-flex items-center gap-2 rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text)]">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
+          </span>
+          Available for new projects
         </span>
-        <span className="text-left transition-colors duration-300 text-primary group-hover:text-text">
-          {label}
-        </span>
-      </span>
-    </motion.a>
+
+        <p className="mt-6 text-caption font-mono uppercase tracking-[0.28em] text-[#e2793d]">
+          Free consultation
+        </p>
+        <h3 className="mt-3 italic font-[family-name:var(--font-playfair)] text-4xl font-black leading-[1.05] tracking-tight text-[var(--color-text)] sm:text-5xl">
+          Let&apos;s build something{" "}
+          <span className="italic font-[family-name:var(--font-playfair)] font-bold text-[#e2793d]">
+            that ships.
+          </span>
+        </h3>
+        <p className="mt-5 leading-7 text-[var(--color-text-muted)]">
+          I design and build fast, SEO-optimised web and mobile products that
+          turn visitors into customers, engineered for rankings, speed and
+          conversions.
+        </p>
+
+        <ul className="mt-6 space-y-3">
+          {contactChecklist.map((item) => (
+            <li key={item} className="flex items-center gap-3">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e2793d] text-white shadow-[0_2px_8px_rgba(226,121,61,0.4)]">
+                <CheckIcon />
+              </span>
+              <span className="text-base text-[var(--color-text)]">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <div className="border-t border-[var(--surface-border)] pt-6">
+          <p className="text-caption font-mono font-bold uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+            Experience across
+          </p>
+          <p className="mt-3 flex flex-wrap gap-x-2 gap-y-1 text-xs font-bold uppercase tracking-[0.08em] text-[var(--color-text-muted)]">
+            {pastCompanies.map((company, index) => (
+              <span key={company}>
+                {company}
+                {index < pastCompanies.length - 1 ? (
+                  <span className="ml-2"></span>
+                ) : null}
+              </span>
+            ))}
+          </p>
+        </div>
+
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+          <a
+            href="mailto:sohail345patel@gmail.com"
+            className="inline-flex items-center gap-2 text-sm text-[var(--color-text)] transition-colors duration-300 hover:text-[var(--color-primary)]"
+          >
+            <MailIcon />
+            Email me
+          </a>
+          <SocialLinks showLabel={false} />
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -171,7 +189,10 @@ export default function Contact() {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setShowSuccessAnimation(false);
     };
-    const timeout = window.setTimeout(() => setShowSuccessAnimation(false), 3200);
+    const timeout = window.setTimeout(
+      () => setShowSuccessAnimation(false),
+      3200,
+    );
 
     document.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -208,7 +229,7 @@ export default function Contact() {
       setError(
         caughtError instanceof Error
           ? caughtError.message
-          : "Unable to send message right now."
+          : "Unable to send message right now.",
       );
     } finally {
       setSending(false);
@@ -246,7 +267,8 @@ export default function Contact() {
                   Thank you!
                 </p>
                 <p className="text-body-lg mt-3 max-w-2xl text-text-muted">
-                  Your message has been sent successfully. I will get back to you soon.
+                  Your message has been sent successfully. I will get back to
+                  you soon.
                 </p>
               </motion.div>
               <Lottie
@@ -275,27 +297,16 @@ export default function Contact() {
           </h2>
         </ScrollReveal>
 
-        <div className="mt-9 grid gap-5 sm:mt-10 sm:gap-6 lg:grid-cols-[0.42fr_0.58fr]">
-          <ScrollReveal mode="inView" direction="up">
-            <div className="story-card rounded-[1.4rem] p-6 sm:rounded-4xl sm:p-8">
-              <p className="text-caption font-mono uppercase tracking-[0.26em] text-[var(--color-primary)]">
-                Reach out
-              </p>
-              <p className="text-body-lg mt-6">
-                I&apos;m open to mobile apps, web products, dashboards, and
-                interfaces where the details matter after launch.
-              </p>
-
-              <div className="mt-5 grid grid-cols-2 gap-3">
-                {socials.map((social) => (
-                  <SocialButton key={social.label} {...social} />
-                ))}
-              </div>
-            </div>
+        <div className="mt-9 grid items-stretch gap-5 sm:mt-10 sm:gap-6 lg:grid-cols-[0.42fr_0.58fr]">
+          <ScrollReveal mode="inView" direction="up" className="h-full">
+            <ContactPitchCard />
           </ScrollReveal>
 
-          <ScrollReveal mode="inView" direction="up">
-            <form onSubmit={handleSubmit} className="story-card rounded-[1.4rem] p-6 sm:rounded-[2rem] sm:p-8">
+          <ScrollReveal mode="inView" direction="up" className="h-full">
+            <form
+              onSubmit={handleSubmit}
+              className="story-card flex h-full flex-col rounded-[1.4rem] p-6 sm:rounded-[2rem] sm:p-8"
+            >
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block">
                   <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
@@ -308,7 +319,10 @@ export default function Contact() {
                     suppressHydrationWarning
                     value={formState.name}
                     onChange={(event) =>
-                      setFormState((state) => ({ ...state, name: event.target.value }))
+                      setFormState((state) => ({
+                        ...state,
+                        name: event.target.value,
+                      }))
                     }
                     className="mt-3 w-full rounded-[1.25rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3 text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]"
                   />
@@ -325,7 +339,10 @@ export default function Contact() {
                     suppressHydrationWarning
                     value={formState.email}
                     onChange={(event) =>
-                      setFormState((state) => ({ ...state, email: event.target.value }))
+                      setFormState((state) => ({
+                        ...state,
+                        email: event.target.value,
+                      }))
                     }
                     className="mt-3 w-full rounded-[1.25rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3 text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]"
                   />
@@ -347,7 +364,13 @@ export default function Contact() {
                       : "border-[var(--surface-border)] bg-[var(--control-bg)] hover:border-[var(--surface-border-strong)]"
                   }`}
                 >
-                  <span className={formState.service ? "text-[var(--color-text)]" : "text-[var(--color-text-muted)]"}>
+                  <span
+                    className={
+                      formState.service
+                        ? "text-[var(--color-text)]"
+                        : "text-[var(--color-text-muted)]"
+                    }
+                  >
                     {formState.service || "Select a service"}
                   </span>
                   <span
@@ -381,7 +404,9 @@ export default function Contact() {
                         }`}
                       >
                         <span>{service}</span>
-                        {formState.service === service ? <span aria-hidden="true">✓</span> : null}
+                        {formState.service === service ? (
+                          <span aria-hidden="true">✓</span>
+                        ) : null}
                       </button>
                     ))}
                   </div>
@@ -399,7 +424,10 @@ export default function Contact() {
                   suppressHydrationWarning
                   value={formState.message}
                   onChange={(event) =>
-                    setFormState((state) => ({ ...state, message: event.target.value }))
+                    setFormState((state) => ({
+                      ...state,
+                      message: event.target.value,
+                    }))
                   }
                   className="mt-3 w-full rounded-[1.5rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3 text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]"
                 />
@@ -409,13 +437,23 @@ export default function Contact() {
                 <p className="mt-4 text-sm text-red-300">{error}</p>
               ) : null}
 
+              <p className="flex items-center justify-center pt-10 gap-2 text-[12px] font-medium text-[#141B1A]/40">
+                <ShieldCheck
+                  size={13}
+                  strokeWidth={2}
+                  className="text-[#C56E3D]"
+                  aria-hidden="true"
+                />
+                Your details stay private — no spam, ever.
+              </p>
+
               <motion.button
                 type="submit"
                 disabled={sending}
                 aria-busy={sending}
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.99 }}
-                className="text-button mt-6 flex w-full items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-4 font-mono uppercase tracking-[0.28em] text-[var(--primary-action-text)] disabled:cursor-wait disabled:opacity-60"
+                className="text-button mt-auto flex w-full items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-4 font-mono uppercase tracking-[0.28em] text-[var(--primary-action-text)] disabled:cursor-wait disabled:opacity-60"
               >
                 {sending ? (
                   <>

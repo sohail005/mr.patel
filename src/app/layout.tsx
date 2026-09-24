@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Playfair_Display, Fraunces, Poppins } from "next/font/google";
 import ClickSpark from "@/components/effects/ClickSpark";
 import ThemeSwitcher from "@/components/effects/ThemeSwitcher";
 import LiquidGlassTracker from "@/components/effects/LiquidGlassTracker";
@@ -10,7 +10,7 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -18,6 +18,29 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
   weight: ["400", "500", "600", "700"],
+});
+
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const fraunce = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunce",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  variable: "--font-poppins",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -51,12 +74,12 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              'try{var t=localStorage.getItem("portfolio-theme")||"midnight";document.documentElement.dataset.theme=t;}catch(e){}',
+              'try{var t=localStorage.getItem("portfolio-theme")||"daylight";document.documentElement.dataset.theme=t;}catch(e){}',
           }}
         />
       </head>
       <body
-        className={`${inter.variable} ${jetBrainsMono.variable} antialiased`}
+        className={`${inter.variable} ${jetBrainsMono.variable} ${playfairDisplay.variable} ${fraunce.variable} ${poppins.variable} antialiased`}
       >
         <ClickSpark
           sparkColor="#cfe4d1"

@@ -22,8 +22,12 @@ function isThemeId(value: string | null): value is ThemeId {
   return themes.some((theme) => theme.id === value);
 }
 
-export default function ThemeSwitcher() {
-  const [activeTheme, setActiveTheme] = useState<ThemeId>("midnight");
+export default function ThemeSwitcher({
+  variant = "floating",
+}: {
+  variant?: "floating" | "inline";
+}) {
+  const [activeTheme, setActiveTheme] = useState<ThemeId>("daylight");
   const [hydrated, setHydrated] = useState(false);
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -35,7 +39,7 @@ export default function ThemeSwitcher() {
       ? savedTheme
       : isThemeId(currentTheme)
         ? currentTheme
-        : "midnight";
+        : "daylight";
 
     window.queueMicrotask(() => {
       setActiveTheme(nextTheme);
@@ -78,7 +82,11 @@ export default function ThemeSwitcher() {
   };
 
   return (
-    <div ref={menuRef} className="theme-switcher" aria-label="Theme settings">
+    <div
+      ref={menuRef}
+      className={`theme-switcher ${variant === "inline" ? "theme-switcher--inline" : ""}`.trim()}
+      aria-label="Theme settings"
+    >
       <button
         type="button"
         className="theme-quick"
