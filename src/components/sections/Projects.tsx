@@ -1,7 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import ScrollReveal from "@/components/effects/ScrollReveal";
+import SpecularButton from "@/components/effects/SpecularButton";
 
 type Project = {
   title: string;
@@ -663,6 +665,7 @@ function ProjectThumbnail({ project }: { project: Project }) {
 }
 
 export default function Projects({ limit }: { limit?: number }) {
+  const router = useRouter();
   const visibleProjects = limit ? orderedProjects.slice(0, limit) : orderedProjects;
 
   return (
@@ -746,13 +749,20 @@ export default function Projects({ limit }: { limit?: number }) {
 
         {limit ? (
           <div className="mt-10 flex justify-center">
-            <a
-              href="/projects"
-              className="text-button inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-3 font-mono uppercase tracking-[0.24em] text-[var(--primary-action-text)] transition-[transform,background-color,border-color,color,gap] duration-300 hover:-translate-y-0.5 hover:gap-4 hover:border-[var(--color-primary)] hover:bg-[var(--control-bg-hover)] hover:text-[var(--color-primary)]"
+            <SpecularButton
+              size="md"
+              radius={999}
+              onClick={() => router.push("/projects")}
+              className="view-all-projects-button"
+              tintOpacity={0}
+              textColor="var(--primary-action-text)"
+              lineColor="#ffffff"
+              baseColor="#3f5a4a"
+              proximity={220}
             >
               View all projects
               <span aria-hidden="true">-&gt;</span>
-            </a>
+            </SpecularButton>
           </div>
         ) : null}
       </div>

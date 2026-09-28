@@ -6,6 +6,8 @@ import { Lottie } from "lottie-react";
 import handshakeAnimation from "@/Assets/Business_Handshake.json";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 import SocialLinks from "@/components/sections/SocialLinks";
+import SpecularButton from "@/components/effects/SpecularButton";
+import CurvedInput from "@/components/effects/CurvedInput";
 import { ShieldCheck } from "lucide-react";
 
 const serviceOptions = [
@@ -203,6 +205,10 @@ export default function Contact() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    if (!formState.name.trim() || !formState.email.trim()) {
+      setError("Please fill in your name and email.");
+      return;
+    }
     if (!formState.service) {
       setError("Please select a service before sending your message.");
       return;
@@ -312,40 +318,56 @@ export default function Contact() {
                   <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
                     Name
                   </span>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Your name"
-                    suppressHydrationWarning
-                    value={formState.name}
-                    onChange={(event) =>
-                      setFormState((state) => ({
-                        ...state,
-                        name: event.target.value,
-                      }))
-                    }
-                    className="mt-3 w-full rounded-[1.25rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3 text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]"
-                  />
+                  <div className="mt-3">
+                    <CurvedInput
+                      type="text"
+                      name="name"
+                      placeholder="Your name"
+                      ariaLabel="Name"
+                      value={formState.name}
+                      onChange={(value) =>
+                        setFormState((state) => ({ ...state, name: value }))
+                      }
+                      width="100%"
+                      height={56}
+                      bend={10}
+                      showButton={false}
+                      showIcon={false}
+                      backgroundColor="var(--control-bg)"
+                      textColor="var(--color-text)"
+                      placeholderColor="var(--color-text-muted)"
+                      borderColor="var(--surface-border)"
+                      buttonColor="var(--color-primary)"
+                    />
+                  </div>
                 </label>
 
                 <label className="block">
                   <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
                     Email
                   </span>
-                  <input
-                    type="email"
-                    required
-                    placeholder="you@example.com"
-                    suppressHydrationWarning
-                    value={formState.email}
-                    onChange={(event) =>
-                      setFormState((state) => ({
-                        ...state,
-                        email: event.target.value,
-                      }))
-                    }
-                    className="mt-3 w-full rounded-[1.25rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3 text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]"
-                  />
+                  <div className="mt-3">
+                    <CurvedInput
+                      type="email"
+                      name="email"
+                      placeholder="you@example.com"
+                      ariaLabel="Email"
+                      value={formState.email}
+                      onChange={(value) =>
+                        setFormState((state) => ({ ...state, email: value }))
+                      }
+                      width="100%"
+                      height={56}
+                      bend={10}
+                      showButton={false}
+                      showIcon={false}
+                      backgroundColor="var(--control-bg)"
+                      textColor="var(--color-text)"
+                      placeholderColor="var(--color-text-muted)"
+                      borderColor="var(--surface-border)"
+                      buttonColor="var(--color-primary)"
+                    />
+                  </div>
                 </label>
               </div>
 
@@ -437,7 +459,7 @@ export default function Contact() {
                 <p className="mt-4 text-sm text-red-300">{error}</p>
               ) : null}
 
-              <p className="flex items-center justify-center pt-10 gap-2 text-[12px] font-medium text-[#141B1A]/40">
+              <p className="flex items-center justify-center py-10 gap-2 text-[12px] font-medium text-[var(--color-text-muted)]">
                 <ShieldCheck
                   size={13}
                   strokeWidth={2}
@@ -447,13 +469,18 @@ export default function Contact() {
                 Your details stay private — no spam, ever.
               </p>
 
-              <motion.button
+              <SpecularButton
                 type="submit"
                 disabled={sending}
                 aria-busy={sending}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.99 }}
-                className="text-button mt-auto flex w-full items-center justify-center gap-3 rounded-full border border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] px-6 py-4 font-mono uppercase tracking-[0.28em] text-[var(--primary-action-text)] disabled:cursor-wait disabled:opacity-60"
+                size="md"
+                radius={999}
+                className="contact-submit-button mt-auto w-full"
+                tintOpacity={0}
+                textColor="var(--primary-action-text)"
+                lineColor="#ffffff"
+                baseColor="#3f5a4a"
+                proximity={220}
               >
                 {sending ? (
                   <>
@@ -468,7 +495,7 @@ export default function Contact() {
                 ) : (
                   "Send message"
                 )}
-              </motion.button>
+              </SpecularButton>
             </form>
           </ScrollReveal>
         </div>

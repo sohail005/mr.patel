@@ -4,6 +4,8 @@ import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import ProfileCard from "@/components/effects/ProfileCard";
+import SpecularButton from "@/components/effects/SpecularButton";
+import { scrollToHash } from "@/lib/scrollToHash";
 import profilePhoto from "@/Assets/profile-photo.jpg";
 
 const HeroScene = dynamic(() => import("@/components/three/HeroScene"), {
@@ -210,20 +212,32 @@ export default function Hero() {
             {...rise(REVEAL_DELAY + 0.55)}
             className="flex flex-wrap items-center gap-3 pt-1 sm:gap-4"
           >
-            <a
-              href="#projects"
-              className="relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-6 py-2.5 text-center font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text)] shadow-[0_9px_28px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-2xl transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            <SpecularButton
+              size="sm"
+              radius={999}
+              onClick={() => scrollToHash("projects")}
+              className="hero-cta-button"
+              tintOpacity={0}
+              textColor="var(--color-text)"
+              lineColor="#ffffff"
+              baseColor="#3f5a4a"
+              proximity={200}
             >
-              <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
               Explore work
-            </a>
-            <a
-              href="#contact"
-              className="relative inline-flex min-h-11 items-center justify-center overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-6 py-2.5 text-center font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text)] shadow-[0_9px_28px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-2xl transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            </SpecularButton>
+            <SpecularButton
+              size="sm"
+              radius={999}
+              onClick={() => scrollToHash("contact")}
+              className="hero-cta-button"
+              tintOpacity={0}
+              textColor="var(--color-text)"
+              lineColor="#ffffff"
+              baseColor="#3f5a4a"
+              proximity={200}
             >
-              <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
               Discuss a build
-            </a>
+            </SpecularButton>
           </motion.div>
 
           <motion.div

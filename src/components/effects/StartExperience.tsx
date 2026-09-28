@@ -2,12 +2,14 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Lottie } from "lottie-react";
+import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import loadingAnimation from "@/Assets/loading.json";
 
 const roles = ["SOFTWARE", "MOBILE", "WEB", "PRODUCT"];
 
 export default function StartExperience() {
+  const pathname = usePathname();
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -17,9 +19,12 @@ export default function StartExperience() {
   );
 
   useEffect(() => {
+    setProgress(0);
+    setVisible(true);
+
     let frame = 0;
     const start = performance.now();
-    const duration = 2600;
+    const duration = 1000;
 
     const tick = (now: number) => {
       const elapsed = now - start;
@@ -37,7 +42,7 @@ export default function StartExperience() {
 
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (!visible) return;
@@ -104,7 +109,7 @@ export default function StartExperience() {
                   initial={{ opacity: 0, y: 26 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, delay: 0.18, ease: "easeOut" }}
-                  className=" text-[clamp(2rem,15vw,13rem)] font-bold leading-[0.82] tracking-[-0.06em] text-white/90 lg:text-[clamp(2rem,15vw,16rem)]"
+                  className="font-(family-name:--font-poppins) text-[clamp(2rem,15vw,13rem)] font-black leading-[0.82] tracking-[-0.06em] text-white/90 lg:text-[clamp(2rem,15vw,16rem)]"
                 >
                   Sohail
                   <br />

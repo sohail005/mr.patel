@@ -174,7 +174,7 @@ export function getChatResponse(question: string, context: ChatContext = {}): Ch
       type: "services",
       message: "These are the services currently shown in Sohail's portfolio.",
       services: sohailServices,
-      actions: [{ label: "Contact Sohail", href: "/#contact", kind: "primary" }],
+      actions: [{ label: "Contact Sohail", href: "/contact", kind: "primary" }],
       suggestions: ["Can Sohail deploy apps?", "Complete App Development", "Website Development"],
       updatedContext: { ...nextContext, lastTopic: "services" },
     };
@@ -206,7 +206,7 @@ export function getChatResponse(question: string, context: ChatContext = {}): Ch
     return {
       type: "text",
       message: sohailProfile.availability,
-      actions: [{ label: "Contact Sohail", href: "/#contact", kind: "primary" }],
+      actions: [{ label: "Contact Sohail", href: "/contact", kind: "primary" }],
       suggestions: ["Services", "Why Hire Sohail?", "Contact Sohail"],
       updatedContext: { ...nextContext, lastTopic: "availability" },
     };

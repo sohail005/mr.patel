@@ -10,6 +10,7 @@ import {
   useMemo,
   useRef,
 } from "react";
+import { scrollToHash } from "@/lib/scrollToHash";
 import "./ProfileCard.css";
 
 const DEFAULT_INNER_GRADIENT =
@@ -185,7 +186,7 @@ function ProfileCardComponent({
   );
 
   const handleContactClick = useCallback(() => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    scrollToHash("contact");
   }, []);
 
   return (

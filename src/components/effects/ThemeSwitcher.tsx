@@ -1,17 +1,10 @@
 "use client";
 
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const themes = [
-  { id: "midnight", name: "Midnight", swatch: "#8bbb92" },
-  { id: "emerald", name: "Emerald", swatch: "#7fe0c3" },
-  { id: "ember", name: "Ember", swatch: "#ff9f6e" },
-  { id: "violet", name: "Violet", swatch: "#c4a7ff" },
-  { id: "daylight", name: "Daylight", swatch: "#2563eb" },
-] as const;
+type ThemeId = "midnight" | "daylight";
 
-type ThemeId = (typeof themes)[number]["id"];
-type SwatchStyle = CSSProperties & { "--theme-swatch": string };
 type ViewTransitionDocument = Document & {
   startViewTransition?: (callback: () => void) => void;
 };
@@ -19,18 +12,12 @@ type ViewTransitionDocument = Document & {
 const storageKey = "portfolio-theme";
 
 function isThemeId(value: string | null): value is ThemeId {
-  return themes.some((theme) => theme.id === value);
+  return value === "midnight" || value === "daylight";
 }
 
-export default function ThemeSwitcher({
-  variant = "floating",
-}: {
-  variant?: "floating" | "inline";
-}) {
-  const [activeTheme, setActiveTheme] = useState<ThemeId>("daylight");
+export default function ThemeSwitcher({ className = "" }: { className?: string }) {
+  const [theme, setThemeState] = useState<ThemeId>("midnight");
   const [hydrated, setHydrated] = useState(false);
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem(storageKey);
@@ -39,107 +26,115 @@ export default function ThemeSwitcher({
       ? savedTheme
       : isThemeId(currentTheme)
         ? currentTheme
-        : "daylight";
+        : "midnight";
 
     window.queueMicrotask(() => {
-      setActiveTheme(nextTheme);
+      setThemeState(nextTheme);
       setHydrated(true);
     });
   }, []);
 
   useEffect(() => {
     if (!hydrated) return;
-    document.documentElement.dataset.theme = activeTheme;
-  }, [activeTheme, hydrated]);
-
-  useEffect(() => {
-    const handlePointerDown = (event: PointerEvent) => {
-      if (!menuRef.current?.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    };
-
-    window.addEventListener("pointerdown", handlePointerDown);
-    return () => window.removeEventListener("pointerdown", handlePointerDown);
-  }, []);
-
-  const applyTheme = (theme: ThemeId) => {
-    setActiveTheme(theme);
     document.documentElement.dataset.theme = theme;
-    localStorage.setItem(storageKey, theme);
+  }, [theme, hydrated]);
+
+  const applyTheme = (next: ThemeId) => {
+    setThemeState(next);
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem(storageKey, next);
   };
 
-  const setTheme = (theme: ThemeId) => {
+  const toggleTheme = () => {
+    const next: ThemeId = theme === "midnight" ? "daylight" : "midnight";
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const transitionDocument = document as ViewTransitionDocument;
 
     if (transitionDocument.startViewTransition && !prefersReducedMotion) {
-      transitionDocument.startViewTransition(() => applyTheme(theme));
+      transitionDocument.startViewTransition(() => applyTheme(next));
       return;
     }
 
-    applyTheme(theme);
+    applyTheme(next);
   };
 
+  const isLight = theme === "daylight";
+
   return (
-    <div
-      ref={menuRef}
-      className={`theme-switcher ${variant === "inline" ? "theme-switcher--inline" : ""}`.trim()}
-      aria-label="Theme settings"
+    <button
+      type="button"
+      onClick={toggleTheme}
+      className={`theme-toggle ${className}`.trim()}
+      role="switch"
+      aria-checked={isLight}
+      aria-label={isLight ? "Switch to dark theme" : "Switch to white theme"}
     >
-      <button
-        type="button"
-        className="theme-quick"
-        aria-pressed={activeTheme !== "daylight"}
-        onClick={() => setTheme("midnight")}
+      <span className="theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true">
+        <SunIcon />
+      </span>
+      <span className="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true">
+        <MoonIcon />
+      </span>
+      <motion.span
+        className="theme-toggle-thumb"
+        animate={{ x: isLight ? "100%" : "0%" }}
+        transition={{ type: "spring", stiffness: 480, damping: 32 }}
       >
-        Dark
-      </button>
-      <button
-        type="button"
-        className="theme-quick"
-        aria-pressed={activeTheme === "daylight"}
-        onClick={() => setTheme("daylight")}
-      >
-        White
-      </button>
-      <button
-        type="button"
-        className="theme-menu-trigger"
-        aria-expanded={open}
-        aria-haspopup="menu"
-        onClick={() => setOpen((value) => !value)}
-      >
-        Themes
-      </button>
+        <AnimatePresence mode="wait" initial={false}>
+          {isLight ? (
+            <motion.span
+              key="sun"
+              initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+              transition={{ duration: 0.22 }}
+              className="theme-toggle-thumb-icon"
+            >
+              <SunIcon />
+            </motion.span>
+          ) : (
+            <motion.span
+              key="moon"
+              initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
+              transition={{ duration: 0.22 }}
+              className="theme-toggle-thumb-icon"
+            >
+              <MoonIcon />
+            </motion.span>
+          )}
+        </AnimatePresence>
+      </motion.span>
+    </button>
+  );
+}
 
-      {open ? (
-        <div className="theme-dropdown" role="menu">
-          {themes.map((theme) => {
-            const selected = theme.id === activeTheme;
+function SunIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="4.5" fill="currentColor" />
+      <g stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+        <path d="M12 2.5v2.2" />
+        <path d="M12 19.3v2.2" />
+        <path d="M4.2 4.2l1.6 1.6" />
+        <path d="M18.2 18.2l1.6 1.6" />
+        <path d="M2.5 12h2.2" />
+        <path d="M19.3 12h2.2" />
+        <path d="M4.2 19.8l1.6-1.6" />
+        <path d="M18.2 5.8l1.6-1.6" />
+      </g>
+    </svg>
+  );
+}
 
-            return (
-              <button
-                key={theme.id}
-                type="button"
-                className="theme-option"
-                style={{ "--theme-swatch": theme.swatch } as SwatchStyle}
-                aria-checked={selected}
-                role="menuitemradio"
-                onClick={() => {
-                  setTheme(theme.id);
-                  setOpen(false);
-                }}
-              >
-                <span className="theme-swatch" aria-hidden="true">
-                  <span />
-                </span>
-                <span>{theme.name}</span>
-              </button>
-            );
-          })}
-        </div>
-      ) : null}
-    </div>
+function MoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M20.2 14.6a8.4 8.4 0 1 1-10.8-10.8 8.4 8.4 0 0 0 10.8 10.8Z"
+        fill="currentColor"
+      />
+    </svg>
   );
 }

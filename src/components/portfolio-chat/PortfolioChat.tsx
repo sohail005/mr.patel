@@ -3,6 +3,7 @@
 import { FormEvent, KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { getChatResponse } from "@/lib/portfolio-chat/responseGenerator";
+import SpecularButton from "@/components/effects/SpecularButton";
 import type { ChatContext, ChatMessage, ChatResponse } from "@/types/portfolio-chat";
 
 const storageKey = "ask-sohail-chat-v1";
@@ -262,22 +263,29 @@ export default function PortfolioChat() {
 
   return (
     <>
-      <motion.button
-        type="button"
-        aria-label="Open Ask Sohail portfolio assistant"
-        aria-expanded={open}
-        onClick={() => setOpen(true)}
-        whileHover={{ y: -3, scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className={`ask-sohail-scope fixed bottom-[4.75rem] right-4 z-[90] flex min-h-12 items-center gap-3 overflow-hidden rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(139,187,146,0.18),rgba(42,131,95,0.11),rgba(255,255,255,0.07))] px-4 py-3 text-sm font-semibold text-[var(--color-text)] shadow-[0_9px_28px_rgba(0,0,0,0.16),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-2xl sm:bottom-[4.85rem] sm:right-5 ${open ? "pointer-events-none opacity-0" : "opacity-100"}`}
+      <div
+        className={`ask-sohail-scope fixed bottom-[4.75rem] right-4 z-[90] transition-opacity duration-200 sm:bottom-[4.85rem] sm:right-5 ${open ? "pointer-events-none opacity-0" : "opacity-100"}`}
       >
-        <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
-        <span className="relative h-2.5 w-2.5 rounded-full bg-[var(--color-secondary)] shadow-[0_0_18px_var(--color-secondary)]" />
-        <span className="hidden sm:inline">Ask Sohail</span>
-        <span className="sm:hidden" aria-hidden="true">
-          Ask
-        </span>
-      </motion.button>
+        <SpecularButton
+          size="sm"
+          radius={999}
+          onClick={() => setOpen(true)}
+          aria-label="Open Ask Sohail portfolio assistant"
+          aria-expanded={open}
+          className="ask-sohail-button"
+          tintOpacity={0}
+          textColor="var(--color-text)"
+          lineColor="#ffffff"
+          baseColor="#3f5a4a"
+          proximity={200}
+        >
+          <span className="relative h-2.5 w-2.5 rounded-full bg-[var(--color-secondary)] shadow-[0_0_18px_var(--color-secondary)]" />
+          <span className="hidden sm:inline">Ask Sohail</span>
+          <span className="sm:hidden" aria-hidden="true">
+            Ask
+          </span>
+        </SpecularButton>
+      </div>
 
       <AnimatePresence>
         {open ? (

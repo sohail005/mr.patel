@@ -1,6 +1,8 @@
 "use client";
 
 import ScrollReveal from "@/components/effects/ScrollReveal";
+import SpecularButton from "@/components/effects/SpecularButton";
+import { scrollToHash } from "@/lib/scrollToHash";
 
 type ServiceIcon = "deployment" | "app" | "website" | "training";
 
@@ -176,14 +178,23 @@ export default function Services() {
                     ))}
                   </ul>
 
-                  <a
-                    href="#contact"
-                    aria-label={`Talk about ${service.title}`}
-                    className="text-button mt-8 inline-flex min-h-11 w-fit items-center gap-2 rounded-full border border-(--primary-action-border) bg-(--primary-action-bg) px-5 py-3 font-mono uppercase tracking-[0.2em] text-(--primary-action-text) transition-[transform,background-color,border-color,color,gap] duration-300 hover:-translate-y-0.5 hover:gap-3 hover:border-primary hover:bg-(--control-bg-hover) hover:text-(--color-text)"
-                  >
-                    Let&apos;s talk about this
-                    <span aria-hidden="true">-&gt;</span>
-                  </a>
+                  <div className="mt-8 w-fit">
+                    <SpecularButton
+                      size="sm"
+                      radius={999}
+                      onClick={() => scrollToHash("contact")}
+                      aria-label={`Talk about ${service.title}`}
+                      className="service-cta-button"
+                      tintOpacity={0}
+                      textColor="var(--primary-action-text)"
+                      lineColor="#ffffff"
+                      baseColor="#3f5a4a"
+                      proximity={180}
+                    >
+                      Let&apos;s talk about this
+                      <span aria-hidden="true">-&gt;</span>
+                    </SpecularButton>
+                  </div>
                 </div>
               </article>
             </ScrollReveal>

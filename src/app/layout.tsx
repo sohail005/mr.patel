@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Inter, JetBrains_Mono, Playfair_Display, Fraunces, Poppins } from "next/font/google";
 import ClickSpark from "@/components/effects/ClickSpark";
-import ThemeSwitcher from "@/components/effects/ThemeSwitcher";
 import LiquidGlassTracker from "@/components/effects/LiquidGlassTracker";
+import StartExperience from "@/components/effects/StartExperience";
+import StartProjectTab from "@/components/effects/StartProjectTab";
 import PortfolioChat from "@/components/portfolio-chat/PortfolioChat";
 import "./globals.css";
 
@@ -74,7 +75,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              'try{var t=localStorage.getItem("portfolio-theme")||"daylight";document.documentElement.dataset.theme=t;}catch(e){}',
+              'try{var t=localStorage.getItem("portfolio-theme");if(t!=="midnight"&&t!=="daylight"){t="midnight";}document.documentElement.dataset.theme=t;}catch(e){}',
           }}
         />
       </head>
@@ -90,9 +91,10 @@ export default function RootLayout({
           extraScale={1.15}
         >
           <div className="noise-overlay" />
+          <StartExperience />
           {children}
+          <StartProjectTab />
           <PortfolioChat />
-          <ThemeSwitcher />
           <LiquidGlassTracker />
         </ClickSpark>
         <Script

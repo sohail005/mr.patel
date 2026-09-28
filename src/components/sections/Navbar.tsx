@@ -5,15 +5,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import ThemeSwitcher from "@/components/effects/ThemeSwitcher";
+import SpecularButton from "@/components/effects/SpecularButton";
+import { scrollToHash } from "@/lib/scrollToHash";
 
 const navLinks = [
   { name: "Home", href: "/#hero", section: "hero" },
   { name: "About", href: "/#about", section: "about" },
-  { name: "Skills", href: "/#skills", section: "skills" },
   { name: "Services", href: "/#services", section: "services" },
   { name: "Projects", href: "/#projects", section: "projects" },
-  { name: "Experience", href: "/#experience", section: "experience" },
-  { name: "Contact", href: "/#contact", section: "contact" },
 ];
 
 export default function Navbar() {
@@ -117,22 +116,26 @@ export default function Navbar() {
           })}
         </div>
 
-        <motion.a
-          href="/#contact"
-          whileHover={{ scale: 1.03, y: -1 }}
-          whileTap={{ scale: 0.99 }}
-          className="text-button primary-action-button relative z-10 hidden overflow-hidden rounded-full border px-5 py-3 font-mono uppercase tracking-[0.24em] lg:block"
-        >
-          <motion.span
-            animate={{ x: ["-140%", "160%"] }}
-            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", repeatDelay: 1.6 }}
-            className="absolute inset-y-0 left-0 w-14 skew-x-[-20deg] bg-(--control-bg-hover)"
-          />
-          <span className="relative z-10">Start a project</span>
-        </motion.a>
+        <div className="relative z-10 hidden items-center gap-4 lg:flex">
+          <SpecularButton
+            size="sm"
+            radius={999}
+            onClick={() => scrollToHash("contact")}
+            className="primary-action-button"
+            tintOpacity={0}
+            textColor="#ffffff"
+            lineColor="#ffffff"
+            baseColor="#8bbb92"
+            proximity={220}
+          >
+            Start a project
+          </SpecularButton>
+
+          <ThemeSwitcher />
+        </div>
 
         <div className="relative z-10 flex items-center gap-2 lg:hidden">
-          <ThemeSwitcher variant="inline" />
+          <ThemeSwitcher />
 
           <button
             type="button"
