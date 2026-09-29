@@ -74,9 +74,9 @@ const readCssColor = (name: string, fallback: string) => {
 
 const gradientColorAt = (progress: number) => {
   const stops = [
-    readCssColor("--color-primary-strong", "#cfe4d1"),
-    readCssColor("--color-secondary", "#2a835f"),
-    readCssColor("--color-accent", "#12544f"),
+    readCssColor("--color-primary-strong", "#e8dcc4"),
+    readCssColor("--color-secondary", "#123f36"),
+    readCssColor("--color-accent", "#123f36"),
   ];
   const clamped = Math.min(1, Math.max(0, progress));
   const segment = 1 / (stops.length - 1);
@@ -161,7 +161,7 @@ export default function Hero() {
       <div className="atmosphere" />
       <div className="terrain-grid absolute inset-0 opacity-[0.06]" />
 
-      <div className="pointer-events-none absolute left-1/2 top-[10%] h-[18rem] w-[18rem] -translate-x-1/2 rounded-full bg-[rgba(139,187,146,0.14)] blur-[90px] sm:h-[28rem] sm:w-[28rem] lg:h-[34rem] lg:w-[34rem] lg:blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-[10%] h-[18rem] w-[18rem] -translate-x-1/2 rounded-full bg-[rgba(42,107,92,0.14)] blur-[90px] sm:h-[28rem] sm:w-[28rem] lg:h-[34rem] lg:w-[34rem] lg:blur-[120px]" />
 
       <div className="absolute inset-x-0 bottom-0 h-56 bg-[var(--hero-bottom-fade)]" />
 
@@ -220,7 +220,7 @@ export default function Hero() {
               tintOpacity={0}
               textColor="var(--color-text)"
               lineColor="#ffffff"
-              baseColor="#3f5a4a"
+              baseColor="#2a6b5c"
               proximity={200}
             >
               Explore work
@@ -233,7 +233,7 @@ export default function Hero() {
               tintOpacity={0}
               textColor="var(--color-text)"
               lineColor="#ffffff"
-              baseColor="#3f5a4a"
+              baseColor="#2a6b5c"
               proximity={200}
             >
               Discuss a build
@@ -267,7 +267,7 @@ export default function Hero() {
               status="Available"
               contactText="Contact"
               behindGlowEnabled
-              behindGlowColor="rgba(139,187,146,0.5)"
+              behindGlowColor="rgba(42,107,92,0.5)"
               behindGlowSize="48%"
               innerGradient="linear-gradient(145deg,rgba(6,16,27,0.96) 0%,rgba(13,30,45,0.88) 62%,rgba(18,44,52,0.78) 100%)"
               className="hero-profile-card"

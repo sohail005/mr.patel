@@ -66,7 +66,7 @@ export default function Navbar() {
         <motion.div
           animate={{ x: ["-10%", "10%", "-10%"] }}
           transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-          className="pointer-events-none absolute inset-y-0 left-[-20%] w-[40%] bg-[linear-gradient(90deg,transparent,rgba(139,187,146,0.12),transparent)] blur-2xl"
+          className="pointer-events-none absolute inset-y-0 left-[-20%] w-[40%] bg-[linear-gradient(90deg,transparent,rgba(42,107,92,0.12),transparent)] blur-2xl"
         />
         <motion.div
           animate={{ opacity: [0.35, 0.8, 0.35], scaleX: [0.8, 1, 0.8] }}
@@ -125,7 +125,7 @@ export default function Navbar() {
             tintOpacity={0}
             textColor="#ffffff"
             lineColor="#ffffff"
-            baseColor="#8bbb92"
+            baseColor="#2a6b5c"
             proximity={220}
           >
             Start a project

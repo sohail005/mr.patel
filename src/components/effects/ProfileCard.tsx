@@ -14,7 +14,7 @@ import { scrollToHash } from "@/lib/scrollToHash";
 import "./ProfileCard.css";
 
 const DEFAULT_INNER_GRADIENT =
-  "linear-gradient(145deg,rgba(18,84,79,0.55) 0%,rgba(139,187,146,0.27) 100%)";
+  "linear-gradient(145deg,rgba(18, 63, 54,0.55) 0%,rgba(42, 107, 92,0.27) 100%)";
 
 const clamp = (value: number, min = 0, max = 100) =>
   Math.min(Math.max(value, min), max);
@@ -179,7 +179,7 @@ function ProfileCardComponent({
       "--icon": iconUrl ? `url(${iconUrl})` : "none",
       "--grain": grainUrl ? `url(${grainUrl})` : "none",
       "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
-      "--behind-glow-color": behindGlowColor ?? "rgba(139,187,146,0.67)",
+      "--behind-glow-color": behindGlowColor ?? "rgba(42, 107, 92,0.67)",
       "--behind-glow-size": behindGlowSize ?? "50%",
     }),
     [behindGlowColor, behindGlowSize, grainUrl, iconUrl, innerGradient]

@@ -45,7 +45,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://www.opusvirtualoffices.com/affiliate-program-opus-landing.webp",
       alt: "Opus Virtual Offices website displayed on desktop and mobile devices",
-      accent: "#8bbb92",
+      accent: "#2a6b5c",
       previewUrl: "opusvirtualoffices.com",
       fit: "cover",
       source: "Website",
@@ -65,7 +65,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://play-lh.googleusercontent.com/E6TXN3xEHMIgeqCxp7pAU1oc6pb0cu_90T28qH_JrkUyMUnKfhORyyBBILpI21MOPL9LDr3h_IMZCA933izq=w526-h296",
       alt: "Finecart app preview screenshot from Google Play",
-      accent: "#2a835f",
+      accent: "#123f36",
       previewUrl: "play.google.com/store/apps/details?id=com.retail.center.io",
       fit: "cover",
       source: "Google Play",
@@ -96,7 +96,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/5a/28/f8/5a28f80a-3279-9227-5100-c95ba654e812/3068028c-8ffe-4401-949c-346382aceb4a_Simulator_Screenshot_-_iPhone_8_Plus_-_2023-08-18_at_16.44.16.png/392x696bb.png",
       alt: "Finecart iOS app preview screenshot from the App Store",
-      accent: "#2a835f",
+      accent: "#123f36",
       previewUrl: "apps.apple.com/in/app/finecart/id6462674750",
       source: "App Store",
       appIcon:
@@ -126,7 +126,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://play-lh.googleusercontent.com/xyskAwNunUCiHz4iht1QJI7zYN4ZWk-aP6wZ5V4AFN7MT1VE4i221V8-jv0bx2wIT4Ml9lXBkNMAOQ6k9Z7XkA",
       alt: "HOPP COMPANY customer app preview screenshot from Google Play",
-      accent: "#12544f",
+      accent: "#123f36",
       previewUrl: "play.google.com/store/apps/details?id=com.Revalsys.warantech.HoppCustomer",
       fit: "cover",
       source: "Google Play",
@@ -157,7 +157,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/d7/03/59/d7035919-a6df-7339-cf84-75955eeb7941/4d179d47-975d-477f-9b87-27b9865e944c_1.jpg/392x696bb.jpg",
       alt: "HOPP COMPANY iOS app preview screenshot from the App Store",
-      accent: "#12544f",
+      accent: "#123f36",
       previewUrl: "apps.apple.com/in/app/hopp-company/id1527763771",
       source: "App Store",
       appIcon:
@@ -187,7 +187,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://play-lh.googleusercontent.com/U7GfWeX-gKBQtDNXrTPn3lL-XS7KRDBuJ6z06Q-rJUlOmXSUJc-6bBJX1bhZC_yiSj04Jpp3gXgZQZFZtUUWa8Y",
       alt: "HOPP Partner driver app preview screenshot from Google Play",
-      accent: "#12544f",
+      accent: "#123f36",
       previewUrl: "play.google.com/store/apps/details?id=com.Revalsys.warantech.HOPPDriver",
       fit: "cover",
       source: "Google Play",
@@ -218,7 +218,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/2b/99/64/2b996460-c3e3-f620-ae09-d893a25bc213/be4f6f29-3612-48a5-a12a-4faf1821542b_1.jpg/392x696bb.jpg",
       alt: "HOPP Partner iOS app preview screenshot from the App Store",
-      accent: "#12544f",
+      accent: "#123f36",
       previewUrl: "apps.apple.com/in/app/hopp-partner/id1527779025",
       source: "App Store",
       appIcon:
@@ -248,7 +248,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://play-lh.googleusercontent.com/Vc695YWsbcXaN3B9jFtbG477XysLjp1QJKDwfnOrF5D9cKUK2q_gnzUWr2P8dvxdCIHMaE5EY-Zq26bqyHIhaw",
       alt: "HOPP COMPANY Admin app preview screenshot from Google Play",
-      accent: "#8bbb92",
+      accent: "#2a6b5c",
       previewUrl: "play.google.com/store/apps/details?id=com.hoppadmin",
       fit: "cover",
       source: "Google Play",
@@ -279,7 +279,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://play-lh.googleusercontent.com/2JLmGumfsvm5gDfKHmRS1A3j75jQ4prQDckID9pC-BRaLQVIwahGY84TdBHVm8lrKX093Uml9ReFqzQEElHG=w526-h296",
       alt: "RevalOmni Dashboard app preview screenshot from Google Play",
-      accent: "#8bbb92",
+      accent: "#2a6b5c",
       previewUrl: "play.google.com/store/apps/details?id=com.masterwsi",
       fit: "cover",
       source: "Google Play",
@@ -309,7 +309,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://play-lh.googleusercontent.com/MQJhsMZ1kxxRQiF3uqfZjyvTwn4Afa-XY5qoAfJydl9aS15oNXOb51YaoU8CNjaArQHDa3J6bIeEXXmI88HJ=w526-h296",
       alt: "Revalsys Authenticator app preview screenshot from Google Play",
-      accent: "#2a835f",
+      accent: "#123f36",
       previewUrl: "play.google.com/store/apps/details?id=com.revalnotification",
       fit: "cover",
       source: "Google Play",
@@ -339,7 +339,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://play-lh.googleusercontent.com/kY9PiqF9d224lRkHlS42GNBXBTcfpKhXE4-F3AfndohIVNdHmPaHoa-Q9rN9RzIypjNwEJydlYf_TliSKMwyiA=w526-h296",
       alt: "Reval ESS Android app preview screenshot from Google Play",
-      accent: "#8bbb92",
+      accent: "#2a6b5c",
       previewUrl: "play.google.com/store/apps/details?id=com.revaless",
       fit: "cover",
       source: "Google Play",
@@ -370,7 +370,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/b2/a0/99/b2a0997a-9959-9d62-a7e7-de859543d4eb/6.7a_U0302_U0080_U009d_Display_-page-1.jpg/320x480bb.jpg",
       alt: "Revalsys Authenticator iOS app preview screenshot from the App Store",
-      accent: "#2a835f",
+      accent: "#123f36",
       previewUrl: "apps.apple.com/in/app/revalsys-authenticator/id6737756995",
       source: "App Store",
       appIcon:
@@ -400,7 +400,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/3e/25/90/3e259080-18d1-50b8-32f5-88228a6abda4/shared_image__U00282_U0029.png/320x480bb.jpg",
       alt: "RevalESS iOS app preview screenshot from the App Store",
-      accent: "#8bbb92",
+      accent: "#2a6b5c",
       previewUrl: "apps.apple.com/in/app/revaless/id6739558255",
       source: "App Store",
       appIcon:
@@ -430,7 +430,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/93/3c/27/933c27d7-f0dd-cb8f-b226-8f7d62f9ed2c/image__U00283_U0029.png/392x696bb.png",
       alt: "Trusterra Partner iOS app preview screenshot from the App Store",
-      accent: "#2a835f",
+      accent: "#123f36",
       previewUrl: "apps.apple.com/in/app/trusterra-partner/id6748809106",
       source: "App Store",
       appIcon:
@@ -459,7 +459,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://play-lh.googleusercontent.com/jd_hrq2Shq_IO2_Fq610-qdhbvNfTtN_xoUojTtKFb8yeOnkJdVcfpyO0t5Xk2mjZs0eAaKTMMkph3pnI6JpIw=w526-h296",
       alt: "Pro 5 Networking app preview screenshot from Google Play",
-      accent: "#8bbb92",
+      accent: "#2a6b5c",
       previewUrl: "play.google.com/store/apps/details?id=com.pro_v_networking",
       fit: "cover",
       source: "Google Play",
@@ -489,7 +489,7 @@ const projects: Project[] = [
     thumbnail: {
       src: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/5f/a1/0e/5fa10efd-b16d-572e-8ab8-f73be306ac79/image-blue.png/320x480bb.jpg",
       alt: "Pro 5 Networking iOS app preview screenshot from the App Store",
-      accent: "#8bbb92",
+      accent: "#2a6b5c",
       previewUrl: "apps.apple.com/in/app/pro-5-networking/id6745877588",
       source: "App Store",
       appIcon:
@@ -757,7 +757,7 @@ export default function Projects({ limit }: { limit?: number }) {
               tintOpacity={0}
               textColor="var(--primary-action-text)"
               lineColor="#ffffff"
-              baseColor="#3f5a4a"
+              baseColor="#2a6b5c"
               proximity={220}
             >
               View all projects

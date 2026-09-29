@@ -126,7 +126,7 @@ function ServiceIcon({ name }: { name: ServiceIcon }) {
 export default function Services() {
   return (
     <section id="services" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
-      <div className="pointer-events-none absolute right-0 top-24 hidden h-72 w-72 rounded-full bg-[rgba(139,187,146,0.07)] blur-[90px] md:block" />
+      <div className="pointer-events-none absolute right-0 top-24 hidden h-72 w-72 rounded-full bg-[rgba(42,107,92,0.07)] blur-[90px] md:block" />
 
       <div className="mx-auto max-w-7xl px-6">
         <ScrollReveal mode="inView" className="max-w-3xl">
@@ -188,7 +188,7 @@ export default function Services() {
                       tintOpacity={0}
                       textColor="var(--primary-action-text)"
                       lineColor="#ffffff"
-                      baseColor="#3f5a4a"
+                      baseColor="#2a6b5c"
                       proximity={180}
                     >
                       Let&apos;s talk about this

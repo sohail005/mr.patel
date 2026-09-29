@@ -47,13 +47,13 @@ function ResponseDetails({ response }: { response: ChatResponse }) {
   return (
     <div className="mt-3 space-y-3">
       {response.skills?.map((group) => (
-        <div key={group.title} className="rounded-2xl border border-white/10 bg-white/[0.045] p-3">
+        <div key={group.title} className="rounded-2xl border border-[var(--surface-border)] bg-[var(--control-bg)] p-3">
           <p className="text-caption font-mono uppercase tracking-[0.22em] text-[var(--color-primary)]">
             {group.title}
           </p>
           <div className="mt-2 flex flex-wrap gap-2">
             {group.items.map((item) => (
-              <span key={item} className="rounded-full border border-white/10 bg-white/[0.055] px-3 py-1 text-xs text-[var(--color-text)]">
+              <span key={item} className="rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] px-3 py-1 text-xs text-[var(--color-text)]">
                 {item}
               </span>
             ))}
@@ -62,12 +62,12 @@ function ResponseDetails({ response }: { response: ChatResponse }) {
       ))}
 
       {response.services?.map((service) => (
-        <div key={service.id} className="rounded-2xl border border-white/10 bg-white/[0.045] p-3">
+        <div key={service.id} className="rounded-2xl border border-[var(--surface-border)] bg-[var(--control-bg)] p-3">
           <p className="font-semibold text-[var(--color-text)]">{service.title}</p>
           <p className="mt-1 text-sm leading-6 text-[var(--color-text-muted)]">{service.description}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {service.capabilities.slice(0, 4).map((item) => (
-              <span key={item} className="text-sm rounded-full border border-white/10 bg-[var(--control-bg)] px-2.5 py-1 text-[var(--color-text-muted)]">
+              <span key={item} className="text-sm rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] px-2.5 py-1 text-[var(--color-text-muted)]">
                 {item}
               </span>
             ))}
@@ -81,7 +81,7 @@ function ResponseDetails({ response }: { response: ChatResponse }) {
           href={project.projectUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="block rounded-2xl border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.075),rgba(255,255,255,0.035))] p-3 transition hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--color-primary)_42%,transparent)]"
+          className="block rounded-2xl border border-[var(--surface-border)] bg-[var(--control-bg)] p-3 transition hover:-translate-y-0.5 hover:border-[color-mix(in_srgb,var(--color-primary)_42%,transparent)]"
         >
           <div className="flex items-start justify-between gap-3">
             <div>
@@ -90,14 +90,14 @@ function ResponseDetails({ response }: { response: ChatResponse }) {
                 {project.platform.join(" + ")} / {project.metric}
               </p>
             </div>
-            <span className="text-caption rounded-full border border-white/10 px-2 py-1 text-[var(--color-text-muted)]">
+            <span className="text-caption rounded-full border border-[var(--surface-border)] px-2 py-1 text-[var(--color-text-muted)]">
               View
             </span>
           </div>
           <p className="mt-2 text-sm leading-6 text-[var(--color-text-muted)]">{project.description}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {project.technologies.slice(0, 4).map((technology) => (
-              <span key={technology} className="text-caption rounded-full bg-white/[0.055] px-2.5 py-1 text-[var(--color-text-muted)]">
+              <span key={technology} className="text-caption rounded-full bg-[var(--control-bg)] px-2.5 py-1 text-[var(--color-text-muted)]">
                 {technology}
               </span>
             ))}
@@ -116,7 +116,7 @@ function ResponseDetails({ response }: { response: ChatResponse }) {
               className={`rounded-full border px-3 py-2 text-xs font-medium ${
                 action.kind === "primary"
                   ? "border-[var(--primary-action-border)] bg-[var(--primary-action-bg)] text-[var(--primary-action-text)]"
-                  : "border-white/10 bg-white/[0.045] text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                  : "border-[var(--surface-border)] bg-[var(--control-bg)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
               }`}
             >
               {action.label}
@@ -142,7 +142,7 @@ function MessageBubble({ message }: { message: ChatMessage }) {
         className={`max-w-[82%] rounded-[1.25rem] border px-4 py-3 text-sm leading-6 shadow-[0_18px_42px_rgba(0,0,0,0.18)] ${
           isUser
             ? "border-[color-mix(in_srgb,var(--color-primary)_28%,transparent)] bg-[color-mix(in_srgb,var(--color-primary)_17%,transparent)] text-[var(--color-text)]"
-            : "border-white/10 bg-white/[0.055] text-[var(--color-text-muted)]"
+            : "border-[var(--surface-border)] bg-[var(--control-bg)] text-[var(--color-text-muted)]"
         }`}
       >
         <p className="whitespace-pre-wrap break-words">{message.content}</p>
@@ -156,7 +156,7 @@ function TypingIndicator() {
   return (
     <div className="flex items-center gap-3">
       <AssistantGlyph />
-      <div className="flex gap-1.5 rounded-full border border-white/10 bg-white/[0.055] px-4 py-3">
+      <div className="flex gap-1.5 rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3">
         {[0, 1, 2].map((item) => (
           <span
             key={item}
@@ -276,7 +276,7 @@ export default function PortfolioChat() {
           tintOpacity={0}
           textColor="var(--color-text)"
           lineColor="#ffffff"
-          baseColor="#3f5a4a"
+          baseColor="#2a6b5c"
           proximity={200}
         >
           <span className="relative h-2.5 w-2.5 rounded-full bg-[var(--color-secondary)] shadow-[0_0_18px_var(--color-secondary)]" />
@@ -298,11 +298,11 @@ export default function PortfolioChat() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 18, scale: 0.97 }}
             transition={{ duration: 0.22, ease: "easeOut" }}
-            className="ask-sohail-scope fixed inset-x-3 bottom-3 top-3 z-[120] flex overflow-hidden rounded-[1.65rem] border border-white/12 bg-[linear-gradient(145deg,rgba(8,20,32,0.84),rgba(5,13,22,0.94))] text-[var(--color-text)] shadow-[0_28px_95px_rgba(0,0,0,0.46),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl sm:inset-auto sm:bottom-5 sm:right-5 sm:h-[min(680px,calc(100svh-2.5rem))] sm:w-[400px]"
+            className="ask-sohail-scope fixed inset-x-3 bottom-3 top-3 z-[120] flex overflow-hidden rounded-[1.65rem] border border-[var(--surface-border-strong)] bg-[linear-gradient(145deg,var(--color-panel),var(--color-panel-strong))] text-[var(--color-text)] shadow-[0_28px_95px_rgba(0,0,0,0.46),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl sm:inset-auto sm:bottom-5 sm:right-5 sm:h-[min(680px,calc(100svh-2.5rem))] sm:w-[400px]"
           >
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,color-mix(in_srgb,var(--color-primary)_24%,transparent),transparent_34%),radial-gradient(circle_at_90%_20%,color-mix(in_srgb,var(--color-secondary)_15%,transparent),transparent_30%)]" />
             <div className="relative z-10 flex min-h-0 w-full flex-col">
-              <header className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-4">
+              <header className="flex items-center justify-between gap-3 border-b border-[var(--surface-border)] px-4 py-4">
                 <div className="flex items-center gap-3">
                   <AssistantGlyph />
                   <div>
@@ -318,7 +318,7 @@ export default function PortfolioChat() {
                   <button
                     type="button"
                     onClick={clearChat}
-                    className="text-sm rounded-full border border-white/10 bg-white/[0.045] px-3 py-2 text-[var(--color-text-muted)] hover:text-[var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+                    className="text-sm rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] px-3 py-2 text-[var(--color-text-muted)] hover:text-[var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
                     aria-label="Clear Ask Sohail chat"
                     title="Clear chat"
                   >
@@ -327,7 +327,7 @@ export default function PortfolioChat() {
                   <button
                     type="button"
                     onClick={() => setOpen(false)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.045] text-xl leading-none text-[var(--color-text-muted)] hover:text-[var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] text-xl leading-none text-[var(--color-text-muted)] hover:text-[var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
                     aria-label="Close Ask Sohail"
                     title="Close"
                   >
@@ -344,7 +344,7 @@ export default function PortfolioChat() {
                 className="min-h-0 flex-1 touch-pan-y space-y-4 overflow-y-auto overscroll-contain px-4 py-4"
               >
                 {messages.length === 0 ? (
-                  <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.055] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                  <div className="rounded-[1.35rem] border border-[var(--surface-border)] bg-[var(--control-bg)] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
                     <p className="text-2xl font-semibold">Hi</p>
                     <p className="mt-3 text-sm leading-7 text-[var(--color-text-muted)]">
                       I&apos;m Sohail&apos;s portfolio assistant. I can help you explore his skills,
@@ -361,7 +361,7 @@ export default function PortfolioChat() {
                 {processing ? <TypingIndicator /> : null}
               </div>
 
-              <div className="border-t border-white/10 p-4">
+              <div className="border-t border-[var(--surface-border)] p-4">
                 {suggestions.length ? (
                   <div className="mb-3 flex gap-2 overflow-x-auto pb-1" aria-label="Suggested Ask Sohail questions">
                     {suggestions.map((suggestion) => (
@@ -369,7 +369,7 @@ export default function PortfolioChat() {
                         key={suggestion}
                         type="button"
                         onClick={() => sendMessage(suggestion)}
-                        className="shrink-0 rounded-full border border-white/10 bg-white/[0.045] px-3 py-2 text-xs text-[var(--color-text-muted)] hover:border-[color-mix(in_srgb,var(--color-primary)_36%,transparent)] hover:text-[var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+                        className="shrink-0 rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] px-3 py-2 text-xs text-[var(--color-text-muted)] hover:border-[color-mix(in_srgb,var(--color-primary)_36%,transparent)] hover:text-[var(--color-text)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
                       >
                         {suggestion}
                       </button>
@@ -390,7 +390,7 @@ export default function PortfolioChat() {
                     onChange={(event) => setValue(event.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder="Ask about Sohail..."
-                    className="max-h-28 min-h-12 flex-1 resize-none rounded-[1.1rem] border border-white/10 bg-white/[0.055] px-4 py-3 text-sm text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[color-mix(in_srgb,var(--color-primary)_22%,transparent)]"
+                    className="max-h-28 min-h-12 flex-1 resize-none rounded-[1.1rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3 text-sm text-[var(--color-text)] outline-none placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[color-mix(in_srgb,var(--color-primary)_22%,transparent)]"
                   />
                   <button
                     type="submit"

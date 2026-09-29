@@ -1,46 +1,44 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, JetBrains_Mono, Playfair_Display, Fraunces, Poppins } from "next/font/google";
+import { Fira_Code } from "next/font/google";
 import ClickSpark from "@/components/effects/ClickSpark";
 import LiquidGlassTracker from "@/components/effects/LiquidGlassTracker";
 import StartExperience from "@/components/effects/StartExperience";
-import StartProjectTab from "@/components/effects/StartProjectTab";
 import PortfolioChat from "@/components/portfolio-chat/PortfolioChat";
 import "./globals.css";
 
-const inter = Inter({
+const inter = Fira_Code({
   subsets: ["latin"],
   variable: "--font-inter",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const jetBrainsMono = JetBrains_Mono({
+const jetBrainsMono = Fira_Code({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
-const playfairDisplay = Playfair_Display({
+const playfairDisplay = Fira_Code({
   subsets: ["latin"],
   variable: "--font-playfair",
-  weight: ["400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const fraunce = Fraunces({
+const fraunce = Fira_Code({
   subsets: ["latin"],
   variable: "--font-fraunce",
-  weight: ["400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const poppins = Poppins({
+const poppins = Fira_Code({
   subsets: ["latin"],
   variable: "--font-poppins",
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -83,7 +81,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetBrainsMono.variable} ${playfairDisplay.variable} ${fraunce.variable} ${poppins.variable} antialiased`}
       >
         <ClickSpark
-          sparkColor="#cfe4d1"
+          sparkColor="#e8dcc4"
           sparkSize={12}
           sparkRadius={20}
           sparkCount={10}
@@ -93,7 +91,6 @@ export default function RootLayout({
           <div className="noise-overlay" />
           <StartExperience />
           {children}
-          <StartProjectTab />
           <PortfolioChat />
           <LiquidGlassTracker />
         </ClickSpark>

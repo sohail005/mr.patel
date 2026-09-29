@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #000000;
-  --color-surface: #0a0a0a;
-  --color-surface-soft: #161616;
-  --color-panel: rgba(0, 0, 0, 0.7);
-  --color-panel-strong: rgba(0, 0, 0, 0.92);
-  --color-primary: #8bbb92;
-  --color-primary-strong: #cfe4d1;
-  --color-secondary: #2a835f;
-  --color-accent: #FFFFFFFF;
-  --color-text: #eaf3ec;
-  --color-text-muted: #93a89c;
-  --color-border: rgba(255, 255, 255, 0.14);
+  --color-background: #07120f;
+  --color-surface: #0d1815;
+  --color-surface-soft: #15241f;
+  --color-panel: rgba(7, 18, 15, 0.7);
+  --color-panel-strong: rgba(7, 18, 15, 0.92);
+  --color-primary: #2a6b5c;
+  --color-primary-strong: #e8dcc4;
+  --color-secondary: #123f36;
+  --color-accent: #c49a45;
+  --color-text: #e8dcc4;
+  --color-text-muted: #a79c86;
+  --color-border: rgba(232, 220, 196, 0.14);
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -27,79 +27,79 @@
   --font-mono: var(--font-jetbrains-mono), "SFMono-Regular", Consolas, monospace;
   --font-serif: var(--font-inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --body-bg:
-    radial-gradient(circle at top, rgba(11, 139, 101, 0.1), transparent 30%),
-    radial-gradient(circle at 80% 20%, rgba(74, 22, 158, 0.08), transparent 24%),
-    #000000;
-  --scrollbar-track: #000000;
-  --nav-bg-rest: rgba(0, 0, 0, 0.55);
-  --nav-bg-scrolled: rgba(0, 0, 0, 0.86);
-  --theme-panel: rgba(0, 0, 0, 0.75);
-  --surface-border: rgba(255, 255, 255, 0.1);
-  --surface-border-strong: rgba(255, 255, 255, 0.16);
-  --control-bg: rgba(255, 255, 255, 0.05);
-  --control-bg-hover: rgba(255, 255, 255, 0.09);
-  --primary-action-bg: rgba(139, 187, 146, 0.13);
-  --primary-action-border: rgba(139, 187, 146, 0.28);
-  --primary-action-text: #ffffff;
+    radial-gradient(circle at top, rgba(42, 107, 92, 0.12), transparent 30%),
+    radial-gradient(circle at 80% 20%, rgba(196, 154, 69, 0.08), transparent 24%),
+    #07120f;
+  --scrollbar-track: #07120f;
+  --nav-bg-rest: rgba(7, 18, 15, 0.55);
+  --nav-bg-scrolled: rgba(7, 18, 15, 0.86);
+  --theme-panel: rgba(7, 18, 15, 0.75);
+  --surface-border: rgba(232, 220, 196, 0.1);
+  --surface-border-strong: rgba(232, 220, 196, 0.16);
+  --control-bg: rgba(232, 220, 196, 0.05);
+  --control-bg-hover: rgba(232, 220, 196, 0.09);
+  --primary-action-bg: rgba(42, 107, 92, 0.18);
+  --primary-action-border: rgba(42, 107, 92, 0.36);
+  --primary-action-text: #e8dcc4;
   --hero-bottom-fade: linear-gradient(to top, var(--color-background), transparent);
-  --highlight-text: #02070d;
-  --featured-bg: #000000;
-  --featured-bg-layer: radial-gradient(circle at 35% 40%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 24%), linear-gradient(90deg, #000000 0%, #0f0f0f 52%, #050505 100%);
-  --featured-bg-layer-mobile: radial-gradient(circle at 35% 40%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 24%), linear-gradient(180deg, #000000 0%, #0e0e0e 55%, #050505 100%);
-  --featured-vignette: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 20%, transparent 80%, rgba(255, 255, 255, 0.02));
-  --featured-card: rgba(10, 18, 28, 0.9);
-  --featured-card-soft: rgba(255, 255, 255, 0.035);
-  --featured-card-strong: rgba(255, 255, 255, 0.065);
-  --featured-border: rgba(255, 255, 255, 0.1);
-  --featured-border-strong: rgba(255, 255, 255, 0.16);
-  --featured-line: rgba(255, 255, 255, 0.6);
-  --featured-soft-text: rgba(236, 242, 248, 0.68);
-  --featured-card-text: rgba(236, 242, 248, 0.82);
+  --highlight-text: #07120f;
+  --featured-bg: #07120f;
+  --featured-bg-layer: radial-gradient(circle at 35% 40%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 24%), linear-gradient(90deg, #07120f 0%, #0f1c17 52%, #050c0a 100%);
+  --featured-bg-layer-mobile: radial-gradient(circle at 35% 40%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 24%), linear-gradient(180deg, #07120f 0%, #0e1b16 55%, #050c0a 100%);
+  --featured-vignette: linear-gradient(180deg, rgba(232, 220, 196, 0.02), transparent 20%, transparent 80%, rgba(232, 220, 196, 0.02));
+  --featured-card: rgba(13, 24, 21, 0.9);
+  --featured-card-soft: rgba(232, 220, 196, 0.035);
+  --featured-card-strong: rgba(232, 220, 196, 0.065);
+  --featured-border: rgba(232, 220, 196, 0.1);
+  --featured-border-strong: rgba(232, 220, 196, 0.16);
+  --featured-line: rgba(232, 220, 196, 0.6);
+  --featured-soft-text: rgba(232, 220, 196, 0.68);
+  --featured-card-text: rgba(232, 220, 196, 0.82);
 }
 
 :root[data-theme="daylight"] {
   color-scheme: light;
-  --color-background: #ffffff;
-  --color-surface: #ffffff;
-  --color-surface-soft: #f5f5f5;
-  --color-panel: rgba(255, 255, 255, 0.78);
-  --color-panel-strong: rgba(255, 255, 255, 0.94);
-  --color-primary: #2563eb;
-  --color-primary-strong: #7db4ff;
-  --color-secondary: #14b8a6;
-  --color-accent: #f59e0b;
-  --color-text: #0f172a;
-  --color-text-muted: #334155;
-  --color-border: rgba(15, 23, 42, 0.16);
+  --color-background: #e8dcc4;
+  --color-surface: #f1e8d6;
+  --color-surface-soft: #f6efe3;
+  --color-panel: rgba(232, 220, 196, 0.78);
+  --color-panel-strong: rgba(232, 220, 196, 0.94);
+  --color-primary: #2a6b5c;
+  --color-primary-strong: #123f36;
+  --color-secondary: #123f36;
+  --color-accent: #c49a45;
+  --color-text: #123f36;
+  --color-text-muted: #4b6259;
+  --color-border: rgba(18, 63, 54, 0.16);
   --body-bg:
-    radial-gradient(circle at top, rgba(37, 99, 235, 0.1), transparent 30%),
-    radial-gradient(circle at 80% 20%, rgba(20, 184, 166, 0.08), transparent 24%),
-    #ffffff;
-  --scrollbar-track: #ffffff;
-  --nav-bg-rest: rgba(255, 255, 255, 0.72);
-  --nav-bg-scrolled: rgba(255, 255, 255, 0.9);
-  --theme-panel: rgba(255, 255, 255, 0.78);
-  --surface-border: rgba(15, 23, 42, 0.16);
-  --surface-border-strong: rgba(15, 23, 42, 0.24);
-  --control-bg: rgba(15, 23, 42, 0.05);
-  --control-bg-hover: rgba(15, 23, 42, 0.09);
-  --primary-action-bg: #2563eb;
-  --primary-action-border: rgba(37, 99, 235, 0.38);
-  --primary-action-text: #ffffff;
-  --hero-bottom-fade: linear-gradient(to top, #ffffff, transparent);
-  --highlight-text: #ffffff;
-  --featured-bg: #ffffff;
-  --featured-bg-layer: radial-gradient(circle at 35% 40%, rgba(37, 99, 235, 0.1), transparent 24%), linear-gradient(90deg, #ffffff 0%, #fafafa 52%, #f5f5f5 100%);
-  --featured-bg-layer-mobile: radial-gradient(circle at 35% 40%, rgba(37, 99, 235, 0.1), transparent 24%), linear-gradient(180deg, #ffffff 0%, #fafafa 55%, #f5f5f5 100%);
-  --featured-vignette: linear-gradient(180deg, rgba(37, 99, 235, 0.035), transparent 20%, transparent 80%, rgba(20, 184, 166, 0.04));
-  --featured-card: rgba(255, 255, 255, 0.78);
-  --featured-card-soft: rgba(15, 23, 42, 0.035);
-  --featured-card-strong: rgba(37, 99, 235, 0.08);
-  --featured-border: rgba(15, 23, 42, 0.1);
-  --featured-border-strong: rgba(37, 99, 235, 0.2);
-  --featured-line: rgba(15, 23, 42, 0.36);
-  --featured-soft-text: rgba(71, 85, 105, 0.78);
-  --featured-card-text: rgba(15, 23, 42, 0.84);
+    radial-gradient(circle at top, rgba(42, 107, 92, 0.1), transparent 30%),
+    radial-gradient(circle at 80% 20%, rgba(196, 154, 69, 0.1), transparent 24%),
+    #e8dcc4;
+  --scrollbar-track: #e8dcc4;
+  --nav-bg-rest: rgba(232, 220, 196, 0.72);
+  --nav-bg-scrolled: rgba(232, 220, 196, 0.9);
+  --theme-panel: rgba(232, 220, 196, 0.78);
+  --surface-border: rgba(18, 63, 54, 0.16);
+  --surface-border-strong: rgba(18, 63, 54, 0.24);
+  --control-bg: rgba(18, 63, 54, 0.05);
+  --control-bg-hover: rgba(18, 63, 54, 0.09);
+  --primary-action-bg: #2a6b5c;
+  --primary-action-border: rgba(42, 107, 92, 0.38);
+  --primary-action-text: #e8dcc4;
+  --hero-bottom-fade: linear-gradient(to top, #e8dcc4, transparent);
+  --highlight-text: #e8dcc4;
+  --featured-bg: #e8dcc4;
+  --featured-bg-layer: radial-gradient(circle at 35% 40%, rgba(42, 107, 92, 0.1), transparent 24%), linear-gradient(90deg, #e8dcc4 0%, #f1e8d6 52%, #f6efe3 100%);
+  --featured-bg-layer-mobile: radial-gradient(circle at 35% 40%, rgba(42, 107, 92, 0.1), transparent 24%), linear-gradient(180deg, #e8dcc4 0%, #f1e8d6 55%, #f6efe3 100%);
+  --featured-vignette: linear-gradient(180deg, rgba(42, 107, 92, 0.035), transparent 20%, transparent 80%, rgba(196, 154, 69, 0.04));
+  --featured-card: rgba(232, 220, 196, 0.78);
+  --featured-card-soft: rgba(18, 63, 54, 0.035);
+  --featured-card-strong: rgba(42, 107, 92, 0.08);
+  --featured-border: rgba(18, 63, 54, 0.1);
+  --featured-border-strong: rgba(42, 107, 92, 0.2);
+  --featured-line: rgba(18, 63, 54, 0.36);
+  --featured-soft-text: rgba(75, 98, 89, 0.78);
+  --featured-card-text: rgba(18, 63, 54, 0.84);
 }
 
 html {
@@ -112,7 +112,7 @@ html {
 }
 
 ::view-transition-new(root) {
-  animation: theme-reveal 1500ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: theme-reveal 1300ms cubic-bezier(0.22, 1, 0.36, 1);
   mix-blend-mode: normal;
 }
 
@@ -140,6 +140,12 @@ input,
 textarea,
 select {
   font-family: var(--font-sans);
+}
+
+*,
+*::before,
+*::after {
+  font-family: "Fira Code", "Fira Code Fallback", ui-monospace, "SFMono-Regular", Consolas, monospace !important;
 }
 
 .social-orbit-button {
@@ -575,8 +581,8 @@ textarea {
 
 .terrain-lines {
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(139, 187, 146, 0.12), transparent 28%),
-    radial-gradient(circle at 80% 10%, rgba(42, 131, 95, 0.08), transparent 22%),
+    radial-gradient(circle at 20% 30%, rgba(42, 107, 92, 0.12), transparent 28%),
+    radial-gradient(circle at 80% 10%, rgba(18, 63, 54, 0.08), transparent 22%),
     repeating-radial-gradient(circle at 50% 120%, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 34px);
 }
 
@@ -629,7 +635,7 @@ background:'transparent';
 
 .ridge-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(139, 187, 146, 0.5), rgba(18, 84, 79, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(42, 107, 92, 0.5), rgba(18, 63, 54, 0.4), transparent);
 }
 
 .atmosphere {
@@ -727,7 +733,7 @@ background:'transparent';
   border-radius: 999px;
   background: linear-gradient(160deg, var(--color-primary-strong), var(--color-primary));
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
-  color: #081018;
+  color: #123f36;
   overflow: hidden;
 }
 
@@ -815,31 +821,28 @@ background:'transparent';
 }
 
 .ask-sohail-scope {
-  --color-text: #eaf3ec;
-  --color-text-muted: #93a89c;
-  --color-primary: #8bbb92;
-  --color-secondary: #2a835f;
-  --control-bg: rgba(255, 255, 255, 0.05);
-  --primary-action-bg: rgba(139, 187, 146, 0.13);
-  --primary-action-border: rgba(139, 187, 146, 0.28);
-  --primary-action-text: #ffffff;
+  --color-primary: #2a6b5c;
+  --color-secondary: #123f36;
+  --primary-action-bg: rgba(42, 107, 92, 0.16);
+  --primary-action-border: rgba(42, 107, 92, 0.32);
+  --primary-action-text: #e8dcc4;
 }
 
 .primary-action-button {
-  background: linear-gradient(135deg, #3a9e6f 0%, #2a835f 55%, #12544f 100%);
-  border-color: rgba(255, 255, 255, 0.28);
-  box-shadow: 0 6px 16px rgba(42, 131, 95, 0.14);
-  color: #ffffff !important;
+  background: linear-gradient(135deg, #3d8a76 0%, #2a6b5c 55%, #123f36 100%);
+  border-color: rgba(232, 220, 196, 0.28);
+  box-shadow: 0 6px 16px rgba(18, 63, 54, 0.14);
+  color: #e8dcc4 !important;
 }
 
 .primary-action-button:hover {
-  background: linear-gradient(135deg, #4bb280 0%, #3a9e6f 55%, #1a6459 100%);
-  box-shadow: 0 4px 10px rgba(42, 131, 95, 0.18);
-  color: #ffffff !important;
+  background: linear-gradient(135deg, #4fa189 0%, #3d8a76 55%, #123f36 100%);
+  box-shadow: 0 4px 10px rgba(18, 63, 54, 0.18);
+  color: #e8dcc4 !important;
 }
 
 .specular-button.primary-action-button {
-  background: linear-gradient(135deg, #3a9e6f 0%, #2a835f 55%, #12544f 100%);
+  background: linear-gradient(135deg, #3d8a76 0%, #2a6b5c 55%, #123f36 100%);
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 700;
@@ -848,12 +851,12 @@ background:'transparent';
 }
 
 .specular-button.primary-action-button:hover {
-  background: linear-gradient(135deg, #4bb280 0%, #3a9e6f 55%, #1a6459 100%);
+  background: linear-gradient(135deg, #4fa189 0%, #3d8a76 55%, #123f36 100%);
 }
 
 .specular-button.hero-cta-button {
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: linear-gradient(135deg, rgba(139, 187, 146, 0.18), rgba(42, 131, 95, 0.11), rgba(255, 255, 255, 0.07));
+  border: 1px solid rgba(232, 220, 196, 0.14);
+  background: linear-gradient(135deg, rgba(42, 107, 92, 0.18), rgba(18, 63, 54, 0.11), rgba(196, 154, 69, 0.07));
   box-shadow:
     0 9px 28px rgba(0, 0, 0, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -873,8 +876,8 @@ background:'transparent';
 
 .specular-button.ask-sohail-button {
   min-height: 3rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: linear-gradient(135deg, rgba(139, 187, 146, 0.18), rgba(42, 131, 95, 0.11), rgba(255, 255, 255, 0.07));
+  border: 1px solid rgba(232, 220, 196, 0.14);
+  background: linear-gradient(135deg, rgba(42, 107, 92, 0.18), rgba(18, 63, 54, 0.11), rgba(196, 154, 69, 0.07));
   box-shadow:
     0 9px 28px rgba(0, 0, 0, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -891,7 +894,7 @@ background:'transparent';
 }
 
 :root[data-theme="daylight"] .ask-sohail-scope .specular-button.ask-sohail-button {
-  --color-text: #0f172a;
+  --color-text: #123f36;
 }
 
 .specular-button.service-cta-button {
@@ -969,11 +972,11 @@ background:'transparent';
 @keyframes pulseGlow {
   0%,
   100% {
-    box-shadow: 0 0 0 rgba(139, 187, 146, 0);
+    box-shadow: 0 0 0 rgba(42, 107, 92, 0);
   }
 
   50% {
-    box-shadow: 0 0 36px rgba(139, 187, 146, 0.18);
+    box-shadow: 0 0 36px rgba(42, 107, 92, 0.18);
   }
 }
 

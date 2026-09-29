@@ -87,12 +87,12 @@ function ContactPitchCard() {
           Available for new projects
         </span>
 
-        <p className="mt-6 text-caption font-mono uppercase tracking-[0.28em] text-[#e2793d]">
+        <p className="mt-6 text-caption font-mono uppercase tracking-[0.28em] text-[#c49a45]">
           Free consultation
         </p>
         <h3 className="mt-3 italic font-[family-name:var(--font-playfair)] text-4xl font-black leading-[1.05] tracking-tight text-[var(--color-text)] sm:text-5xl">
           Let&apos;s build something{" "}
-          <span className="italic font-[family-name:var(--font-playfair)] font-bold text-[#e2793d]">
+          <span className="italic font-[family-name:var(--font-playfair)] font-bold text-[#c49a45]">
             that ships.
           </span>
         </h3>
@@ -105,7 +105,7 @@ function ContactPitchCard() {
         <ul className="mt-6 space-y-3">
           {contactChecklist.map((item) => (
             <li key={item} className="flex items-center gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#e2793d] text-white shadow-[0_2px_8px_rgba(226,121,61,0.4)]">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#c49a45] text-white shadow-[0_2px_8px_rgba(196,154,69,0.4)]">
                 <CheckIcon />
               </span>
               <span className="text-base text-[var(--color-text)]">{item}</span>
@@ -463,7 +463,7 @@ export default function Contact() {
                 <ShieldCheck
                   size={13}
                   strokeWidth={2}
-                  className="text-[#C56E3D]"
+                  className="text-[#c49a45]"
                   aria-hidden="true"
                 />
                 Your details stay private — no spam, ever.
@@ -479,7 +479,7 @@ export default function Contact() {
                 tintOpacity={0}
                 textColor="var(--primary-action-text)"
                 lineColor="#ffffff"
-                baseColor="#3f5a4a"
+                baseColor="#2a6b5c"
                 proximity={220}
               >
                 {sending ? (

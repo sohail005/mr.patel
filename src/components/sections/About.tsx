@@ -32,7 +32,7 @@ export default function About() {
     <section id="about" ref={ref} className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
       <motion.div
         style={{ y: hazeY }}
-        className="pointer-events-none absolute left-0 top-16 hidden h-80 w-80 rounded-full bg-[rgba(42,131,95,0.08)] blur-[90px] md:block"
+        className="pointer-events-none absolute left-0 top-16 hidden h-80 w-80 rounded-full bg-[rgba(18,63,54,0.08)] blur-[90px] md:block"
       />
 
       <div className="mx-auto max-w-7xl px-6">
