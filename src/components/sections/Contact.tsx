@@ -3,12 +3,14 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Lottie } from "lottie-react";
+import { Mail, ShieldCheck } from "lucide-react";
 import handshakeAnimation from "@/Assets/Business_Handshake.json";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 import SocialLinks from "@/components/sections/SocialLinks";
-import SpecularButton from "@/components/effects/SpecularButton";
-import CurvedInput from "@/components/effects/CurvedInput";
-import { ShieldCheck } from "lucide-react";
+import Button from "@/components/ui/Button";
+import Container from "@/components/ui/Container";
+import SectionLabel from "@/components/ui/SectionLabel";
+import { sohailContact } from "@/data/sohail";
 
 const serviceOptions = [
   "App Deployment Services",
@@ -23,80 +25,22 @@ const contactChecklist = [
   "Designed to turn visitors into customers",
 ];
 
-const pastCompanies = [
-  "Fossil",
-  "Opus Virtual Offices",
-  "Jockey",
-  "Hopp",
-  "Pro 5 Networking",
-  "Finecart",
-  "Reval ERP",
-];
-
-function CheckIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      className="h-3.5 w-3.5"
-      aria-hidden="true"
-    >
-      <path
-        d="M5 12.5 10 17 19 7"
-        stroke="currentColor"
-        strokeWidth={2.4}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function MailIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
-      <rect
-        x="3"
-        y="5"
-        width="18"
-        height="14"
-        rx="2"
-        stroke="currentColor"
-        strokeWidth={1.8}
-      />
-      <path
-        d="m4 7 8 6 8-6"
-        stroke="currentColor"
-        strokeWidth={1.8}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const inputClasses =
+  "mt-2 w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] outline-none transition-colors focus:border-[var(--color-primary-accent)]";
 
 function ContactPitchCard() {
   return (
-    <div className="story-card flex h-full flex-col justify-between gap-8 rounded-[1.4rem] p-6 sm:rounded-4xl sm:p-8">
+    <div className="flex h-full flex-col justify-between gap-8 rounded-2xl border border-[var(--color-border)] p-6 sm:p-8">
       <div>
-        <span className="inline-flex items-center gap-2 rounded-full border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-text)]">
+        <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-text-primary)]">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-secondary" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-primary-accent)] opacity-60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--color-primary-accent)]" />
           </span>
           Available for new projects
         </span>
 
-        <p className="mt-6 text-caption font-mono uppercase tracking-[0.28em] text-[#c49a45]">
-          Free consultation
-        </p>
-        <h3 className="mt-3 italic font-[family-name:var(--font-playfair)] text-4xl font-black leading-[1.05] tracking-tight text-[var(--color-text)] sm:text-5xl">
-          Let&apos;s build something{" "}
-          <span className="italic font-[family-name:var(--font-playfair)] font-bold text-[#c49a45]">
-            that ships.
-          </span>
-        </h3>
-        <p className="mt-5 leading-7 text-[var(--color-text-muted)]">
+        <p className="mt-6 leading-7 text-[var(--color-text-secondary)]">
           I design and build fast, SEO-optimised web and mobile products that
           turn visitors into customers, engineered for rankings, speed and
           conversions.
@@ -104,39 +48,21 @@ function ContactPitchCard() {
 
         <ul className="mt-6 space-y-3">
           {contactChecklist.map((item) => (
-            <li key={item} className="flex items-center gap-3">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#c49a45] text-white shadow-[0_2px_8px_rgba(196,154,69,0.4)]">
-                <CheckIcon />
-              </span>
-              <span className="text-base text-[var(--color-text)]">{item}</span>
+            <li key={item} className="flex items-start gap-3">
+              <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-primary-accent)]" />
+              <span className="text-sm text-[var(--color-text-primary)]">{item}</span>
             </li>
           ))}
         </ul>
       </div>
 
       <div>
-        <div className="border-t border-[var(--surface-border)] pt-6">
-          <p className="text-caption font-mono font-bold uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
-            Experience across
-          </p>
-          <p className="mt-3 flex flex-wrap gap-x-2 gap-y-1 text-xs font-bold uppercase tracking-[0.08em] text-[var(--color-text-muted)]">
-            {pastCompanies.map((company, index) => (
-              <span key={company}>
-                {company}
-                {index < pastCompanies.length - 1 ? (
-                  <span className="ml-2"></span>
-                ) : null}
-              </span>
-            ))}
-          </p>
-        </div>
-
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[var(--color-border)] pt-6">
           <a
-            href="mailto:sohail345patel@gmail.com"
-            className="inline-flex items-center gap-2 text-sm text-[var(--color-text)] transition-colors duration-300 hover:text-[var(--color-primary)]"
+            href={`mailto:${sohailContact.email}`}
+            className="inline-flex items-center gap-2 text-sm text-[var(--color-text-primary)] transition-colors hover:text-[var(--color-primary-accent)]"
           >
-            <MailIcon />
+            <Mail size={16} strokeWidth={1.75} />
             Email me
           </a>
           <SocialLinks showLabel={false} />
@@ -264,15 +190,15 @@ export default function Contact() {
               onClick={(event) => event.stopPropagation()}
             >
               <motion.div
-                className="relative z-10 mt-60 bg-background p-10 text-center rounded-2xl shadow-[0_22px_55px_rgba(0,0,0,0.42)] backdrop-blur-2xl "
+                className="relative z-10 mt-60 rounded-2xl bg-[var(--color-background)] p-10 text-center shadow-[0_22px_55px_rgba(0,0,0,0.42)] backdrop-blur-2xl"
                 initial={{ y: -14, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.12, duration: 0.32, ease: "easeOut" }}
               >
-                <p className="text-4xl font-bold text-text sm:text-5xl">
+                <p className="text-4xl font-bold text-[var(--color-text-primary)] sm:text-5xl">
                   Thank you!
                 </p>
-                <p className="text-body-lg mt-3 max-w-2xl text-text-muted">
+                <p className="mt-3 max-w-2xl text-base text-[var(--color-text-secondary)]">
                   Your message has been sent successfully. I will get back to
                   you soon.
                 </p>
@@ -295,15 +221,19 @@ export default function Contact() {
           </motion.div>
         ) : null}
       </AnimatePresence>
-      <div className="mx-auto max-w-6xl px-6">
-        <ScrollReveal mode="inView" className="max-w-3xl">
-          <p className="section-kicker">Contact</p>
-          <h2 className="section-heading mt-4">
-            Tell me what you are building. I will tell you where I can help.
+
+      <Container>
+        <ScrollReveal mode="inView" className="max-w-2xl">
+          <SectionLabel>Contact</SectionLabel>
+          <h2 className="text-section mt-4 font-sans font-semibold leading-[1.1] text-[var(--color-text-primary)]">
+            Let&apos;s build something.
           </h2>
+          <p className="mt-5 text-sm leading-6 text-[var(--color-text-secondary)] sm:text-base">
+            Tell me what you are building. I will tell you where I can help.
+          </p>
         </ScrollReveal>
 
-        <div className="mt-9 grid items-stretch gap-5 sm:mt-10 sm:gap-6 lg:grid-cols-[0.42fr_0.58fr]">
+        <div className="mt-10 grid items-stretch gap-6 sm:mt-12 lg:grid-cols-[0.42fr_0.58fr]">
           <ScrollReveal mode="inView" direction="up" className="h-full">
             <ContactPitchCard />
           </ScrollReveal>
@@ -311,68 +241,46 @@ export default function Contact() {
           <ScrollReveal mode="inView" direction="up" className="h-full">
             <form
               onSubmit={handleSubmit}
-              className="story-card flex h-full flex-col rounded-[1.4rem] p-6 sm:rounded-[2rem] sm:p-8"
+              className="flex h-full flex-col rounded-2xl border border-[var(--color-border)] p-6 sm:p-8"
             >
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block">
-                  <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
                     Name
                   </span>
-                  <div className="mt-3">
-                    <CurvedInput
-                      type="text"
-                      name="name"
-                      placeholder="Your name"
-                      ariaLabel="Name"
-                      value={formState.name}
-                      onChange={(value) =>
-                        setFormState((state) => ({ ...state, name: value }))
-                      }
-                      width="100%"
-                      height={56}
-                      bend={10}
-                      showButton={false}
-                      showIcon={false}
-                      backgroundColor="var(--control-bg)"
-                      textColor="var(--color-text)"
-                      placeholderColor="var(--color-text-muted)"
-                      borderColor="var(--surface-border)"
-                      buttonColor="var(--color-primary)"
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    aria-label="Name"
+                    value={formState.name}
+                    onChange={(event) =>
+                      setFormState((state) => ({ ...state, name: event.target.value }))
+                    }
+                    className={inputClasses}
+                  />
                 </label>
 
                 <label className="block">
-                  <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
                     Email
                   </span>
-                  <div className="mt-3">
-                    <CurvedInput
-                      type="email"
-                      name="email"
-                      placeholder="you@example.com"
-                      ariaLabel="Email"
-                      value={formState.email}
-                      onChange={(value) =>
-                        setFormState((state) => ({ ...state, email: value }))
-                      }
-                      width="100%"
-                      height={56}
-                      bend={10}
-                      showButton={false}
-                      showIcon={false}
-                      backgroundColor="var(--control-bg)"
-                      textColor="var(--color-text)"
-                      placeholderColor="var(--color-text-muted)"
-                      borderColor="var(--surface-border)"
-                      buttonColor="var(--color-primary)"
-                    />
-                  </div>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    aria-label="Email"
+                    value={formState.email}
+                    onChange={(event) =>
+                      setFormState((state) => ({ ...state, email: event.target.value }))
+                    }
+                    className={inputClasses}
+                  />
                 </label>
               </div>
 
               <div ref={serviceMenuRef} className="relative mt-5">
-                <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
                   Service
                 </span>
                 <button
@@ -380,16 +288,16 @@ export default function Contact() {
                   aria-haspopup="listbox"
                   aria-expanded={serviceOpen}
                   onClick={() => setServiceOpen((open) => !open)}
-                  className={`mt-3 flex min-h-14 w-full items-center justify-between gap-4 rounded-[1.25rem] border px-4 py-3 text-left text-sm outline-none transition-[border-color,background-color,box-shadow] duration-300 ${
+                  className={`mt-2 flex min-h-[52px] w-full items-center justify-between gap-4 rounded-lg border px-4 py-3 text-left text-sm outline-none transition-colors ${
                     serviceOpen
-                      ? "border-[var(--color-primary)] bg-[var(--control-bg-hover)] shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-primary)_12%,transparent)]"
-                      : "border-[var(--surface-border)] bg-[var(--control-bg)] hover:border-[var(--surface-border-strong)]"
+                      ? "border-[var(--color-primary-accent)] bg-[var(--color-surface)]"
+                      : "border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-strong)]"
                   }`}
                 >
                   <span
                     className={
                       formState.service
-                        ? "text-[var(--color-text)]"
+                        ? "text-[var(--color-text-primary)]"
                         : "text-[var(--color-text-muted)]"
                     }
                   >
@@ -397,7 +305,7 @@ export default function Contact() {
                   </span>
                   <span
                     aria-hidden="true"
-                    className={`text-[var(--color-primary)] transition-transform duration-300 ${serviceOpen ? "rotate-180" : ""}`}
+                    className={`text-[var(--color-primary-accent)] transition-transform duration-300 ${serviceOpen ? "rotate-180" : ""}`}
                   >
                     ↓
                   </span>
@@ -407,7 +315,7 @@ export default function Contact() {
                   <div
                     role="listbox"
                     aria-label="Available services"
-                    className="absolute inset-x-0 top-full z-30 mt-2 overflow-hidden rounded-[1.25rem] border border-[var(--surface-border-strong)] bg-[var(--color-panel-strong)] p-1.5 shadow-[0_22px_55px_rgba(0,0,0,0.42)] backdrop-blur-2xl"
+                    className="absolute inset-x-0 top-full z-30 mt-2 overflow-hidden rounded-lg border border-[var(--color-border-strong)] bg-[var(--color-background-secondary)] p-1.5 shadow-[0_22px_55px_rgba(0,0,0,0.42)]"
                   >
                     {serviceOptions.map((service) => (
                       <button
@@ -419,10 +327,10 @@ export default function Contact() {
                           setFormState((state) => ({ ...state, service }));
                           setServiceOpen(false);
                         }}
-                        className={`flex w-full items-center justify-between rounded-[0.9rem] px-4 py-3 text-left text-sm transition-colors duration-200 ${
+                        className={`flex w-full items-center justify-between rounded-md px-4 py-3 text-left text-sm transition-colors duration-200 ${
                           formState.service === service
-                            ? "bg-[var(--primary-action-bg)] text-[var(--color-text)]"
-                            : "text-[var(--color-text-muted)] hover:bg-[var(--control-bg-hover)] hover:text-[var(--color-text)]"
+                            ? "bg-[var(--color-surface)] text-[var(--color-text-primary)]"
+                            : "text-[var(--color-text-muted)] hover:bg-[var(--color-surface)] hover:text-[var(--color-text-primary)]"
                         }`}
                       >
                         <span>{service}</span>
@@ -436,7 +344,7 @@ export default function Contact() {
               </div>
 
               <label className="mt-5 block">
-                <span className="text-caption font-mono uppercase tracking-[0.24em] text-[var(--color-text-muted)]">
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
                   Message
                 </span>
                 <textarea
@@ -451,7 +359,7 @@ export default function Contact() {
                       message: event.target.value,
                     }))
                   }
-                  className="mt-3 w-full rounded-[1.5rem] border border-[var(--surface-border)] bg-[var(--control-bg)] px-4 py-3 text-[var(--color-text)] outline-none focus:border-[var(--color-primary)]"
+                  className={inputClasses}
                 />
               </label>
 
@@ -459,29 +367,17 @@ export default function Contact() {
                 <p className="mt-4 text-sm text-red-300">{error}</p>
               ) : null}
 
-              <p className="flex items-center justify-center py-10 gap-2 text-[12px] font-medium text-[var(--color-text-muted)]">
+              <p className="flex items-center justify-center gap-2 py-8 text-xs font-medium text-[var(--color-text-muted)]">
                 <ShieldCheck
                   size={13}
                   strokeWidth={2}
-                  className="text-[#c49a45]"
+                  className="text-[var(--color-primary-accent)]"
                   aria-hidden="true"
                 />
                 Your details stay private — no spam, ever.
               </p>
 
-              <SpecularButton
-                type="submit"
-                disabled={sending}
-                aria-busy={sending}
-                size="md"
-                radius={999}
-                className="contact-submit-button mt-auto w-full"
-                tintOpacity={0}
-                textColor="var(--primary-action-text)"
-                lineColor="#ffffff"
-                baseColor="#2a6b5c"
-                proximity={220}
-              >
+              <Button type="submit" variant="primary" className="mt-auto w-full">
                 {sending ? (
                   <>
                     <span
@@ -495,11 +391,11 @@ export default function Contact() {
                 ) : (
                   "Send message"
                 )}
-              </SpecularButton>
+              </Button>
             </form>
           </ScrollReveal>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

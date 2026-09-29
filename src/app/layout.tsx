@@ -1,64 +1,68 @@
 import type { Metadata } from "next";
-import Script from "next/script";
-import { Fira_Code } from "next/font/google";
-import ClickSpark from "@/components/effects/ClickSpark";
-import LiquidGlassTracker from "@/components/effects/LiquidGlassTracker";
-import StartExperience from "@/components/effects/StartExperience";
-import PortfolioChat from "@/components/portfolio-chat/PortfolioChat";
+import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { sohailContact } from "@/data/sohail";
 
-const inter = Fira_Code({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-geist",
   display: "swap",
 });
 
-const jetBrainsMono = Fira_Code({
+const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
-const playfairDisplay = Fira_Code({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const fraunce = Fira_Code({
-  subsets: ["latin"],
-  variable: "--font-fraunce",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
-
-const poppins = Fira_Code({
-  subsets: ["latin"],
-  variable: "--font-poppins",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
+const SITE_DESCRIPTION =
+  "I engineer modern, production-ready web & mobile experiences. React Native, Next.js, React.js, Firebase, SEO, and production deployment.";
 
 export const metadata: Metadata = {
+  // TODO: update to the real production domain once it's live.
+  metadataBase: new URL("https://sohailpatel.dev"),
   title: "Sohail Patel | Software Developer",
-  description:
-    "Explore the portfolio of Sohail Patel — a software developer crafting scalable digital products with modern web and mobile technologies.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "developer portfolio",
+    "React Native developer",
+    "Next.js developer",
+    "React developer",
+    "mobile app development",
+    "web development",
     "full-stack developer",
-    "React",
-    "Next.js",
-    "Three.js",
-    "3D web",
   ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Sohail Patel | Developer Portfolio",
-    description: "Software Developer",
+    title: "Sohail Patel | Software Developer",
+    description: SITE_DESCRIPTION,
+    siteName: "Sohail Patel",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sohail Patel | Software Developer",
+    description: SITE_DESCRIPTION,
+  },
+};
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Sohail Patel",
+  jobTitle: "Software Developer",
+  url: "https://sohailpatel.dev",
+  email: `mailto:${sohailContact.email}`,
+  sameAs: [
+    sohailContact.github,
+    sohailContact.linkedin,
+    sohailContact.threads,
+    sohailContact.instagram,
+    sohailContact.youtube,
+  ],
 };
 
 export default function RootLayout({
@@ -67,39 +71,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth">
       <head>
-        <meta name="google-adsense-account" content="ca-pub-7274193441004898" />
         <script
-          dangerouslySetInnerHTML={{
-            __html:
-              'try{var t=localStorage.getItem("portfolio-theme");if(t!=="midnight"&&t!=="daylight"){t="midnight";}document.documentElement.dataset.theme=t;}catch(e){}',
-          }}
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
       </head>
-      <body
-        className={`${inter.variable} ${jetBrainsMono.variable} ${playfairDisplay.variable} ${fraunce.variable} ${poppins.variable} antialiased`}
-      >
-        <ClickSpark
-          sparkColor="#e8dcc4"
-          sparkSize={12}
-          sparkRadius={20}
-          sparkCount={10}
-          duration={460}
-          extraScale={1.15}
-        >
-          <div className="noise-overlay" />
-          <StartExperience />
-          {children}
-          <PortfolioChat />
-          <LiquidGlassTracker />
-        </ClickSpark>
-        <Script
-          async
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7274193441004898"
-          crossOrigin="anonymous"
-        />
+      <body className={`${geist.variable} ${jetBrainsMono.variable} antialiased`}>
+        <div className="noise-overlay" />
+        {children}
       </body>
     </html>
   );

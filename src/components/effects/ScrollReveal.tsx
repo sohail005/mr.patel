@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, type Variants } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, type Variants } from "framer-motion";
 
 type ScrollRevealMode = "scroll" | "inView";
 type ScrollOffset = NonNullable<Parameters<typeof useScroll>[0]>["offset"];
@@ -44,6 +44,12 @@ export default function ScrollReveal({
   delay = 0,
   fade = true,
 }: ScrollRevealProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={`relative ${className}`.trim()}>{children}</div>;
+  }
+
   if (mode === "inView") {
     return (
       <motion.div
