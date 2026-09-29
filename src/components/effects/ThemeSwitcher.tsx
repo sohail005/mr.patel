@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 type ThemeId = "midnight" | "daylight";
 
 type ViewTransitionDocument = Document & {
-  startViewTransition?: (callback: () => void) => void;
+  startViewTransition?: (callback: () => void) => { finished: Promise<void> };
 };
 
 const storageKey = "portfolio-theme";
@@ -45,13 +45,29 @@ export default function ThemeSwitcher({ className = "" }: { className?: string }
     localStorage.setItem(storageKey, next);
   };
 
-  const toggleTheme = () => {
+  const toggleTheme = (event: MouseEvent<HTMLButtonElement>) => {
     const next: ThemeId = theme === "midnight" ? "daylight" : "midnight";
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const transitionDocument = document as ViewTransitionDocument;
 
     if (transitionDocument.startViewTransition && !prefersReducedMotion) {
-      transitionDocument.startViewTransition(() => applyTheme(next));
+      const { clientX, clientY } = event;
+      const root = document.documentElement;
+      const radius = Math.hypot(
+        Math.max(clientX, window.innerWidth - clientX),
+        Math.max(clientY, window.innerHeight - clientY),
+      );
+
+      root.style.setProperty("--theme-reveal-x", `${clientX}px`);
+      root.style.setProperty("--theme-reveal-y", `${clientY}px`);
+      root.style.setProperty("--theme-reveal-radius", `${radius}px`);
+
+      const transition = transitionDocument.startViewTransition(() => applyTheme(next));
+      transition.finished.finally(() => {
+        root.style.removeProperty("--theme-reveal-x");
+        root.style.removeProperty("--theme-reveal-y");
+        root.style.removeProperty("--theme-reveal-radius");
+      });
       return;
     }
 
