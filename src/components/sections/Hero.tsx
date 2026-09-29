@@ -35,7 +35,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[var(--color-background)]"
+      className="relative flex min-h-svh items-center overflow-hidden bg-[var(--color-background)]"
     >
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[60%] opacity-[0.06]"
@@ -46,11 +46,7 @@ export default function Hero() {
       />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(to_top,var(--color-background),transparent)]" />
 
-      <motion.div
-        {...rise(0.4, 24)}
-        className="pointer-events-none absolute inset-y-0 right-0 hidden w-full max-w-5xl items-center justify-center lg:flex"
-        aria-hidden="true"
-      >
+      <div className="pointer-events-none absolute inset-0 hidden opacity-60 lg:block" aria-hidden="true">
         {shouldReduceMotion ? (
           <div
             className="absolute inset-[12%] rounded-full opacity-40 blur-2xl"
@@ -60,11 +56,9 @@ export default function Hero() {
             }}
           />
         ) : (
-          <div className="h-full w-full">
-            <HeroField />
-          </div>
+          <HeroField />
         )}
-      </motion.div>
+      </div>
 
       <Container className="relative z-10 grid items-center gap-10 pb-16 pt-24 sm:pt-28 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] lg:gap-8 lg:pb-20 lg:pt-24">
         <div className="flex max-w-2xl flex-col items-start gap-5 lg:gap-6">

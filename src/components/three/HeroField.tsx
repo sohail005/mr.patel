@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -9,7 +9,21 @@ function seededRandom(index: number) {
   return value - Math.floor(value);
 }
 
-function ParticleShell({ count = 900, radius = 3.2 }: { count?: number; radius?: number }) {
+function readCssColor(name: string, fallback: string) {
+  if (typeof window === "undefined") return fallback;
+  const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return value.startsWith("#") ? value : fallback;
+}
+
+function ParticleShell({
+  count = 1000,
+  radius = 3,
+  color,
+}: {
+  count?: number;
+  radius?: number;
+  color: string;
+}) {
   const pointsRef = useRef<THREE.Points>(null!);
 
   const positions = useMemo(() => {
@@ -37,10 +51,10 @@ function ParticleShell({ count = 900, radius = 3.2 }: { count?: number; radius?:
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.028}
-        color="#69D3B0"
+        size={0.026}
+        color={color}
         transparent
-        opacity={0.55}
+        opacity={0.5}
         sizeAttenuation
         depthWrite={false}
         blending={THREE.AdditiveBlending}
@@ -49,7 +63,7 @@ function ParticleShell({ count = 900, radius = 3.2 }: { count?: number; radius?:
   );
 }
 
-function WireCore() {
+function WireCore({ primary, secondary }: { primary: string; secondary: string }) {
   const groupRef = useRef<THREE.Group>(null!);
 
   useFrame((state) => {
@@ -61,26 +75,35 @@ function WireCore() {
   return (
     <group ref={groupRef}>
       <mesh>
-        <icosahedronGeometry args={[1.9, 1]} />
-        <meshBasicMaterial color="#0100ff" wireframe transparent opacity={0.22} />
+        <icosahedronGeometry args={[1.7, 1]} />
+        <meshBasicMaterial color={secondary} wireframe transparent opacity={0.22} />
       </mesh>
-      <mesh scale={0.62}>
-        <icosahedronGeometry args={[1.9, 0]} />
-        <meshBasicMaterial color="#0100ff" wireframe transparent opacity={0.35} />
+      <mesh scale={0.6}>
+        <icosahedronGeometry args={[1.7, 0]} />
+        <meshBasicMaterial color={primary} wireframe transparent opacity={0.35} />
       </mesh>
     </group>
   );
 }
 
 export default function HeroField() {
+  const [colors, setColors] = useState({ primary: "#69D3B0", secondary: "#8FD8C2" });
+
+  useEffect(() => {
+    setColors({
+      primary: readCssColor("--color-primary-accent", "#69D3B0"),
+      secondary: readCssColor("--color-secondary-accent", "#8FD8C2"),
+    });
+  }, []);
+
   return (
     <Canvas
-      camera={{ position: [0, 0, 6.2], fov: 42 }}
+      camera={{ position: [0, 0, 5.6], fov: 42 }}
       dpr={[1, 1.5]}
       gl={{ antialias: true, alpha: true }}
     >
-      <WireCore />
-      <ParticleShell />
+      <WireCore primary={colors.primary} secondary={colors.secondary} />
+      <ParticleShell color={colors.primary} />
     </Canvas>
   );
 }

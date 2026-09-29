@@ -48,13 +48,13 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             </span>
           ) : null}
 
-          <div className="relative h-40 w-40 overflow-hidden rounded-[22%] bg-transparent shadow-[0_16px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 transition-transform duration-500 group-hover:scale-[1.05] sm:h-56 sm:w-56 md:h-80 md:w-80 lg:h-128 lg:w-lg xl:h-160 xl:w-160">
+          <div className="relative h-20 w-20 overflow-hidden rounded-[22%] bg-transparent shadow-[0_16px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 transition-transform duration-500 group-hover:scale-[1.05] sm:h-28 sm:w-28 md:h-36 md:w-36 lg:h-44 lg:w-44 xl:h-52 xl:w-52">
             <Image
               src={getHiResThumbnail(thumbnail.appIcon)}
               alt={`${project.title} app icon`}
               fill
               quality={90}
-              sizes="(min-width: 1280px) 640px, (min-width: 1024px) 512px, (min-width: 768px) 320px, (min-width: 640px) 224px, 160px"
+              sizes="(min-width: 1280px) 208px, (min-width: 1024px) 176px, (min-width: 768px) 144px, (min-width: 640px) 112px, 80px"
               className="object-contain"
             />
           </div>
