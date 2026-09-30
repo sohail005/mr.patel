@@ -119,8 +119,8 @@ export default function Navbar() {
           })}
         </div>
 
-        <div className="relative z-10 hidden items-center gap-4 lg:flex">
-          <Button variant="primary" size="sm" href="/contact">
+        <div className="relative z-10 hidden items-center gap-4 lg:flex ">
+          <Button className="text-(--color-text-primary)" variant="primary" size="sm" href="/contact">
             Discuss a build
           </Button>
         </div>

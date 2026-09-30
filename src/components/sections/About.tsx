@@ -43,14 +43,16 @@ export default function About() {
         <div className="mt-10 grid gap-10 sm:mt-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <ScrollReveal>
             <div className="flex flex-col gap-6">
-              <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl border border-[var(--color-border)]">
+              <div className="group relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl border border-[var(--color-border)] transition-[border-color,box-shadow] duration-500 hover:border-[var(--color-primary-accent)] hover:shadow-[0_0_50px_-12px_var(--color-primary-accent)]">
                 <Image
                   src={profilePhoto}
                   alt="Sohail Patel"
                   fill
                   sizes="(min-width: 1024px) 24rem, 100vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--color-background)]/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="pointer-events-none absolute inset-0 -translate-x-full -skew-x-12 bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
               </div>
 
               <p className="max-w-md text-sm leading-6 text-[var(--color-text-secondary)]">
@@ -79,7 +81,7 @@ export default function About() {
                 {sohailProfile.highlights.map((highlight) => (
                   <li
                     key={highlight}
-                    className="rounded-full border border-[var(--color-border)] px-3 py-3 font-mono text-xs text-[var(--color-text-muted)]"
+                    className="rounded-full border border-[var(--color-border)] px-3 py-3 font-mono text-xs uppercase tracking-[0.08em] text-[var(--color-text-muted)] sm:text-sm"
                   >
                     {highlight}
                   </li>

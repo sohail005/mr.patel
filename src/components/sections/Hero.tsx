@@ -92,10 +92,10 @@ export default function Hero() {
           </motion.p>
 
           <motion.div {...rise(0.5)} className="flex flex-wrap items-center gap-3 pt-1 sm:gap-4">
-            <Button variant="primary" href="/#projects">
+            <Button className="text-(--color-text-primary)" variant="primary" href="/#projects">
               Explore work
             </Button>
-            <Button variant="secondary" href="/contact">
+            <Button className="text-(--color-text-primary)" variant="secondary" href="/contact">
               Discuss a build
             </Button>
           </motion.div>

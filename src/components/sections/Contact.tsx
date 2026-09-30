@@ -207,7 +207,7 @@ export default function Contact() {
                 src={handshakeAnimation}
                 autoplay
                 loop={false}
-                className="h-auto w-[140vw] min-w-[140vw] max-w-none shrink-0"
+                className="h-auto w-screen max-w-none shrink-0"
               />
             </motion.div>
             <button
@@ -377,7 +377,7 @@ export default function Contact() {
                 Your details stay private — no spam, ever.
               </p>
 
-              <Button type="submit" variant="primary" className="mt-auto w-full">
+              <Button type="submit" variant="primary" className="mt-auto w-full text-(--color-text-primary)">
                 {sending ? (
                   <>
                     <span

@@ -13,7 +13,7 @@ export default function CapabilityGroup({ title, items }: CapabilityGroupProps) 
         {items.map((item) => (
           <span
             key={item}
-            className="rounded-full border border-[var(--color-border)] px-3 py-2 font-mono text-xs text-[var(--color-text-secondary)]"
+            className="rounded-full border border-[var(--color-border)] px-3 py-2 font-mono text-xs uppercase tracking-[0.08em] text-[var(--color-text-secondary)] sm:text-sm"
           >
             {item}
           </span>

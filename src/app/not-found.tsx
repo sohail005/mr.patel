@@ -24,10 +24,10 @@ export default function NotFound() {
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Button variant="primary" href="/">
+              <Button className="text-(--color-text-primary)" variant="primary" href="/">
                 Back home
               </Button>
-              <Button variant="secondary" href="/#projects">
+              <Button className="text-(--color-text-primary)" variant="secondary" href="/#projects">
                 View projects
               </Button>
             </div>
