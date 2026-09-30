@@ -96,7 +96,7 @@ export default function Hero() {
               Explore work
             </Button>
             <Button className="text-(--color-text-primary)" variant="secondary" href="/contact">
-              Discuss a build
+              Discuss a project
             </Button>
           </motion.div>
 
