@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node check.js)"
+      "Bash(node check.js)",
+      "Bash(npx @next/codemod@canary middleware-to-proxy .)",
+      "Bash(git mv *)",
+      "Bash(taskkill //F //FI \"COMMANDLINE eq *3001*\")",
+      "Bash(taskkill //F //PID 15344)"
     ]
   }
 }

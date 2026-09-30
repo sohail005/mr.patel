@@ -1,21 +1,8 @@
 import type { NextConfig } from "next";
 
-const CONTENT_SECURITY_POLICY = [
-  "default-src 'self'",
-  "script-src 'self'",
-  "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
-  "font-src 'self' data:",
-  "connect-src 'self'",
-  "frame-ancestors 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-  "object-src 'none'",
-  "upgrade-insecure-requests",
-].join("; ");
-
+// Content-Security-Policy is set per-request (with a script nonce) in src/middleware.ts
+// instead of here, since Next.js needs to inject a nonce into its own hydration scripts.
 const securityHeaders = [
-  { key: "Content-Security-Policy", value: CONTENT_SECURITY_POLICY },
   { key: "X-Frame-Options", value: "DENY" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -31,10 +18,6 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   async headers() {
-    if (process.env.NODE_ENV !== "production") {
-      return [];
-    }
-
     return [
       {
         source: "/:path*",
