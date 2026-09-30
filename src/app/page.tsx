@@ -6,6 +6,7 @@ import Interests from "@/components/sections/Interests";
 import Skills from "@/components/sections/Skills";
 import Services from "@/components/sections/Services";
 import Projects from "@/components/sections/Projects";
+import ClientProjects from "@/components/sections/ClientProjects";
 import Experience from "@/components/sections/Experience";
 import Footer from "@/components/sections/Footer";
 
@@ -19,7 +20,8 @@ export default function Home() {
       <Interests />
       <Skills />
       <Services />
-      <Projects limit={2} />
+      <Projects limit={4} />
+      <ClientProjects />
       <Experience />
       <Footer />
     </main>

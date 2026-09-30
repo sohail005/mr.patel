@@ -687,6 +687,70 @@ export const sohailProjects: PortfolioProject[] = [
   },
 ];
 
+export const sohailClientProjects: PortfolioProject[] = [
+  {
+    id: "dhunzza",
+    title: "Dhunzza",
+    description:
+      "A free, browser-based Hindi radio streaming Bollywood classics all day, no sign-up or app install required.",
+    technologies: ["Next.js", "React", "Tailwind CSS"],
+    platform: ["Web"],
+    company: "Client Project",
+    region: "India",
+    type: "Streaming Web App",
+    metric: "Live client site",
+    projectUrl: "https://dhunzza.in/",
+    featured: true,
+    thumbnail: {
+      src: "/thumbnails/dhunzza.png",
+      alt: "Dhunzza website homepage preview",
+      previewUrl: "dhunzza.in",
+      fit: "cover",
+      source: "Website",
+    },
+  },
+  {
+    id: "kranthi-the-leader",
+    title: "Kranthi The Leader",
+    description:
+      "A personal portfolio site for a professional, showcasing work, writing, and a gallery across dedicated sections.",
+    technologies: ["Next.js", "React", "Tailwind CSS"],
+    platform: ["Web"],
+    company: "Client Project",
+    region: "India",
+    type: "Portfolio Website",
+    metric: "Live client site",
+    projectUrl: "https://kranthi-the-leaderr.vercel.app/",
+    thumbnail: {
+      src: "/thumbnails/kranthi.png",
+      alt: "Kranthi The Leader portfolio website preview",
+      previewUrl: "kranthi-the-leaderr.vercel.app",
+      fit: "cover",
+      source: "Website",
+    },
+  },
+  {
+    id: "thestartech",
+    title: "TheStarTech",
+    description:
+      "A business site for a CCTV, biometric access, and IT networking security solutions provider serving clients across India.",
+    technologies: ["Next.js", "React", "Tailwind CSS"],
+    platform: ["Web"],
+    company: "Client Project",
+    region: "India",
+    type: "Business Website",
+    metric: "Live client site",
+    projectUrl: "https://thestartech.vercel.app/",
+    thumbnail: {
+      src: "/thumbnails/thestartech.png",
+      alt: "TheStarTech business website preview",
+      previewUrl: "thestartech.vercel.app",
+      fit: "cover",
+      source: "Website",
+    },
+  },
+];
+
 export const sohailContact = {
   email: "sohail345patel@gmail.com",
   github: "https://github.com/sohail005",

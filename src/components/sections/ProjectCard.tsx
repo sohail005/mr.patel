@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { PortfolioProject } from "@/types/portfolio";
 import SectionNumber from "@/components/ui/SectionNumber";
-import EditorialLink from "@/components/ui/EditorialLink";
 import { getHiResThumbnail } from "@/lib/getHiResThumbnail";
 
 type ProjectCardProps = {
@@ -14,7 +13,12 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
   const aspect = thumbnail?.fit === "contain" ? "aspect-video" : "aspect-[4/3]";
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[rgba(255,255,255,0.015)] transition-colors duration-300 hover:border-[var(--color-border-strong)]">
+    <a
+      href={project.projectUrl}
+      target="_blank"
+      rel="noreferrer"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[rgba(255,255,255,0.015)] transition-colors duration-300 hover:border-[var(--color-border-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)]"
+    >
       {thumbnail?.appIcon ? (
         <div
           className={`relative flex w-full ${aspect} items-center justify-center overflow-hidden bg-[var(--color-surface)]`}
@@ -48,13 +52,13 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             </span>
           ) : null}
 
-          <div className="relative h-20 w-20 overflow-hidden rounded-[22%] bg-transparent shadow-[0_16px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 transition-transform duration-500 group-hover:scale-[1.05] sm:h-28 sm:w-28 md:h-36 md:w-36 lg:h-44 lg:w-44 xl:h-52 xl:w-52">
+          <div className="relative h-10 w-10 overflow-hidden rounded-[22%] bg-transparent shadow-[0_16px_32px_rgba(0,0,0,0.4)] ring-1 ring-white/10 transition-transform duration-500 group-hover:scale-[1.05] sm:h-14 sm:w-14 md:h-18 md:w-18 lg:h-22 lg:w-22 xl:h-26 xl:w-26">
             <Image
               src={getHiResThumbnail(thumbnail.appIcon)}
               alt={`${project.title} app icon`}
               fill
               quality={90}
-              sizes="(min-width: 1280px) 208px, (min-width: 1024px) 176px, (min-width: 768px) 144px, (min-width: 640px) 112px, 80px"
+              sizes="(min-width: 1280px) 104px, (min-width: 1024px) 88px, (min-width: 768px) 72px, (min-width: 640px) 56px, 40px"
               className="object-contain"
             />
           </div>
@@ -75,15 +79,15 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
       ) : null}
 
-      <div className="flex flex-1 flex-col gap-3.5 p-6 sm:p-7">
+      <div className="flex flex-1 flex-col gap-1.5 p-3 sm:p-3.5">
         <SectionNumber value={String(index + 1).padStart(2, "0")} label="PROJECT" />
 
-        <div className="flex flex-col gap-1.5">
-          <h3 className="line-clamp-2 min-h-[2.3em] text-project-title font-sans font-semibold leading-tight text-[var(--color-text-primary)]">
+        <div className="flex flex-col gap-0.5">
+          <h3 className="line-clamp-2 py-5 min-h-[1.15em] text-3xl font-sans font-semibold leading-tight text-[var(--color-text-primary)]">
             {project.title}
           </h3>
 
-          <div className="flex min-h-[1.4em] flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
+          <div className="flex min-h-[0.7em] flex-wrap items-center gap-x-1.5 gap-y-0.5 font-mono text-xs uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
             {project.year ? <span>{project.year}</span> : null}
             <span aria-hidden="true">/</span>
             <span>{project.type}</span>
@@ -92,30 +96,27 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           </div>
         </div>
 
-        <p className="line-clamp-2 min-h-[3rem] text-sm leading-6 text-[var(--color-text-secondary)]">
+        <p className="line-clamp-2 min-h-6 text-sm leading-6 text-[var(--color-text-secondary)]">
           {project.description}
         </p>
 
-        <div className="flex min-h-[1.75rem] flex-wrap gap-2">
+        <div className="flex min-h-[0.9rem] flex-wrap gap-1 py-4">
           {project.technologies.slice(0, 3).map((tech) => (
             <span
               key={tech}
-              className="rounded-full border border-[var(--color-border)] px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--color-text-muted)]"
+              className="rounded-full border border-[var(--color-border)] px-1.5 py-0.5 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--color-text-muted)]"
             >
               {tech}
             </span>
           ))}
         </div>
 
-        <div className="mt-auto flex items-center justify-between gap-4 border-t border-[var(--color-border)] pt-5">
+        <div className="mt-auto border-t border-[var(--color-border)] pt-2.5">
           <span className="font-mono text-xs uppercase tracking-[0.16em] text-[var(--color-text-muted)]">
             {project.company}
           </span>
-          <EditorialLink href={project.projectUrl} external icon="arrowUpRight">
-            View project
-          </EditorialLink>
         </div>
       </div>
-    </article>
+    </a>
   );
 }
