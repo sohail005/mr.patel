@@ -11,13 +11,9 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
 import { sohailContact } from "@/data/sohail";
+import { CONTACT_SERVICE_OPTIONS } from "@/data/contactOptions";
 
-const serviceOptions = [
-  "App Deployment Services",
-  "Complete App Development",
-  "Website Development",
-  "Development Training",
-];
+const serviceOptions = CONTACT_SERVICE_OPTIONS;
 
 const contactChecklist = [
   "SEO-ready, engineered to rank on Google",
