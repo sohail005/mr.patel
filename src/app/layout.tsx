@@ -21,8 +21,7 @@ const SITE_DESCRIPTION =
   "I engineer modern, production-ready web & mobile experiences. React Native, Next.js, React.js, Firebase, SEO, and production deployment.";
 
 export const metadata: Metadata = {
-  // TODO: update to the real production domain once it's live.
-  metadataBase: new URL("https://sohailpatel.dev"),
+  metadataBase: new URL("https://sohailcode.vercel.app"),
   title: "Sohail Patel | Software Developer",
   description: SITE_DESCRIPTION,
   keywords: [
@@ -55,7 +54,7 @@ const personSchema = {
   "@type": "Person",
   name: "Sohail Patel",
   jobTitle: "Software Developer",
-  url: "https://sohailpatel.dev",
+  url: "https://sohailcode.vercel.app",
   email: `mailto:${sohailContact.email}`,
   sameAs: [
     sohailContact.github,
