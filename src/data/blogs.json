@@ -1,0 +1,12 @@
+[
+  {
+    "id": "dhunzza-free-hindi-radio",
+    "slug": "dhunzza-free-hindi-radio",
+    "title": "Building Dhunzza: A Free, Browser-Based Hindi Radio Streaming Bollywood Classics",
+    "author": "Sohail Patel",
+    "excerpt": "How Dhunzza delivers a no-signup, no-app Hindi radio experience in the browser, built with Next.js, React, and Tailwind CSS.",
+    "content": "Dhunzza (https://dhunzza.in/) is a free, browser-based Hindi radio station that streams Bollywood classics all day long, with no sign-up and no app install required. The goal was simple: let anyone open a link and instantly start listening, on any device, without friction.\n\nThe frontend is built with Next.js and React for fast page loads and a smooth, app-like feel, while Tailwind CSS keeps the UI clean and consistent across screen sizes. Since the entire experience lives in the browser, there is no account system, no onboarding flow, and no native app to download, just an instant stream that starts playing within seconds of landing on the page.\n\nAs a client project, Dhunzza is a good example of building a focused, single-purpose web app that prioritizes speed and simplicity over feature bloat. It is a live production site serving real listeners today.",
+    "tags": ["Next.js", "React", "Tailwind CSS", "Client Project"],
+    "createdAt": "2026-10-08T00:00:00.000Z"
+  }
+]

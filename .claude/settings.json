@@ -5,7 +5,16 @@
       "Bash(npx @next/codemod@canary middleware-to-proxy .)",
       "Bash(git mv *)",
       "Bash(taskkill //F //FI \"COMMANDLINE eq *3001*\")",
-      "Bash(taskkill //F //PID 15344)"
+      "Bash(taskkill //F //PID 15344)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/blogs)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/blogs/dhunzza-free-hindi-radio)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/blogs/new)",
+      "Bash(curl -s http://localhost:3000/api/blogs)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/blogs)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/blogs/dhunzza-free-hindi-radio)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3001/blogs/new)",
+      "Bash(curl -s http://localhost:3001/api/blogs)",
+      "Bash(curl -s http://localhost:3001/blogs/dhunzza-free-hindi-radio)"
     ]
   }
 }
