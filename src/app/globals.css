@@ -125,6 +125,171 @@ textarea {
   border-radius: 999px;
 }
 
+/* ---------------------------------------------------------------------- */
+/* Depth / glass / futuristic surface system                             */
+/* ---------------------------------------------------------------------- */
+
+.glass-panel {
+  background: color-mix(in srgb, var(--color-background-secondary) 55%, transparent);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 24px 60px -24px rgba(0, 0, 0, 0.55);
+}
+
+.glow-accent {
+  position: relative;
+}
+
+.glow-accent::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-primary-accent) 55%, transparent),
+    transparent 40%,
+    transparent 60%,
+    color-mix(in srgb, var(--color-secondary-accent) 40%, transparent)
+  );
+  opacity: 0;
+  transition: opacity 400ms ease;
+  pointer-events: none;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.glow-accent:hover::before,
+.glow-accent:focus-within::before {
+  opacity: 1;
+}
+
+.aurora-field {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.aurora-field::before,
+.aurora-field::after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.16;
+  will-change: transform;
+}
+
+.aurora-field::before {
+  top: -10%;
+  left: -5%;
+  background: radial-gradient(circle, var(--color-primary-accent), transparent 70%);
+  animation: aurora-drift-a 22s ease-in-out infinite;
+}
+
+.aurora-field::after {
+  bottom: -15%;
+  right: -5%;
+  background: radial-gradient(circle, var(--color-secondary-accent), transparent 70%);
+  animation: aurora-drift-b 26s ease-in-out infinite;
+}
+
+@keyframes aurora-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(6%, 8%) scale(1.12);
+  }
+}
+
+@keyframes aurora-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-6%, -6%) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-field::before,
+  .aurora-field::after {
+    animation: none;
+  }
+}
+
+/* Tilt-on-pointer card primitive (perspective lives on the wrapper) */
+.tilt-card-wrapper {
+  perspective: 1200px;
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.tilt-card-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  border-radius: inherit;
+  opacity: 0;
+  background: radial-gradient(
+    circle at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgba(255, 255, 255, 0.14),
+    transparent 60%
+  );
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+
+.tilt-card-wrapper:hover .tilt-card-glare {
+  opacity: 1;
+}
+
+@keyframes ripple {
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Custom cursor */
+.cursor-active * {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor {
+    display: none;
+  }
+}
+
 .noise-overlay {
   position: fixed;
   inset: 0;

@@ -1,6 +1,7 @@
 import { sohailProjects } from "@/data/sohail";
 import type { PortfolioProject } from "@/types/portfolio";
 import ScrollReveal from "@/components/effects/ScrollReveal";
+import TiltCard from "@/components/effects/TiltCard";
 import Container from "@/components/ui/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Button from "@/components/ui/Button";
@@ -34,8 +35,16 @@ export default function Projects({ limit }: { limit?: number }) {
 
         <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-6 lg:grid-cols-4">
           {projects.map((project, index) => (
-            <ScrollReveal key={project.id} mode="inView" direction="up" delay={index * 0.05}>
-              <ProjectCard project={project} index={index} />
+            <ScrollReveal
+              key={project.id}
+              mode="inView"
+              direction="up"
+              delay={index * 0.05}
+              className="h-full"
+            >
+              <TiltCard className="h-full" max={6}>
+                <ProjectCard project={project} index={index} />
+              </TiltCard>
             </ScrollReveal>
           ))}
         </div>

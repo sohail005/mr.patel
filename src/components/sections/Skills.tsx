@@ -2,7 +2,7 @@ import { sohailSkills } from "@/data/sohail";
 import ScrollReveal from "@/components/effects/ScrollReveal";
 import Container from "@/components/ui/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
-import CapabilityGroup from "@/components/sections/CapabilityGroup";
+import CapabilityOrbit from "@/components/sections/CapabilityOrbit";
 
 export default function Skills() {
   return (
@@ -18,7 +18,7 @@ export default function Skills() {
         <div className="mt-10 grid gap-8 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
           {sohailSkills.map((group, index) => (
             <ScrollReveal key={group.title} mode="inView" delay={index * 0.06}>
-              <CapabilityGroup title={group.title} items={group.items} />
+              <CapabilityOrbit title={group.title} items={group.items} />
             </ScrollReveal>
           ))}
         </div>

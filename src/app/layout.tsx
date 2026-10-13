@@ -3,6 +3,7 @@ import { Geist, JetBrains_Mono } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
 import { sohailContact } from "@/data/sohail";
+import GlobalEffects from "@/components/effects/GlobalEffects";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -84,6 +85,7 @@ export default async function RootLayout({
       </head>
       <body className={`${geist.variable} ${jetBrainsMono.variable} antialiased`}>
         <div className="noise-overlay" />
+        <GlobalEffects />
         {children}
       </body>
     </html>

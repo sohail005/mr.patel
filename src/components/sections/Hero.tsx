@@ -37,6 +37,7 @@ export default function Hero() {
       id="hero"
       className="relative flex min-h-svh items-center overflow-hidden bg-[var(--color-background)]"
     >
+      <div className="aurora-field" aria-hidden="true" />
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-[60%] opacity-[0.06]"
         style={{

@@ -11,6 +11,7 @@
   "dependencies": {
     "@radix-ui/react-avatar": "^1.2.6",
     "@radix-ui/react-tooltip": "^1.2.16",
+    "@react-three/drei": "^10.7.9",
     "@react-three/fiber": "^9.8.1",
     "@types/three": "^0.186.0",
     "clsx": "^2.1.1",

@@ -21,9 +21,9 @@ export default function ScrollProgress() {
                 style={{
                     scaleX,
                     background:
-                        "linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent))",
+                        "linear-gradient(90deg, var(--color-primary-accent), var(--color-secondary-accent))",
                     boxShadow:
-                        "0 0 12px rgba(108,99,255,0.8), 0 0 28px rgba(0,212,255,0.4)",
+                        "0 0 12px color-mix(in srgb, var(--color-primary-accent) 70%, transparent), 0 0 28px color-mix(in srgb, var(--color-secondary-accent) 40%, transparent)",
                 }}
             />
             {/* Glowing dot at the leading tip */}
@@ -32,8 +32,9 @@ export default function ScrollProgress() {
                 style={{
                     left: dotLeft,
                     marginTop: "-3px",
-                    background: "var(--color-secondary)",
-                    boxShadow: "0 0 10px var(--color-secondary), 0 0 20px var(--color-primary)",
+                    background: "var(--color-secondary-accent)",
+                    boxShadow:
+                        "0 0 10px var(--color-secondary-accent), 0 0 20px var(--color-primary-accent)",
                     opacity: scaleX,
                 }}
             />

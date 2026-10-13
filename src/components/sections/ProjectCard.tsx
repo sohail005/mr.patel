@@ -17,7 +17,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       href={project.projectUrl}
       target="_blank"
       rel="noreferrer"
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[rgba(255,255,255,0.015)] transition-colors duration-300 hover:border-[var(--color-border-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)]"
+      className="group glow-accent flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[rgba(255,255,255,0.015)] transition-colors duration-300 hover:border-[var(--color-border-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-primary-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)]"
     >
       {thumbnail?.appIcon ? (
         <div

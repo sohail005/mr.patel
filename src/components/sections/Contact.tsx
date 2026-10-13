@@ -26,7 +26,7 @@ const inputClasses =
 
 function ContactPitchCard() {
   return (
-    <div className="flex h-full flex-col justify-between gap-8 rounded-2xl border border-[var(--color-border)] p-6 sm:p-8">
+    <div className="glass-panel flex h-full flex-col justify-between gap-8 rounded-2xl p-6 sm:p-8">
       <div>
         <span className="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-[var(--color-text-primary)]">
           <span className="relative flex h-2 w-2">
@@ -237,7 +237,7 @@ export default function Contact() {
           <ScrollReveal mode="inView" direction="up" className="h-full">
             <form
               onSubmit={handleSubmit}
-              className="flex h-full flex-col rounded-2xl border border-[var(--color-border)] p-6 sm:p-8"
+              className="glass-panel flex h-full flex-col rounded-2xl p-6 sm:p-8"
             >
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block">
